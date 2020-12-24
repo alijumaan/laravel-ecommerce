@@ -1,20 +1,11 @@
-@import "bootstrap";
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-.avatar{
-    vertical-align: middle;
-    width: 100px;
-    height: 100px;
-}
+// Variables
+@import 'variables';
 
-.avatar-round{
-    vertical-align: middle;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-}
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
 
-.col-sm-6 {
-    flex: 0 0 50%;
-    max-width: 30%;
-}
+
 

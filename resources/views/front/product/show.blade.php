@@ -1,5 +1,9 @@
 @extends('front.layouts.app')
 
+@section('style')
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">--}}
+
+@endsection
 @section('content')
     <div class="product-details ptb-100 pb-90">
         <div class="container">
@@ -50,9 +54,29 @@
                         <h3>{{ $product->name }}</h3>
                         <div class="rating-number">
                             <div class="quick-view-number">
-                                <span>{{ $product->approved_comments->count() }} Ratting (S)</span>
+                                <span class="score">
+                                    <div class="score-wrap">
+                                        <span class="stars-active" style="width: {{ $product->rate()*20 }}%">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </span>
+
+                                        <span class="stars-inactive">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                    </div>
+                                </span>
+                                <span>{{ $product->ratings()->count() }} Ratting (S)</span>
                             </div>
                         </div>
+
                         <div class="details-price">
                             <span>${{ $product->price }}</span>
                         </div>
@@ -137,18 +161,19 @@
         <div class="container">
             <div class="product-description-review text-center">
                 <div class="description-review-title nav" role=tablist>
-                    <a class="active" href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
-                        Description
-                    </a>
-                    <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
+                    <a class="active" href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
                         Reviews ({{ $product->approved_comments->count() }})
                     </a>
+                    <a href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
+                        Description
+                    </a>
                 </div>
+
                 <div class="description-review-text tab-content">
-                    <div class="tab-pane active show fade" id="pro-dec" role="tabpanel">
+                    <div class="tab-pane fade" id="pro-dec" role="tabpanel">
                         <p>{{ $product->details }}</p>
                     </div>
-                    <div class="tab-pane fade" id="pro-review" role="tabpanel">
+                    <div class="tab-pane active show fade" id="pro-review" role="tabpanel">
 
                         <div class="page-blog-details section-padding--lg bg--white pt-0">
                             <div class="container">
@@ -168,11 +193,10 @@
                                                                 <div class="content">
                                                                     {{ $comment->name }}
                                                                     <div class="comnt__author d-block d-sm-flex">
-                                                                        <small>{{ $comment->created_at->format('M d  Y h:i a') }}</small>
+                                                                        <small>{{ $comment->created_at->format('M d  Y') }}</small>
                                                                     </div>
                                                                     <div>
-                                                                        <br>
-                                                                        <p>{{ $comment->comment }}</p>
+                                                                        <p style="float: center;">{{ $comment->comment }}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -189,7 +213,27 @@
                                             @if(auth()->check())
                                             <div class="comment_respond">
                                                 <h3 class="reply_title">Leave a Reply <small></small></h3>
-                                                <p>Your email address will not be published. Required fields are marked </p>
+{{--                                                <p>Your email address will not be published. Required fields are marked </p>--}}
+
+                                                @if($productFind)
+                                                    @if(auth()->user()->rated($product))
+                                                        <div class="rating">
+                                                            <span class="rating-star" data-value="5"></span>
+                                                            <span class="rating-star" data-value="4"></span>
+                                                            <span class="rating-star" data-value="3"></span>
+                                                            <span class="rating-star" data-value="2"></span>
+                                                            <span class="rating-star" data-value="1"></span>
+                                                        </div>
+                                                    @else
+                                                        <div class="rating">
+                                                            <span class="rating-star" data-value="5"></span>
+                                                            <span class="rating-star" data-value="4"></span>
+                                                            <span class="rating-star" data-value="3"></span>
+                                                            <span class="rating-star" data-value="2"></span>
+                                                            <span class="rating-star" data-value="1"></span>
+                                                        </div>
+                                                    @endif
+
 
                                                 {!! Form::open(['route' => ['products.add_comment', $product->slug], 'method' => 'post', 'class' => 'comment__form']) !!}
                                                 <div class="input__box">
@@ -212,9 +256,14 @@
 
                                                 {!! Form::close() !!}
                                                 @else
-                                                    <hr>
-                                                    <a href="{{ route('front.login') }}" class="bg-success">Login to write a comment!</a>
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <small>Must buy this book before write a review.</small>
+                                                    </div>
                                                 @endif
+                                                @else
+                                                <hr>
+                                                <a href="{{ route('front.login') }}" class="bg-success">Login to write a comment!</a>
+                                            @endif
                                             </div>
                                         </div>
                                     </div>
@@ -232,5 +281,26 @@
 
 @endsection
 @section('script')
-<script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $('.rating-star').click(function() {
+
+            let submitStars = $(this).attr('data-value');
+
+            $.ajax({
+                type: 'post',
+                url: {{ $product->id }} + '/rate',
+                data: {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                    'value' : submitStars,
+                },
+                success: function() {
+                    // alert('Rating add successfully');
+                    location.reload();
+                },
+                error: function() {
+                    alert('Something was wrong');
+                },
+            });
+        });
+    </script>
 @endsection

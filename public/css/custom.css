@@ -1,0 +1,17 @@
+.avatar{
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+}
+
+.avatar-round{
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 30%;
+}

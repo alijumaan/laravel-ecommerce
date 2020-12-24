@@ -13,33 +13,34 @@ if (App::environment('production')) {
 Route::group(['namespace' => 'Front'], function () {
     Route::get('/', 'IndexController@index')->name('home');
 
-    # Route CATEGORY, ARCHIVE (Sidebar sections)
+    /***** ROUTE CATEGORY - ARCHIVE(SIDEBAR SECTIONS) *****/
     Route::get('/category/{category_slug}', 'IndexController@category')->name('category.product');
     Route::get('/archive/{date}', 'IndexController@archive')->name('archive.product');
 
-    # Search
+    /***** SEARCH *****/
     Route::get('/search', 'IndexController@search')->name('search');
 
-    # Tag
+    /***** TAGS *****/
     Route::get('/tag/{tag_slug}', 'ProductController@tag')->name('tag.products');
-    # Products
+    /***** PRODUCTS *****/
     Route::post('products/{product}', 'ProductController@store_comment')->name('products.add_comment');
+    Route::post('products/{product}/rate', 'ProductController@rate')->name('products.rate');
     Route::resource('products', 'ProductController', ['as' => 'front']);
 
-    # Contact
+    /***** CONTACTS *****/
     Route::get('/contact', 'ContactController@index')->name('contact.index');
     Route::post('/contact', 'ContactController@store')->name('contact.store');
 
-    # Cart
+    /***** CART *****/
     Route::get('/cart', 'CartController@index')->name('cart.index');
     Route::get('/cart/apply-coupon', 'CartController@applyCoupon')->name('cart.coupon');
     Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add');
     Route::get('/destroy/{product}', 'CartController@destroy')->name('cart.destroy');
 
-    # Checkout
+    /***** CHECKOUT *****/
     Route::get('/cart/checkout', 'CheckoutController@index')->name('checkout.index');
 
-    # Order Store
+    /***** ORDER STORE *****/
     Route::post('/cart/checkout', 'OrderController@store')->name('checkout.store');
 
 
@@ -50,19 +51,21 @@ Route::group(['namespace' => 'Front'], function () {
 
     Route::group(['middleware' => 'verified'], function () {
         Route::get('/dashboard', 'UserController@index')->name('dashboard');
-        //Route::get('/dashboard/{id}', 'UserController@show')->name('user.order');
+//        Route::get('/dashboard/{id}', 'UserController@show')->name('user.order');
         Route::get('/edit-info', 'UserController@edit_info')->name('front.users.edit');
         Route::post('/edit-info', 'UserController@update_info')->name('users.update_info');
         Route::post('/edit-password', 'UserController@update_password')->name('users.update_password');
-        # Users comments
+
+        /***** USERS COMMENTS *****/
         Route::get('/comments', 'UserController@show_comments')->name('users.comments');
     });
 
-    // Authentication Routes...
+
+    /***** AUTHENTICATION ROUTES *****/
     Route::get('/login',                            ['as' => 'front.login.form',           'uses' => 'Auth\LoginController@showLoginForm']);
     Route::post('login',                            ['as' => 'front.login',                'uses' => 'Auth\LoginController@login']);
 
-    // Login By Social Media [ Facebook - Twitter - Google ]
+    /***** LOGIN BY SOCIAL MEDIA [ FACEBOOK - TWITTER - GOOGLE ] *****/
     Route::get('login/{provider}',                  [LoginController::class, 'redirectToProvider'])->name('front.social_login');
     Route::get('login/{provider}/callback',         [LoginController::class, 'handleProviderCallback'])->name('front.social_login_callback');
 

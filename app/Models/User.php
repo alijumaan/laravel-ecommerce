@@ -57,6 +57,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Product::class);
     }
 
+    public function OrderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -66,4 +71,29 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->status == '1' ? 'Active' : 'Inactive';
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function rated(Product $product)
+    {
+        return $this->ratings->where('product_id', $product->id)->isNotEmpty();
+    }
+
+    public function productRating(Product $product)
+    {
+        return $this->rated($product) ? $this->ratings->where('product_id', $product->id)->first() : NULL;
+    }
+
+//    public function ratedPurches()
+//    {
+//        return $this->belongsToMany(Product::class)->withPivot(['bought'])->wherePivot('bought', true);
+//    }
+
+//    public function productsInCart()
+//    {
+//        return $this->belongsToMany(Product::class)->withPivot(['in_stock', 'bought'])->wherePivot('bought', false);
+//    }
 }

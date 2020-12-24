@@ -59,7 +59,8 @@ class OrderController extends Controller
             $order['grand_total'] = \Cart::session(auth()->id())->getTotal();
             $order['item_count']= \Cart::session(auth()->id())->getContent()->count();
 
-            $order['user_id'] = auth()->id();
+            $userId = auth()->id();
+            $order['user_id'] = $userId;
 
             if (request('payment_method') == 'paypal') {
                 $order['payment_method'] = 'paypal';
@@ -71,7 +72,7 @@ class OrderController extends Controller
             $cartItems = \Cart::session(auth()->id())->getContent();
 
             foreach($cartItems as $item) {
-                $order->items()->attach($item->id, ['price'=> $item->price, 'quantity'=> $item->quantity]);
+                $order->items()->attach($item->id, ['price'=> $item->price, 'quantity'=> $item->quantity, 'user_id' => $userId]);
             }
 
             //payment

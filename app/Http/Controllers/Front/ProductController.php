@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Rating;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,8 +48,13 @@ class ProductController extends Controller
         $product = $product->whereSlug($id);
         $product = $product->whereStatus(1)->first();
 
+        $productFind = 0;
+        if (Auth::check()) {
+            $productFind = auth()->user()->OrderItems()->where('product_id', $product->id)->where('user_id', auth()->user()->id)->where('is_paid', true)->first();
+        }
+
         if ($product) {
-            return view('front.product.show', compact('product'));
+            return view('front.product.show', compact('product', 'productFind'));
         }else {
             return redirect()->route('home');
         }
@@ -116,5 +123,21 @@ class ProductController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function rate(Request $request, Product $product)
+    {
+        if(auth()->user()->rated($product)) {
+            $rating = Rating::where(['user_id' => auth()->user()->id, 'product_id' => $product->id])->first();
+            $rating->value = $request->value;
+            $rating->save();
+        } else {
+            $rating = new Rating;
+            $rating->user_id = auth()->user()->id;
+            $rating->product_id = $product->id;
+            $rating->value = $request->value;
+            $rating->save();
+        }
+        return back();
     }
 }

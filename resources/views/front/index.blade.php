@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="p-1 text-white text-center" style="background-image: url(assets/img/bg/12.jpg)"><b>Up to 15% off</b> coupon: KSA</div>
+<div class="p-1 text-white text-center" style="background-image: url(assets/img/bg/12.jpg)">Up to 15% off</div>
 
     <div class="slider-area">
         <div class="slider-active-2 owl-carousel">

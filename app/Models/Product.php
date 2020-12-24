@@ -83,5 +83,15 @@ class Product extends Model
         return $this->status == 1 ? 'Active' : 'Inactive';
     }
 
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function rate()
+    {
+        return $this->ratings->isNotEmpty() ? $this->ratings()->sum('value') / $this->ratings()->count() : 0;
+    }
+
 
 }

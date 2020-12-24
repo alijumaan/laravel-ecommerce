@@ -27,5 +27,4 @@ class Order extends Model
     {
         return $this->status == '1' ? 'Confirmed' : 'Pending';
     }
-
 }
