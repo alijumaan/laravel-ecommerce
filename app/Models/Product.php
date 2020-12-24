@@ -28,7 +28,7 @@ class Product extends Model
             'products.name'        => 10,
             'products.slug'        => 10,
             'products.description' => 10,
-            'products.details' => 10,
+            'products.details'     => 10,
         ],
     ];
 

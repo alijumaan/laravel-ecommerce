@@ -87,15 +87,9 @@ class UserController extends Controller
         $update = auth()->user()->update($data);
 
         if ($update) {
-            return redirect()->back()->with([
-                'message' => 'Information updated successfully',
-                'alert-type' => 'success',
-            ]);
+            return redirect()->back()->with(['message' => 'Information updated successfully', 'alert-type' => 'success',]);
         }else {
-            return redirect()->back()->with([
-                'message' => 'Something was wrong',
-                'alert-type' => 'danger',
-            ]);
+            return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger',]);
         }
 
     }
@@ -119,21 +113,12 @@ class UserController extends Controller
 
             if ($update) {
                 auth()->logout();
-                return redirect()->route('front.login')->with([
-                    'message' => 'Password updated successfully',
-                    'alert-type' => 'success',
-                ]);
+                return redirect()->route('front.login')->with(['message' => 'Password updated successfully', 'alert-type' => 'success',]);
             }else {
-                return redirect()->back()->with([
-                    'message' => 'Something was wrong',
-                    'alert-type' => 'danger',
-                ]);
+                return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger',]);
             }
         }else {
-            return redirect()->back()->with([
-                'message' => 'Something was wrong',
-                'alert-type' => 'danger',
-            ]);
+            return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger',]);
         }
 
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -20,7 +19,7 @@ class ProductController extends Controller
         $orderBy = (isset(\request()->order_by) && \request()->order_by != '') ? \request()->order_by : 'desc';
         $limitBy = (isset(\request()->limit_by) && \request()->limit_by != '') ? \request()->limit_by : '15';
 
-        $products = Product::orderBy($sortBy, $orderBy);
+        $products = Product::with('media', 'tags')->orderBy($sortBy, $orderBy);
         $products = $products->paginate($limitBy);
 
         if ($keyword != null) {
@@ -35,8 +34,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with(['media',
-            'approved_comments' => function($query) {
+        $product = Product::with(['media', 'approved_comments' => function($query) {
                 $query->orderBy('id', 'desc');
             }
         ]);
@@ -93,17 +91,11 @@ class ProductController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with([
-                'message' => 'Something was wrong',
-                'alert-type' => 'warning'
-            ]);
+            return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'warning']);
 
         }
 
-        return redirect()->back()->with([
-            'message' => 'Something was wrong',
-            'alert-type' => 'danger'
-        ]);
+        return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger']);
 
     }
 
@@ -112,7 +104,7 @@ class ProductController extends Controller
         $tag = Tag::whereSlug($slug)->orWhere('id', $slug)->first()->id;
 
         if ($tag) {
-            $products = Product::with(['media', 'tags', 'category'])
+            $products = Product::with(['media', 'tags'])
                 ->whereHas('tags', function ($query) use ($slug) {
                     $query->where('slug', $slug);
                 })

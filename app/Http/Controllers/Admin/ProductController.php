@@ -63,6 +63,16 @@ class ProductController extends Controller
         return view('admin.products.index', compact( 'categories', 'tags',  'products'));
     }
 
+    public function show($id)
+    {
+        if (!\auth()->user()->ability('admin', 'display_products')) {
+            return redirect('admin/index');
+        }
+
+        $product = Product::with(['media', 'category', 'user', 'comments'])->whereId($id)->first();
+        return view('admin.products.show', compact('product'));
+    }
+
     public function create()
     {
         if (!\auth()->user()->ability('admin', 'create_products')) {
@@ -152,16 +162,6 @@ class ProductController extends Controller
         $tags = Tag::orderBy('id', 'desc')->pluck('name', 'id');
         return view('admin.products.edit', compact('categories', 'product', 'tags'));
 
-    }
-
-    public function show($id)
-    {
-        if (!\auth()->user()->ability('admin', 'display_products')) {
-            return redirect('admin/index');
-        }
-
-        $product = Product::with(['media', 'category', 'user', 'comments'])->whereId($id)->first();
-        return view('admin.products.show', compact('product'));
     }
 
     public function update(Request $request, $id)

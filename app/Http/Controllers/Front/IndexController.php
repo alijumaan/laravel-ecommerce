@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,17 +11,12 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $products = Product::active()->with(['media', 'user'])
+        $products = Product::active()->with('media')
             ->whereHas('category', function ($query){
                 $query->whereStatus(1);
             })->orderBy('id', 'desc')->paginate(8);
 
-        $comments = Comment::orderBy('id', 'desc')->take(3)->get();
-
-        return view('front.index', compact('products', 'comments'))->with([
-            'message' => 'searching...',
-            'alert-type' => 'success'
-        ]);
+        return view('front.index', compact('products'))->with(['message' => 'searching...', 'alert-type' => 'success']);
 
     }
 
@@ -30,7 +24,7 @@ class IndexController extends Controller
     {
         $keyword = isset($request->keyword) && $request->keyword != '' ? $request->keyword : null;
 
-        $products = Product::whereStatus(1)->with(['category', 'media', 'user', 'tags'])
+        $products = Product::whereStatus(1)->with(['category', 'media', 'tags'])
             ->whereHas('category', function ($query){
                 $query->whereStatus(1);
             });
@@ -41,10 +35,8 @@ class IndexController extends Controller
 
         $products = $products->orderBy('id', 'desc')->paginate(8);
 
-        return view('front.product.index', compact('products'))->with([
-        'message' => 'Products not found.',
-        'alert-type' => 'warning'
-         ]);
+        return view('front.product.index', compact('products'))->with(['message' => 'Products not found.', 'alert-type' => 'warning'
+        ]);
 
     }
 
@@ -53,7 +45,7 @@ class IndexController extends Controller
         $category = Category::whereSlug($slug)->orWhere('id', $slug)->whereStatus(1)->first()->id;
 
         if ($category) {
-            $products = Product::whereCategoryId($category)
+            $products = Product::with('tags', 'media')->whereCategoryId($category)
                 ->orderBy('id', 'desc')
                 ->paginate(5);
 
@@ -69,7 +61,7 @@ class IndexController extends Controller
         $month = $exploded_date[0];
         $year = $exploded_date[1];
 
-        $products = Product::active()
+        $products = Product::with('tags', 'media')->active()
             ->whereMonth('created_at', $month)
             ->whereYear('created_at', $year)
             ->orderBy('id', 'desc')

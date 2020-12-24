@@ -45,11 +45,11 @@
     @include('front.layouts.footer')
 
 <!-- all js here -->
-<script src="{{ asset('assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('assets/js/vendor/jquery-1.12.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/popper.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+{{--<script src="{{ asset('assets/js/vendor/jquery-1.12.0.min.js') }}"></script>--}}
+{{--<script src="{{ asset('assets/js/popper.js') }}"></script>--}}
+{{--<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>--}}
 <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ asset('assets/js/isotope.pkgd.min.js') }}"></script>
 <script src="{{ asset('assets/js/imagesloaded.pkgd.min.js') }}"></script>

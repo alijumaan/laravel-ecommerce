@@ -88,8 +88,8 @@
                         <td>
                             <div class="btn-group btn-group-toggle">
                                 <a href="{{ route('admin.product-comments.edit', $comment->id) }}" title="Edit" class="btn-primary btn btn-sm"><i class="fa fa-edit"></i></a>
-                                <a href="javascript:void(0);" onclick="if (confirm('Are You sure want to Delete?'))
-                                    { document.getElementById('comment-delete-{{ $comment->id }}').submit(); } else { return false; }"
+                                <a href="javascript:void(0);"
+                                   onclick="if (confirm('Are You sure want to Delete?')) { document.getElementById('comment-delete-{{ $comment->id }}').submit(); } else { return false; }"
                                    title="Delete" class="btn-danger btn btn-sm"><i class="fa fa-trash"></i>
                                 </a>
                                 <form action="{{ route('admin.product-comments.destroy', $comment->id) }}" method="post" id="comment-delete-{{ $comment->id }}">

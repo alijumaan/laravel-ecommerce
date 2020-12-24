@@ -38,6 +38,6 @@ class Tag extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Tag::class, 'products_tags');
+        return $this->belongsToMany(Product::class, 'products_tags');
     }
 }
