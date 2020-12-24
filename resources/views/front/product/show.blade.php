@@ -104,7 +104,7 @@
 {{--                        </div>--}}
                         <div class="quickview-plus-minus">
                             <div class="cart-plus-minus">
-                                <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
                             </div>
                             <div class="quickview-btn-cart">
                                 <a class="btn-hover-black" href="{{route('cart.add', $product->id)}}">add to cart</a>
