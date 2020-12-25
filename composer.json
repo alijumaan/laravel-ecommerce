@@ -25,6 +25,7 @@
         "livewire/livewire": "^1.3",
         "mindscms/entrust": "^2.0",
         "nicolaslopezj/searchable": "^1.13",
+        "paypal/rest-api-sdk-php": "^1.14",
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "~4.0",
         "spatie/valuestore": "^1.2"

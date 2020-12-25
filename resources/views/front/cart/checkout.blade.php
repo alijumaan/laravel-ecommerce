@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="checkout-area pt-5 pb-5">
-        <div class="container">
+        <div class="container card-body">
             <div class="row">
                 <div class="col-md-12">
 
@@ -31,73 +31,74 @@
                </div>
 
 
-                                   {!! Form::open(['route' => 'checkout.store', 'method' => 'post']) !!}
-                                   <div class="row">
-                                       <div class="col-lg-6 col-md-12 col-12">
+               {!! Form::open(['route' => 'checkout.store', 'method' => 'post']) !!}
+               <div class="row">
+                   <div class="col-lg-6 col-md-12 col-12">
 
-                                           <div class="checkbox-form">
-                                               <h3>{{ __('Billing Details') }}</h3>
-                                               <div class="row">
-                                                   <div class="col-md-6">
-                                                       <div class="checkout-form-list">
-                                                           {!! Form::label('text', 'First name*') !!}
-                                                           {!! Form::text('shipping_first_name', old('shipping_first_name'), ['placeholder' => 'First name']) !!}
-                                                           @error('shipping_first_name')<span class="text-danger">{{ $message }}</span>@enderror
-                                                       </div>
-                                                   </div>
-                                                   <div class="col-md-6">
-                                                       <div class="checkout-form-list">
-                                                           {!! Form::label('text', 'Last name*') !!}
-                                                           {!! Form::text('shipping_last_name', old('shipping_last_name'), ['placeholder' => 'Last name']) !!}
-                                                           @error('shipping_last_name')<span class="text-danger">{{ $message }}</span>@enderror
-                                                       </div>
-                                                   </div>
-                                                   <div class="col-md-12">
-                                                       <div class="checkout-form-list">
-                                                           {!! Form::label('text', 'Address*') !!}
-                                                           {!! Form::text('shipping_address', old('shipping_address'), ['placeholder' => 'Address']) !!}
-                                                           @error('shipping_address')<span class="text-danger">{{ $message }}</span>@enderror
-                                                       </div>
-                                                   </div>
-                                                   <div class="col-md-6">
-                                                       <div class="checkout-form-list">
-                                                           {!! Form::label('text', 'State*') !!}
-                                                           {!! Form::text('shipping_state', old('shipping_state'), ['placeholder' => 'State']) !!}
-                                                           @error('shipping_state')<span class="text-danger">{{ $message }}</span>@enderror
-                                                       </div>
-                                                   </div>
-                                                   <div class="col-md-6">
-                                                       <div class="checkout-form-list">
-                                                           {!! Form::label('text', 'City*') !!}
-                                                           {!! Form::text('shipping_city', old('shipping_city'), ['placeholder' => 'City']) !!}
-                                                           @error('shipping_city')<span class="text-danger">{{ $message }}</span>@enderror
-                                                       </div>
-                                                   </div>
-                                                   <div class="col-md-6">
-                                                       <div class="checkout-form-list">
-                                                           {!! Form::label('email', 'Email*') !!}
-                                                           {!! Form::email('shipping_email', auth()->user()->email, ['placeholder' => 'Email']) !!}
-                                                           @error('shipping_email')<span class="text-danger">{{ $message }}</span>@enderror
-                                                       </div>
-                                                   </div>
-                                                   <div class="col-md-6">
-                                                       <div class="checkout-form-list">
-                                                           {!! Form::label('text', 'Phone*') !!}
-                                                           {!! Form::text('shipping_phone', old('shipping_phone'), ['placeholder' => 'Phone']) !!}
-                                                           @error('shipping_phone')<span class="text-danger">{{ $message }}</span>@enderror
-                                                       </div>
-                                                   </div>
-                                                   <div class="col-md-12">
-                                                       <div class="form-check form-check-inline">
-                                                       {!! Form::label('payment_method', 'Cash', ['class' => 'form-check-input', 'for' => 'cash_on_delivery']) !!}
-                                                       {!! Form::radio('payment_method', 'cash_on_delivery', 'selected', ['class' => 'form-check-input', 'id' => 'cash_on_delivery']) !!}
-                                                       </div>
-                                                       <br>
+                       <div class="checkbox-form">
+                           <h3>{{ __('Billing Details') }}</h3>
+                           <div class="row">
+                               <div class="col-md-6">
+                                   <div class="checkout-form-list">
+                                       {!! Form::label('text', 'First name*') !!}
+                                       {!! Form::text('shipping_first_name', old('shipping_first_name'), ['placeholder' => 'First name']) !!}
+                                       @error('shipping_first_name')<span class="text-danger">{{ $message }}</span>@enderror
+                                   </div>
+                               </div>
+                               <div class="col-md-6">
+                                   <div class="checkout-form-list">
+                                       {!! Form::label('text', 'Last name*') !!}
+                                       {!! Form::text('shipping_last_name', old('shipping_last_name'), ['placeholder' => 'Last name']) !!}
+                                       @error('shipping_last_name')<span class="text-danger">{{ $message }}</span>@enderror
+                                   </div>
+                               </div>
+                               <div class="col-md-12">
+                                   <div class="checkout-form-list">
+                                       {!! Form::label('text', 'Address*') !!}
+                                       {!! Form::text('shipping_address', old('shipping_address'), ['placeholder' => 'Address']) !!}
+                                       @error('shipping_address')<span class="text-danger">{{ $message }}</span>@enderror
+                                   </div>
+                               </div>
+                               <div class="col-md-6">
+                                   <div class="checkout-form-list">
+                                       {!! Form::label('text', 'State*') !!}
+                                       {!! Form::text('shipping_state', old('shipping_state'), ['placeholder' => 'State']) !!}
+                                       @error('shipping_state')<span class="text-danger">{{ $message }}</span>@enderror
+                                   </div>
+                               </div>
+                               <div class="col-md-6">
+                                   <div class="checkout-form-list">
+                                       {!! Form::label('text', 'City*') !!}
+                                       {!! Form::text('shipping_city', old('shipping_city'), ['placeholder' => 'City']) !!}
+                                       @error('shipping_city')<span class="text-danger">{{ $message }}</span>@enderror
+                                   </div>
+                               </div>
+                               <div class="col-md-6">
+                                   <div class="checkout-form-list">
+                                       {!! Form::label('email', 'Email*') !!}
+                                       {!! Form::email('shipping_email', auth()->user()->email, ['placeholder' => 'Email']) !!}
+                                       @error('shipping_email')<span class="text-danger">{{ $message }}</span>@enderror
+                                   </div>
+                               </div>
+                               <div class="col-md-6">
+                                   <div class="checkout-form-list">
+                                       {!! Form::label('text', 'Phone*') !!}
+                                       {!! Form::text('shipping_phone', old('shipping_phone'), ['placeholder' => 'Phone']) !!}
+                                       @error('shipping_phone')<span class="text-danger">{{ $message }}</span>@enderror
+                                   </div>
+                               </div>
+                               <div class="col-md-12">
+                                   <div class="form-check form-check-inline">
+                                   {!! Form::label('payment_method', 'Cash', ['class' => 'form-check-input', 'for' => 'cash_on_delivery']) !!}
+                                   {!! Form::radio('payment_method', 'cash_on_delivery', 'selected', ['class' => 'form-check-input', 'id' => 'cash_on_delivery']) !!}
+                                   </div>
+                                   <br>
+                                   <div id="paypal-button"></div>
 {{--                                <div class="form-check form-check-inline">--}}
 {{--                                    {!! Form::label('payment_method', 'PayPal', ['class' => 'form-check-input', 'for' => 'cash_on_delivery']) !!}--}}
 {{--                                    {!! Form::radio('payment_method', 'cash_on_delivery', 'disabled', ['class' => 'form-check-input']) !!}--}}
 {{--                                </div>--}}
-                                <span class="text-info">Paypal coming soon!</span>
+{{--                                <span class="text-info">Paypal coming soon!</span>--}}
                             </div>
                         </div>
                     </div>
@@ -188,6 +189,41 @@
         </div>
     </div>
     <!-- checkout-area end -->
+@endsection
+
+@section('script')
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        paypal.Button.render({
+            env: 'sandbox', // Or 'production'
+            // Set up the payment:
+            // 1. Add a payment callback
+            payment: function(data, actions) {
+                // 2. Make a request to your server
+                return actions.request.post('/api/create-payment', {
+                    userId: "{{ auth()->user()->id }}"
+                })
+                    .then(function(res) {
+                        // 3. Return res.id from the response
+                        return res.id;
+                    });
+            },
+            // Execute the payment:
+            // 1. Add an onAuthorize callback
+            onAuthorize: function(data, actions) {
+                // 2. Make a request to your server
+                return actions.request.post('/api/execute-payment', {
+                    paymentID: data.paymentID,
+                    payerID:   data.payerID,
+                    userId: "{{ auth()->user()->id }}"
+                })
+                    .then(function(res) {
+                        $('#success').slideDown(200);
+                        $('.card-body').slideUp(0);
+                    });
+            }
+        }, '#paypal-button');
+    </script>
 @endsection
 
 

@@ -87,13 +87,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->rated($product) ? $this->ratings->where('product_id', $product->id)->first() : NULL;
     }
 
-//    public function ratedPurches()
-//    {
-//        return $this->belongsToMany(Product::class)->withPivot(['bought'])->wherePivot('bought', true);
-//    }
+    public function productsInCart()
+    {
+        return $this->belongsToMany(Product::class)->withPivot(['in_stock', 'is_paid'])->wherePivot('is_paid', false);
+    }
 
-//    public function productsInCart()
-//    {
-//        return $this->belongsToMany(Product::class)->withPivot(['in_stock', 'bought'])->wherePivot('bought', false);
-//    }
+    public function ratedPurches()
+    {
+        return $this->belongsToMany(Product::class)->withPivot(['is_paid'])->wherePivot('id_paid', true);
+    }
 }

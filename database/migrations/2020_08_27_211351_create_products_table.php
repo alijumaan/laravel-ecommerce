@@ -19,9 +19,10 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->longText('details');
-            $table->unsignedDouble('price', 8, 2)->default(0.00);
+            $table->decimal('price', 8, 2);
+            $table->unsignedBigInteger('in_stock');
             $table->unsignedTinyInteger('status')->default(0);
-            $table->unsignedTinyInteger('comment_able')->default(1);
+            $table->unsignedTinyInteger('review_able')->default(1);
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
