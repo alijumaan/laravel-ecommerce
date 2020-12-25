@@ -31,7 +31,7 @@
                                             <i class="pe-7s-chat"></i>
                                         </div>
                                         <div class="food-info-content">
-                                            <p><a href="http://alijumaan.com">alila3883@gmail.com</a> <br><a href="http://cartwhite.com">company@alijumaan.info</a></p>
+                                            <p><a href="http://alijumaan.com">alila3883@gmail.com</a> <br><a href="https://alijumaan.com/" target="_blank">contact@alijumaan.com</a></p>
                                         </div>
                                     </div>
                                 </div>
