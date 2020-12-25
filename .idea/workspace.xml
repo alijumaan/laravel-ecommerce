@@ -22,7 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="" />
+    <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_24_122054_create_product_user_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/index.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -574,7 +578,9 @@
       <workItem from="1608471548233" duration="679000" />
       <workItem from="1608778495637" duration="4977000" />
       <workItem from="1608809909175" duration="7415000" />
-      <workItem from="1608831736636" duration="12911000" />
+      <workItem from="1608831736636" duration="13033000" />
+      <workItem from="1608846217510" duration="102000" />
+      <workItem from="1608890326954" duration="315000" />
     </task>
     <servers />
   </component>

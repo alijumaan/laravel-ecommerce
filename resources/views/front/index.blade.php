@@ -28,24 +28,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4">
-                    <div class="furits-banner-wrapper mb-30 wow fadeInLeft">
-                        <img src="{{ asset('assets/img/banner/49.jpg') }}" alt="">
-                        <div class="furits-banner-content">
+                    <div class="card-body">
+                        <div class="furits-banner-wrapper mb-30 wow fadeInLeft">
+                            <img src="{{ asset('assets/img/banner/49.jpg') }}" alt="">
+                            <div class="furits-banner-content">
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                    <div class="furits-banner-wrapper mb-30 wow fadeInUp">
+                    <div class="card-body">
+                        <div class="furits-banner-wrapper mb-30 wow fadeInUp">
                         <img src="{{ asset('assets/img/banner/50.jpg') }}" alt="">
                         <div class="furits-banner-content">
                         </div>
                     </div>
+                    </div>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                    <div class="furits-banner-wrapper mb-30 wow fadeInUp">
+                    <div class="card-body">
+                        <div class="furits-banner-wrapper mb-30 wow fadeInUp">
                         <img src="{{ asset('assets/img/banner/51.png') }}" alt="">
                         <div class="furits-banner-content">
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
