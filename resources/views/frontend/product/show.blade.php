@@ -262,7 +262,7 @@
                                                 @endif
                                                 @else
                                                 <hr>
-                                                <a href="{{ route('front.login') }}" class="bg-success">Login to write a review!</a>
+                                                <a href="{{ route('frontend.login') }}" class="bg-success">Login to write a review!</a>
                                             @endif
                                             </div>
                                         </div>

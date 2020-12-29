@@ -11,9 +11,9 @@
 {{--            <li class="list-group-item"><a href="{{route('dashboard').'/'.$orders[0]->id}}">My orders</a></li>--}}
 {{--            @endif--}}
             <li class="list-group-item"><a href="{{route('dashboard')}}">My account</a></li>
-            <li class="list-group-item"><a href="{{route('front.users.edit') }}">Update information</a></li>
+            <li class="list-group-item"><a href="{{route('frontend.users.edit') }}">Update information</a></li>
             <li class="list-group-item"><a href="{{route('users.reviews')}}">My reviews</a></li>
-            <li class="list-group-item"><a href="{{ route('front.logout') }}" onclick="event.preventDefault();
+            <li class="list-group-item"><a href="{{ route('frontend.logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">Logout</a></li>
         </ul>
     </div>

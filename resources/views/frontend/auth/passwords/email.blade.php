@@ -29,8 +29,8 @@
                                         {!! Form::button('Send Password Reset Link', ['type' => 'submit', 'class' => 'default-btn floatright']) !!}
                                     </div>
                                     <div class="form-group row mb-0">
-                                        @if (Route::has('front.login'))
-                                            <a class="btn btn-link" href="{{ route('front.login') }}">
+                                        @if (Route::has('frontend.login'))
+                                            <a class="btn btn-link" href="{{ route('frontend.login') }}">
                                                 {{ __('Login?') }}
                                             </a>
                                         @endif

@@ -13,13 +13,13 @@
                     <nav>
                         <ul>
                             <li><a href="{{route('home')}}">Home</a></li>
-			    <li><a href="{{route('front.products.index')}}">All Products</a></li>
+			    <li><a href="{{route('frontend.products.index')}}">All Products</a></li>
                                 <ul class="single-dropdown">
                                     <li><a href="{{route('contact.index')}}">Contact us</a></li>
                                     @guest
-                                    <li><a href="{{route('front.login')}}">Login</a></li>
-                                    @if (route('front.register.form'))
-                                    <li><a href="{{route('front.register.form')}}">Register</a></li>
+                                    <li><a href="{{route('frontend.login')}}">Login</a></li>
+                                    @if (route('frontend.register.form'))
+                                    <li><a href="{{route('frontend.register.form')}}">Register</a></li>
                                     @endif
                                     @endguest
                                     <li><a href="{{route('cart.index')}}">Cart page</a></li>
@@ -41,10 +41,10 @@
                         <ul>
                             @guest
                                 <li>
-                                    <a href="{{route('front.login')}}">Login</a>
+                                    <a href="{{route('frontend.login')}}">Login</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('front.register.form')}}">Reg</a>
+                                    <a href="{{route('frontend.register.form')}}">Reg</a>
                                 </li>
                             @else
                                 @if(auth()->user()->isAdmin())
@@ -54,12 +54,12 @@
                                     <ul class="single-dropdown" >
                                         <li ><a href="{{ route('dashboard') }}" style="color: #578a01;">Dashboard</a></li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('front.logout') }}"
+                                            <a class="dropdown-item" href="{{ route('frontend.logout') }}"
                                                onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();" style="color: #578a01;">
                                                 {{ __('Logout') }}
                                             </a>
-                                            <form id="logout-form" action="{{ route('front.logout') }}" method="POST" style="display: none;">
+                                            <form id="logout-form" action="{{ route('frontend.logout') }}" method="POST" style="display: none;">
                                                 @csrf
                                             </form>
                                         </li>
@@ -115,7 +115,7 @@
                         <nav id="mobile-menu-active">
                             <ul class="menu-overflow">
                                 <li><a href="{{route('home')}}">HOME</a></li>
-				                <li><a href="{{route('front.products.index')}}">ALL PRODUCTS</a></li>
+				                <li><a href="{{route('frontend.products.index')}}">ALL PRODUCTS</a></li>
                                 <li><a href="#">Categories</a>
                                     <ul>
                                         <li>
@@ -128,10 +128,10 @@
                                 <li><a href="{{route('contact.index')}}">contact</a></li>
                                 @guest
                                     <li>
-                                        <a href="{{route('front.login')}}">Login</a>
+                                        <a href="{{route('frontend.login')}}">Login</a>
                                     </li>
                                     <li>
-                                        <a href="{{route('front.register.form')}}">Reg</a>
+                                        <a href="{{route('frontend.register.form')}}">Reg</a>
                                     </li>
                                 @else
                                     @if(auth()->user()->isAdmin())
@@ -140,12 +140,12 @@
                                     <li ><a href="{{ route('dashboard') }}" >Dashboard</a></li>
 
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('front.logout') }}"
+                                        <a class="dropdown-item" href="{{ route('frontend.logout') }}"
                                            onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
-                                        <form id="logout-form" action="{{ route('front.logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('frontend.logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
                                     </li>

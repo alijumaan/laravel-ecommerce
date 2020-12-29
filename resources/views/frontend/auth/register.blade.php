@@ -7,7 +7,7 @@
             <div class="breadcrumb-content text-center">
                 <h2>register</h2>
                 <ul>
-                    <li><a href="{{route('front.login.form')}}">login</a></li>
+                    <li><a href="{{route('frontend.login.form')}}">login</a></li>
                     <li> register </li>
                 </ul>
             </div>
@@ -22,7 +22,7 @@
                         <div class="login-form-container">
                             <div class="form-group">
 
-                                {!! Form::open(['route' => 'front.register', 'method' => 'post', 'files' => true]) !!}
+                                {!! Form::open(['route' => 'frontend.register', 'method' => 'post', 'files' => true]) !!}
 
                                 <div class="mb-2">
                                     {!! Form::label('name', 'Name *') !!}
@@ -73,8 +73,8 @@
                                 </div>
 
                                 <div class="form-group row m-0">
-                                    @if (Route::has('front.login'))
-                                        <a class="btn btn-link" href="{{ route('front.login') }}">
+                                    @if (Route::has('frontend.login'))
+                                        <a class="btn btn-link" href="{{ route('frontend.login') }}">
                                             {{ __('Login?') }}
                                         </a>
                                     @endif

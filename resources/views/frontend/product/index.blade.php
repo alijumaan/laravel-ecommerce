@@ -18,7 +18,7 @@
                                     <div class="col-8">
                                         <div class="shop-found-selector">
                                             <div class="shop-selector">
-                                                {!! Form::open(['route' => 'front.products.index', 'method' => 'get']) !!}
+                                                {!! Form::open(['route' => 'frontend.products.index', 'method' => 'get']) !!}
                                                 <label>Order By : </label>
                                                 <label>
                                                     {!! Form::select('order_by', ['' => 'Default', 'asc' => 'A to Z', 'desc' => 'Z to A'], old('order_by', request()->input('order_by'))) !!}
@@ -67,7 +67,7 @@
                                             <div class="col-lg-12">
                                                 <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
                                                     <div class="product-img list-img-width">
-                                                        <a href="{{route('front.products.show', $product->slug)}}">
+                                                        <a href="{{route('frontend.products.show', $product->slug)}}">
                                                             @if($product->media->count() > 0)
                                                                 <img src="{{ asset('storage/' . $product->media->first()->file_name ) }}">
                                                             @endif
@@ -75,7 +75,7 @@
                                                     </div>
                                                     <div class="product-content-list">
                                                         <div class="product-list-info">
-                                                            <h4><a href="{{route('front.products.show', $product->slug)}}">{{ $product->name }}</a></h4>
+                                                            <h4><a href="{{route('frontend.products.show', $product->slug)}}">{{ $product->name }}</a></h4>
                                                             <span>${{ $product->price }}</span>
                                                             @if($product->tags->count() > 0)
                                                             @foreach($product->tags as $tag)
@@ -91,7 +91,7 @@
                                                                 <a class="btn-hover list-btn-style" href="{{route('cart.add', $product->id)}}">add to cart</a>
                                                             </div>
                                                             <div class="product-list-look">
-                                                                <a class="btn-hover list-btn-wishlist" href="{{route('front.products.show', $product->slug)}}">
+                                                                <a class="btn-hover list-btn-wishlist" href="{{route('frontend.products.show', $product->slug)}}">
                                                                     <i class="fas fa-eye"></i>
                                                                 </a>
                                                             </div>
@@ -111,7 +111,7 @@
                                             <div class="col-lg-6 col-md-6" style="max-width: 30%;">
                                                 <div class="product-wrapper mb-30">
                                                     <div class="product-img">
-                                                        <a href="{{route('front.products.show', $product->slug)}}">
+                                                        <a href="{{route('frontend.products.show', $product->slug)}}">
                                                             @if($product->media->count() > 0)
                                                                 <img src="{{ asset('storage/' . $product->media->first()->file_name ) }}">
                                                             @endif
@@ -121,14 +121,14 @@
                                                             <a class="animate-top" title="Add To Cart" href="{{route('cart.add', $product->id)}}">
                                                                 <i class="fas fa-shopping-cart"></i>
                                                             </a>
-                                                            <a class="animate-right" title="Quick View" href="{{route('front.products.show', $product->slug)}}">
+                                                            <a class="animate-right" title="Quick View" href="{{route('frontend.products.show', $product->slug)}}">
 
                                                                 <i class="fas fa-eye"></i>
                                                             </a>
                                                         </div>
                                                     </div>
                                                     <div class="product-content">
-                                                        <h4><a href="{{route('front.products.show', $product->slug)}}">{{ $product->name }}</a></h4>
+                                                        <h4><a href="{{route('frontend.products.show', $product->slug)}}">{{ $product->name }}</a></h4>
                                                         <span>${{ $product->price }}</span>
                                                     </div>
                                                     @if($product->tags->count() > 0)

@@ -37,6 +37,10 @@ class PermissionTableSeeder extends Seeder
         DB::table('permissions')->insert(['name' => 'edit-review', 'desc' => 'Edit review']);
         DB::table('permissions')->insert(['name' => 'delete-review', 'desc' => 'Delete review']);
 
+        DB::table('permissions')->insert(['name' => 'add-tag', 'desc' => 'Add tag']);
+        DB::table('permissions')->insert(['name' => 'edit-tag', 'desc' => 'Edit tag']);
+        DB::table('permissions')->insert(['name' => 'delete-tag', 'desc' => 'Delete tag']);
+
         DB::table('permissions')->insert(['name' => 'add-user', 'desc' => 'Add users']);
         DB::table('permissions')->insert(['name' => 'edit-user', 'desc' => 'Edit users']);
         DB::table('permissions')->insert(['name' => 'delete-user', 'desc' => 'Delete users']);

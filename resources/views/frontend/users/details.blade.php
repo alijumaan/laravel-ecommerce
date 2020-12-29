@@ -1,4 +1,4 @@
-{{--@extends('front.layouts.app')--}}
+{{--@extends('frontend.layouts.app')--}}
 
 {{--@section('page')--}}
 {{--    Details of Your Order--}}

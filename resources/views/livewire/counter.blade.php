@@ -60,7 +60,7 @@
                                 </ul>
                                 <a href="{{route('checkout.index')}}">Proceed to checkout</a>
                             @endif
-                            <a href="{{route('front.products.index')}}">Continue to shopping</a>
+                            <a href="{{route('frontend.products.index')}}">Continue to shopping</a>
                         </div>
                     </div>
                 </div>

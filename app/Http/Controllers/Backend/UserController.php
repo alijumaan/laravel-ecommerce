@@ -30,6 +30,7 @@ class UserController extends Controller
 
     public function create()
     {
+        abort_if(!auth()->user()->can('add-user'), 403, 'You did not have permission to access this page!');
         return view('backend.users.create');
     }
 
@@ -54,6 +55,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        abort_if(!auth()->user()->can('edit-user'), 403, 'You did not have permission to access this page!');
         if ($user) {
             return view('backend.users.edit', compact('user'));
         }
@@ -93,7 +95,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-
+        abort_if(!auth()->user()->can('delete-user'), 403, 'You did not have permission to access this page!');
         $user = User::whereId($id)->first();
         if($user) {
             if ($user->user_image != '') {
@@ -118,6 +120,7 @@ class UserController extends Controller
 
     public function removeImage(Request $request, User $user)
     {
+        abort_if(!auth()->user()->can('delete-user'), 403, 'You did not have permission to access this page!');
         if ($user) {
             if ($user->avatar != '') {
                 if (File::exists('storage/' . $user->avatar)) {
@@ -142,7 +145,6 @@ class UserController extends Controller
         $data['status']                 = $request->status;
         $data['bio']                    = $request->bio;
         $data['receive_email']          = $request->receive_email;
-
         return $data;
     }
 }

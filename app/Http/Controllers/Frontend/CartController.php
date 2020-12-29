@@ -19,13 +19,11 @@ class CartController extends Controller
     public function index()
     {
         $cartItems = \Cart::session(auth()->id())->getContent();
-
         return view('frontend.cart.index', compact('cartItems'));
     }
 
     public function add(Product $product)
     {
-
         try {
             $condition = new CartCondition(array(
                 'name' => 'VAT 5%',
@@ -43,8 +41,6 @@ class CartController extends Controller
 
         } catch (InvalidConditionException $e) {
         }
-
-
 
         \Cart::session(auth()->id())->add(array(
             'id' => $product['id'],
@@ -78,7 +74,6 @@ class CartController extends Controller
             ]);
         }
 
-
         //coupon logic
         $condition = new \Darryldecode\Cart\CartCondition(array(
             'name' => $couponData->name,
@@ -88,7 +83,6 @@ class CartController extends Controller
         ));
 
         \Cart::session(auth()->id())->condition($condition); // for a speicifc user's cart
-
 
         return back()->with([
             'message' => 'coupon applied',

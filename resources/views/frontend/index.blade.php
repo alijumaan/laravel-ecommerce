@@ -19,7 +19,7 @@
         </div>
         <br>
         <div class="slider-social">
-            <span><a class="furits-slider-btn btn-hover animated" href="{{ route('front.products.index') }}">Shop Now</a></span>
+            <span><a class="furits-slider-btn btn-hover animated" href="{{ route('frontend.products.index') }}">Shop Now</a></span>
         </div>
     </div>
 
@@ -80,13 +80,13 @@
                                 <a class="furit-animate-left" title="Add To Cart" href="{{route('cart.add', $product->id)}}">
                                     <i class="fas fa-shopping-cart"></i>
                                 </a>
-                                <a class="furit-animate-right" title="Wishlist" href="{{route('front.products.show', $product->slug)}}">
+                                <a class="furit-animate-right" title="Wishlist" href="{{route('frontend.products.show', $product->slug)}}">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </div>
                         </div>
                         <div class="product-fruit-content text-center">
-                            <h4><a href="{{route('front.products.show', $product->slug)}}">{{ $product->name }}</a></h4>
+                            <h4><a href="{{route('frontend.products.show', $product->slug)}}">{{ $product->name }}</a></h4>
                             <span>${{ $product->price }}</span>
                         </div>
                         </div>
@@ -169,13 +169,13 @@
                                 <a class="furit-animate-left" title="Add To Cart" href="{{route('cart.add', $product->id)}}">
                                     <i class="fas fa-shopping-cart"></i>
                                 </a>
-                                <a class="furit-animate-right" title="Wishlist" href="{{route('front.products.show', $product->slug)}}">
+                                <a class="furit-animate-right" title="Wishlist" href="{{route('frontend.products.show', $product->slug)}}">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </div>
                         </div>
                         <div class="product-fruit-content text-center">
-                            <h4><a href="{{route('front.products.show', $product->slug)}}">{{ $product->name }}</a></h4>
+                            <h4><a href="{{route('frontend.products.show', $product->slug)}}">{{ $product->name }}</a></h4>
                             <span>${{ $product->price }}</span>
                         </div>
                         </div>

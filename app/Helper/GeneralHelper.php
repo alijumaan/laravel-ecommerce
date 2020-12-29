@@ -24,3 +24,10 @@ function clear_cache()
     Cache::forget('global_archives');
     Cache::forget('global_tags');
 }
+
+//function getParentShowOf($param)
+//{
+//    $f = str_replace('admin.', '', $param);
+//    $perm = Permission::where('as', $f)->first();
+//    return $perm ? $perm->parent_show : $f;
+//}

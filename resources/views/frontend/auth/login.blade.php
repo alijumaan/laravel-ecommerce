@@ -5,7 +5,7 @@
             <div class="breadcrumb-content text-center">
                 <h2>login</h2>
                 <ul>
-                    <li><a href="{{route('front.register.form')}}">register</a></li>
+                    <li><a href="{{route('frontend.register.form')}}">register</a></li>
                     <li> login </li>
                 </ul>
             </div>
@@ -20,7 +20,7 @@
                         <div class="login-form-container">
                             <div class="form-group">
 
-                                {!! Form::open(['route' => 'front.login', 'method' => 'post']) !!}
+                                {!! Form::open(['route' => 'frontend.login', 'method' => 'post']) !!}
 
                                 <div class="mb-4">
                                     {!! Form::label('username', 'Username *') !!}
@@ -54,13 +54,13 @@
                                     </label>
                                 </div>
                                 <div class="form-group mt-4 mb-0">
-                                    <a href="{{ route('front.social_login', 'facebook') }}" class="btn btn-block" style="background-color: #1877F2; color: #FFFFFF">
+                                    <a href="{{ route('frontend.social_login', 'facebook') }}" class="btn btn-block" style="background-color: #1877F2; color: #FFFFFF">
                                         Login with Facebook
                                     </a>
-                                    {{--                                    <a href="{{ route('front.social_login', 'twitter') }}" class="btn btn-block" style="background-color: #1DA1F2; color: #FFFFFF">--}}
+                                    {{--                                    <a href="{{ route('frontend.social_login', 'twitter') }}" class="btn btn-block" style="background-color: #1DA1F2; color: #FFFFFF">--}}
                                     {{--                                        Login with Twitter--}}
                                     {{--                                    </a>--}}
-                                    {{--                                    <a href="{{ route('front.social_login', 'google') }}" class="btn btn-block" style="border-color: #1877F2; color: black">--}}
+                                    {{--                                    <a href="{{ route('frontend.social_login', 'google') }}" class="btn btn-block" style="border-color: #1877F2; color: black">--}}
                                     {{--                                        Login with Google--}}
                                     {{--                                    </a>--}}
                                 </div>

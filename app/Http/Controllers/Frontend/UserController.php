@@ -106,7 +106,7 @@ class UserController extends Controller
 
             if ($update) {
                 auth()->logout();
-                return redirect()->route('front.login.form')->with(['message' => 'Password updated successfully', 'alert-type' => 'success',]);
+                return redirect()->route('frontend.login.form')->with(['message' => 'Password updated successfully', 'alert-type' => 'success',]);
             }else {
                 return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger',]);
             }

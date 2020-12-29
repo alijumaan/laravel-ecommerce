@@ -34,6 +34,7 @@ class TagController extends Controller
 
     public function create()
     {
+        abort_if(!auth()->user()->can('add-tag'), 403, 'You did not have permission to access this page!');
         return view('backend.tags.create');
     }
 
@@ -53,6 +54,7 @@ class TagController extends Controller
 
     public function edit(Tag $tag)
     {
+        abort_if(!auth()->user()->can('edit-tag'), 403, 'You did not have permission to access this page!');
         return view('backend.tags.edit', compact('tag'));
     }
 
@@ -69,6 +71,7 @@ class TagController extends Controller
 
     public function destroy(Tag $tag)
     {
+        abort_if(!auth()->user()->can('delete-tag'), 403, 'You did not have permission to access this page!');
         if($tag) {
             $tag->delete();
             clear_cache();

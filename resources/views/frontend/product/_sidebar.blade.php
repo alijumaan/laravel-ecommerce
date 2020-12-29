@@ -107,13 +107,13 @@
                 @foreach( $recent_products as $recent_product)
                     <li>
                         <div class="post-wrapper d-flex">
-                                <a href="{{ route('front.products.show', $recent_product->slug) }}">
+                                <a href="{{ route('frontend.products.show', $recent_product->slug) }}">
                                     @if($recent_product->media->count() > 0)
                                         <img class="avatar pb-3" src="{{ asset('storage/' . $recent_product->media->first()->file_name ) }}">
                                     @endif
                                 </a>
                             <div class="">
-                                <h4><a href="{{ route('front.products.show', $recent_product->slug) }}">{{ \Illuminate\Support\Str::limit($recent_product->name, 20, ' ...') }}</a></h4>
+                                <h4><a href="{{ route('frontend.products.show', $recent_product->slug) }}">{{ \Illuminate\Support\Str::limit($recent_product->name, 20, ' ...') }}</a></h4>
                                 <p>${{ $recent_product->price }}</p>
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                         </div>
                         <div class="ml-3 p-0">
                             @if(isset($recent_review->product->slug))
-                                <a href="{{ route('front.products.show', $recent_review->product->slug) }}">
+                                <a href="{{ route('frontend.products.show', $recent_review->product->slug) }}">
                                 <h6><span class="text-success">{{ $recent_review->name }}</span>
                                     <small> review on :
                                     {{ $recent_review->product->name }}

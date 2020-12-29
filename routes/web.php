@@ -38,7 +38,7 @@ Route::get('/tag/{tag_slug}', [ProductController::class, 'tag'])->name('tag.prod
 /***** PRODUCTS *****/
 Route::post('products/{product}', [ProductController::class, 'store_review'])->name('products.add_review');
 Route::post('products/{product}/rate', [ProductController::class, 'rate'])->name('products.rate');
-Route::resource('products', ProductController::class)->names('front.products');
+Route::resource('products', ProductController::class)->names('frontend.products');
 
 /***** CONTACTS *****/
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
@@ -64,7 +64,7 @@ Route::post('/cart/checkout', [OrderController::class, 'store'])->name('checkout
 
 Route::group(['middleware' => 'verified'], function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
-    Route::get('/edit-info', [UserController::class, 'edit_info'])->name('front.users.edit');
+    Route::get('/edit-info', [UserController::class, 'edit_info'])->name('frontend.users.edit');
     Route::post('/edit-info', [UserController::class, 'update_info'])->name('users.update_info');
     Route::post('/edit-password', [UserController::class, 'update_password'])->name('users.update_password');
 
@@ -74,15 +74,15 @@ Route::group(['middleware' => 'verified'], function () {
 
 
 /***** AUTHENTICATION ROUTES *****/
-Route::get('/login',                            [LoginController::class, 'showLoginForm'])->name('front.login.form');
-Route::post('/login',                            [LoginController::class, 'login'])->name('front.login');
+Route::get('/login',                            [LoginController::class, 'showLoginForm'])->name('frontend.login.form');
+Route::post('/login',                            [LoginController::class, 'login'])->name('frontend.login');
 
 /***** LOGIN BY SOCIAL MEDIA [ FACEBOOK - TWITTER - GOOGLE ] *****/
-Route::get('login/{provider}',                  [LoginController::class, 'redirectToProvider'])->name('front.social_login');
-Route::get('login/{provider}/callback',         [LoginController::class, 'handleProviderCallback'])->name('front.social_login_callback');
-Route::post('/logout',                            [LoginController::class, 'logout'])->name('front.logout');
-Route::get('/register',                            [RegisterController::class, 'showRegistrationForm'])->name('front.register.form');
-Route::post('/register',                            [RegisterController::class, 'register'])->name('front.register');
+Route::get('login/{provider}',                  [LoginController::class, 'redirectToProvider'])->name('frontend.social_login');
+Route::get('login/{provider}/callback',         [LoginController::class, 'handleProviderCallback'])->name('frontend.social_login_callback');
+Route::post('/logout',                            [LoginController::class, 'logout'])->name('frontend.logout');
+Route::get('/register',                            [RegisterController::class, 'showRegistrationForm'])->name('frontend.register.form');
+Route::post('/register',                            [RegisterController::class, 'register'])->name('frontend.register');
 Route::get('/password/reset',                            [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/password/email',                            [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/password/reset/{token}',                            [ResetPasswordController::class, 'showResetForm'])->name('password.reset');

@@ -26,6 +26,7 @@ class SettingController extends Controller
 
     public function update(Request $request, $id)
     {
+        abort_if(!auth()->user()->can('edit-setting'), 403, 'You did not have permission to access this page!');
         for ($i = 0; $i < count($request->id); $i++) {
             $input['value'] = isset($request->value[$i]) ? $request->value[$i] : null;
             Setting::whereId($request->id[$i])->first()->update($input);

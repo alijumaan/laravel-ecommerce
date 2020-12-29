@@ -63,7 +63,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" class="text-center bg-success">
-                                                <a href="{{route('front.users.edit') }}"><i class="fa fa-edit text-white"> Update</i></a>
+                                                <a href="{{route('frontend.users.edit') }}"><i class="fa fa-edit text-white"> Update</i></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -91,7 +91,7 @@
                                             <th>Product</th>
                                             <td>
                                                 @foreach($order->items as $product)
-                                                    <a href="{{route('front.products.show', $product->slug) }}"> {{ $product->name }}</a>
+                                                    <a href="{{route('frontend.products.show', $product->slug) }}"> {{ $product->name }}</a>
                                                     <br>
                                                 @endforeach
                                             </td>

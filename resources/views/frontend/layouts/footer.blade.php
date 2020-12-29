@@ -47,9 +47,9 @@
                                 <li><a href="{{ route('cart.index') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt=""> Cart</a></li>
                                 <li><a href="{{ route('dashboard') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt=""> My Account</a></li>
                                 @guest
-                                    <li><a href="{{ route('front.login') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt=""> Login</a></li>
-                                    @if (route('front.register.form'))
-                                        <li><a href="{{ route('front.register.form') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt="">Register</a></li>
+                                    <li><a href="{{ route('frontend.login') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt=""> Login</a></li>
+                                    @if (route('frontend.register.form'))
+                                        <li><a href="{{ route('frontend.register.form') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt="">Register</a></li>
                                     @endif
                                 @endguest
                             </ul>
