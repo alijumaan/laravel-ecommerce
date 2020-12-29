@@ -14,9 +14,9 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        Category::create(['name' => 'Phones', 'status' => 1]);
-        Category::create(['name' => 'Computers', 'status' => 1]);
-        Category::create(['name' => 'Headphones', 'status' => 1]);
-        Category::create(['name' => 'Televisions', 'status' => 1]);
+        Category::create(['name' => 'Phones']);
+        Category::create(['name' => 'Computers']);
+        Category::create(['name' => 'Headphones']);
+        Category::create(['name' => 'Televisions']);
     }
 }

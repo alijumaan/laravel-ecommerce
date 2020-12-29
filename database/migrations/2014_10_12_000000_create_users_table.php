@@ -19,9 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('mobile')->unique()->nullable();
+            $table->foreignId('role_id')->default(3)->constrained();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('user_image')->nullable();
+            $table->string('avatar')->default('images/avatar.png');
             $table->unsignedTinyInteger('status')->default(0);
             $table->text('bio')->nullable();
             $table->unsignedTinyInteger('receive_email')->default(0);

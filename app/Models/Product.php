@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Product extends Model
 {
+    use HasFactory;
 
     use Sluggable, SearchableTrait;
 
@@ -34,7 +36,7 @@ class Product extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('status', 1);
+        return $query->where('in_stock', '>=', 1);
     }
 
 
@@ -45,7 +47,7 @@ class Product extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'products_tags', 'product_id', 'tag_id');
+        return $this->belongsToMany(Tag::class, 'product_tag', 'product_id', 'tag_id');
     }
 
     public function user()
@@ -53,9 +55,9 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
+    public function reviews()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Review::class);
     }
 
     public function orders()
@@ -68,9 +70,9 @@ class Product extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function approved_comments()
+    public function approved_reviews()
     {
-        return $this->hasMany(Comment::class)->whereStatus(1);
+        return $this->hasMany(Review::class)->whereStatus(1);
     }
 
     public function media()
@@ -78,9 +80,9 @@ class Product extends Model
         return $this->hasMany(ProductMedia::class);
     }
 
-    public function status()
+    public function inStock()
     {
-        return $this->status == 1 ? 'Active' : 'Inactive';
+        return $this->in_stock >= 1 ? 'In stock' : 'Out of stock';
     }
 
     public function ratings()

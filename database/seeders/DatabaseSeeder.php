@@ -13,13 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $images = glob(public_path('frontend/images/products/*.*'));
+        foreach ($images as $image) {
+            unlink($image);
+        }
+
         $this->call(RolesTableSeeder::class);
         $this->call(PermissionTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(TagsTableSeeder::class);
         $this->call(ProductsTableSeeder::class);
-        $this->call(ProductsTagsTableSeeder::class);
-//        $this->call(ProductMediaTableSeeder::class);
-        $this->call(SettingTableSeeder::class);
+        $this->call(ProductTagTableSeeder::class);
+        $this->call(ProductMediaTableSeeder::class);
+        $this->call(PagesSeeder::class);
     }
 }

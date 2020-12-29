@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Mindscms\Entrust\Traits\EntrustUserWithPermissionsTrait;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, EntrustUserWithPermissionsTrait, searchableTrait;
+    use Notifiable, searchableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -49,7 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function orders()
     {
-        return $this->hasMany(Order::class, 'user_id');
+        return $this->hasMany(Order::class);
     }
 
     public function products()
@@ -57,19 +56,19 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Product::class);
     }
 
-    public function OrderItems()
+    public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
     }
 
-    public function comments()
+    public function reviews()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Review::class);
     }
 
     public function status()
     {
-        return $this->status == '1' ? 'Active' : 'Inactive';
+        return $this->status == 1 ? 'Active' : 'Inactive';
     }
 
     public function ratings()
@@ -89,11 +88,46 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function productsInCart()
     {
-        return $this->belongsToMany(Product::class)->withPivot(['in_stock', 'is_paid'])->wherePivot('is_paid', false);
+        return $this->belongsToMany(OrderItem::class)->withPivot(['quantity', 'is_paid'])->wherePivot('is_paid', false);
     }
 
     public function ratedPurches()
     {
         return $this->belongsToMany(Product::class)->withPivot(['is_paid'])->wherePivot('id_paid', true);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->role->id == 1;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role->id <= 2;
+    }
+
+    public function roleId()
+    {
+        switch ($this->role_id) {
+            case 1:
+                return 'Admin';
+
+            case 2:
+                return 'Supervisor';
+
+            case 3:
+                return 'User';
+        }
+    }
+
+    public function hasAllow($permission)
+    {
+        $role = $this->role()->first();
+        return $role->permissions()->whereName($permission)->first() ? true : false;
     }
 }

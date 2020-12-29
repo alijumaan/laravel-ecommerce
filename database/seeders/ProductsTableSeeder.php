@@ -29,7 +29,7 @@ class ProductsTableSeeder extends Seeder
                     'description'   => $faker->paragraph(),
                     'details'   => $faker->paragraph(),
                     'price'   => $faker->randomFloat(2, 100, 5000),
-                    'status'   => 1,
+                    'in_stock'   => $faker->numberBetween(50, 2000),
                     'category_id'   => $category->id,
                 ]);
 

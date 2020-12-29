@@ -1,6 +1,18 @@
 <?php
 
-use App\Http\Controllers\Front\Auth\LoginController;
+use App\Http\Controllers\Frontend\Auth\ForgotPasswordController;
+use App\Http\Controllers\Frontend\Auth\LoginController;
+use App\Http\Controllers\Frontend\Auth\RegisterController;
+use App\Http\Controllers\Frontend\Auth\ResetPasswordController;
+use App\Http\Controllers\Frontend\Auth\VerificationController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\Frontend\PayPalController;
+use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -10,74 +22,73 @@ if (App::environment('production')) {
 }
 
 
-Route::group(['namespace' => 'Front'], function () {
-    Route::get('/', 'IndexController@index')->name('home');
 
-    /***** ROUTE CATEGORY - ARCHIVE(SIDEBAR SECTIONS) *****/
-    Route::get('/category/{category_slug}', 'IndexController@category')->name('category.product');
-    Route::get('/archive/{date}', 'IndexController@archive')->name('archive.product');
+Route::get('/', [IndexController::class, 'index'])->name('home');
 
-    /***** SEARCH *****/
-    Route::get('/search', 'IndexController@search')->name('search');
+/***** ROUTE CATEGORY - ARCHIVE(SIDEBAR SECTIONS) *****/
+Route::get('/category/{category_slug}', [IndexController::class, 'category'])->name('category.product');
+Route::get('/archive/{date}', [IndexController::class, 'archive'])->name('archive.product');
 
-    /***** TAGS *****/
-    Route::get('/tag/{tag_slug}', 'ProductController@tag')->name('tag.products');
-    /***** PRODUCTS *****/
-    Route::post('products/{product}', 'ProductController@store_comment')->name('products.add_comment');
-    Route::post('products/{product}/rate', 'ProductController@rate')->name('products.rate');
-    Route::resource('products', 'ProductController', ['as' => 'front']);
+/***** SEARCH *****/
+Route::get('/search', [IndexController::class, 'search'])->name('search');
 
-    /***** CONTACTS *****/
-    Route::get('/contact', 'ContactController@index')->name('contact.index');
-    Route::post('/contact', 'ContactController@store')->name('contact.store');
+/***** TAGS *****/
+Route::get('/tag/{tag_slug}', [ProductController::class, 'tag'])->name('tag.products');
 
-    /***** CART *****/
-    Route::get('/cart', 'CartController@index')->name('cart.index');
-    Route::get('/cart/apply-coupon', 'CartController@applyCoupon')->name('cart.coupon');
-    Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add');
-    Route::get('/destroy/{product}', 'CartController@destroy')->name('cart.destroy');
+/***** PRODUCTS *****/
+Route::post('products/{product}', [ProductController::class, 'store_review'])->name('products.add_review');
+Route::post('products/{product}/rate', [ProductController::class, 'rate'])->name('products.rate');
+Route::resource('products', ProductController::class)->names('front.products');
 
-    /***** CHECKOUT *****/
-    Route::get('/cart/checkout', 'CheckoutController@index')->name('checkout.index');
+/***** CONTACTS *****/
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-    /***** ORDER STORE *****/
-    Route::post('/cart/checkout', 'OrderController@store')->name('checkout.store');
+/***** CART *****/
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart/apply-coupon', [CartController::class, 'applyCoupon'])->name('cart.coupon');
+Route::get('/add-to-cart/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/destroy/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
 
+/***** CHECKOUT *****/
+Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-    /***** PAYPAL *****/
-    Route::get('paypal/checkout/{order}', 'PayPalController@getExpressCheckout')->name('paypal.checkout');
-    Route::get('paypal/checkout-success/{order}', 'PayPalController@getExpressCheckoutSuccess')->name('paypal.success');
-    Route::get('paypal/checkout-cancel', 'PayPalController@cancelPage')->name('paypal.cancel');
+/***** ORDER STORE *****/
+Route::post('/cart/checkout', [OrderController::class, 'store'])->name('checkout.store');
 
-
-    Route::group(['middleware' => 'verified'], function () {
-        Route::get('/dashboard', 'UserController@index')->name('dashboard');
-//        Route::get('/dashboard/{id}', 'UserController@show')->name('user.order');
-        Route::get('/edit-info', 'UserController@edit_info')->name('front.users.edit');
-        Route::post('/edit-info', 'UserController@update_info')->name('users.update_info');
-        Route::post('/edit-password', 'UserController@update_password')->name('users.update_password');
-
-        /***** USERS COMMENTS *****/
-        Route::get('/comments', 'UserController@show_comments')->name('users.comments');
-    });
+/***** PAYPAL *****/
+//    Route::get('paypal/checkout/{order}', [PayPalController::class, 'getExpressCheckout'])->name('paypal.checkout');
+//    Route::get('paypal/checkout-success/{order}', [PayPalController::class, 'getExpressCheckoutSuccess'])->name('paypal.success');
+//    Route::get('paypal/checkout-cancel', [PayPalController::class, 'cancelPage'])->name('paypal.cancel');
 
 
-    /***** AUTHENTICATION ROUTES *****/
-    Route::get('/login',                            ['as' => 'front.login.form',           'uses' => 'Auth\LoginController@showLoginForm']);
-    Route::post('login',                            ['as' => 'front.login',                'uses' => 'Auth\LoginController@login']);
+Route::group(['middleware' => 'verified'], function () {
+    Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+    Route::get('/edit-info', [UserController::class, 'edit_info'])->name('front.users.edit');
+    Route::post('/edit-info', [UserController::class, 'update_info'])->name('users.update_info');
+    Route::post('/edit-password', [UserController::class, 'update_password'])->name('users.update_password');
 
-    /***** LOGIN BY SOCIAL MEDIA [ FACEBOOK - TWITTER - GOOGLE ] *****/
-    Route::get('login/{provider}',                  [LoginController::class, 'redirectToProvider'])->name('front.social_login');
-    Route::get('login/{provider}/callback',         [LoginController::class, 'handleProviderCallback'])->name('front.social_login_callback');
-
-    Route::post('logout',                           ['as' => 'front.logout',               'uses' => 'Auth\LoginController@logout']);
-    Route::get('register',                          ['as' => 'front.register.form',        'uses' => 'Auth\RegisterController@showRegistrationForm']);
-    Route::post('register',                         ['as' => 'front.register',             'uses' => 'Auth\RegisterController@register']);
-    Route::get('password/reset',                    ['as' => 'password.request',           'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
-    Route::post('password/email',                   ['as' => 'password.email',             'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
-    Route::get('password/reset/{token}',            ['as' => 'password.reset',             'uses' => 'Auth\ResetPasswordController@showResetForm']);
-    Route::post('password/reset',                   ['as' => 'password.update',            'uses' => 'Auth\ResetPasswordController@reset']);
-    Route::get('email/verify',                      ['as' => 'verification.notice',        'uses' => 'Auth\VerificationController@show']);
-    Route::get('/email/verify/{id}/{hash}',         ['as' => 'verification.verify',        'uses' => 'Auth\VerificationController@verify']);
-    Route::post('email/resend',                     ['as' => 'verification.resend',        'uses' => 'Auth\VerificationController@resend']);
+    /***** USERS REVIEWS *****/
+    Route::get('/reviews', [UserController::class, 'show_reviews'])->name('users.reviews');
 });
+
+
+/***** AUTHENTICATION ROUTES *****/
+Route::get('/login',                            [LoginController::class, 'showLoginForm'])->name('front.login.form');
+Route::post('/login',                            [LoginController::class, 'login'])->name('front.login');
+
+/***** LOGIN BY SOCIAL MEDIA [ FACEBOOK - TWITTER - GOOGLE ] *****/
+Route::get('login/{provider}',                  [LoginController::class, 'redirectToProvider'])->name('front.social_login');
+Route::get('login/{provider}/callback',         [LoginController::class, 'handleProviderCallback'])->name('front.social_login_callback');
+Route::post('/logout',                            [LoginController::class, 'logout'])->name('front.logout');
+Route::get('/register',                            [RegisterController::class, 'showRegistrationForm'])->name('front.register.form');
+Route::post('/register',                            [RegisterController::class, 'register'])->name('front.register');
+Route::get('/password/reset',                            [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/email',                            [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/password/reset/{token}',                            [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset',                            [ResetPasswordController::class, 'reset'])->name('password.update');
+Route::get('/email/verify',                            [VerificationController::class, 'show'])->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}',                            [VerificationController::class, 'verify'])->name('verification.verify');
+Route::post('email/resend',                            [VerificationController::class, 'resend'])->name('verification.resend');
+
+

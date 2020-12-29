@@ -58,8 +58,8 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Active Comments</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{  $active_comments }}</div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Active Reviews</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{  $active_reviews }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>

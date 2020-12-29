@@ -4,10 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\ProductMedia;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class ProductMediaTableSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      *
@@ -19,9 +21,8 @@ class ProductMediaTableSeeder extends Seeder
         $products = Product::all();
 
         foreach ($products as $product) {
-            for ($i = 1; $i <= 5; $i++) {
+            for ($i = 1; $i <= 4; $i++) {
                 ProductMedia::create([
-                    'file_name'      => 'https://via.placeholder.com/300?text='.str_replace(' ', '+', $product->name) . '+' .$i,
                     'product_id'   => $product->id,
                 ]);
             }

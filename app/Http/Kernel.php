@@ -64,10 +64,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        'roles' => \App\Http\Middleware\CheckRole::class,
+        'admin' => \App\Http\Middleware\Admin::class,
+        'superAdmin' => \App\Http\Middleware\SuperAdmin::class,
 
-        'role' => \Mindscms\Entrust\Middleware\EntrustRole::class,
-        'permission' => \Mindscms\Entrust\Middleware\EntrustPermission::class,
-        'ability' => \Mindscms\Entrust\Middleware\EntrustAbility::class,
     ];
 }

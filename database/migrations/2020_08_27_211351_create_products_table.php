@@ -21,16 +21,13 @@ class CreateProductsTable extends Migration
             $table->longText('details');
             $table->decimal('price', 8, 2);
             $table->unsignedBigInteger('in_stock');
-            $table->unsignedTinyInteger('status')->default(0);
             $table->unsignedTinyInteger('review_able')->default(1);
+            $table->unsignedInteger('category_id')->nullable();
 
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-
-            $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-
-            $table->foreignId('shop_id')->nullable()->constrained()->onDelete('cascade');
-
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('set null');
             $table->timestamps();
         });
     }

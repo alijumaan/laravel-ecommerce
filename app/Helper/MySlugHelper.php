@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Helper;
-
 
 class MySlugHelper
 {
