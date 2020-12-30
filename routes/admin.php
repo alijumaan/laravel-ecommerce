@@ -33,7 +33,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/products/remove-image/{mediaId}', [ProductController::class, 'removeImage'])->name('products.media.destroy');
     Route::resource('products', ProductController::class)->names('admin.products');
 
-    /** Reviews */
+    /** REVIEWS */
     Route::resource('reviews', ReviewController::class)->names('admin.reviews');
 
     /** CATEGORIES */

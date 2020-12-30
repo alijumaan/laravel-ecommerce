@@ -10,7 +10,7 @@
         </div>
         <div class="col-2">
             <div class="form-group">
-                {!! Form::select('product_id', ['' => '---' ] + $products->toArray(), old('product_id', request()->input('product_id')), ['class' => 'form-control']) !!}
+                @include('backend.partial.products')
             </div>
         </div>
         <div class="col-2">

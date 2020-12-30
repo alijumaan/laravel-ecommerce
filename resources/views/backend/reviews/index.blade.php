@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <div class="card shadow-sm mb-4">
             <div class="card-header d-flex py-3">
-                <h4 class="m-0 font-weight-bold text-success">Comments</h4>
+                <h4 class="m-0 font-weight-bold text-success">Reviews</h4>
             </div>
             <div class="col-11 mr-auto">
                 @include('backend.reviews.filter.filter')
@@ -17,7 +17,7 @@
                         <tr>
                             <th>Image</th>
                             <th>User</th>
-                            <th width="40%">Comment</th>
+                            <th width="40%">Review</th>
                             <th>Status</th>
                             <th>Create at</th>
                             <th>Action</th>
@@ -34,7 +34,7 @@
                                     {{ $review->user_id != '' ? '(Member)' : '' }}
                                 </td>
                                 <td>
-                                    {!! $review->comment !!}
+                                    {!! $review->review !!}
                                     <div class="text-muted">
                                         <a href="{{ route('admin.products.show', $review->product_id) }}">{{ $review->product->name }}</a>
                                     </div>
@@ -45,10 +45,10 @@
                                     <div class="btn-group btn-group-toggle">
                                         <a href="{{ route('admin.reviews.edit', $review->id) }}" title="Edit" class="btn-primary btn btn-sm"><i class="fa fa-edit"></i></a>
                                         <a href="javascript:void(0);" onclick="if (confirm('Are You sure want to Delete?'))
-                                            { document.getElementById('comment-delete-{{ $review->id }}').submit(); } else { return false; }"
+                                            { document.getElementById('review-delete-{{ $review->id }}').submit(); } else { return false; }"
                                            title="Delete" class="btn-danger btn btn-sm"><i class="fa fa-trash"></i>
                                         </a>
-                                        <form action="{{ route('admin.reviews.destroy', $review->id) }}" method="post" id="comment-delete-{{ $review->id }}">
+                                        <form action="{{ route('admin.reviews.destroy', $review->id) }}" method="post" id="review-delete-{{ $review->id }}">
                                             @csrf
                                             @method('DELETE')
                                         </form>

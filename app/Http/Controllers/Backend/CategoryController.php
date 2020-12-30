@@ -5,78 +5,54 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Validator;
+use App\Repositories\Backend\CategoryRepository;
+use App\Traits\FilterTrait;
 
 class CategoryController extends Controller
 {
-    public $categories;
-    public function __construct(Category $categories)
+    use FilterTrait;
+
+    public $category;
+
+    public function __construct(CategoryRepository $category)
     {
-        $this->categories = $categories;
+        $this->category = $category;
     }
 
     public function index()
     {
-        $keyword = (isset(\request()->keyword) && \request()->keyword != '') ? \request()->keyword : null;
-        $status = (isset(\request()->status) && \request()->status != '') ? \request()->status : null;
-        $sortBy = (isset(\request()->sort_by) && \request()->sort_by != '') ? \request()->sort_by : 'id';
-        $orderBy = (isset(\request()->order_by) && \request()->order_by != '') ? \request()->order_by : 'desc';
-        $limitBy = (isset(\request()->limit_by) && \request()->limit_by != '') ? \request()->limit_by : '10';
-
-        $categories = Category::withCount('products');
-        if ($keyword != null) {
-            $categories = $categories->search($keyword);
-        }
-        if ($status != null) {
-            $categories = $categories->whereStatus($status);
-        }
-
-        $categories = $categories->orderBy($sortBy, $orderBy);
-        $categories = $categories->paginate($limitBy);
-
+        $query = Category::withCount('products');
+        $categories = $this->filter($query);
         return view('backend.categories.index', compact(  'categories'));
     }
 
     public function create()
     {
-        abort_if(!auth()->user()->can('add-category'), 403, 'You did not have permission to access this page!');
-        $categories = Category::orderBy('id', 'desc')->pluck('name', 'id');
+        $categories = $this->category->create();
+
         return view('backend.categories.create', compact('categories'));
     }
 
-    public function store(StoreCategoryRequest $request, Category $category)
+    public function store(StoreCategoryRequest $request)
     {
-        $category->name         = $request->name;
-        $category->description  = $request->description;
-        $category->status       = $request->status;
-        $category->parent_id    = $request->parent_id;
-        $category->save();
-        if ($request->status == 1)
-            clear_cache();
+        $this->category->store($request);
+
         return redirect()->route('admin.categories.index')->with(['message' => 'Category create successfully', 'alert-type' => 'success',]);
     }
 
     public function edit(Category $category)
     {
-        abort_if(!auth()->user()->can('edit-category'), 403, 'You did not have permission to access this page!');
-        $categories = $this->categories::orderBy('id', 'desc')->pluck('name', 'id');
+        $categories = $this->category->edit();
+
         return view('backend.categories.edit', compact('category', 'categories'));
     }
 
     public function update(StoreCategoryRequest $request, Category $category)
     {
         if($category) {
-            $category->name         = $request->name;
-            $category->slug         = null;
-            $category->parent_id    = $request->parent_id;
-            $category->status       = $request->status;
-            $category->description  = $request->description;
-            $category->save();
 
-            clear_cache();
+            $this->category->update($request, $category);
+
             return redirect()->route('admin.categories.index')->with(['message' => 'Product updated successfully', 'alert-type' => 'success']);
         }
         return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger']);
@@ -84,17 +60,8 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        abort_if(!auth()->user()->can('delete-category'), 403, 'You did not have permission to access this page!');
-        foreach ($category->products as $product) {
-            if ($product->media->count() > 0) {
-                foreach ($product->media as $media) {
-                    if (File::exists('storage/' . $media->file_name))
-                        unlink('storage/' . $media->file_name);
-                }
-            }
-        }
-        $category->delete();
-        clear_cache();
+        $this->category->delete($category);
+
         return redirect()->route('admin.categories.index')->with(['message' => 'Category deleted successfully', 'alert-type' => 'success',]);
     }
 }

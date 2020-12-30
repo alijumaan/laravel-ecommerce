@@ -10,27 +10,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\FilterTrait;
 
 class ProductController extends Controller
 {
+    use FilterTrait;
+
     public function index()
     {
-        $keyword = (isset(\request()->keyword) && \request()->keyword != '') ? \request()->keyword : null;
-        $categoryId = (isset(\request()->category_id) && \request()->category_id != '') ? \request()->category_id : null;
-        $sortBy = (isset(\request()->sort_by) && \request()->sort_by != '') ? \request()->sort_by : 'id';
-        $orderBy = (isset(\request()->order_by) && \request()->order_by != '') ? \request()->order_by : 'desc';
-        $limitBy = (isset(\request()->limit_by) && \request()->limit_by != '') ? \request()->limit_by : '15';
-
-        $products = Product::with('media', 'tags')->orderBy($sortBy, $orderBy);
-        $products = $products->paginate($limitBy);
-
-        if ($keyword != null) {
-            $products = $products->search($keyword);
-        }
-        if ($categoryId != null) {
-            $products = $products->whereCategoryId($categoryId);
-        }
-
+        $query = Product::with('media', 'tags');
+        $products = $this->filter($query);
         return view('frontend.product.index', compact( 'products'));
     }
 

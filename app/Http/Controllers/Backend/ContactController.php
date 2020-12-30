@@ -4,35 +4,24 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Traits\FilterTrait;
 
 class ContactController extends Controller
 {
 
-    public function __construct()
+    use FilterTrait;
+
+    public $contact;
+
+    public function __construct(Contact $contact)
     {
+        $this->contact = $contact;
     }
 
     public function index()
     {
-
-        $keyword = (isset(\request()->keyword) && \request()->keyword != '') ? \request()->keyword : null;
-        $status = (isset(\request()->status) && \request()->status != '') ? \request()->status : null;
-        $sortBy = (isset(\request()->sort_by) && \request()->sort_by != '') ? \request()->sort_by : 'id';
-        $orderBy = (isset(\request()->order_by) && \request()->order_by != '') ? \request()->order_by : 'desc';
-        $limitBy = (isset(\request()->limit_by) && \request()->limit_by != '') ? \request()->limit_by : '10';
-
-        $messages = Contact::query();
-        if ($keyword != null) {
-            $messages = $messages->search($keyword);
-        }
-
-        if ($status != null) {
-            $messages = $messages->whereStatus($status);
-        }
-
-        $messages = $messages->orderBy($sortBy, $orderBy);
-        $messages = $messages->paginate($limitBy);
-
+        $query = $this->contact::query();
+        $messages = $this->filter($query);
         return view('backend.contacts.index', compact(  'messages'));
     }
 
@@ -49,10 +38,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         abort_if(!auth()->user()->can('delete-message'), 403, 'You did not have permission to access this page!');
-        if($contact) {
-            $contact->delete();
-            return redirect()->route('admin.contacts.index')->with(['message' => 'Message deleted successfully', 'alert-type' => 'success']);
-        }
-        return redirect()->route('admin.contacts.index')->with(['message' => 'Something was wrong', 'alert-type' => 'danger']);
+        $contact->delete();
+        return redirect()->route('admin.contacts.index')->with(['message' => 'Message deleted successfully', 'alert-type' => 'success']);
     }
 }

@@ -15,9 +15,7 @@ class Review extends Model
 
         'columns' => [
             'reviews.name'       => 10,
-            'reviews.email'      => 10,
-            'reviews.ip_address' => 10,
-            'reviews.comment'    => 10,
+            'reviews.review'    => 10,
         ],
     ];
 

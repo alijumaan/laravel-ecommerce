@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTagRequest;
 use App\Models\Tag;
+use App\Traits\FilterTrait;
 
 class TagController extends Controller
 {
+    use FilterTrait;
+
     public function __construct()
     {
         //
@@ -15,19 +18,8 @@ class TagController extends Controller
 
     public function index()
     {
-
-        $keyword = (isset(\request()->keyword) && \request()->keyword != '') ? \request()->keyword : null;
-        $sortBy = (isset(\request()->sort_by) && \request()->sort_by != '') ? \request()->sort_by : 'id';
-        $orderBy = (isset(\request()->order_by) && \request()->order_by != '') ? \request()->order_by : 'desc';
-        $limitBy = (isset(\request()->limit_by) && \request()->limit_by != '') ? \request()->limit_by : '10';
-
-        $tags = Tag::withCount('products');
-        if ($keyword != null) {
-            $tags = $tags->search($keyword);
-        }
-
-        $tags = $tags->orderBy($sortBy, $orderBy);
-        $tags = $tags->paginate($limitBy);
+        $query = Tag::withCount('products');
+        $tags = $this->filter($query);
 
         return view('backend.tags.index', compact( 'tags'));
     }

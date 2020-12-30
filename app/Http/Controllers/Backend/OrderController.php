@@ -7,14 +7,15 @@ use App\Models\Order;
 
 class OrderController extends Controller
 {
-    public function __construct()
+    public $order;
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     public function index()
     {
-        $orders = Order::all();
+        $orders = $this->order::all();
         return view('backend.orders.index', compact('orders'));
     }
 
@@ -26,9 +27,11 @@ class OrderController extends Controller
     public function confirm($id)
     {
         // Find the order
-        $order = Order::find($id);
+        $order = $this->order::find($id);
+
         // Update the order
         $order->update(['status' => 1]);
+
         //Redirect the page
         return redirect()->back()->with(['message' => 'Order has been again into confirm', 'alert-type' => 'success']);
     }
@@ -36,9 +39,11 @@ class OrderController extends Controller
     public function pending($id)
     {
         // Find the order
-        $order = Order::find($id);
+        $order = $this->order::find($id);
+
         // Update the order
         $order->update(['status' => 0]);
+
         //Redirect the page
         return redirect()->back()->with(['message' => 'Order has been pending', 'alert-type' => 'warning']);
 
