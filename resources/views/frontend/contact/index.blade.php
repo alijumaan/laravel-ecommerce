@@ -77,7 +77,8 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="contact-info-text">
-                                <p><span>Address:</span>  1234 - King Salman Road <br>  Jeddah</p>
+{{--                                <p><span>Address:</span>  1234 - King Salman Road <br>  Jeddah</p>--}}
+                                <p><span>Address: </span>{!! getSettingsOf('address') !!}</p>
                             </div>
                         </div>
                         <div class="single-contact-info">

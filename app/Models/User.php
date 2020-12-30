@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Nicolaslopezj\Searchable\SearchableTrait;
@@ -10,6 +11,8 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, searchableTrait;
+
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.

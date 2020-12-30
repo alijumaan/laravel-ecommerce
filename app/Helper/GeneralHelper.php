@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Cache;
+use Spatie\Valuestore\Valuestore;
 
 function get_gravatar( $email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array() )
 {
@@ -25,9 +26,7 @@ function clear_cache()
     Cache::forget('global_tags');
 }
 
-//function getParentShowOf($param)
-//{
-//    $f = str_replace('admin.', '', $param);
-//    $perm = Permission::where('as', $f)->first();
-//    return $perm ? $perm->parent_show : $f;
-//}
+function getSettingsOf($key) {
+    $settings = Valuestore::make(config_path('settings.json'));
+    return $settings->get($key);
+}

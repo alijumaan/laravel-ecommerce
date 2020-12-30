@@ -9,7 +9,14 @@ class Setting extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'display_name',
+        'key',
+        'value',
+        'details',
+        'type',
+        'section',
+    ];
 
     public $timestamps = false;
 

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +14,8 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('permissions')->truncate();
+//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//        DB::table('permissions')->truncate();
 
         DB::table('permissions')->insert(['name' => 'add-product', 'desc' => 'Add product']);
         DB::table('permissions')->insert(['name' => 'edit-product', 'desc' => 'Edit product']);
@@ -41,12 +40,17 @@ class PermissionTableSeeder extends Seeder
         DB::table('permissions')->insert(['name' => 'edit-tag', 'desc' => 'Edit tag']);
         DB::table('permissions')->insert(['name' => 'delete-tag', 'desc' => 'Delete tag']);
 
-        DB::table('permissions')->insert(['name' => 'add-user', 'desc' => 'Add users']);
-        DB::table('permissions')->insert(['name' => 'edit-user', 'desc' => 'Edit users']);
-        DB::table('permissions')->insert(['name' => 'delete-user', 'desc' => 'Delete users']);
+        DB::table('permissions')->insert(['name' => 'add-user', 'desc' => 'Add user']);
+        DB::table('permissions')->insert(['name' => 'edit-user', 'desc' => 'Edit user']);
+        DB::table('permissions')->insert(['name' => 'delete-user', 'desc' => 'Delete user']);
+
+        DB::table('permissions')->insert(['name' => 'add-setting', 'desc' => 'Add setting']);
+        DB::table('permissions')->insert(['name' => 'edit-setting', 'desc' => 'Edit setting']);
+        DB::table('permissions')->insert(['name' => 'delete-setting', 'desc' => 'Delete setting']);
 
         DB::table('permissions')->insert(['name' => 'show-message', 'desc' => 'Show message']);
         DB::table('permissions')->insert(['name' => 'delete-message', 'desc' => 'Delete message']);
+
 
     }
 
