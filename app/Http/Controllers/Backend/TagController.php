@@ -11,14 +11,16 @@ class TagController extends Controller
 {
     use FilterTrait;
 
-    public function __construct()
+    public $tag;
+
+    public function __construct(Tag $tag)
     {
-        //
+        $this->tag = $tag;
     }
 
     public function index()
     {
-        $query = Tag::withCount('products');
+        $query = $this->tag::withCount('products');
         $tags = $this->filter($query);
 
         return view('backend.tags.index', compact( 'tags'));
@@ -32,16 +34,10 @@ class TagController extends Controller
 
     public function store(StoreTagRequest $request, Tag $tag)
     {
-        try {
-            $tag->name = $request->name;
-            $tag->save();
-            clear_cache();
-            if ($tag) {
-                return redirect()->route('admin.tags.index')->with(['message' => 'Tag create successfully', 'alert-type' => 'success']);
-            }
-        } catch (\Exception $exception) {
-            return redirect()->route('admin.tags.index')->with(['message' => 'Something was wrong', 'alert-type' => 'danger']);
-        }
+        $tag->name = $request->name;
+        $tag->save();
+        clear_cache();
+        return redirect()->route('admin.tags.index')->with(['message' => 'Tag create successfully', 'alert-type' => 'success']);
     }
 
     public function edit(Tag $tag)
@@ -52,23 +48,17 @@ class TagController extends Controller
 
     public function update(StoreTagRequest $request, Tag $tag)
     {
-        if($tag) {
-            $tag->name = $request->name;
-            $tag->save();
-            clear_cache();
-            return redirect()->route('admin.tags.index')->with(['message' => 'Tag updated successfully', 'alert-type' => 'success']);
-        }
-        return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger']);
+        $tag->name = $request->name;
+        $tag->save();
+        clear_cache();
+        return redirect()->route('admin.tags.index')->with(['message' => 'Tag updated successfully', 'alert-type' => 'success']);
     }
 
     public function destroy(Tag $tag)
     {
         abort_if(!auth()->user()->can('delete-tag'), 403, 'You did not have permission to access this page!');
-        if($tag) {
-            $tag->delete();
-            clear_cache();
-            return redirect()->route('admin.tags.index')->with(['message' => 'Tag deleted successfully', 'alert-type' => 'success']);
-        }
-        return redirect()->route('admin.tags.index')->with(['message' => 'Something was wrong', 'alert-type' => 'danger']);
+        $tag->delete();
+        clear_cache();
+        return redirect()->route('admin.tags.index')->with(['message' => 'Tag deleted successfully', 'alert-type' => 'success']);
     }
 }

@@ -70,11 +70,11 @@ class UserController extends Controller
         $data['receive_email'] = $request->receive_email;
 
         if ($request->has('avatar')) {
-
-            if (File::exists('storage/' . auth()->user()->avatar)) {
-                unlink('storage/' . auth()->user()->avatar);
-                $data['avatar'] = $this->uploadAvatar($request->avatar);
+            if (auth()->user()->avatar != 'images/avatar.png') {
+                if (File::exists('storage/' . auth()->user()->avatar))
+                    unlink('storage/' . auth()->user()->avatar);
             }
+            $data['avatar'] = $this->uploadAvatar($request->avatar);
         }
 
         $update = auth()->user()->update($data);

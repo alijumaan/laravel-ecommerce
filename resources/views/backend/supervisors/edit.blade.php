@@ -1,7 +1,10 @@
 @extends('backend.layouts.app')
 
-@section('content')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('backend/vendor/select2/css/select2.min.css') }}">
+@endsection
 
+@section('content')
     <div class="card">
         <div class="card-header d-flex">
             <h4 class="m-0 font-weight-bold text-success">Edit user {{ $supervisor->name }}</h4>
@@ -59,12 +62,19 @@
                 </div>
                 <div class="col-3">
                     <div class="form-group">
+                        {!! Form::label('permissions', 'Permissions') !!}
+                        @include('backend.partial.permissions')
+                        @error('permissions')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
                         {!! Form::label('status', 'Status') !!}
                         {!! Form::select('status', ['' => '---', '1' => 'Active', '0' => 'Inactive'] , old('status', $supervisor->status), ['class' => 'form-control']) !!}
                         @error('status')<span class="text-danger">{!!  $message  !!}</span>@enderror
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-3">
                     <div class="form-group">
                         {!! Form::label('receive_email', 'Receive Email') !!}
                         {!! Form::select('receive_email', ['' => '---', '1' => 'Yes', '0' => 'No'] , old('receive_email', $supervisor->receive_email), ['class' => 'form-control']) !!}
@@ -94,3 +104,15 @@
 
 @endsection
 
+@section('script')
+    <script src="{{ asset('backend/vendor/select2/js/select2.full.min.js') }}"></script>
+    <script>
+        $(function () {
+            $('.select-multiple-tags').select2({
+                minimumResultsForSearch: Infinity,
+                tags: false,
+                closeOnSelect: false
+            });
+        });
+    </script>
+@endsection

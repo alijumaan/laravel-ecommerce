@@ -94,7 +94,7 @@
                 <div class="col-12">
                     <div class="form-group">
                         {!! Form::label('permissions', 'Permissions') !!}
-                        {!! Form::select('permissions[]', [] + $permissions->toArray() , old('permissions'), ['class' => 'form-control select-multiple-tags', 'multiple' => 'multiple']) !!}
+                        @include('backend.partial.permissions')
                         @error('permissions')<span class="text-danger">{!!  $message  !!}</span>@enderror
                     </div>
                 </div>

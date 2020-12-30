@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('App\Http\View\Composers\CategoryComposer');
         $this->app->singleton('App\Http\View\Composers\TagComposer');
         $this->app->singleton('App\Http\View\Composers\ProductComposer');
+        $this->app->singleton('App\Http\View\Composers\PermissionComposer');
     }
 
     /**
@@ -35,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('backend.partial.categories', 'App\Http\View\Composers\CategoryComposer');
         View::composer('backend.partial.tags', 'App\Http\View\Composers\TagComposer');
         View::composer('backend.partial.products', 'App\Http\View\Composers\ProductComposer');
+        View::composer('backend.partial.permissions', 'App\Http\View\Composers\PermissionComposer');
 
         Blade::if('admin', function (){
             return auth()->check() && auth()->user()->isAdmin();
