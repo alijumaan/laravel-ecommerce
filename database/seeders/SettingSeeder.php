@@ -18,10 +18,10 @@ class SettingSeeder extends Seeder
         Setting::create(['display_name' => 'Site Slogan', 'key' => 'site_slogan', 'value' => 'Amazing shop!', 'type' => 'text', 'section' => 'General']);
         Setting::create(['display_name' => 'Site Description', 'key' => 'site_description', 'value' => 'ORIGINAL PRODUCTS', 'type' => 'text', 'section' => 'General']);
         Setting::create(['display_name' => 'Site Keywords', 'key' => 'site_keywords', 'value' => 'Store, Shop, Product', 'type' => 'text', 'section' => 'General']);
-        Setting::create(['display_name' => 'Site Email', 'key' => 'site_email', 'value' => 'info@cartwhite.com', 'type' => 'text', 'section' => 'General']);
+        Setting::create(['display_name' => 'Site Email', 'key' => 'site_email', 'value' => 'info@alijumaan.com', 'type' => 'text', 'section' => 'General']);
         Setting::create(['display_name' => 'Site Status', 'key' => 'site_status', 'value' => 'Active', 'type' => 'text', 'section' => 'General']);
         Setting::create(['display_name' => 'Admin Title', 'key' => 'admin_title', 'value' => 'Cart White', 'type' => 'text', 'section' => 'General']);
-        Setting::create(['display_name' => 'Phone Number', 'key' => 'phone_number', 'value' => '0123456789', 'type' => 'text', 'section' => 'General']);
+        Setting::create(['display_name' => 'Phone Number', 'key' => 'phone_number', 'value' => '(966) 000 000 000', 'type' => 'text', 'section' => 'General']);
         Setting::create(['display_name' => 'Address', 'key' => 'address', 'value' => 'M57F+QM King Abdulaziz International Airport, Jeddah', 'type' => 'text', 'section' => 'General']);
         Setting::create(['display_name' => 'Map Latitude', 'key' => 'address_altitude', 'value' => '21.671914', 'type' => 'text', 'section' => 'General']);
         Setting::create(['display_name' => 'Map Longitude', 'key' => 'address_longitude', 'value' => '39.173875', 'type' => 'text', 'section' => 'General']);

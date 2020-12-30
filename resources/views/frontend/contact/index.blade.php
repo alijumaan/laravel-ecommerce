@@ -77,8 +77,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="contact-info-text">
-{{--                                <p><span>Address:</span>  1234 - King Salman Road <br>  Jeddah</p>--}}
-                                <p><span>Address: </span>{!! getSettingsOf('address') !!}</p>
+                                <p><span>Address:</span> {!! getSettingsOf('address') !!}</p>
                             </div>
                         </div>
                         <div class="single-contact-info">
@@ -86,7 +85,7 @@
                                 <i class="far fa-envelope"></i>
                             </div>
                             <div class="contact-info-text">
-                                <p><span>Email: </span> Support@alijumaan.com</p>
+                                <p><span>Email: </span> {!! getSettingsOf('site_email') !!}</p>
                             </div>
                         </div>
                         <div class="single-contact-info">
@@ -94,7 +93,7 @@
                                 <i class="fas fa-phone"></i>
                             </div>
                             <div class="contact-info-text">
-                                <p><span>Phone: </span>  (966) 000 000 000</p>
+                                <p><span>Phone: </span> {!! getSettingsOf('phone_number') !!}</p>
                             </div>
                         </div>
                     </div>

@@ -23,16 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/database/seeders/PermissionRoleTableSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helper/GeneralHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helper/GeneralHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Permission.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Permission.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Setting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/PermissionTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/PermissionTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/SettingSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/SettingSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/contact/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/contact/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -609,7 +600,7 @@
       <workItem from="1609246244184" duration="891000" />
       <workItem from="1609248463377" duration="1621000" />
       <workItem from="1609268211358" duration="3139000" />
-      <workItem from="1609305302414" duration="25303000" />
+      <workItem from="1609305302414" duration="26330000" />
     </task>
     <servers />
   </component>
