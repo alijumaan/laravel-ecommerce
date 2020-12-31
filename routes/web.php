@@ -8,7 +8,7 @@ use App\Http\Controllers\Frontend\Auth\VerificationController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\ContactController;
-use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\PayPalController;
 use App\Http\Controllers\Frontend\ProductController;
@@ -23,20 +23,20 @@ if (App::environment('production')) {
 
 
 
-Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /***** ROUTE CATEGORY - ARCHIVE(SIDEBAR SECTIONS) *****/
-Route::get('/category/{category_slug}', [IndexController::class, 'category'])->name('category.product');
-Route::get('/archive/{date}', [IndexController::class, 'archive'])->name('archive.product');
+Route::get('/category/{category_slug}', [HomeController::class, 'category'])->name('category.product');
+Route::get('/archive/{date}', [HomeController::class, 'archive'])->name('archive.product');
 
 /***** SEARCH *****/
-Route::get('/search', [IndexController::class, 'search'])->name('search');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 /***** TAGS *****/
 Route::get('/tag/{tag_slug}', [ProductController::class, 'tag'])->name('tag.products');
 
 /***** PRODUCTS *****/
-Route::post('products/{product}', [ProductController::class, 'store_review'])->name('products.add_review');
+Route::post('products/{product}', [ProductController::class, 'storeReview'])->name('products.add_review');
 Route::post('products/{product}/rate', [ProductController::class, 'rate'])->name('products.rate');
 Route::resource('products', ProductController::class)->names('frontend.products');
 

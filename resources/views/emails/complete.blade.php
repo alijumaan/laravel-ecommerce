@@ -3,7 +3,7 @@
 
 Thank you for your order. Please order again.
 
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/dashboard'])
+@component('mail::button', ['url' => 'http://cart.test'])
 My orders
 @endcomponent
 

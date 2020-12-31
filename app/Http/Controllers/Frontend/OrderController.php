@@ -3,30 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOrderRequest;
 use App\Mail\OrderCompleted;
 use App\Models\Order;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
-        $validation = Validator::make($request->all(), [
-            'shipping_first_name' => 'required',
-            'shipping_last_name' => 'required',
-            'shipping_email' => 'required|email',
-            'shipping_state' => 'required',
-            'shipping_city' => 'required',
-            'shipping_address' => 'required',
-            'shipping_phone' => 'required|numeric',
-            'payment_method' => 'required',
-        ]);
-
-        if ($validation->fails()) {
-            return redirect()->back()->withErrors($validation)->withInput();
-        }
 
         $order = new Order();
 

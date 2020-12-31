@@ -7472,9 +7472,11 @@ h5.panel-title {
     display: inline-block;
     font-size: 14px;
     font-weight: 500;
-    height: 40px;
-    line-height: 41px;
-    width: 45px;
+    height: 35px;
+    line-height: 35px;
+    width: 40px;
+    border-radius: 45%;
+
 }
 .pagination-style ul li.active a,
 .pagination-style ul li a:hover {

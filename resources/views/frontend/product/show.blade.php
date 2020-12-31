@@ -1,9 +1,5 @@
 @extends('frontend.layouts.app')
 
-@section('style')
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">--}}
-
-@endsection
 @section('content')
     <div class="product-details ptb-100 pb-90">
         <div class="container">

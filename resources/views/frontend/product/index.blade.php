@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="col-2">
                                         <div class="shop-selector">
-                                            {!! Form::button('Search', ['class' => 'btn-outline-link btn', 'type' => 'submit']) !!}
+                                            {!! Form::button('Search', ['class' => 'btn-sm btn btn-outline-link', 'type' => 'submit']) !!}
                                             {!! Form::close() !!}
                                         </div>
                                     </div>

@@ -10,7 +10,7 @@ trait FilterTrait
         $status = (isset(\request()->status) && \request()->status != '') ? \request()->status : null;
         $sortBy = (isset(\request()->sort_by) && \request()->sort_by != '') ? \request()->sort_by : 'id';
         $orderBy = (isset(\request()->order_by) && \request()->order_by != '') ? \request()->order_by : 'desc';
-        $limitBy = (isset(\request()->limit_by) && \request()->limit_by != '') ? \request()->limit_by : '10';
+        $limitBy = (isset(\request()->limit_by) && \request()->limit_by != '') ? \request()->limit_by : '8';
         $productId = (isset(\request()->product_id) && \request()->product_id != '') ? \request()->product_id : null;
         $categoryId = (isset(\request()->category_id) && \request()->category_id != '') ? \request()->category_id : null;
         $tagId = (isset(\request()->tag_id) && \request()->tag_id != '') ? \request()->tag_id : null;

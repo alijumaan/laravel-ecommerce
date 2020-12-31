@@ -4,17 +4,22 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\Rating;
-use App\Models\Tag;
+use App\Repositories\Frontend\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\FilterTrait;
 
 class ProductController extends Controller
 {
     use FilterTrait;
+
+    public $product;
+
+    public function __construct(ProductRepository $product)
+    {
+        $this->product = $product;
+    }
 
     public function index()
     {
@@ -25,108 +30,43 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with(['media', 'approved_reviews' => function($query) {
-                $query->orderBy('id', 'desc');
-            }
-        ]);
-
-        $product = $product->whereHas('category', function ($query) {
-            $query->whereStatus(1);
-        });
-
-        $product = $product->whereSlug($id);
-        $product = $product->active()->first();
+        $product = $this->product->show($id);
 
         $productFind = 0;
-        if (Auth::check()) {
+        if (Auth::check())
             $productFind = auth()->user()->orderItems()->where('product_id', $product->id)->where('user_id', auth()->user()->id)->where('is_paid', true)->first();
-        }
 
-        if ($product) {
+        if ($product)
             return view('frontend.product.show', compact('product', 'productFind'));
-        }else {
-            return redirect()->route('home');
-        }
+
+        return redirect()->route('home');
 
     }
 
-    public function store_review(Request $request, $slug)
+    public function storeReview(Request $request, $slug)
     {
-        $validation = Validator::make($request->all(), [
-            'review' => 'required',
-        ]);
+        $validation = Validator::make($request->all(), ['review' => 'required',]);
 
-        if ($validation->fails()) {
-            return redirect()->back()->withErrors($validation)->withInput();
-        }
+        if ($validation->fails()) {return redirect()->back()->withErrors($validation)->withInput();}
 
-        $product = Product::whereSlug($slug)->first();
-        if ($product) {
+        $this->product->storeReview($request, $slug);
 
-            $userId = auth()->check() ?  auth()->id() : null;
-            $userName = auth()->user()->name;
-            $userEmail = auth()->user()->email;
-
-            $data['name']             = $userName;
-            $data['email']            = $userEmail;
-            $data['ip_address']       = $request->ip();
-            $data['status']           = 1;
-            $data['review']          = $request->review;
-            $data['product_id']       = $product->id;
-            $data['user_id']          = $userId;
-
-            $review = $product->reviews()->create($data);
-
-            if ($review) {
-
-                Cache::forget('recent_reviews');
-
-                return redirect()->back()->with([
-                    'message' => 'Review added successfully',
-                    'alert-type' => 'success'
-                ]);
-            }
-
-            return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'warning']);
-
-        }
-
-        return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger']);
+        return redirect()->back()->with(['message' => 'Review added successfully', 'alert-type' => 'success']);
 
     }
 
     public function tag($slug)
     {
-        $tag = Tag::whereSlug($slug)->orWhere('id', $slug)->first()->id;
+        $products = $this->product->tag($slug);
 
-        if ($tag) {
-            $products = Product::with(['media', 'tags'])
-                ->whereHas('tags', function ($query) use ($slug) {
-                    $query->where('slug', $slug);
-                })
-                ->active()
-                ->orderBy('id', 'desc')
-                ->paginate(5);
-
+        if ($products)
             return view('frontend.product.index', compact( 'products'));
-        }
 
         return redirect()->back();
     }
 
     public function rate(Request $request, Product $product)
     {
-        if(auth()->user()->rated($product)) {
-            $rating = Rating::where(['user_id' => auth()->user()->id, 'product_id' => $product->id])->first();
-            $rating->value = $request->value;
-            $rating->save();
-        } else {
-            $rating = new Rating;
-            $rating->user_id = auth()->user()->id;
-            $rating->product_id = $product->id;
-            $rating->value = $request->value;
-            $rating->save();
-        }
-        return back();
+        $this->product->rate($request, $product);
     }
 }
