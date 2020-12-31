@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Repositories\Frontend\FavoriteRepository;
 use App\Repositories\Frontend\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +15,13 @@ class ProductController extends Controller
 {
     use FilterTrait;
 
-    public $product;
+    protected $product;
+    protected $favorite;
 
-    public function __construct(ProductRepository $product)
+    public function __construct(ProductRepository $product, FavoriteRepository $favorite)
     {
         $this->product = $product;
+        $this->favorite = $favorite;
     }
 
     public function index()
@@ -31,13 +34,14 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->product->show($id);
+        $favorite = $this->favorite->show($product->id);
 
         $productFind = 0;
         if (Auth::check())
             $productFind = auth()->user()->orderItems()->where('product_id', $product->id)->where('user_id', auth()->user()->id)->where('is_paid', true)->first();
 
         if ($product)
-            return view('frontend.product.show', compact('product', 'productFind'));
+            return view('frontend.product.show', compact('product', 'productFind', 'favorite'));
 
         return redirect()->route('home');
 

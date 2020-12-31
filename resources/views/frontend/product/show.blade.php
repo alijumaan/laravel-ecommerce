@@ -109,7 +109,27 @@
                                 <a class="btn-hover" href="{{ route('cart.index') }}"><i class="fas fa-shopping-cart"></i></a>
                             </div>
                         </div>
+
+
+
+                        <div class="mt-5">
+                            @auth
+                            <a id="fav" href="javascript:void(0)" data-id="{{ $product->id }}" class="btn btn-sm btn-success {{ $favorite ? 'unFav' : 'fav' }}">
+                                {{ $favorite ? "Remove from favorite" : "Add to favorite "}}
+                            </a>
+                            @endauth
+                        </div>
+
+
+
                         <div class="product-details-cati-tag mt-35">
+                            <ul>
+{{--                                @auth--}}
+{{--                                    <a id="fav" href="javascript:void(0)" data-id="{{ $product->id }}" class="btn btn-success {{ $favorite ? 'unFav' : 'fav' }}">--}}
+{{--                                        {{ $favorite ? "Remove from favorite" : "Add to favorite "}}--}}
+{{--                                    </a>--}}
+{{--                                @endauth--}}
+                            </ul>
                             <ul>
                                 <li class="categories-title">Categories :</li>
                                 <li><a href="#">{{ $product->category->name }}</a></li>
@@ -151,6 +171,7 @@
 {{--                                </li>--}}
                             </ul>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -282,24 +303,65 @@
 @endsection
 @section('script')
     <script>
-        $('.rating-star').click(function() {
 
-            let submitStars = $(this).attr('data-value');
+        $(document).ready(function(){
 
-            $.ajax({
-                type: 'post',
-                url: {{ $product->id }} + '/rate',
-                data: {
-                    '_token': $('meta[name="csrf-token"]').attr('content'),
-                    'value' : submitStars,
-                },
-                success: function() {
-                    // alert('Rating add successfully');
-                    location.reload();
-                },
-                error: function() {
-                    alert('Something was wrong');
-                },
+            $('.rating-star').click(function() {
+                let submitStars = $(this).attr('data-value');
+                $.ajax({
+                    type: 'post',
+                    url: {{ $product->id }} + '/rate',
+                    data: {
+                        '_token': $('meta[name="csrf-token"]').attr('content'),
+                        'value' : submitStars,
+                    },
+                    success: function() {
+                        // alert('Rating add successfully');
+                        location.reload();
+                    },
+                    error: function() {
+                        alert('Something was wrong');
+                    },
+                });
+            });
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('#fav').on('click', function(){
+
+                let product_id = $(this).data('id');
+                product = $(this);
+
+                if (product.hasClass("fav") ) {
+                    url = '/products/' + product_id + '/favorite';
+                    status = "unFav";
+                    text = "Remove from favorite"
+                }
+                else{
+                    url = '/products/' + product_id + '/unFavorite';
+                    status = "fav";
+                    text = "Add to favorite";
+                }
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: url,
+                    type: 'post',
+                    data: {
+                        'product_id': product_id
+                    },
+                    success: function(response){
+                        product
+                            .removeClass('fav')
+                            .removeClass('unFav')
+                            .addClass(status)
+                            .html(text)
+                    }
+                });
             });
         });
     </script>

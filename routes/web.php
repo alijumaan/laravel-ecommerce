@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\Auth\VerificationController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\FavoriteController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\PayPalController;
@@ -24,6 +25,21 @@ if (App::environment('production')) {
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'verified'], function () {
+    Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+    Route::get('/edit-info', [UserController::class, 'edit_info'])->name('frontend.users.edit');
+    Route::post('/edit-info', [UserController::class, 'update_info'])->name('users.update_info');
+    Route::post('/edit-password', [UserController::class, 'update_password'])->name('users.update_password');
+
+    /***** FAVORITE *****/
+    Route::post('/products/{id}/favorite',    [FavoriteController::class, 'store']);
+    Route::post('/products/{id}/unFavorite',  [FavoriteController::class, 'destroy']);
+    Route::get('/user-fav',                   [FavoriteController::class, 'index'])->name('userFav');
+
+    /***** USERS REVIEWS *****/
+    Route::get('/reviews', [UserController::class, 'show_reviews'])->name('users.reviews');
+});
 
 /***** ROUTE CATEGORY - ARCHIVE(SIDEBAR SECTIONS) *****/
 Route::get('/category/{category_slug}', [HomeController::class, 'category'])->name('category.product');
@@ -62,15 +78,7 @@ Route::post('/cart/checkout', [OrderController::class, 'store'])->name('checkout
 //    Route::get('paypal/checkout-cancel', [PayPalController::class, 'cancelPage'])->name('paypal.cancel');
 
 
-Route::group(['middleware' => 'verified'], function () {
-    Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
-    Route::get('/edit-info', [UserController::class, 'edit_info'])->name('frontend.users.edit');
-    Route::post('/edit-info', [UserController::class, 'update_info'])->name('users.update_info');
-    Route::post('/edit-password', [UserController::class, 'update_password'])->name('users.update_password');
 
-    /***** USERS REVIEWS *****/
-    Route::get('/reviews', [UserController::class, 'show_reviews'])->name('users.reviews');
-});
 
 
 /***** AUTHENTICATION ROUTES *****/

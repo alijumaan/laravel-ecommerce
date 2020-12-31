@@ -133,4 +133,10 @@ class User extends Authenticatable implements MustVerifyEmail
         $role = $this->role()->first();
         return $role->permissions()->whereName($permission)->first() ? true : false;
     }
+
+    public function favProduct()
+    {
+        return $this->belongsToMany(Product::class, 'favorites')->withTimestamps();
+    }
+
 }
