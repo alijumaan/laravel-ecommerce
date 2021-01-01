@@ -34,12 +34,11 @@ class PurchaseController extends Controller
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
 
-        $products = User::find($request->userId)->productsInCart;
-//        $products = \Cart::session(auth()->id())->getContent();
+        $products = User::find($request->userId)->productsInCart();
 
         $itemsArray = array();
 
-        $total = \Cart::session(auth()->id())->getTotal();
+        $total = User::find($request->userId)->orderTotal();
 
         foreach($products as $product) {
 
@@ -74,8 +73,8 @@ class PurchaseController extends Controller
 
         $baseUrl = url('/');
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl("$baseUrl/cart")
-            ->setCancelUrl("$baseUrl/cart");
+        $redirectUrls->setReturnUrl("$baseUrl/cart/checkout")
+            ->setCancelUrl("$baseUrl/cart/checkout");
 
         $payment = new Payment();
         $payment->setIntent("sale")
@@ -126,7 +125,7 @@ class PurchaseController extends Controller
         try {
             $result = $payment->execute($execution, $apiContext);
             $user = User::find($request->userId);
-            $products = $user->productsInCart;
+            $products = User::find($request->userId)->productsInCart();
             foreach($products as $product) {
                 $user->productsInCart()->updateExistingPivot($product->id, ['is_paid' => TRUE]);
                 $product->save();

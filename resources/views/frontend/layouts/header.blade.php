@@ -6,7 +6,7 @@
             <div class="header-bottom-wrapper ">
                 <div class="logo-2 ptb-35 menu-hover">
                     <a href="{{route('home')}}">
-                        <img style="width: 150px" src="{{asset('assets/img/logo/logo.png')}}" alt="">
+                        <img style="width: 150px" src="{{asset('frontend/img/logo/logo.png')}}" alt="">
                     </a>
                 </div>
                 <div class="menu-style-2 handicraft-menu menu-hover">

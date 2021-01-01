@@ -1,7 +1,6 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-
 <div class="checkout-area pt-5 pb-5">
     <div class="container">
         <div id="success" style="display: none" class="col-md-8 text-center h3 p-4 bg-success text-light rounded">The purchase was completed successfully</div>
@@ -106,7 +105,7 @@
 
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="your-order">
-                        <h3>Your order</h3>
+                        <h3 class="d-flex">Your order <span class="ml-auto">{{ auth()->user()->totalQuantity() }} item(s)</span></h3>
                         <div class="your-order-table table-responsive">
                             <table>
                                 <thead>
@@ -120,11 +119,11 @@
                                     <tr class="cart_item">
                                         <td class="product-name">
                                             {{$item->name}} <strong class="product-quantity"> ×
-                                                {{ $item['quantity'] }}
+                                                {{ $item->quantity }}
                                             </strong>
                                         </td>
                                         <td class="product-total">
-                                            <span class="amount">${{Cart::session(auth()->id())->get($item['id'])->getPriceSum()}}</span>
+                                            <span class="amount">${{Cart::session(auth()->id())->get($item->id)->getPriceSum()}}</span>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -132,13 +131,13 @@
                                 <tfoot>
                                 <tr class="cart-subtotal">
                                     <th>Cart Subtotal</th>
-                                    <td><span class="amount">${{\Cart::session(auth()->id())->getSubTotal()}}</span></td>
+                                    <td><span class="amount">${{ auth()->user()->orderSubTotal() }}</span></td>
                                 </tr>
                                 <tr class="order-total">
-                                    <th>Order Total</th>
-                                    <td><strong><span class="amount">${{\Cart::session(auth()->id())->getTotal()}}</span></strong>
-                                    </td>
+                                    <th>Order Quantity</th>
+                                    <td><strong><span class="amount">${{ auth()->user()->orderTotal() }}</span></strong></td>
                                 </tr>
+
                                 </tfoot>
                             </table>
                         </div>
@@ -189,15 +188,15 @@
         </div>
     </div>
 </div>
-
     <!-- checkout-area end -->
 @endsection
 
 @section('script')
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
     <script>
         paypal.Button.render({
-            env: 'sandbox', // Or 'production'
+            env: 'production', // Or 'production'
             // Set up the payment:
             // 1. Add a payment callback
             payment: function(data, actions) {
@@ -205,24 +204,24 @@
                 return actions.request.post('/api/create-payment', {
                     userId: "{{ auth()->user()->id }}"
                 })
-                .then(function(res) {
-                    // 3. Return res.id from the response
-                    return res.id;
-                });
+                    .then(function(res) {
+                        // 3. Return res.id from the response
+                        return res.id;
+                    });
             },
             // Execute the payment:
             // 1. Add an onAuthorize callback
             onAuthorize: function(data, actions) {
-            // 2. Make a request to your server
-            return actions.request.post('/api/execute-payment', {
-                paymentID: data.paymentID,
-                payerID:   data.payerID,
-                userId: "{{ auth()->user()->id }}"
-            })
-            .then(function(res) {
-                $('#success').slideDown(200);
-                $('.card-body').slideUp(0);
-            });
+                // 2. Make a request to your server
+                return actions.request.post('/api/execute-payment', {
+                    paymentID: data.paymentID,
+                    payerID:   data.payerID,
+                    userId: "{{ auth()->user()->id }}"
+                })
+                    .then(function(res) {
+                        $('#success').slideDown(200);
+                        $('.card-body').slideUp(0);
+                    });
             }
         }, '#paypal-button');
     </script>

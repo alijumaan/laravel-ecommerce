@@ -44,12 +44,11 @@
                         <h3 class="footer-widget-title-6">Options</h3>
                         <div class="food-widget-content">
                             <ul>
-                                <li><a href="{{ route('cart.index') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt=""> Cart</a></li>
-                                <li><a href="{{ route('dashboard') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt=""> My Account</a></li>
+                                <li><a href="{{ route('cart.index') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> Cart</a></li>
+                                <li><a href="{{ route('dashboard') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> My Account</a></li>
                                 @guest
-                                    <li><a href="{{ route('frontend.login') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt=""> Login</a></li>
                                     @if (route('frontend.register.form'))
-                                        <li><a href="{{ route('frontend.register.form') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt="">Register</a></li>
+                                        <li><a href="{{ route('frontend.register.form') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Register</a></li>
                                     @endif
                                 @endguest
                             </ul>
@@ -61,10 +60,10 @@
                         <h3 class="footer-widget-title-6">Information</h3>
                         <div class="food-widget-content">
                             <ul>
-                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt=""> About</a></li>
-                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt="">Contact</a></li>
-                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt="">Privacy Policy</a></li>
-                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('assets/img/icon-img/41.png') }}" alt="">News</a></li>
+                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> About</a></li>
+                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Contact</a></li>
+                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Privacy Policy</a></li>
+                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">News</a></li>
                             </ul>
                         </div>
                     </div>

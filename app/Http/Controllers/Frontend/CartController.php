@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Repositories\Frontend\CartRepository;
-use Illuminate\Http\Request;
 
 
 class CartController extends Controller

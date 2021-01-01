@@ -23,17 +23,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/FavoriteController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Favorite.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Frontend/FavoriteRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_12_31_175305_create_favorites_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/FavoriteSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/users/userFavorites.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/PayPalController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/PurchaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/PurchaseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/users/_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/users/_sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/cart/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/cart/checkout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +164,7 @@
       <path value="$PROJECT_DIR$/vendor/league/oauth1-client" />
       <path value="$PROJECT_DIR$/vendor/laravel/socialite" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/srmklive/paypal" />
+      <path value="$PROJECT_DIR$/vendor/paypal/rest-api-sdk-php" />
     </include_path>
   </component>
   <component name="ProjectId" id="1ghICTN7sVcmLWZg6vDKgauKXqw" />
@@ -622,7 +623,8 @@
       <workItem from="1609342144552" duration="9929000" />
       <workItem from="1609356274805" duration="1645000" />
       <workItem from="1609419136478" duration="13308000" />
-      <workItem from="1609437087667" duration="9252000" />
+      <workItem from="1609437087667" duration="9440000" />
+      <workItem from="1609485729838" duration="11088000" />
     </task>
     <servers />
   </component>

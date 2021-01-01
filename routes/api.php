@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 
 /**** PAYPAL ****/
-Route::post('/create-payment' , [PurchaseController::class, 'createPayment']);
-Route::post('/execute-payment' , [PurchaseController::class, 'executePayment']);
+Route::post('create-payment' , [PurchaseController::class, 'createPayment']);
+Route::post('execute-payment' , [PurchaseController::class, 'executePayment']);
 
 /*** CART ADMIN PANEL ***/
 Route::get('/chart/orders-chart', [ApiController::class, 'orders_chart']);

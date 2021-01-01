@@ -11,7 +11,6 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\FavoriteController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
-use App\Http\Controllers\Frontend\PayPalController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\App;
@@ -71,14 +70,6 @@ Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checko
 
 /***** ORDER STORE *****/
 Route::post('/cart/checkout', [OrderController::class, 'store'])->name('checkout.store');
-
-/***** PAYPAL *****/
-//    Route::get('paypal/checkout/{order}', [PayPalController::class, 'getExpressCheckout'])->name('paypal.checkout');
-//    Route::get('paypal/checkout-success/{order}', [PayPalController::class, 'getExpressCheckoutSuccess'])->name('paypal.success');
-//    Route::get('paypal/checkout-cancel', [PayPalController::class, 'cancelPage'])->name('paypal.cancel');
-
-
-
 
 
 /***** AUTHENTICATION ROUTES *****/

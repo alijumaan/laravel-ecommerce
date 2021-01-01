@@ -91,12 +91,28 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function productsInCart()
     {
-        return $this->belongsToMany(OrderItem::class)->withPivot(['quantity', 'is_paid'])->wherePivot('is_paid', false);
+        return \Cart::session(auth()->id())->getContent();
+    }
+
+    public function orderTotal()
+    {
+        return \Cart::session(auth()->id())->getTotal();
+    }
+
+    public function orderSubTotal()
+    {
+        return \Cart::session(auth()->id())->getSubTotal();
+    }
+
+    public function totalQuantity()
+    {
+        return \Cart::session(auth()->id())->getTotalQuantity();
     }
 
     public function ratedPurches()
     {
         return $this->belongsToMany(Product::class)->withPivot(['is_paid'])->wherePivot('id_paid', true);
+
     }
 
     public function role()
