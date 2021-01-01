@@ -71,7 +71,6 @@ Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checko
 /***** ORDER STORE *****/
 Route::post('/cart/checkout', [OrderController::class, 'store'])->name('checkout.store');
 
-
 /***** AUTHENTICATION ROUTES *****/
 Route::get('/login',                            [LoginController::class, 'showLoginForm'])->name('frontend.login.form');
 Route::post('/login',                            [LoginController::class, 'login'])->name('frontend.login');

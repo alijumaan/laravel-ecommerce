@@ -109,6 +109,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return \Cart::session(auth()->id())->getTotalQuantity();
     }
 
+    public function tax()
+    {
+        return $this->orderTotal() - $this->orderSubTotal();
+    }
+
     public function ratedPurches()
     {
         return $this->belongsToMany(Product::class)->withPivot(['is_paid'])->wherePivot('id_paid', true);

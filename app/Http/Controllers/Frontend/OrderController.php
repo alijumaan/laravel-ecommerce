@@ -63,7 +63,7 @@ class OrderController extends Controller
             //payment
             if(request('payment_method') == 'paypal') {
                 //redirect to paypal
-                return redirect()->route('paypal.checkout', $order->id);
+                return redirect()->route('payWithPaypal', $order->id);
 
             }
 

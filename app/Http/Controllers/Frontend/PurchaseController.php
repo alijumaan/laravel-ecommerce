@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 
 use App\Models\User;
+
+use Illuminate\Support\Facades\Config;
 use PayPal\Api\Item;
 use PayPal\Api\Payer;
 use PayPal\Api\Amount;
@@ -17,16 +19,38 @@ use PayPal\Api\RedirectUrls;
 use Illuminate\Http\Request;
 
 use PayPal\Api\PaymentExecution;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
+
 
 class PurchaseController extends Controller
 {
+
+    private $apiContext;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $paypalConf = Config::get('paypal');
+        $this->apiContext = new ApiContext(new OAuthTokenCredential(
+                $paypalConf['client_id'],
+                $paypalConf['secret'])
+        );
+
+        $this->apiContext->setConfig($paypalConf['settings']);
+    }
+
     public function createPayment(Request $request)
     {
-        $apiContext = new \PayPal\Rest\ApiContext(
-            new \PayPal\Auth\OAuthTokenCredential(
-                'Aaqco3nIPqsLzJoIsGnkE1bscCDPmPkyGUOgTbRzNFfAg_QowlV2R3XhMjpGM25CVbfRGJBGaJF5bDLI',
-                'ECtirpK9v9UNofFiaUJLXvIkqRwfR126_IuBMjn1wow8XmLQ8osQpSKIzgqolsZZxRvmU1LvK_b0N-vS')
-        );
+//        $apiContext = new \PayPal\Rest\ApiContext(
+//            new \PayPal\Auth\OAuthTokenCredential(
+//                'Aaqco3nIPqsLzJoIsGnkE1bscCDPmPkyGUOgTbRzNFfAg_QowlV2R3XhMjpGM25CVbfRGJBGaJF5bDLI',
+//                'ECtirpK9v9UNofFiaUJLXvIkqRwfR126_IuBMjn1wow8XmLQ8osQpSKIzgqolsZZxRvmU1LvK_b0N-vS')
+//        );
 
         $shipping = 0;
         $tax = 0;
@@ -34,16 +58,14 @@ class PurchaseController extends Controller
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
 
-        $products = User::find($request->userId)->productsInCart();
-
+        $products = \Cart::session(auth()->id())->getContent();
         $itemsArray = array();
-
-        $total = User::find($request->userId)->orderTotal();
-
+        $total = 0;
         foreach($products as $product) {
+            $total += $product->price * $product->quantity;
 
             $item = new Item();
-            $item->setName($product->name)
+            $item->setName($product->title)
                 ->setCurrency('USD')
                 ->setQuantity($product->quantity)
                 ->setSku($product->id) // Similar to `item_number` in Classic API
@@ -83,7 +105,7 @@ class PurchaseController extends Controller
             ->setTransactions(array($transaction));
 
         try {
-            $payment->create($apiContext);
+            $payment->create($this->apiContext);
         } catch (\Exception $ex) {
             echo $ex;
             exit(1);
@@ -95,14 +117,8 @@ class PurchaseController extends Controller
     public function executePayment(Request $request)
     {
 
-        $apiContext = new \PayPal\Rest\ApiContext(
-            new \PayPal\Auth\OAuthTokenCredential(
-                'Aaqco3nIPqsLzJoIsGnkE1bscCDPmPkyGUOgTbRzNFfAg_QowlV2R3XhMjpGM25CVbfRGJBGaJF5bDLI',
-                'ECtirpK9v9UNofFiaUJLXvIkqRwfR126_IuBMjn1wow8XmLQ8osQpSKIzgqolsZZxRvmU1LvK_b0N-vS')
-        );
-
         $paymentId = $request->paymentID;
-        $payment = Payment::get($paymentId, $apiContext);
+        $payment = Payment::get($paymentId, $this->apiContext);
 
 
         $execution = new PaymentExecution();
@@ -123,9 +139,9 @@ class PurchaseController extends Controller
 
         // $execution->addTransaction($transaction);
         try {
-            $result = $payment->execute($execution, $apiContext);
+            $result = $payment->execute($execution, $this->apiContext);
             $user = User::find($request->userId);
-            $products = User::find($request->userId)->productsInCart();
+            $products = $user->productsInCart;
             foreach($products as $product) {
                 $user->productsInCart()->updateExistingPivot($product->id, ['is_paid' => TRUE]);
                 $product->save();

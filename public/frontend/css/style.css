@@ -5193,7 +5193,7 @@ a.icon-cart-furniture span.green {
 }
 
 .power-feathers-area {
-    background: rgba(0, 0, 0, 0) url("../img/banner/5.png") no-repeat scroll 95.5% 46% / 25% auto;
+    background: rgba(0, 0, 0, 0) url("../img/banner/7.png") no-repeat scroll 95.5% 46% / 25% auto;
 }
 .smart-watch-product-wrapper {
     position: relative;
@@ -6549,7 +6549,7 @@ a.icon-cart-furniture.food-cart span {
     position: relative;
 }
 .text-bg::before {
-    background: rgba(0, 0, 0, 0) url("../img/icon-img/44.png") no-repeat scroll left 0 center;
+    background: rgba(0, 0, 0, 0) url("../img/icon-img/40.png") no-repeat scroll left 0 center;
     content: "";
     height: 75px;
     left: 8px;
@@ -9293,7 +9293,7 @@ a.bundle-btn {
     position: relative;
 }
 .fruits-top-seller-area:before {
-    content: url(../img/banner/12.png);
+    content: url(../img/banner/9.png);
     position: absolute;
     left: 0;
     top: 0px;
@@ -9301,7 +9301,7 @@ a.bundle-btn {
     z-index: -1;
 }
 .fruits-top-seller-area:after {
-    content: url(../img/banner/13.png);
+    content: url(../img/banner/49.jpg);
     position: absolute;
     right: 0;
     bottom: 0;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
+use App\Models\ProductMedia;
 use App\Repositories\Frontend\CartRepository;
 
 
@@ -21,7 +22,6 @@ class CartController extends Controller
     public function index()
     {
         $cartItems = \Cart::session(auth()->id())->getContent();
-
         return view('frontend.cart.index', compact('cartItems'));
     }
 

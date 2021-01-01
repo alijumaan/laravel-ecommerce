@@ -92,12 +92,12 @@
                                     {!! Form::label('payment_method', 'Cash', ['class' => 'form-check-input', 'for' => 'cash_on_delivery']) !!}
                                     {!! Form::radio('payment_method', 'cash_on_delivery', 'selected', ['class' => 'form-check-input', 'id' => 'cash_on_delivery']) !!}
                                 </div>
-                                <br>
-
-{{--                            <div class="form-check form-check-inline">--}}
-{{--                                {!! Form::label('payment_method', 'PayPal', ['class' => 'form-check-input', 'for' => 'paypal']) !!}--}}
-{{--                                {!! Form::radio('payment_method', 'paypal', 'disabled', ['class' => 'form-check-input']) !!}--}}
-{{--                            </div>--}}
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check form-check-inline">
+                                    {!! Form::label('payment_method', 'PayPal', ['class' => 'form-check-input', 'for' => 'paypal']) !!}
+                                    {!! Form::radio('payment_method', 'paypal', 'disabled', ['class' => 'form-check-input']) !!}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -132,6 +132,10 @@
                                 <tr class="cart-subtotal">
                                     <th>Cart Subtotal</th>
                                     <td><span class="amount">${{ auth()->user()->orderSubTotal() }}</span></td>
+                                </tr>
+                                <tr class="cart-subtotal">
+                                    <th>Task(5%)</th>
+                                    <td><span class="amount">${{ auth()->user()->tax() }}</span></td>
                                 </tr>
                                 <tr class="order-total">
                                     <th>Order Quantity</th>
@@ -176,8 +180,9 @@
                                     </div>
                                 </div>
                                 <div class="order-button-payment">
+
                                     <input type="submit" value="Place order" />
-                                    <div id="paypal-button" ></div>
+{{--                                    <div id="paypal-button" ></div>--}}
                                 </div>
                             </div>
                         </div>
@@ -193,10 +198,14 @@
 
 @section('script')
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-
     <script>
         paypal.Button.render({
-            env: 'production', // Or 'production'
+            env: 'sandbox', // Or 'production'
+            style: {
+                size: 'large',
+                color: 'blue',
+                shape: 'pill',
+            },
             // Set up the payment:
             // 1. Add a payment callback
             payment: function(data, actions) {

@@ -12,3 +12,4 @@ Route::post('execute-payment' , [PurchaseController::class, 'executePayment']);
 /*** CART ADMIN PANEL ***/
 Route::get('/chart/orders-chart', [ApiController::class, 'orders_chart']);
 Route::get('/chart/products-chart', [ApiController::class, 'products_chart']);
+

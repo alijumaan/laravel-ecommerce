@@ -76,7 +76,7 @@
 {{--                                        <ul class="cart-dropdown">--}}
 {{--                                        <li class="single-product-cart" style="display: inline;">--}}
 {{--                                            <div class="cart-img">--}}
-{{--                                                <a href="#"><img style="width: 100px;" src="{{ asset('uploads/products/default_small.png') }}" alt=""></a>--}}
+{{--                                                <a href="#"><img style="width: 100px;" src="{{ asset('frontend/images/default_small.png') }}" alt=""></a>--}}
 {{--                                                <p class="ml-3" style="display: inline;"><a href="#" > Bits Headphone</a></p>--}}
 {{--                                                <span>$80.00 x 1</span>--}}
 {{--                                                <span class="cart-delete mt-3" style="float: right;">--}}
