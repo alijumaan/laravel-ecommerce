@@ -61,11 +61,11 @@ class OrderController extends Controller
             }
 
             //payment
-            if(request('payment_method') == 'paypal') {
-                //redirect to paypal
-                return redirect()->route('payWithPaypal', $order->id);
-
-            }
+//            if(request('payment_method') == 'paypal') {
+//                //redirect to paypal
+//                return redirect()->route('payWithPaypal', $order->id);
+//
+//            }
 
             //empty cart
             \Cart::session(auth()->id())->clear();

@@ -93,12 +93,12 @@
                                     {!! Form::radio('payment_method', 'cash_on_delivery', 'selected', ['class' => 'form-check-input', 'id' => 'cash_on_delivery']) !!}
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-check form-check-inline">
-                                    {!! Form::label('payment_method', 'PayPal', ['class' => 'form-check-input', 'for' => 'paypal']) !!}
-                                    {!! Form::radio('payment_method', 'paypal', 'disabled', ['class' => 'form-check-input']) !!}
-                                </div>
-                            </div>
+{{--                            <div class="col-md-12">--}}
+{{--                                <div class="form-check form-check-inline">--}}
+{{--                                    {!! Form::label('payment_method', 'PayPal', ['class' => 'form-check-input', 'for' => 'paypal']) !!}--}}
+{{--                                    {!! Form::radio('payment_method', 'paypal', 'disabled', ['class' => 'form-check-input']) !!}--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>
