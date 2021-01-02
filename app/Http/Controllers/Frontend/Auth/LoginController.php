@@ -103,6 +103,7 @@ class LoginController extends Controller
             'email_verified_at' => Carbon::now(),
             'mobile' => $id,
             'status' => 1,
+            'role_id' => 3,
             'receive_email' => 1,
             'remember_token' => $token,
             'password' => Hash::make($email),
@@ -115,9 +116,9 @@ class LoginController extends Controller
             $user->update(['avatar' => $filename]);
         }
 
-        if (!$user->hasRole('user')){
-            $user->attachRole(Role::whereName('user')->first()->id);
-        }
+//        if (!$user->hasRole('user')){
+//            $user->attachRole(Role::whereName('user')->first()->id);
+//        }
 
         Auth::login($user, true);
 
