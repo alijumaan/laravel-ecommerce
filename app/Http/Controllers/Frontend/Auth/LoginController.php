@@ -109,12 +109,13 @@ class LoginController extends Controller
             'password' => Hash::make($email),
         ]);
 
-        if ($user->avatar == '') {
-            $filename = '' . $user->username . '.jpg';
-            $path = public_path('/uploads/users/' . $filename);
-            Image::make($avatar)->save($path, 100);
-            $user->update(['avatar' => $filename]);
-        }
+//        if ($user->avatar == '') {
+//            $filename = '' . $user->username . '.jpg';
+//            $path = public_path('/storage/' . $filename);
+//            Image::make($avatar)->save($path, 100);
+//            $user->update(['avatar' => $filename]);
+//        }
+
 
 //        if (!$user->hasRole('user')){
 //            $user->attachRole(Role::whereName('user')->first()->id);
