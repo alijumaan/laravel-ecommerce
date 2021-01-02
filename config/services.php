@@ -41,19 +41,19 @@ return [
     'facebook' => [
         'client_id' => '1079454672514017',
         'client_secret' => 'a029aac3df6dd281a461ebdcfba2afd2',
-        'redirect' => 'https://cartwhite.com/login/facebook/callback',
+        'redirect' => 'https://cartwhite.tk/login/facebook/callback',
     ],
 
     'twitter' => [
         'client_id' => '',
         'client_secret' => '',
-        'redirect' => 'https://cartwhite.com/login/twitter/callback',
+        'redirect' => 'https://cartwhite.tk/login/twitter/callback',
     ],
 
     'google' => [
         'client_id' => '',
         'client_secret' => '',
-        'redirect' => 'https://cartwhite.com/login/google/callback',
+        'redirect' => 'https://cartwhite.tk/login/google/callback',
     ],
 
 
