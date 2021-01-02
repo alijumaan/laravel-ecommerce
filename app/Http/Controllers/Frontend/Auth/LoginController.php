@@ -101,7 +101,7 @@ class LoginController extends Controller
             'username' => $nickName != '' ? $nickName : trim(Str::lower(Str::replaceArray(' ', ['_'], $name))),
             'email' => $email,
             'email_verified_at' => Carbon::now(),
-            'mobile' => $id,
+            'mobile' => null,
             'status' => 1,
             'role_id' => 3,
             'receive_email' => 1,
