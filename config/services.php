@@ -31,18 +31,18 @@ return [
     ],
 
     //  Social Media On Test
-    'facebook' => [
-        'client_id' => '1036141446846834',
-        'client_secret' => '82d4f87675e4bbf9d5229e369bcced17',
-        'redirect' => 'https://cart.test/login/facebook/callback',
-    ],
+//    'facebook' => [
+//        'client_id' => '1036141446846834',
+//        'client_secret' => '82d4f87675e4bbf9d5229e369bcced17',
+//        'redirect' => 'https://cart.test/login/facebook/callback',
+//    ],
 
     // Social Media On Server
-//    'facebook' => [
-//        'client_id' => '1079454672514017',
-//        'client_secret' => 'a029aac3df6dd281a461ebdcfba2afd2',
-//        'redirect' => 'https://cartwhite.tk/login/facebook/callback',
-//    ],
+    'facebook' => [
+        'client_id' => '1079454672514017',
+        'client_secret' => 'a029aac3df6dd281a461ebdcfba2afd2',
+        'redirect' => 'https://cartwhite.tk/login/facebook/callback',
+    ],
 
     'twitter' => [
         'client_id' => '',
