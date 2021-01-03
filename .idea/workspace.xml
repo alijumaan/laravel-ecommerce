@@ -24,15 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/FavoriteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/FavoriteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/cart/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/cart/checkout.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/contact/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/contact/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/product/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/product/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/users/_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/users/_sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/users/userFavorites.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/users/wishlist.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -627,7 +619,8 @@
       <workItem from="1609595084049" duration="3550000" />
       <workItem from="1609602641848" duration="7044000" />
       <workItem from="1609619206512" duration="2160000" />
-      <workItem from="1609649946955" duration="15812000" />
+      <workItem from="1609649946955" duration="17165000" />
+      <workItem from="1609672926579" duration="312000" />
     </task>
     <servers />
   </component>

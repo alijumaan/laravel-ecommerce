@@ -1,27 +1,29 @@
+
 <header class="ptb-50">
     <div class="header-bottom wrapper-padding-2 res-header-sm sticker header-sticky-3 furits-header">
         <div class="container-fluid">
+
             <div class="header-bottom-wrapper ">
                 <div class="logo-2 ptb-35 menu-hover">
                     <a href="{{route('home')}}">
-                        <img style="width: 150px" src="{{asset('frontend/img/logo/logo.png')}}" alt="">
+                        <img style="width: 150px" src="{{asset('assets/img/logo/logo.png')}}" alt="">
                     </a>
                 </div>
                 <div class="menu-style-2 handicraft-menu menu-hover">
                     <nav>
                         <ul>
                             <li><a href="{{route('home')}}">Home</a></li>
-			    <li><a href="{{route('frontend.products.index')}}">All Products</a></li>
-                                <ul class="single-dropdown">
-                                    <li><a href="{{route('contact.index')}}">Contact us</a></li>
-                                    @guest
+                            <li><a href="{{route('frontend.products.index')}}">All Products</a></li>
+                            <ul class="single-dropdown">
+                                <li><a href="{{route('contact.index')}}">Contact us</a></li>
+                                @guest
                                     <li><a href="{{route('frontend.login')}}">Login</a></li>
                                     @if (route('frontend.register.form'))
-                                    <li><a href="{{route('frontend.register.form')}}">Register</a></li>
+                                        <li><a href="{{route('frontend.register.form')}}">Register</a></li>
                                     @endif
-                                    @endguest
-                                    <li><a href="{{route('cart.index')}}">Cart page</a></li>
-                                </ul>
+                                @endguest
+                                <li><a href="{{route('cart.index')}}">Cart page</a></li>
+                            </ul>
                             <li><a href="javascript:void(0);">Categories</a>
                                 <ul class="single-dropdown">
                                     @foreach($global_categories as $global_category)
@@ -46,11 +48,14 @@
                                 </li>
                             @else
                                 @admin
-                                    <li ><a href="{{ route('admin.index') }}" style="color: #578a01;">Administration</a>
+                                <li ><a href="{{ route('admin.index') }}" style="color: #578a01;">Administration</a>
                                 @endadmin
+
                                 <li><a href="javascript:void(0);" style="color: #578a01;">My Account</a>
                                     <ul class="single-dropdown" >
-                                        <li ><a href="{{ route('dashboard') }}" style="color: #578a01;">Dashboard</a></li>
+                                        @auth
+                                            <li ><a href="{{ route('dashboard') }}" style="color: #578a01;">Dashboard</a></li>
+                                        @endauth
                                         <li>
                                             <a class="dropdown-item" href="{{ route('frontend.logout') }}"
                                                onclick="event.preventDefault();
@@ -63,50 +68,44 @@
                                         </li>
                                     </ul>
                                 </li>
+
+
+
+
 {{--                                <span class="header-cart-4 furits-cart bell">--}}
-{{--                                    <a href="javascript:void(0)">--}}
+{{--                                    <a href="">--}}
 {{--                                        <span class="handicraft-count">*</span>--}}
 {{--                                        <i class="far fa-bell fa-2x"></i>--}}
 {{--                                        <ul class="cart-dropdown">--}}
 {{--                                        <li class="single-product-cart" style="display: inline;">--}}
 {{--                                            <div class="cart-img">--}}
-{{--                                                <a href="#"><img style="width: 100px;" src="{{ asset('frontend/images/default_small.png') }}" alt=""></a>--}}
+{{--                                                <a href="#"><img style="width: 100px;" src="{{ asset('uploads/products/default_small.png') }}" alt=""></a>--}}
 {{--                                                <p class="ml-3" style="display: inline;"><a href="#" > Bits Headphone</a></p>--}}
 {{--                                                <span>$80.00 x 1</span>--}}
 {{--                                                <span class="cart-delete mt-3" style="float: right;">--}}
-{{--                                                <a href="javascript:void(0)"><i class="far fa-trash-alt"></i></a>--}}
+{{--                                                <a href="#"><i class="far fa-trash-alt"></i></a>--}}
 {{--                                                </span>--}}
 {{--                                             </div>--}}
 {{--                                        </li>--}}
 {{--                                    </ul>--}}
 {{--                                    </a>--}}
 {{--                                </span>--}}
+
                             @endguest
 
                         </ul>
 
                     </div>
-                    @auth
                     <div class="header-cart-4 furits-cart">
                         <a class="icon-cart" href="{{route('cart.index')}}">
                             @auth
-{{--                                <span class="handicraft-count">--}}
-{{--                                    {{Cart::session(auth()->id())->getContent()->count()}}--}}
-{{--                                </span>--}}
                                 <span class="shop-count-furniture green">
                                     {{Cart::session(auth()->id())->getContent()->count()}}
                                 </span>
-{{--                                    <i class="fas fa-shopping-cart fa-3x"></i>--}}
-                                <i class="ti-shopping-cart"></i>
-                            @else
-{{--                                <span class="handicraft-count">0</span>--}}
-                                <span class="shop-count-furniture green">0</span>
-{{--                                <i class="fas fa-shopping-cart fa-3x"></i>--}}
                                 <i class="ti-shopping-cart"></i>
                             @endauth
                         </a>
                     </div>
-                    @endauth
                 </div>
             </div>
 
@@ -116,14 +115,13 @@
                         <nav id="mobile-menu-active">
                             <ul class="menu-overflow">
                                 <li><a href="{{route('home')}}">HOME</a></li>
-				                <li><a href="{{route('frontend.products.index')}}">ALL PRODUCTS</a></li>
+                                <li><a href="{{route('frontend.products.index')}}">ALL PRODUCTS</a></li>
                                 <li><a href="#">Categories</a>
                                     <ul>
                                         <li>
                                         @foreach($global_categories as $global_category)
-                                            <a href="{{ route('category.product', $global_category->slug) }}">{{ $global_category->name }}</a>
+                                            <li><a href="{{ route('category.product', $global_category->slug) }}">{{ $global_category->name }}</a></li>
                                         @endforeach
-                                        </li>
                                     </ul>
                                 </li>
                                 <li><a href="{{route('contact.index')}}">contact</a></li>
@@ -135,9 +133,11 @@
                                         <a href="{{route('frontend.register.form')}}">Reg</a>
                                     </li>
                                 @else
-                                    @if(auth()->user()->isAdmin())
-                                        <li ><a href="{{ route('admin.index') }}">Administration</a>
-                                    @endif
+
+                                    @admin
+                                    <li ><a href="{{ route('admin.index') }}">Administration</a>
+                                    @endadmin
+
                                     <li ><a href="{{ route('dashboard') }}" >Dashboard</a></li>
 
                                     <li>
@@ -159,8 +159,9 @@
         </div>
     </div>
 </header>
-
 <div class="breadcrumb-area pt-50" >
+
+
     <div class="container-fluid">
         <div class="furniture-bottom-wrapper">
             <div class="furniture-login">
@@ -168,17 +169,16 @@
             </div>
             <div class="furniture-search">
                 {!! Form::open(['route' => 'search', 'method' => 'get']) !!}
-                    <div class="form-input">
-                        {!! Form::text('keyword', old('keyword', request()->keyword), ['placeholder' => 'I am Searching for . . .']) !!}
-                        {!! Form::button('<i class="fas fa-search"></i>', ['type' => 'submit']) !!}
-                    </div>
+                <div class="form-input">
+                    {!! Form::text('keyword', old('keyword', request()->keyword), ['placeholder' => 'I am Searching for . . .']) !!}
+                    {!! Form::button('<i class="fas fa-search"></i>', ['type' => 'submit']) !!}
+                </div>
                 {!! Form::close() !!}
             </div>
             <div class="furniture-wishlist">
-{{--                <ul>--}}
-{{--                    <li><a href="wishlist.html"><i class="ti-heart"></i> Wishlist</a></li>--}}
-{{--                </ul>--}}
+
             </div>
         </div>
     </div>
+
 </div>
