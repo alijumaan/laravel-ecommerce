@@ -509,7 +509,7 @@ a.button-small:hover::after { width: 100% }
 *************************/
 input {
     background: #fffff;
-    height: 15px;
+    /*height: 15px;*/
     box-shadow: none;
     padding-left: 10px;
     margin-bottom: 5px;
