@@ -90,7 +90,13 @@
                             <div class="col-md-12">
                                 <div class="form-check form-check-inline">
                                     {!! Form::label('payment_method', 'Cash', ['class' => 'form-check-input', 'for' => 'cash_on_delivery']) !!}
-                                    {!! Form::radio('payment_method', 'cash_on_delivery', 'selected', ['class' => 'form-check-input', 'id' => 'cash_on_delivery']) !!}
+                                    {!! Form::radio('payment_method', 'cash_on_delivery', 'disabled', ['class' => 'form-check-input', 'id' => 'cash_on_delivery']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check form-check-inline">
+                                    {!! Form::label('payment_method', 'card', ['class' => 'form-check-input', 'for' => 'card']) !!}
+                                    {!! Form::radio('payment_method', 'card', 'selected', ['class' => 'form-check-input']) !!}
                                 </div>
                             </div>
 {{--                            <div class="col-md-12">--}}

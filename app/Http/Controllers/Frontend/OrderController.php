@@ -6,10 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Mail\OrderCompleted;
 use App\Models\Order;
+use App\Repositories\Frontend\OrderRepository;
 use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
+
+    public $orderRepository;
+
+    public function __construct(OrderRepository $orderRepository)
+    {
+        $this->middleware('auth');
+        return $this->orderRepository = $orderRepository;
+    }
+
     public function store(StoreOrderRequest $request)
     {
 
@@ -47,8 +57,8 @@ class OrderController extends Controller
             $userId = auth()->id();
             $order['user_id'] = $userId;
 
-            if (request('payment_method') == 'paypal') {
-                $order['payment_method'] = 'paypal';
+            if (request('payment_method') == 'card') {
+                $order['payment_method'] = 'card';
             }
 
             $order->save();
@@ -61,16 +71,16 @@ class OrderController extends Controller
             }
 
             //payment
-//            if(request('payment_method') == 'paypal') {
-//                //redirect to paypal
-//                return redirect()->route('payWithPaypal', $order->id);
-//
-//            }
+            if(request('payment_method') == 'card') {
+                //redirect to card
+                return redirect()->route('checkout.charge_request', $order->id);
+
+            }
 
             //empty cart
             \Cart::session(auth()->id())->clear();
 
-            Mail::to($request->user())->send(new OrderCompleted);
+            Mail::to($request->user())->send(new OrderCompleted());
 
             //send email to customer
             return redirect()->route('home')->with([
@@ -84,6 +94,19 @@ class OrderController extends Controller
             'alert-type' => 'danger'
         ]);
 
+    }
+
+    public function chargeRequest()
+    {
+        $user = auth()->user();
+        $total = \Cart::session(auth()->id())->getTotal();
+
+        return redirect($this->orderRepository->getChargeRequest($total, $user->name,$user->email, $user->phone));
+    }
+
+    public function chargeUpdate()
+    {
+        return $this->orderRepository->validateRequest(request()->tap_id);
     }
 
 }

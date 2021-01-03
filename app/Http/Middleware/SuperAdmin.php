@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class SuperAdmin
 {
@@ -20,5 +21,6 @@ class SuperAdmin
             return back();
         }
         return $next($request);
+
     }
 }

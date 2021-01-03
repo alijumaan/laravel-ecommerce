@@ -9,8 +9,10 @@
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
+            @superAdmin
             <a class="nav-link" href="{{ route('permissions.index') }}">
             <span>Permissions</span></a>
+            @endsuperAdmin
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.settings.index') }}">
@@ -18,8 +20,10 @@
         </li>
 
         <li class="nav-item">
+            @superAdmin
             <a class="nav-link" href="{{ route('admin.supervisors.index') }}">
             <span>Supervisors</span></a>
+            @endsuperAdmin
         </li>
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1">
@@ -39,7 +43,7 @@
                             <i class="fas fa-file-alt text-white"></i>
                         </div>
                     </div>
-                    <div>
+                    <div>A
                         <div class="small text-gray-500">December 12, 2019</div>
                         <span class="font-weight-bold">A new monthly report is ready to download!</span>
                     </div>

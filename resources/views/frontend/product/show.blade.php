@@ -105,20 +105,21 @@
                             <div class="quickview-btn-cart">
                                 <a class="btn-hover-black" href="{{route('cart.add', $product->id)}}">add to cart</a>
                             </div>
-                            <div class="quickview-btn-wishlist">
-                                <a class="btn-hover" href="{{ route('cart.index') }}"><i class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="mt-5">
                             @auth
-                            <a id="fav" href="javascript:void(0)" data-id="{{ $product->id }}" class="btn btn-sm btn-success {{ $favorite ? 'unFav' : 'fav' }}">
-                                {{ $favorite ? "Remove from favorite" : "Add to favorite "}}
-                            </a>
+                            <div class="quickview-btn-wishlist">
+                                <a id="fav" class="btn-hover {{ $favorite ? 'unFav' : 'fav' }}" href="javascript:void(0)" data-id="{{ $product->id }}">{!! $favorite ? "<i class='fas fa-heart text-danger'></i>" : "<i class='far fa-heart'></i>" !!}</a>
+{{--                                <i class="{{ $favorite ? 'unFav' : 'fav' }}"></i>--}}
+                            </div>
                             @endauth
                         </div>
+
+
+
+{{--                        <div class="mt-5">--}}
+{{--                            <a id="fav" href="javascript:void(0)" data-id="{{ $product->id }}" class="btn btn-sm btn-success {{ $favorite ? 'unFav' : 'fav' }}">--}}
+{{--                                {{ $favorite ? "Remove from favorite" : "Add to favorite "}}--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
 
 
 
@@ -337,12 +338,12 @@
                 if (product.hasClass("fav") ) {
                     url = '/products/' + product_id + '/favorite';
                     status = "unFav";
-                    text = "Remove from favorite"
+                    text = "<i class='fas fa-heart text-danger'></i>"
                 }
                 else{
                     url = '/products/' + product_id + '/unFavorite';
                     status = "fav";
-                    text = "Add to favorite";
+                    text = "<i class='far fa-heart'></i>";
                 }
 
                 $.ajax({

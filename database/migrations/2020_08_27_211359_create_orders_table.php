@@ -18,11 +18,11 @@ class CreateOrdersTable extends Migration
 
             $table->string('order_number');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->boolean('status')->default(0);
             $table->float('grand_total');
             $table->integer('item_count');
             $table->boolean('completed')->default(FALSE);
             $table->enum('payment_method', ['cash_on_delivery', 'paypal','card'])->default('cash_on_delivery');
+            $table->enum('status', ['pending', 'failed','paid', 'delivered'])->default('pending');
 
             $table->string('shipping_first_name');
             $table->string('shipping_last_name');

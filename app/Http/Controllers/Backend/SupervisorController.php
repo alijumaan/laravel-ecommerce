@@ -15,6 +15,7 @@ class SupervisorController extends Controller
     public function __construct(SupervisorRepository $supervisor)
     {
         $this->supervisor = $supervisor;
+        $this->middleware('superAdmin');
     }
 
     public function index()

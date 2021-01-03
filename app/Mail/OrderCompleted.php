@@ -16,9 +16,9 @@ class OrderCompleted extends Mailable
      *
      * @return void
      */
+
     public function __construct()
     {
-        //
     }
 
     /**
@@ -28,6 +28,6 @@ class OrderCompleted extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.complete');
+        return $this->markdown('emails.orders.completed');
     }
 }

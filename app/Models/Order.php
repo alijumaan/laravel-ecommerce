@@ -22,9 +22,4 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class, 'order_items')->withPivot('quantity', 'price');
     }
-
-    public function status()
-    {
-        return $this->status == '1' ? 'Confirmed' : 'Pending';
-    }
 }

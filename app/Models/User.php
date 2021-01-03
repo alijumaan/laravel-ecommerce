@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -48,6 +49,11 @@ class User extends Authenticatable implements MustVerifyEmail
             'users.bio'         => 10,
         ],
     ];
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
 
     public function orders()
     {
@@ -133,6 +139,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdmin()
     {
         return $this->role->id <= 2;
+//        return null !== $this->role()->where('role', $role)->first();
     }
 
     public function roleId()

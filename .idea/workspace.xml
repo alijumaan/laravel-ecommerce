@@ -23,8 +23,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Repositories/Frontend/OrderRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/emails/orders/completed.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/SupervisorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/SupervisorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/SuperAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/SuperAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/OrderCompleted.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/OrderCompleted.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_27_211359_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_08_27_211359_create_orders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/layouts/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layouts/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/complete.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/cart/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/cart/checkout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +185,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/frontend/users" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Repositories/Frontend" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -184,8 +199,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/frontend/users" />
       <recent name="$PROJECT_DIR$/app/Repositories/Frontend" />
+      <recent name="$PROJECT_DIR$/resources/views/frontend/users" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/public/storage/images" />
       <recent name="$PROJECT_DIR$/app/Traits" />
@@ -616,7 +631,10 @@
       <workItem from="1609485729838" duration="20699000" />
       <workItem from="1609514314814" duration="12731000" />
       <workItem from="1609530322808" duration="26000" />
-      <workItem from="1609595084049" duration="2132000" />
+      <workItem from="1609595084049" duration="3550000" />
+      <workItem from="1609602641848" duration="7044000" />
+      <workItem from="1609619206512" duration="2160000" />
+      <workItem from="1609649946955" duration="7288000" />
     </task>
     <servers />
   </component>

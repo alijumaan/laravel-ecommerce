@@ -71,6 +71,10 @@ Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checko
 /***** ORDER STORE *****/
 Route::post('/cart/checkout', [OrderController::class, 'store'])->name('checkout.store');
 
+/*****  TAP GATEWAY****/
+Route::get('/cart/charge-request', [OrderController::class, 'chargeRequest'])->name('checkout.charge_request');
+Route::get('/cart/charge-update', [OrderController::class, 'chargeUpdate'])->name('checkout.charge_update');
+
 /***** AUTHENTICATION ROUTES *****/
 Route::get('/login',                            [LoginController::class, 'showLoginForm'])->name('frontend.login.form');
 Route::post('/login',                            [LoginController::class, 'login'])->name('frontend.login');
