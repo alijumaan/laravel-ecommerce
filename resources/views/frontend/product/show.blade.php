@@ -108,7 +108,6 @@
                             @auth
                             <div class="quickview-btn-wishlist">
                                 <a id="fav" class="btn-hover {{ $favorite ? 'unFav' : 'fav' }}" href="javascript:void(0)" data-id="{{ $product->id }}">{!! $favorite ? "<i class='fas fa-heart text-danger'></i>" : "<i class='far fa-heart'></i>" !!}</a>
-{{--                                <i class="{{ $favorite ? 'unFav' : 'fav' }}"></i>--}}
                             </div>
                             @endauth
                         </div>

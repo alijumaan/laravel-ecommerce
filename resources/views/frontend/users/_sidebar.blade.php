@@ -7,7 +7,7 @@
                     <img class="avatar-round" src="{{ asset('storage').'/'. auth()->user()->avatar }}"/>
                 @endif
             </li>
-            <li class="list-group-item"><a href="{{route('userFav')}}">My favorite</a></li>
+            <li class="list-group-item"><a href="{{route('userFav')}}">Wishlist</a></li>
             <li class="list-group-item"><a href="{{route('dashboard')}}">My account</a></li>
             <li class="list-group-item"><a href="{{route('frontend.users.edit') }}">Update information</a></li>
             <li class="list-group-item"><a href="{{route('users.reviews')}}">My reviews</a></li>

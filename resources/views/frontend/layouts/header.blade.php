@@ -1,8 +1,6 @@
-
 <header class="ptb-50">
     <div class="header-bottom wrapper-padding-2 res-header-sm sticker header-sticky-3 furits-header">
         <div class="container-fluid">
-
             <div class="header-bottom-wrapper ">
                 <div class="logo-2 ptb-35 menu-hover">
                     <a href="{{route('home')}}">
@@ -47,9 +45,9 @@
                                     <a href="{{route('frontend.register.form')}}">Reg</a>
                                 </li>
                             @else
-                                @if(auth()->user()->isAdmin())
+                                @admin
                                     <li ><a href="{{ route('admin.index') }}" style="color: #578a01;">Administration</a>
-                                @endif
+                                @endadmin
                                 <li><a href="javascript:void(0);" style="color: #578a01;">My Account</a>
                                     <ul class="single-dropdown" >
                                         <li ><a href="{{ route('dashboard') }}" style="color: #578a01;">Dashboard</a></li>
@@ -65,12 +63,8 @@
                                         </li>
                                     </ul>
                                 </li>
-
-
-
-
 {{--                                <span class="header-cart-4 furits-cart bell">--}}
-{{--                                    <a href="">--}}
+{{--                                    <a href="javascript:void(0)">--}}
 {{--                                        <span class="handicraft-count">*</span>--}}
 {{--                                        <i class="far fa-bell fa-2x"></i>--}}
 {{--                                        <ul class="cart-dropdown">--}}
@@ -80,32 +74,39 @@
 {{--                                                <p class="ml-3" style="display: inline;"><a href="#" > Bits Headphone</a></p>--}}
 {{--                                                <span>$80.00 x 1</span>--}}
 {{--                                                <span class="cart-delete mt-3" style="float: right;">--}}
-{{--                                                <a href="#"><i class="far fa-trash-alt"></i></a>--}}
+{{--                                                <a href="javascript:void(0)"><i class="far fa-trash-alt"></i></a>--}}
 {{--                                                </span>--}}
 {{--                                             </div>--}}
 {{--                                        </li>--}}
 {{--                                    </ul>--}}
 {{--                                    </a>--}}
 {{--                                </span>--}}
-
                             @endguest
 
                         </ul>
 
                     </div>
+                    @auth
                     <div class="header-cart-4 furits-cart">
                         <a class="icon-cart" href="{{route('cart.index')}}">
                             @auth
-                                <span class="handicraft-count">
-                                    {{Cart::session(auth()->id())->getContent()->count()}}</span>
-                                    <i class="fas fa-shopping-cart fa-3x"></i>
+{{--                                <span class="handicraft-count">--}}
+{{--                                    {{Cart::session(auth()->id())->getContent()->count()}}--}}
+{{--                                </span>--}}
+                                <span class="shop-count-furniture green">
+                                    {{Cart::session(auth()->id())->getContent()->count()}}
+                                </span>
+{{--                                    <i class="fas fa-shopping-cart fa-3x"></i>--}}
+                                <i class="ti-shopping-cart"></i>
                             @else
-                                <span class="handicraft-count">0</span>
-                                <i class="fas fa-shopping-cart fa-3x"></i>
+{{--                                <span class="handicraft-count">0</span>--}}
+                                <span class="shop-count-furniture green">0</span>
+{{--                                <i class="fas fa-shopping-cart fa-3x"></i>--}}
+                                <i class="ti-shopping-cart"></i>
                             @endauth
                         </a>
-
                     </div>
+                    @endauth
                 </div>
             </div>
 
@@ -158,26 +159,26 @@
         </div>
     </div>
 </header>
+
 <div class="breadcrumb-area pt-50" >
+    <div class="container-fluid">
+        <div class="furniture-bottom-wrapper">
+            <div class="furniture-login">
 
-
-        <div class="container-fluid">
-            <div class="furniture-bottom-wrapper">
-                <div class="furniture-login">
-
-                </div>
-                <div class="furniture-search">
-                    {!! Form::open(['route' => 'search', 'method' => 'get']) !!}
-                        <div class="form-input">
-                            {!! Form::text('keyword', old('keyword', request()->keyword), ['placeholder' => 'I am Searching for . . .']) !!}
-                            {!! Form::button('<i class="fas fa-search"></i>', ['type' => 'submit']) !!}
-                        </div>
-                    {!! Form::close() !!}
-                </div>
-                <div class="furniture-wishlist">
-
-                </div>
+            </div>
+            <div class="furniture-search">
+                {!! Form::open(['route' => 'search', 'method' => 'get']) !!}
+                    <div class="form-input">
+                        {!! Form::text('keyword', old('keyword', request()->keyword), ['placeholder' => 'I am Searching for . . .']) !!}
+                        {!! Form::button('<i class="fas fa-search"></i>', ['type' => 'submit']) !!}
+                    </div>
+                {!! Form::close() !!}
+            </div>
+            <div class="furniture-wishlist">
+{{--                <ul>--}}
+{{--                    <li><a href="wishlist.html"><i class="ti-heart"></i> Wishlist</a></li>--}}
+{{--                </ul>--}}
             </div>
         </div>
-
+    </div>
 </div>

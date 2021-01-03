@@ -15,7 +15,7 @@
 
                             <div class="shop-bar pb-60">
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-10">
                                         <div class="shop-found-selector">
                                             <div class="shop-selector">
                                                 {!! Form::open(['route' => 'frontend.products.index', 'method' => 'get']) !!}
@@ -24,28 +24,28 @@
                                                     {!! Form::select('order_by', ['' => 'Default', 'asc' => 'A to Z', 'desc' => 'Z to A'], old('order_by', request()->input('order_by'))) !!}
                                                 </label>
                                             </div>
-                                            <div class="shop-selector">
-                                                <label>Sort By : </label>
-                                                <label>
-                                                    {!! Form::select('sort_by', ['' => 'Default', 'name' => 'Name', 'created_at' => 'Date' ], old('sort_by', request()->input('sort_by'))) !!}
-                                                </label>
-                                            </div>
-                                            <div class="shop-selector">
-                                                <label>Show : </label>
-                                                <label>
-                                                    {!! Form::select('limit_by', ['' => 'Default', '10' => '10', '15' => '15', '20' => '20', '25' => '25', '30' => '30' ], old('limit_by', request()->input('limit_by'))) !!}
-                                                </label>
-                                            </div>
+{{--                                            <div class="shop-selector">--}}
+{{--                                                <label>Sort By : </label>--}}
+{{--                                                <label>--}}
+{{--                                                    {!! Form::select('sort_by', ['' => 'Default', 'name' => 'Name', 'created_at' => 'Date' ], old('sort_by', request()->input('sort_by'))) !!}--}}
+{{--                                                </label>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="shop-selector">--}}
+{{--                                                <label>Show : </label>--}}
+{{--                                                <label>--}}
+{{--                                                    {!! Form::select('limit_by', ['' => 'Default', '10' => '10', '15' => '15', '20' => '20', '25' => '25', '30' => '30' ], old('limit_by', request()->input('limit_by'))) !!}--}}
+{{--                                                </label>--}}
+{{--                                            </div>--}}
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="shop-selector">
-                                            {!! Form::button('Search', ['class' => 'btn-sm btn btn-outline-link', 'type' => 'submit']) !!}
+                                            {!! Form::button('Find', ['class' => 'btn-sm btn btn-outline-link', 'type' => 'submit']) !!}
                                             {!! Form::close() !!}
                                         </div>
                                     </div>
-                                    <div class="col-2">
-                                    </div>
+{{--                                    <div class="col-2">--}}
+{{--                                    </div>--}}
                                 </div>
                                 <div class="shop-filter-tab">
                                     <div class="shop-tab nav" role=tablist>
@@ -87,14 +87,17 @@
                                                             <p>{{ $product->description }}</p>
                                                         </div>
                                                         <div class="product-list-cart-wishlist">
+
                                                             <div class="product-list-cart">
                                                                 <a class="btn-hover list-btn-style" href="{{route('cart.add', $product->id)}}">add to cart</a>
                                                             </div>
+                                                            @auth
                                                             <div class="product-list-look">
                                                                 <a class="btn-hover list-btn-wishlist" href="{{route('frontend.products.show', $product->slug)}}">
-                                                                    <i class="fas fa-eye"></i>
+                                                                    <i class='far fa-heart'></i>
                                                                 </a>
                                                             </div>
+                                                            @endauth
                                                         </div>
                                                     </div>
                                                 </div>

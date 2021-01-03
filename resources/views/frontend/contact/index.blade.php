@@ -56,7 +56,7 @@
                                     {!! Form::textarea('message',old('message'), ['placeholder' => 'Message']) !!}
                                     @error('message')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
-                                {!! Form::button('Send Message', ['type' => 'submit', 'class' => 'submit contact-btn btn-hover']) !!}
+                                {!! Form::button('<i class="far fa-envelope"></i> Send', ['type' => 'submit', 'class' => 'submit contact-btn btn-hover']) !!}
                             </div>
                         </div>
                         {!! Form::close() !!}

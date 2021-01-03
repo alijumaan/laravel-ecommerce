@@ -102,6 +102,7 @@
     <div class="text-center">
         @include('messages.flash')
     </div>
+
     @yield('content')
 
     @include('frontend.layouts.footer')
