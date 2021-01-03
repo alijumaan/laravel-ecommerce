@@ -27,6 +27,8 @@ class OrderController extends Controller
 
         if ($order) {
             $order['order_number'] = uniqid('OrderNumber-');
+            $order['shipping_notes'] = $request->input('shipping_notes');
+
             $order['shipping_first_name'] = $request->input('shipping_first_name');
             $order['shipping_last_name'] = $request->input('shipping_last_name');
             $order['shipping_state'] = $request->input('shipping_state');
@@ -34,7 +36,7 @@ class OrderController extends Controller
             $order['shipping_address'] = $request->input('shipping_address');
             $order['shipping_phone'] = $request->input('shipping_phone');
 
-            if(!$request->has('billing_first_name')) {
+            if(!$request->has('billing_order')) {
                 $order['billing_first_name'] = $request->input('shipping_first_name');
                 $order['billing_last_name'] = $request->input('shipping_last_name');
                 $order['billing_state'] = $request->input('shipping_state');
@@ -59,6 +61,11 @@ class OrderController extends Controller
 
             if (request('payment_method') == 'card') {
                 $order['payment_method'] = 'card';
+            }
+
+            if (request('payment_method') == 'paypal') {
+                $order['payment_method'] = 'paypal';
+                return redirect()->route('paypal.checkout', $order->id);
             }
 
             $order->save();
