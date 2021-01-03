@@ -22,7 +22,21 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="" />
+    <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/css/bundle.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/css/bundle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/img/banner/47.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/img/banner/48.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/img/banner/52.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/img/banner/54.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/img/banner/7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/img/banner/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/img/banner/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/img/icon-img/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/cart/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/cart/checkout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/footer.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,7 +181,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/View/Composers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/frontend" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -181,11 +195,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/frontend" />
       <recent name="$PROJECT_DIR$/app/Http/View/Composers" />
       <recent name="$PROJECT_DIR$/resources/views/frontend/partials" />
       <recent name="$PROJECT_DIR$/app/Repositories/Frontend" />
       <recent name="$PROJECT_DIR$/resources/views/frontend/users" />
-      <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/storage/images" />
@@ -617,7 +631,7 @@
       <workItem from="1609602641848" duration="7044000" />
       <workItem from="1609619206512" duration="2160000" />
       <workItem from="1609649946955" duration="17165000" />
-      <workItem from="1609672926579" duration="6912000" />
+      <workItem from="1609672926579" duration="9342000" />
     </task>
     <servers />
   </component>

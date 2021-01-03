@@ -225,6 +225,5 @@
         </div>
     </div>
     <!-- services area end -->
-
 @endsection
 

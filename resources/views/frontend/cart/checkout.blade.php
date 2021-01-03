@@ -103,7 +103,6 @@
                                 <div class="checkout-form-list create-acc">
                                     {!! Form::label('payment_method', 'PayPal', ['class' => 'form-check-input', 'for' => 'paypal']) !!}
                                     {!! Form::radio('payment_method', 'paypal', ['class' => 'form-check-input']) !!}
-
                                 </div>
                             </div>
 

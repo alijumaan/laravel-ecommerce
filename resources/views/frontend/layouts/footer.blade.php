@@ -77,7 +77,6 @@
 
         <div class="container">
 
-
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="footer-services-wrapper mb-30">
@@ -113,8 +112,9 @@
                     </div>
                 </div>
             </div>
-
-
+            <div class="text-center">
+                <img src="{{ asset('frontend/img/icon-img/3.png') }}" alt="">
+            </div>
         </div>
 
 

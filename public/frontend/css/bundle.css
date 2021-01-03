@@ -515,7 +515,7 @@ input {
     margin-bottom: 5px;
     font-size: 14px;
     color: #626262;
-    width: 50%;
+    width: 30%;
 }
 select {
     width: 100%;
@@ -1057,30 +1057,13 @@ textarea:focus {
     background-attachment: fixed; background-clip: initial; background-color: rgba(0, 0, 0, 0); background-origin: initial; background-position: center center; background-repeat: no-repeat; background-size: cover; position: relative; z-index: 0;
  }
  .bg-1 {
-  background: url(../../images/bg/1.jpg);}
- .bg-2 { background: url(../../images/bg/2.jpg);}
- .bg-3 { background: url(../../images/bg/3.jpg);}
- .bg-4 { background: url(../../images/bg/4.jpg);}
- .bg-5 { background: url(../../images/bg/5.jpg);}
- .bg-6 { background: url(../../images/bg/6.jpg);}
- .bg-7 { background: url(../../images/bg/7.jpg);}
- .bg-8 { background: url(../../images/bg/8.jpg);}
- .bg-9 { background: url(../../images/bg/9.jpg);}
- .bg-10 { background: url(../../images/bg/10.jpg);}
+  background: url(../../frontend/img/bg/1.png);}
+ .bg-2 { background: url(../../frontend/img/bg/2.png);}
 
 .bg-img {
   background-position: center center;
   background-size: cover;
 }
-  /*pattern background*/
-.pattern-bg { background:url(../../images/pattern/pattern-bg.png) repeat; background-position: top right; background-color: rgba(236, 239, 247, 1); }
-
-
-
-
-
-
-
 
 /*separator*/
 .separator{
