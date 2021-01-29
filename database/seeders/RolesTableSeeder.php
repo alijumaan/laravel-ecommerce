@@ -32,7 +32,7 @@ class RolesTableSeeder extends Seeder
             'status' => 1,
             'email_verified_at' => Carbon::now(),
             'bio' => 'Administrator',
-            'password' => bcrypt('A1ijumaan-admin'),
+            'password' => 'admin',
 
         ]);
 
@@ -45,7 +45,7 @@ class RolesTableSeeder extends Seeder
             'status' => 1,
             'email_verified_at' => Carbon::now(),
             'bio' => 'Supervisor',
-            'password' => bcrypt('A1ijumaan-admin'),
+            'password' => 'admin',
         ]);
 
 
@@ -58,7 +58,7 @@ class RolesTableSeeder extends Seeder
             'status' => 1,
             'email_verified_at' => Carbon::now(),
             'bio' => 'User',
-            'password' => bcrypt('alijumaan'),
+            'password' => 'ali',
         ]);
 
     }
