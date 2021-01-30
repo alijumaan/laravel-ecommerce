@@ -51,14 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     // If You Use This Method To Set Password Hashed, Don't Use Hash Or Bcrypt Method Controller Or Seeder
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = Hash::make($password);
-    }
-
 //    public function setPasswordAttribute($password)
 //    {
-//        $this->attributes['password'] = bcrypt($password);
+//        $this->attributes['password'] = Hash::make($password);
 //    }
 
     public function orders()
