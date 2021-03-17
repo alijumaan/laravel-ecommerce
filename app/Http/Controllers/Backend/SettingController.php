@@ -10,11 +10,6 @@ use Spatie\Valuestore\Valuestore;
 class SettingController extends Controller
 {
 
-    public function __construct()
-    {
-        //
-    }
-
     public function index()
     {
         $section = (isset(\request()->section) && \request()->section != '') ? \request()->section : 'general';

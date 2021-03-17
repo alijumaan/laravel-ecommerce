@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\ProductMedia;
-use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class ProductMediaTableSeeder extends Seeder

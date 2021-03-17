@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
-use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -19,11 +17,11 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $adminRole = DB::table('roles')->insert(['id' => 1, 'role' => 'Admin']);
-        $supervisorRole = DB::table('roles')->insert(['id' => 2, 'role' => 'Supervisor']);
-        $userRole = DB::table('roles')->insert(['id' => 3, 'role' => 'User']);
+        DB::table('roles')->insert(['id' => 1, 'role' => 'Admin']);
+        DB::table('roles')->insert(['id' => 2, 'role' => 'Supervisor']);
+        DB::table('roles')->insert(['id' => 3, 'role' => 'User']);
 
-        $admin = User::create([
+        User::create([
             'name' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@admin.com',
@@ -32,11 +30,11 @@ class RolesTableSeeder extends Seeder
             'status' => 1,
             'email_verified_at' => Carbon::now(),
             'bio' => 'Administrator',
-            'password' => 'admin',
+            'password' => bcrypt('password'),
 
         ]);
 
-        $supervisor = User::create([
+        User::create([
             'name' => 'Supervisor',
             'username' => 'supervisor',
             'email' => 'supervisor@supervisor.com',
@@ -45,11 +43,10 @@ class RolesTableSeeder extends Seeder
             'status' => 1,
             'email_verified_at' => Carbon::now(),
             'bio' => 'Supervisor',
-            'password' => 'admin',
+            'password' => bcrypt('password'),
         ]);
 
-
-        $user = User::create([
+        User::create([
             'name' => 'Ali',
             'username' => 'ali',
             'email' => 'ali@ali.com',
@@ -58,7 +55,7 @@ class RolesTableSeeder extends Seeder
             'status' => 1,
             'email_verified_at' => Carbon::now(),
             'bio' => 'User',
-            'password' => 'ali',
+            'password' => bcrypt('password'),
         ]);
 
     }

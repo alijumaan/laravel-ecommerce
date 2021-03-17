@@ -51,8 +51,6 @@ class PermissionTableSeeder extends Seeder
         DB::table('permissions')->insert(['name' => 'show-message', 'desc' => 'Show message']);
         DB::table('permissions')->insert(['name' => 'delete-message', 'desc' => 'Delete message']);
 
-
     }
-
 }
 

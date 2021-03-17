@@ -37,12 +37,14 @@ class TagController extends Controller
         $tag->name = $request->name;
         $tag->save();
         clear_cache();
+
         return redirect()->route('admin.tags.index')->with(['message' => 'Tag create successfully', 'alert-type' => 'success']);
     }
 
     public function edit(Tag $tag)
     {
         abort_if(!auth()->user()->can('edit-tag'), 403, 'You did not have permission to access this page!');
+
         return view('backend.tags.edit', compact('tag'));
     }
 
@@ -51,6 +53,7 @@ class TagController extends Controller
         $tag->name = $request->name;
         $tag->save();
         clear_cache();
+
         return redirect()->route('admin.tags.index')->with(['message' => 'Tag updated successfully', 'alert-type' => 'success']);
     }
 
@@ -59,6 +62,7 @@ class TagController extends Controller
         abort_if(!auth()->user()->can('delete-tag'), 403, 'You did not have permission to access this page!');
         $tag->delete();
         clear_cache();
+
         return redirect()->route('admin.tags.index')->with(['message' => 'Tag deleted successfully', 'alert-type' => 'success']);
     }
 }

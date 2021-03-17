@@ -50,7 +50,7 @@ class CartController extends Controller
             return back()->with(['message' => 'Sorry! Coupon does not exist', 'alert-type' => 'danger']);
         }
 
-        //coupon logic
+        // Coupon logic
         $condition = new \Darryldecode\Cart\CartCondition(array(
             'name' => $couponData->name,
             'type' => $couponData->type,

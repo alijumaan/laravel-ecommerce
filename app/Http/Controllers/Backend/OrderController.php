@@ -26,25 +26,19 @@ class OrderController extends Controller
 
     public function confirm($id)
     {
-        // Find the order
         $order = $this->order::find($id);
 
-        // Update the order
         $order->update(['status' => 1]);
 
-        //Redirect the page
         return redirect()->back()->with(['message' => 'Order has been again into confirm', 'alert-type' => 'success']);
     }
 
     public function pending($id)
     {
-        // Find the order
         $order = $this->order::find($id);
 
-        // Update the order
         $order->update(['status' => 0]);
 
-        //Redirect the page
         return redirect()->back()->with(['message' => 'Order has been pending', 'alert-type' => 'warning']);
 
     }

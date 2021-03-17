@@ -8,7 +8,6 @@ use App\Models\Review;
 use App\Repositories\Backend\ReviewRepository;
 use App\Traits\FilterTrait;
 
-
 class ReviewController extends Controller
 {
     use FilterTrait;

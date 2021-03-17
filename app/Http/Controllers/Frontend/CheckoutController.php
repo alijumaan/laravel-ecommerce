@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -41,7 +40,6 @@ class CheckoutController extends Controller
                 'quantity' => $item->quantity,
                 'price' => $item->price
             ]);
-
 
             // payment
             if ($request['payment_method'] == 'paypal') {

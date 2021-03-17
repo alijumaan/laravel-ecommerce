@@ -6,7 +6,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -49,12 +48,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'users.bio'         => 10,
         ],
     ];
-
-    // If You Use This Method To Set Password Hashed, Don't Use Hash Or Bcrypt Method Controller Or Seeder
-//    public function setPasswordAttribute($password)
-//    {
-//        $this->attributes['password'] = Hash::make($password);
-//    }
 
     public function orders()
     {

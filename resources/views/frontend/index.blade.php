@@ -101,8 +101,6 @@
     </div>
     <!-- product area end -->
 
-
-
     <!-- banner area start -->
     <div class="fruits-choose-area pb-65 bg-img" style="background-image: url(frontend/img/banner/53.png)">
         <div class="container">
@@ -119,7 +117,7 @@
                                 </div>
                                 <div class="fruits-choose-content">
                                     <h4>Free Shipping.</h4>
-{{--                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>--}}
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                 </div>
                             </div>
                             <div class="single-fruits-choose">
@@ -128,7 +126,7 @@
                                 </div>
                                 <div class="fruits-choose-content">
                                     <h4>100% ORIGINAL PRODUCTS.</h4>
-{{--                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>--}}
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                 </div>
                             </div>
                             <div class="single-fruits-choose">
@@ -137,7 +135,7 @@
                                 </div>
                                 <div class="fruits-choose-content">
                                     <h4>Online Support.</h4>
-{{--                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>--}}
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                 </div>
                             </div>
                         </div>

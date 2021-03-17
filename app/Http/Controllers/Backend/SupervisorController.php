@@ -49,7 +49,6 @@ class SupervisorController extends Controller
         abort_if(!auth()->user()->can('edit-user'), 403, 'You did not have permission to access this page!');
 
         return view('backend.supervisors.edit', compact('supervisor'));
-
     }
 
     public function update(Request $request, User $supervisor)
@@ -57,8 +56,6 @@ class SupervisorController extends Controller
         $this->supervisor->update($request, $supervisor);
 
         return redirect()->route('admin.supervisors.index')->with(['message' => 'Supervisor updated successfully', 'alert-type' => 'success']);
-
-
     }
 
     public function destroy(User $supervisor)

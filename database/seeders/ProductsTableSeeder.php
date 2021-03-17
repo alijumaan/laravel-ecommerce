@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\Tag;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
@@ -33,12 +32,6 @@ class ProductsTableSeeder extends Seeder
                     'category_id'   => $category->id,
                 ]);
 
-                /*I Did It In ProductsTagsTableSeeder
-                 *
-                $tags = Tag::inRandomOrder()->take(3)->pluck('id')->toArray();
-                $product->tags()->attach($tags);
-                *
-                */
             }
         }
     }

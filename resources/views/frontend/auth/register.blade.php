@@ -44,7 +44,7 @@
 
                                 <div class="mb-2">
                                     {!! Form::label('mobile', 'Mobile') !!}
-                                    {!! Form::text('mobile', old('mobile'), ['placeholder' => 'Your mobile']) !!}
+                                    {!! Form::number('mobile', old('mobile'), ['placeholder' => 'Your mobile']) !!}
                                     @error('mobile')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
 

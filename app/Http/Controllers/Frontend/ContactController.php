@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreContactRequest;
 use App\Models\Contact;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {

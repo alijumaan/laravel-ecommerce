@@ -15,14 +15,14 @@ class FavoriteSeeder extends Seeder
      */
     public function run()
     {
-//        for ($i=0; $i<10; $i++)
-//        {
-//            DB::table('favorites')->insert([
-//                'user_id' => rand(1, 3),
-//                'product_id' => rand(1, 20),
-//                'created_at' => Carbon::now(),
-//                'updated_at' => Carbon::now(),
-//            ]);
-//        }
+        for ($i=0; $i<10; $i++)
+        {
+            DB::table('favorites')->insert([
+                'user_id' => rand(1, 3),
+                'product_id' => rand(1, 20),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
     }
 }
