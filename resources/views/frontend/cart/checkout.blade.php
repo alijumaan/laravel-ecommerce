@@ -99,25 +99,25 @@
                                     {!! Form::radio('payment_method', 'card', ['class' => 'form-check-input']) !!}
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="checkout-form-list create-acc">
-                                    {!! Form::label('payment_method', 'PayPal', ['class' => 'form-check-input', 'for' => 'paypal']) !!}
-                                    {!! Form::radio('payment_method', 'paypal', ['class' => 'form-check-input']) !!}
-                                </div>
-                            </div>
-
-
 {{--                            <div class="col-md-12">--}}
 {{--                                <div class="checkout-form-list create-acc">--}}
-{{--                                    <input id="cbox" type="checkbox" />--}}
-{{--                                    <label>Create an account?</label>--}}
-{{--                                </div>--}}
-{{--                                <div id="cbox_info" class="checkout-form-list create-account">--}}
-{{--                                    <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>--}}
-{{--                                    <label>Account password  <span class="required">*</span></label>--}}
-{{--                                    <input type="password" placeholder="password" />--}}
+{{--                                    {!! Form::label('payment_method', 'PayPal', ['class' => 'form-check-input', 'for' => 'paypal']) !!}--}}
+{{--                                    {!! Form::radio('payment_method', 'paypal', ['class' => 'form-check-input']) !!}--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
+
+
+                            <div class="col-md-12">
+                                <div class="checkout-form-list create-acc">
+                                    <input id="cbox" type="checkbox" />
+                                    <label>Create an account?</label>
+                                </div>
+                                <div id="cbox_info" class="checkout-form-list create-account">
+                                    <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
+                                    <label>Account password  <span class="required">*</span></label>
+                                    <input type="password" placeholder="password" />
+                                </div>
+                            </div>
                         </div>
 
                         <div class="different-address">

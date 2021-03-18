@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">--}}
+    {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">--}}
 
     <style>
         .score {
@@ -35,11 +35,13 @@
             position: relative;
             overflow: hidden;
         }
+
         .score-wrap {
             display: inline-block;
             position: relative;
             height: 19px;
         }
+
         .score .stars-active {
             color: #FFCA00;
             position: relative;
@@ -48,18 +50,21 @@
             overflow: hidden;
             white-space: nowrap;
         }
+
         .score .stars-inactive {
             color: lightgrey;
             position: absolute;
             top: 0;
             left: 0;
         }
+
         .rating {
             overflow: hidden;
             display: inline-block;
             position: relative;
             font-size: 20px;
         }
+
         .rating-star {
             padding: 0 5px;
             margin: 0;
@@ -67,21 +72,25 @@
             display: block;
             float: right;
         }
+
         .rating-star:after {
             position: relative;
             font-family: "Font Awesome 5 Free";
             content: '\f005';
             color: lightgrey;
         }
+
         .rating-star.checked ~ .rating-star:after,
         .rating-star.checked:after {
             content: '\f005';
             color: #FFCA00;
         }
+
         .rating:hover .rating-star:after {
             content: '\f005';
             color: lightgrey;
         }
+
         .rating-star:hover ~ .rating-star:after,
         .rating .rating-star:hover:after {
             content: '\f005';
@@ -97,15 +106,15 @@
 
 <body>
 
-    @include('frontend.layouts.header')
+@include('frontend.layouts.header')
 
-    <div class="text-center">
-        @include('messages.flash')
-    </div>
+<div class="text-center">
+    @include('messages.flash')
+</div>
 
-    @yield('content')
+@yield('content')
 
-    @include('frontend.layouts.footer')
+@include('frontend.layouts.footer')
 
 <!-- all js here -->
 <script src="{{ asset('js/app.js') }}"></script>

@@ -1,7 +1,7 @@
-# cartwhite
+# Laravel E-commerce 
 
 ## installation :
-
+after install the source code open Terminal to use these command line:
 - composer install
 - cp .env.example .env 
 - create new database
@@ -20,8 +20,11 @@
 - sudo chmod -R 777 settings.json
 - sudo chmod -R 777 storage/app/public/images/
 
+## Try
+- <a href='https://cartwhite.tk'>https://cartwhite.tk</a>
 
+## My site
+<a href='https://alijumaan.com'>https://alijumaan.com</a>
 
-<a href='https://alijumaan.com'>visit my simple site</a>
-### enjoy...
+* enjoy...
 
