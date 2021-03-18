@@ -12,7 +12,7 @@
 - npm run dev
 - php artisan serve
 
-## Permissions FOLDER ( Linux | Mac)
+## Permission folder ( Linux | Mac)
 - sudo chmod -R 777 storage/app/public/images/
 - sudo chmod -R 777 settings.json
 
