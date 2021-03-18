@@ -24,25 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/ReviewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/ReviewController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/SettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/SettingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/SupervisorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/SupervisorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/TagController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/TagController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/CartController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/CheckoutController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/ContactController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/ContactController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/FavoriteSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/FavoriteSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/PermissionTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/PermissionTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/ProductMediaTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/ProductMediaTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/ProductsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/ProductsTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/RolesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/RolesTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/images/default.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/users/_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/users/_sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +170,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/app/public/images" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -644,6 +627,9 @@
       <workItem from="1611948211784" duration="2251000" />
       <workItem from="1614951152068" duration="1373000" />
       <workItem from="1615969008008" duration="3643000" />
+      <workItem from="1615985591431" duration="566000" />
+      <workItem from="1615986578431" duration="484000" />
+      <workItem from="1616054039834" duration="1057000" />
     </task>
     <servers />
   </component>
