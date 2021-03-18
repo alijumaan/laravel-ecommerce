@@ -12,11 +12,14 @@
 - npm run dev
 - php artisan serve
 - mkdir storage/app/public/images
+- mkdir storage/app/public/images/products
+- mkdir storage/app/public/images/covers
 - add your default image (should be the name is 'default.png' or custom the default name from ProductMedia migration table)
 
 ## Permission folder ( Linux | Mac)
 - sudo chmod -R 777 settings.json
 - sudo chmod -R 777 storage/app/public/images/
+
 
 
 <a href='https://alijumaan.com'>visit my simple site</a>
