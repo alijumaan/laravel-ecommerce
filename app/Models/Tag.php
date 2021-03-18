@@ -26,15 +26,10 @@ class Tag extends Model
 
     protected $searchable = [
         'columns' => [
-            'tags.name'        => 10,
-            'tags.slug'        => 10,
+            'tags.name' => 10,
+            'tags.slug' => 10,
         ],
     ];
-
-//    public function products()
-//    {
-//        return $this->belongsToMany(Product::class);
-//    }
 
     public function products()
     {

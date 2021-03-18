@@ -24,6 +24,7 @@ class CategoryRepository
     {
         $this->category->create($request->validated());
         if ($request->status == 1)
+
             clear_cache();
     }
 
@@ -41,8 +42,8 @@ class CategoryRepository
         $category->status       = $request->status;
         $category->description  = $request->description;
         $category->save();
-        clear_cache();
 
+        clear_cache();
     }
 
     public function delete($category)
@@ -57,6 +58,7 @@ class CategoryRepository
             }
         }
         $category->delete();
+
         clear_cache();
     }
 }

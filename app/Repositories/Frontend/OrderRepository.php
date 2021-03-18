@@ -43,7 +43,6 @@ class OrderRepository
         $info = json_decode($response->getBody(), true);
 
         return $info['transaction']['url'];
-
     }
 
     public function validateRequest($id)

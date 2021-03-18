@@ -39,7 +39,6 @@ class Product extends Model
         return $query->where('in_stock', '>=', 1);
     }
 
-
     public function category()
     {
         return $this->belongsTo(Category::class);

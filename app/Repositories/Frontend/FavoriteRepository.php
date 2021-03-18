@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoriteRepository
 {
-
     protected $favorite;
 
     public function __construct(Favorite $favorite)
@@ -17,7 +16,7 @@ class FavoriteRepository
 
     public function all()
     {
-        return Auth::user()->favProduct;
+        return auth()->user()->favProduct;
     }
 
     public function store($request)
@@ -27,7 +26,7 @@ class FavoriteRepository
 
     public function show($id)
     {
-        if (Auth::check())
+        if (auth()->check())
         {
             $favorite = Auth::user()->favProduct()->whereProduct_id($id)->first();
 
@@ -37,7 +36,7 @@ class FavoriteRepository
 
     public function delete($id)
     {
-        Auth::user()->favProduct()->detach($id);
+        auth()->user()->favProduct()->detach($id);
     }
 
 

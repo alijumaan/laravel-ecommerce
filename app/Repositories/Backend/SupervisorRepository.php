@@ -4,13 +4,11 @@ namespace App\Repositories\Backend;
 
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\RemoveImageTrait;
 
 class SupervisorRepository
 {
-
     use RemoveImageTrait;
 
     public $supervisor;
@@ -62,7 +60,6 @@ class SupervisorRepository
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-
         $data['name']                   = $request->name;
         $data['username']               = $request->username;
         $data['email']                  = $request->email;
@@ -94,5 +91,4 @@ class SupervisorRepository
 
         $this->removeAvatar($request, $supervisor);
     }
-
 }

@@ -132,8 +132,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin()
     {
-        return $this->role->id <= 2;
 //        return null !== $this->role()->where('role', $role)->first();
+        return $this->role->id <= 2;
     }
 
     public function roleId()

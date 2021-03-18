@@ -2,7 +2,6 @@
 
 namespace App\Repositories\Frontend;
 
-
 use App\Models\Category;
 use App\Models\Product;
 
@@ -47,8 +46,5 @@ class HomeRepository
             ->whereYear('created_at', $year)
             ->orderBy('id', 'desc')
             ->paginate(5);
-
     }
-
-
 }

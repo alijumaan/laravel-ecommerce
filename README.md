@@ -12,6 +12,10 @@
 - npm run dev
 - php artisan serve
 
-<a href='https://alijumaan.com'>My Site</a>
+## Permissions FOLDER ( Linux | Mac)
+- sudo chmod -R 777 storage/app/public/images/
+- sudo chmod -R 777 settings.json
+
+<a href='https://alijumaan.com'>Visit My Simple Site</a>
 ### enjoy...
 

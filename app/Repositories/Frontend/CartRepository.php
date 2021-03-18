@@ -7,7 +7,6 @@ use Darryldecode\Cart\Exceptions\InvalidConditionException;
 
 class CartRepository
 {
-
     public function aadToCart($product)
     {
         try {
@@ -15,14 +14,15 @@ class CartRepository
                 'name' => 'VAT 5%',
                 'type' => 'tax',
                 'target' => 'total', // this condition will be applied to cart's subtotal when getSubTotal() is called.
-                'value' => '5%',
 //                'value' => '0%',
+                'value' => '5%',
                 'attributes' => array( // attributes field is optional
                     'description' => 'Value added tax',
                 )
             ));
 
             \Cart::condition($condition);
+
             \Cart::session(auth()->id())->condition($condition);
 
 
@@ -37,7 +37,5 @@ class CartRepository
             'attributes' => array(),
             'associatedModel' => $product
         ));
-
     }
-
 }

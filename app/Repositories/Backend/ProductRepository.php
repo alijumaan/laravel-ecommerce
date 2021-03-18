@@ -17,7 +17,6 @@ class ProductRepository
     public $category;
     public $tag;
 
-
     public function __construct(Product $product, Category $category, Tag $tag)
     {
         $this->product = $product;
@@ -49,12 +48,12 @@ class ProductRepository
             }
         }
         if ($request->status == 1)
+
             clear_cache();
     }
 
     public function update($request, $product)
     {
-
         $product->name         = $request->name;
         $product->slug         = null;
         $product->description  = $request->description;
@@ -83,7 +82,6 @@ class ProductRepository
                 $i++;
             }
         }
-
     }
 
     public function delete(Product $product)
@@ -97,7 +95,6 @@ class ProductRepository
                 }
             }
         }
-
         $product->delete();
 
         clear_cache();
@@ -105,13 +102,10 @@ class ProductRepository
 
     public function removeImage($request)
     {
-
         $media = ProductMedia::whereId($request->mediaId)->first();
 
         if ($media) {
-
             if (File::exists('storage/' . $media->file_name)) {
-
                 unlink('storage/' . $media->file_name);
             }
 
@@ -119,7 +113,6 @@ class ProductRepository
 
             return true;
         }
-
         return false;
     }
 }

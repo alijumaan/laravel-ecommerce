@@ -2,7 +2,6 @@
 
 namespace App\Repositories\Frontend;
 
-
 use App\Models\Product;
 use App\Models\Rating;
 use App\Models\Tag;
