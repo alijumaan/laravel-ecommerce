@@ -8,6 +8,7 @@ use App\Models\Order;
 class OrderController extends Controller
 {
     public $order;
+
     public function __construct(Order $order)
     {
         $this->order = $order;

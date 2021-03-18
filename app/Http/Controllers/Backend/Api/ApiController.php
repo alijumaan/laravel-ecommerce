@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
-
     public function orders_chart()
     {
         $orders = Order::select(DB::raw('COUNT(*) as count'), DB::raw('Month(created_at) as month'))
@@ -29,7 +28,6 @@ class ApiController extends Controller
 
     }
 
-
     public function products_chart()
     {
         $products = Product::withCount('orders')
@@ -42,7 +40,5 @@ class ApiController extends Controller
         $chart['datasets']['values'] = $products->values()->toArray();
 
         return response()->json($chart);
-
     }
-
 }

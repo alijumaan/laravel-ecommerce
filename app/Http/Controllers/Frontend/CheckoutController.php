@@ -54,6 +54,5 @@ class CheckoutController extends Controller
         }
 
         return redirect()->route('home')->with('msg', 'Order has been placed successfully');
-
     }
 }

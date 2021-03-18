@@ -23,7 +23,7 @@ class CategoryController extends Controller
     {
         $query = Category::withCount('products');
         $categories = $this->filter($query);
-        return view('backend.categories.index', compact(  'categories'));
+        return view('backend.categories.index', compact('categories'));
     }
 
     public function create()
@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
     public function update(StoreCategoryRequest $request, Category $category)
     {
-        if($category) {
+        if ($category) {
 
             $this->category->update($request, $category);
 

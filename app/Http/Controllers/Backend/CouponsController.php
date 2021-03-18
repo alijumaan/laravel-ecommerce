@@ -21,7 +21,7 @@ class CouponsController extends Controller
     {
         $coupons = $this->coupon->index();
 
-        return view('backend.coupons.index', compact( 'coupons'));
+        return view('backend.coupons.index', compact('coupons'));
     }
 
     public function create()

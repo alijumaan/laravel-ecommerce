@@ -4,7 +4,8 @@ namespace App\Helper;
 
 class MySlugHelper
 {
-    public static function slug($string, $separator = '-') {
+    public static function slug($string, $separator = '-')
+    {
         $_transliteration = [
             '/ä|æ|ǽ/' => 'ae',
             '/ö|œ/' => 'oe',

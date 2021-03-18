@@ -3,14 +3,14 @@
 use Illuminate\Support\Facades\Cache;
 use Spatie\Valuestore\Valuestore;
 
-function get_gravatar( $email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array() )
+function get_gravatar($email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array())
 {
     $url = 'https://www.gravatar.com/avatar/';
-    $url .= md5( strtolower( trim( $email ) ) );
+    $url .= md5(strtolower(trim($email)));
     $url .= "?s=$s&d=$d&r=$r";
-    if ( $img ) {
+    if ($img) {
         $url = '<img src="' . $url . '"';
-        foreach ( $atts as $key => $val )
+        foreach ($atts as $key => $val)
             $url .= ' ' . $key . '="' . $val . '"';
         $url .= ' />';
     }
@@ -26,7 +26,8 @@ function clear_cache()
     Cache::forget('global_tags');
 }
 
-function getSettingsOf($key) {
+function getSettingsOf($key)
+{
     $settings = Valuestore::make(config_path('settings.json'));
     return $settings->get($key);
 }

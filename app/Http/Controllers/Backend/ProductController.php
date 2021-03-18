@@ -13,7 +13,6 @@ use App\Traits\FilterTrait;
 
 class ProductController extends Controller
 {
-
     use FilterTrait;
 
     public $product;
@@ -35,7 +34,7 @@ class ProductController extends Controller
 
         $products = $this->filter($query);
 
-        return view('backend.products.index', compact( 'products'));
+        return view('backend.products.index', compact('products'));
     }
 
     public function show(Product $product)

@@ -5,13 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
-use App\Models\ProductMedia;
 use App\Repositories\Frontend\CartRepository;
-
 
 class CartController extends Controller
 {
-
     public $cartRepository;
     public function __construct(CartRepository $cartRepository)
     {
@@ -61,7 +58,5 @@ class CartController extends Controller
         \Cart::session(auth()->id())->condition($condition); // for a speicifc user's cart
 
         return back()->with(['message' => 'coupon applied', 'alert-type' => 'success']);
-
     }
-
 }

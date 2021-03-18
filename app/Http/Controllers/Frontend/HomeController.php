@@ -30,8 +30,7 @@ class HomeController extends Controller
 
     public function search()
     {
-        $query = $this->product::where('in_stock', '>=', 1)->with(['category', 'media', 'tags'])->whereHas('category', function ($query)
-        {
+        $query = $this->product::where('in_stock', '>=', 1)->with(['category', 'media', 'tags'])->whereHas('category', function ($query) {
             $query->whereStatus(1);
         });
 

@@ -36,14 +36,14 @@ class OrderController extends Controller
             $order['shipping_address'] = $request->input('shipping_address');
             $order['shipping_phone'] = $request->input('shipping_phone');
 
-            if(!$request->has('billing_order')) {
+            if (!$request->has('billing_order')) {
                 $order['billing_first_name'] = $request->input('shipping_first_name');
                 $order['billing_last_name'] = $request->input('shipping_last_name');
                 $order['billing_state'] = $request->input('shipping_state');
                 $order['billing_city'] = $request->input('shipping_city');
                 $order['billing_address'] = $request->input('shipping_address');
                 $order['billing_phone'] = $request->input('shipping_phone');
-            }else {
+            } else {
                 $order['billing_first_name'] = $request->input('billing_first_name');
                 $order['billing_last_name'] = $request->input('billing_last_name');
                 $order['billing_state'] = $request->input('billing_state');
@@ -54,7 +54,7 @@ class OrderController extends Controller
 
 
             $order['grand_total'] = \Cart::session(auth()->id())->getTotal();
-            $order['item_count']= \Cart::session(auth()->id())->getContent()->count();
+            $order['item_count'] = \Cart::session(auth()->id())->getContent()->count();
 
             $userId = auth()->id();
             $order['user_id'] = $userId;
@@ -73,12 +73,12 @@ class OrderController extends Controller
             //save order items
             $cartItems = \Cart::session(auth()->id())->getContent();
 
-            foreach($cartItems as $item) {
-                $order->items()->attach($item->id, ['price'=> $item->price, 'quantity'=> $item->quantity, 'user_id' => $userId]);
+            foreach ($cartItems as $item) {
+                $order->items()->attach($item->id, ['price' => $item->price, 'quantity' => $item->quantity, 'user_id' => $userId]);
             }
 
             //payment
-            if(request('payment_method') == 'card') {
+            if (request('payment_method') == 'card') {
                 //redirect to card
                 return redirect()->route('checkout.charge_request', $order->id);
 
@@ -100,7 +100,6 @@ class OrderController extends Controller
             'message' => 'Something was wrong, please try again',
             'alert-type' => 'danger'
         ]);
-
     }
 
     public function chargeRequest()
@@ -108,7 +107,7 @@ class OrderController extends Controller
         $user = auth()->user();
         $total = \Cart::session(auth()->id())->getTotal();
 
-        return redirect($this->orderRepository->getChargeRequest($total, $user->name,$user->email, $user->phone));
+        return redirect($this->orderRepository->getChargeRequest($total, $user->name, $user->email, $user->phone));
     }
 
     public function chargeUpdate()

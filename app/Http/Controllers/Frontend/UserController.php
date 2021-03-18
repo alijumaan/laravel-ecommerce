@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateInfoRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Models\Review;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Traits\ImageUploadTrait;
 
 class UserController extends Controller
 {
-
     use ImageUploadTrait;
 
     public function __construct()
@@ -27,16 +26,10 @@ class UserController extends Controller
         return view('frontend.users.index', compact('orders'));
     }
 
-    public function show($id)
-    {
-//        $order = Order::find($id);
-//        return view('frontend.users.details', compact('order'));
-    }
-
     public function show_reviews()
     {
         $reviews = Review::with('user')
-            ->whereUserId(auth()->user()->id)
+            ->whereUserId(auth()->id())
             ->whereStatus(1)
             ->paginate(5);
 
@@ -48,21 +41,8 @@ class UserController extends Controller
         return view('frontend.users.edit');
     }
 
-    public function update_info(Request $request)
+    public function update_info(UpdateInfoRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'mobile' => 'nullable|numeric',
-            'bio' => 'nullable',
-            'receive_email' => 'required',
-            'avatar' => 'nullable|image|max:20000|mimes:jpeg,jpg,png'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
         $data['name'] = $request->name;
         $data['email'] = $request->email;
         $data['mobile'] = $request->mobile;
@@ -81,23 +61,13 @@ class UserController extends Controller
 
         if ($update) {
             return redirect()->back()->with(['message' => 'Information updated successfully', 'alert-type' => 'success',]);
-        }else {
+        } else {
             return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger',]);
         }
-
     }
 
-    public function update_password(Request $request)
+    public function update_password(UpdatePasswordRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'current_password' => 'required',
-            'password' => 'required|confirmed',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
         $user = auth()->user();
         if (Hash::check($request->current_password, $user->password)) {
             $update = $user->update([
@@ -107,13 +77,11 @@ class UserController extends Controller
             if ($update) {
                 auth()->logout();
                 return redirect()->route('frontend.login.form')->with(['message' => 'Password updated successfully', 'alert-type' => 'success',]);
-            }else {
+            } else {
                 return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger',]);
             }
-        }else {
+        } else {
             return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger',]);
         }
-
-
     }
 }

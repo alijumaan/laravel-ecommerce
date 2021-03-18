@@ -8,11 +8,8 @@ use App\Models\User;
 use App\Repositories\Backend\UserRepository;
 use Illuminate\Http\Request;
 
-
 class UserController extends Controller
 {
-
-
     public $user;
 
     public function __construct(UserRepository $user)
@@ -24,7 +21,7 @@ class UserController extends Controller
     {
         $users = $this->user->index();
 
-        return view('backend.users.index', compact(  'users'));
+        return view('backend.users.index', compact('users'));
     }
 
     public function create()
@@ -71,6 +68,4 @@ class UserController extends Controller
     {
         $this->user->removeImage($request, $user);
     }
-
-
 }

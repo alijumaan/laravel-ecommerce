@@ -8,7 +8,7 @@
                 <h2>My reviews</h2>
                 <ul>
                     <li><a href="{{route('home')}}">home</a></li>
-                    <li> My profile </li>
+                    <li> My profile</li>
                 </ul>
             </div>
         </div>
@@ -29,15 +29,15 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <tr>
+                        @forelse($reviews as $review)
                             <tr>
-                                @forelse($reviews as $review)
-                                    <tr>
-                                        <td>{{ $review->product->name }}</td>
-                                        <td>{{ $review->$review }}</td>
-                                    </tr>
-                                @empty
-                                    <td>No review found.</td>
-                                @endforelse
+                                <td>{{ $review->product->name }}</td>
+                                <td>{{ $review->$review }}</td>
+                            </tr>
+                        @empty
+                            <td>No review found.</td>
+                            @endforelse
                             </tr>
                         </tbody>
                         <tfoot>

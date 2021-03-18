@@ -22,7 +22,7 @@ class ContactController extends Controller
     {
         $query = $this->contact::query();
         $messages = $this->filter($query);
-        return view('backend.contacts.index', compact(  'messages'));
+        return view('backend.contacts.index', compact('messages'));
     }
 
     public function show(Contact $contact)

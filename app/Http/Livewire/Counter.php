@@ -6,10 +6,8 @@ use Livewire\Component;
 
 class Counter extends Component
 {
-
     public $cartItems = [];
     protected $listeners = ['cartUpdated' => 'onCartUpdate'];
-
 
     public function mount()
     {

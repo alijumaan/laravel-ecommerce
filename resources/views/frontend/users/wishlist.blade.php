@@ -8,7 +8,7 @@
                 <h2>My Favorite</h2>
                 <ul>
                     <li><a href="{{route('home')}}">home</a></li>
-                    <li> My Favorite </li>
+                    <li> My Favorite</li>
                 </ul>
             </div>
         </div>
@@ -36,12 +36,15 @@
                                 @forelse($userFav as $product)
                                     <tr>
                                         <td class="product-name"><a href="#">{{ $product->name }}</a></td>
-                                        <td class="product-price-cart"><span class="amount">${{ $product->price }}</span></td>
+                                        <td class="product-price-cart"><span
+                                                class="amount">${{ $product->price }}</span></td>
                                         <td>
-                                            <a  class="btn-sm btn-success" href="{{ route('frontend.products.show', $product->slug) }}" role="button" ><i class="glyphicon glyphicon-remove-sign"></i>Show</a>
+                                            <a class="btn-sm btn-success"
+                                               href="{{ route('frontend.products.show', $product->slug) }}"
+                                               role="button"><i class="glyphicon glyphicon-remove-sign"></i>Show</a>
                                         </td>
                                     </tr>
-                                    @empty
+                                @empty
                                     <td colspan="4" class="text-center">No favorites found.</td>
                                 @endforelse
                                 </tbody>

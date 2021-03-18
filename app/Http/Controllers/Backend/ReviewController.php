@@ -27,7 +27,7 @@ class ReviewController extends Controller
 
         $reviews = $this->filter($query);
 
-        return view('backend.reviews.index', compact( 'reviews'));
+        return view('backend.reviews.index', compact('reviews'));
     }
 
     public function edit(Review $review)

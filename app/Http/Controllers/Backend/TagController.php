@@ -23,7 +23,7 @@ class TagController extends Controller
         $query = $this->tag::withCount('products');
         $tags = $this->filter($query);
 
-        return view('backend.tags.index', compact( 'tags'));
+        return view('backend.tags.index', compact('tags'));
     }
 
     public function create()

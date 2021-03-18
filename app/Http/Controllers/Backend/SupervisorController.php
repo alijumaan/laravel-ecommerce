@@ -22,7 +22,7 @@ class SupervisorController extends Controller
     {
         $supervisors = $this->supervisor->index();
 
-        return view('backend.supervisors.index', compact(  'supervisors'));
+        return view('backend.supervisors.index', compact('supervisors'));
     }
 
     public function create()
