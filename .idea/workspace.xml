@@ -22,25 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/OrderCompleted.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/OrderCompleted.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Permission.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Permission.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Review.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Role.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Tag.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Tag.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/ViewServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/ViewServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Backend/CategoryRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Backend/CategoryRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Backend/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Backend/ProductRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Backend/SupervisorRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Backend/SupervisorRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Frontend/CartRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Frontend/CartRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Frontend/FavoriteRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Frontend/FavoriteRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Frontend/HomeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Frontend/HomeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Frontend/OrderRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Frontend/OrderRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Frontend/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Frontend/ProductRepository.php" afterDir="false" />
-    </list>
+    <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -643,7 +625,7 @@
       <workItem from="1615969008008" duration="3643000" />
       <workItem from="1615985591431" duration="566000" />
       <workItem from="1615986578431" duration="484000" />
-      <workItem from="1616054039834" duration="4292000" />
+      <workItem from="1616054039834" duration="5182000" />
     </task>
     <servers />
   </component>

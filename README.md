@@ -11,11 +11,14 @@
 - npm install
 - npm run dev
 - php artisan serve
+- mkdir storage/app/public/images
+- add your default image (should be the name is 'default.png' or custom the default name from ProductMedia migration table)
 
 ## Permission folder ( Linux | Mac)
-- sudo chmod -R 777 storage/app/public/images/
 - sudo chmod -R 777 settings.json
+- sudo chmod -R 777 storage/app/public/images/
 
-<a href='https://alijumaan.com'>Visit My Simple Site</a>
+
+<a href='https://alijumaan.com'>visit my simple site</a>
 ### enjoy...
 
