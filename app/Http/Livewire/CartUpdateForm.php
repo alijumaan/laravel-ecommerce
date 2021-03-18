@@ -27,7 +27,7 @@ class CartUpdateForm extends Component
 
         $qty = $this->emit('cartUpdated');
 
-        if ($qty < 1) {
+        if ($qty < '1') {
             return;
         }
     }

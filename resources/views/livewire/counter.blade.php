@@ -24,7 +24,7 @@
                                         <a href="#"><img style="width: 50px;"
                                                          src="{{ asset('storage/images/default.png') }}" alt=""></a>
                                     </td>
-                                    <td class="product-name"><a href="#">{{$item['name']}} </a></td>
+                                    <td class="product-name"><a href="#">{{ $item['name'] }} </a></td>
                                     <td class="product-price-cart"><span class="amount">
                                                 ${{ Cart::session(auth()->id())->get($item['id'])->getPriceSum() }}
                                             </span></td>
