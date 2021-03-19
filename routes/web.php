@@ -67,9 +67,7 @@ Route::get('/destroy/{product}', [CartController::class, 'destroy'])->name('cart
 
 /***** CHECKOUT *****/
 Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-
-/***** ORDER STORE *****/
-Route::post('/cart/checkout', [OrderController::class, 'store'])->name('checkout.store');
+Route::post('/cart/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 /*****  TAP GATEWAY****/
 Route::get('/cart/charge-request', [OrderController::class, 'chargeRequest'])->name('checkout.charge_request');
