@@ -10,7 +10,6 @@ use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\ProductController;
-use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SupervisorController;
 use App\Http\Controllers\Backend\TagController;
@@ -22,7 +21,6 @@ use Illuminate\Support\Facades\URL;
 if (App::environment('production')) {
     URL::forceScheme('https');
 }
-
 
 Route::group(['middleware' => 'admin'], function () {
 

@@ -21,8 +21,6 @@ if (App::environment('production')) {
     URL::forceScheme('https');
 }
 
-
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'verified'], function () {
@@ -32,9 +30,9 @@ Route::group(['middleware' => 'verified'], function () {
     Route::post('/edit-password', [UserController::class, 'update_password'])->name('users.update_password');
 
     /***** FAVORITE *****/
-    Route::post('/products/{id}/favorite',    [FavoriteController::class, 'store']);
-    Route::post('/products/{id}/unFavorite',  [FavoriteController::class, 'destroy']);
-    Route::get('/user-fav',                   [FavoriteController::class, 'index'])->name('userFav');
+    Route::post('/products/{id}/favorite', [FavoriteController::class, 'store']);
+    Route::post('/products/{id}/unFavorite', [FavoriteController::class, 'destroy']);
+    Route::get('/user-fav', [FavoriteController::class, 'index'])->name('userFav');
 
     /***** USERS REVIEWS *****/
     Route::get('/reviews', [UserController::class, 'show_reviews'])->name('users.reviews');
@@ -74,21 +72,22 @@ Route::get('/cart/charge-request', [OrderController::class, 'chargeRequest'])->n
 Route::get('/cart/charge-update', [OrderController::class, 'chargeUpdate'])->name('checkout.charge_update');
 
 /***** AUTHENTICATION ROUTES *****/
-Route::get('/login',                            [LoginController::class, 'showLoginForm'])->name('frontend.login.form');
-Route::post('/login',                            [LoginController::class, 'login'])->name('frontend.login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('frontend.login.form');
+Route::post('/login', [LoginController::class, 'login'])->name('frontend.login');
 
 /***** LOGIN BY SOCIAL MEDIA [ FACEBOOK - TWITTER - GOOGLE ] *****/
-Route::get('login/{provider}',                  [LoginController::class, 'redirectToProvider'])->name('frontend.social_login');
-Route::get('login/{provider}/callback',         [LoginController::class, 'handleProviderCallback'])->name('frontend.social_login_callback');
-Route::post('/logout',                            [LoginController::class, 'logout'])->name('frontend.logout');
-Route::get('/register',                            [RegisterController::class, 'showRegistrationForm'])->name('frontend.register.form');
-Route::post('/register',                            [RegisterController::class, 'register'])->name('frontend.register');
-Route::get('/password/reset',                            [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-Route::post('/password/email',                            [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('/password/reset/{token}',                            [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('/password/reset',                            [ResetPasswordController::class, 'reset'])->name('password.update');
-Route::get('/email/verify',                            [VerificationController::class, 'show'])->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}',                            [VerificationController::class, 'verify'])->name('verification.verify');
-Route::post('email/resend',                            [VerificationController::class, 'resend'])->name('verification.resend');
+Route::get('login/{provider}', [LoginController::class, 'redirectToProvider'])->name('frontend.social_login');
+Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('frontend.social_login_callback');
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('frontend.logout');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('frontend.register.form');
+Route::post('/register', [RegisterController::class, 'register'])->name('frontend.register');
+Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
+Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
 

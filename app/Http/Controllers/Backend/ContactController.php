@@ -8,7 +8,6 @@ use App\Traits\FilterTrait;
 
 class ContactController extends Controller
 {
-
     use FilterTrait;
 
     public $contact;
@@ -22,6 +21,7 @@ class ContactController extends Controller
     {
         $query = $this->contact::query();
         $messages = $this->filter($query);
+
         return view('backend.contacts.index', compact('messages'));
     }
 
@@ -32,13 +32,16 @@ class ContactController extends Controller
             $contact->status = 1;
             $contact->save();
         }
+
         return view('backend.contacts.show', compact('contact'));
     }
 
     public function destroy(Contact $contact)
     {
         abort_if(!auth()->user()->can('delete-message'), 403, 'You did not have permission to access this page!');
+
         $contact->delete();
+
         return redirect()->route('admin.contacts.index')->with(['message' => 'Message deleted successfully', 'alert-type' => 'success']);
     }
 }

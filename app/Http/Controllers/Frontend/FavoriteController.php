@@ -18,6 +18,7 @@ class FavoriteController extends Controller
     public function index()
     {
         $userFav = $this->favorite->all();
+
         return view('frontend.users.wishlist', compact('userFav'));
     }
 

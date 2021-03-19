@@ -23,6 +23,7 @@ class CategoryController extends Controller
     {
         $query = Category::withCount('products');
         $categories = $this->filter($query);
+
         return view('backend.categories.index', compact('categories'));
     }
 

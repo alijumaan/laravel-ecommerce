@@ -38,6 +38,7 @@ class SettingController extends Controller
     private function generateCache()
     {
         $settings = Valuestore::make(config_path('settings.json'));
+
         Setting::all()->each(function ($item) use ($settings) {
             $settings->put($item->key, $item->value);
         });

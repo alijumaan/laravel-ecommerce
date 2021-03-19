@@ -53,7 +53,7 @@ class ViewServiceProvider extends ServiceProvider
 
                 $recent_products = Cache::get('recent_products');
 
-                /**** RECENT REVIEWS. ****/
+                // RECENT REVIEWS.
                 if (!Cache::has('recent_reviews')) {
                     $recent_reviews = Review::whereStatus(1)->orderBy('id', 'desc')->limit(5)->get();
                     Cache::remember('recent_reviews', 3600, function () use ($recent_reviews) {

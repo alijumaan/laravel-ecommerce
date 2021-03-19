@@ -9,7 +9,6 @@ use App\Repositories\Backend\CouponRepository;
 
 class CouponsController extends Controller
 {
-
     public $coupon;
 
     public function __construct(CouponRepository $coupon)
