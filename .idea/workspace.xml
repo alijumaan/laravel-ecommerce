@@ -24,8 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/ViewServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/ViewServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,11 +191,11 @@
       <recent name="$PROJECT_DIR$/app/Http/View/Composers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Interfaces/Frontend" />
       <recent name="$PROJECT_DIR$/storage/app/public/images" />
       <recent name="$PROJECT_DIR$/public/storage/images" />
       <recent name="$PROJECT_DIR$/public/frontend" />
       <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/public/backend/vendor" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.blade.php">
@@ -632,7 +632,9 @@
       <workItem from="1616054039834" duration="7816000" />
       <workItem from="1616083904803" duration="7496000" />
       <workItem from="1616143992070" duration="5071000" />
-      <workItem from="1616184890729" duration="1524000" />
+      <workItem from="1616184890729" duration="2582000" />
+      <workItem from="1616189158718" duration="2003000" />
+      <workItem from="1616412459453" duration="330000" />
     </task>
     <servers />
   </component>
