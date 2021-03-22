@@ -5,20 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCouponRequest;
 use App\Models\Coupon;
-use App\Repositories\Backend\CouponRepository;
 
 class CouponsController extends Controller
 {
-    public $coupon;
-
-    public function __construct(CouponRepository $coupon)
-    {
-        $this->coupon = $coupon;
-    }
 
     public function index()
     {
-        $coupons = $this->coupon->index();
+        $coupons = Coupon::orderBy('id', 'desc')->paginate(5);
 
         return view('backend.coupons.index', compact('coupons'));
     }
@@ -32,7 +25,12 @@ class CouponsController extends Controller
 
     public function store(StoreCouponRequest $request)
     {
-        $this->coupon->store($request);
+        $data['name']         = $request->name;
+        $data['code']         = $request->code;
+        $data['type']         = $request->type;
+        $data['value']        = $request->value;
+        $data['description']  = $request->description;
+        Coupon::create($data);
 
         return redirect()->route('admin.coupons.index')->with(['message' => 'Coupon create successfully', 'alert-type' => 'success']);
     }
@@ -46,7 +44,12 @@ class CouponsController extends Controller
 
     public function update(StoreCouponRequest $request, Coupon $coupon)
     {
-        $this->coupon->update($request, $coupon);
+        $coupon->name         = $request->name;
+        $coupon->code         = $request->code;
+        $coupon->type         = $request->type;
+        $coupon->value        = $request->value;
+        $coupon->description  = $request->description;
+        $coupon->save();
 
         return redirect()->route('admin.coupons.index')->with(['message' => 'Coupon updated successfully', 'alert-type' => 'success',]);
 

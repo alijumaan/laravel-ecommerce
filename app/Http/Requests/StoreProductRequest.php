@@ -31,8 +31,7 @@ class StoreProductRequest extends FormRequest
             'in_stock'         => 'required',
             'review_able'   => 'required',
             'category_id'    => 'required',
-            'tags.*'         => 'required',
-            'images.*'       => 'nullable|mimes:jpg,jpeg,png,gif|max:20000',
+            'images[]'       => 'nullable|mimes:jpg,jpeg,png,gif|max:20000',
         ];
     }
 }

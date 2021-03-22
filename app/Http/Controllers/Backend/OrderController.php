@@ -7,16 +7,10 @@ use App\Models\Order;
 
 class OrderController extends Controller
 {
-    public $order;
-
-    public function __construct(Order $order)
-    {
-        $this->order = $order;
-    }
 
     public function index()
     {
-        $orders = $this->order::all();
+        $orders = Order::all();
 
         return view('backend.orders.index', compact('orders'));
     }
@@ -28,7 +22,7 @@ class OrderController extends Controller
 
     public function confirm($id)
     {
-        $order = $this->order::find($id);
+        $order = Order::find($id);
 
         $order->update(['status' => 1]);
 
@@ -37,7 +31,7 @@ class OrderController extends Controller
 
     public function pending($id)
     {
-        $order = $this->order::find($id);
+        $order = Order::find($id);
 
         $order->update(['status' => 0]);
 

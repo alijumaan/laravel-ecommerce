@@ -16,7 +16,7 @@ class FavoriteRepository
 
     public function all()
     {
-        return auth()->user()->favProduct;
+        return auth()->user()->favProduct()->get();
     }
 
     public function store($request)

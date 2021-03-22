@@ -1,9 +1,7 @@
 <footer class="footer-area fruits-footer">
-
     <div class="food-footer-bottom pt-80 pb-70 black-bg-5">
         <div class="container">
             <div class="row">
-
                 <div class="col-md-6 col-lg-4">
                     <div class="footer-widget">
                         <div class="food-about">
@@ -31,7 +29,9 @@
                                             <i class="pe-7s-chat"></i>
                                         </div>
                                         <div class="food-info-content">
-                                            <p><a href="http://alijumaan.com">alila3883@gmail.com</a> <br><a href="https://alijumaan.com/" target="_blank">contact@alijumaan.com</a></p>
+                                            <p><a href="http://alijumaan.com">alila3883@gmail.com</a> <br><a
+                                                    href="https://alijumaan.com/"
+                                                    target="_blank">contact@alijumaan.com</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -44,11 +44,16 @@
                         <h3 class="footer-widget-title-6">Options</h3>
                         <div class="food-widget-content">
                             <ul>
-                                <li><a href="{{ route('cart.index') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> Cart</a></li>
-                                <li><a href="{{ route('dashboard') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> My Account</a></li>
+                                <li><a href="{{ route('cart.index') }}"><img
+                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> Cart</a></li>
+                                <li><a href="{{ route('dashboard') }}"><img
+                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> My Account</a>
+                                </li>
                                 @guest
                                     @if (route('frontend.register.form'))
-                                        <li><a href="{{ route('frontend.register.form') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Register</a></li>
+                                        <li><a href="{{ route('frontend.register.form') }}"><img
+                                                    src="{{ asset('frontend/img/icon-img/41.png') }}"
+                                                    alt="">Register</a></li>
                                     @endif
                                 @endguest
                             </ul>
@@ -60,10 +65,15 @@
                         <h3 class="footer-widget-title-6">Information</h3>
                         <div class="food-widget-content">
                             <ul>
-                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> About</a></li>
-                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Contact</a></li>
-                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Privacy Policy</a></li>
-                                <li><a href="{{ route('contact.index') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">News</a></li>
+                                <li><a href="{{ route('contact.index') }}"><img
+                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> About</a></li>
+                                <li><a href="{{ route('contact.index') }}"><img
+                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Contact</a></li>
+                                <li><a href="{{ route('contact.index') }}"><img
+                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Privacy Policy</a>
+                                </li>
+                                <li><a href="{{ route('contact.index') }}"><img
+                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">News</a></li>
                             </ul>
                         </div>
                     </div>
@@ -72,11 +82,9 @@
             </div>
         </div>
     </div>
-
     <div class="footer-middle black-bg-2 pt-35 pb-40">
 
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="footer-services-wrapper mb-30">
@@ -116,8 +124,6 @@
                 <img src="{{ asset('frontend/img/icon-img/3.png') }}" alt="">
             </div>
         </div>
-
-
     </div>
 
     <div class="food-copyright black-bg-6 ptb-30">
@@ -131,7 +137,6 @@
             </p>
         </div>
     </div>
-
 </footer>
 
 

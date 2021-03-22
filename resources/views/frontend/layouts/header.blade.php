@@ -1,4 +1,3 @@
-
 <header class="ptb-50">
     <div class="header-bottom wrapper-padding-2 res-header-sm sticker header-sticky-3 furits-header">
         <div class="container-fluid">
@@ -27,7 +26,9 @@
                             <li><a href="javascript:void(0);">Categories</a>
                                 <ul class="single-dropdown">
                                     @foreach($global_categories as $global_category)
-                                        <li><a href="{{ route('category.product', $global_category->slug) }}">{{ $global_category->name }}</a></li>
+                                        <li>
+                                            <a href="{{ route('category.product', $global_category->slug) }}">{{ $global_category->name }}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -48,13 +49,13 @@
                                 </li>
                             @else
                                 @admin
-                                <li ><a href="{{ route('admin.index') }}" style="color: #578a01;">Administration</a>
-                                @endadmin
-
+                                <li><a href="{{ route('admin.index') }}" style="color: #578a01;">Administration</a>
+                                    @endadmin
                                 <li><a href="javascript:void(0);" style="color: #578a01;">My Account</a>
-                                    <ul class="single-dropdown" >
+                                    <ul class="single-dropdown">
                                         @auth
-                                            <li ><a href="{{ route('dashboard') }}" style="color: #578a01;">Dashboard</a></li>
+                                            <li><a href="{{ route('dashboard') }}" style="color: #578a01;">Dashboard</a>
+                                            </li>
                                         @endauth
                                         <li>
                                             <a class="dropdown-item" href="{{ route('frontend.logout') }}"
@@ -62,16 +63,13 @@
                                     document.getElementById('logout-form').submit();" style="color: #578a01;">
                                                 {{ __('Logout') }}
                                             </a>
-                                            <form id="logout-form" action="{{ route('frontend.logout') }}" method="POST" style="display: none;">
+                                            <form id="logout-form" action="{{ route('frontend.logout') }}" method="POST"
+                                                  style="display: none;">
                                                 @csrf
                                             </form>
                                         </li>
                                     </ul>
                                 </li>
-
-
-
-
 {{--                                <span class="header-cart-4 furits-cart bell">--}}
 {{--                                    <a href="">--}}
 {{--                                        <span class="handicraft-count">*</span>--}}
@@ -79,8 +77,10 @@
 {{--                                        <ul class="cart-dropdown">--}}
 {{--                                        <li class="single-product-cart" style="display: inline;">--}}
 {{--                                            <div class="cart-img">--}}
-{{--                                                <a href="#"><img style="width: 100px;" src="{{ asset('uploads/products/default_small.png') }}" alt=""></a>--}}
-{{--                                                <p class="ml-3" style="display: inline;"><a href="#" > Bits Headphone</a></p>--}}
+{{--                                                <a href="#"><img style="width: 100px;"--}}
+{{--                                                                 src="{{ asset('uploads/products/default_small.png') }}"--}}
+{{--                                                                 alt=""></a>--}}
+{{--                                                <p class="ml-3" style="display: inline;"><a href="#"> Bits Headphone</a></p>--}}
 {{--                                                <span>$80.00 x 1</span>--}}
 {{--                                                <span class="cart-delete mt-3" style="float: right;">--}}
 {{--                                                <a href="#"><i class="far fa-trash-alt"></i></a>--}}
@@ -90,11 +90,8 @@
 {{--                                    </ul>--}}
 {{--                                    </a>--}}
 {{--                                </span>--}}
-
                             @endguest
-
                         </ul>
-
                     </div>
                     <div class="header-cart-4 furits-cart">
                         <a class="icon-cart" href="{{route('cart.index')}}">
@@ -120,7 +117,9 @@
                                     <ul>
                                         <li>
                                         @foreach($global_categories as $global_category)
-                                            <li><a href="{{ route('category.product', $global_category->slug) }}">{{ $global_category->name }}</a></li>
+                                            <li>
+                                                <a href="{{ route('category.product', $global_category->slug) }}">{{ $global_category->name }}</a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </li>
@@ -133,20 +132,18 @@
                                         <a href="{{route('frontend.register.form')}}">Reg</a>
                                     </li>
                                 @else
-
                                     @admin
-                                    <li ><a href="{{ route('admin.index') }}">Administration</a>
-                                    @endadmin
-
-                                    <li ><a href="{{ route('dashboard') }}" >Dashboard</a></li>
-
+                                    <li><a href="{{ route('admin.index') }}">Administration</a>
+                                        @endadmin
+                                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('frontend.logout') }}"
                                            onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
-                                        <form id="logout-form" action="{{ route('frontend.logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('frontend.logout') }}" method="POST"
+                                              style="display: none;">
                                             @csrf
                                         </form>
                                     </li>
@@ -159,13 +156,11 @@
         </div>
     </div>
 </header>
-<div class="breadcrumb-area pt-50" >
-
+<div class="breadcrumb-area pt-50">
 
     <div class="container-fluid">
         <div class="furniture-bottom-wrapper">
             <div class="furniture-login">
-
             </div>
             <div class="furniture-search">
                 {!! Form::open(['route' => 'search', 'method' => 'get']) !!}
@@ -176,9 +171,7 @@
                 {!! Form::close() !!}
             </div>
             <div class="furniture-wishlist">
-
             </div>
         </div>
     </div>
-
 </div>
