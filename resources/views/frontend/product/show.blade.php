@@ -278,7 +278,7 @@
                                                 {!! Form::close() !!}
                                                 @else
                                                     <div class="alert alert-danger" role="alert">
-                                                        <small>Must buy this book before write a review.</small>
+                                                        <small>Must buy this product before write a review.</small>
                                                     </div>
                                                 @endif
                                                 @else

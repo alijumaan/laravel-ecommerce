@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\CouponsController;
@@ -25,7 +24,7 @@ if (App::environment('production')) {
 Route::group(['middleware' => 'admin'], function () {
 
     /** DASHBOARD */
-    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::view('/', 'backend.index')->name('admin.index');
 
     /** PRODUCTS */
     Route::post('/products/remove-image/{mediaId}', [ProductController::class, 'removeImage'])->name('products.media.destroy');

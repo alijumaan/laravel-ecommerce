@@ -68,12 +68,13 @@ class ProductRepository
     public function rate($request, $product)
     {
         if(auth()->user()->rated($product)) {
-            $rating = Rating::where(['user_id' => auth()->user()->id, 'product_id' => $product->id])->first();
+//            $rating = Rating::where(['user_id' => auth()->id(), 'product_id' => $product->id])->first();
+            $rating = auth()->user()->ratings()->where('product_id', $product->id)->first();
             $rating->value = $request->value;
             $rating->save();
         } else {
             $rating = new Rating;
-            $rating->user_id = auth()->user()->id;
+            $rating->user_id = auth()->id();
             $rating->product_id = $product->id;
             $rating->value = $request->value;
             $rating->save();
