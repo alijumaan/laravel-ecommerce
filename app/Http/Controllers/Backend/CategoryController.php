@@ -5,19 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
-use App\Repositories\Backend\CategoryRepository;
 use App\Traits\FilterTrait;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
     use FilterTrait;
-
-    public $category;
-
-    public function __construct(CategoryRepository $category)
-    {
-        $this->category = $category;
-    }
 
     public function index()
     {
@@ -29,39 +22,60 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $categories = $this->category->create();
+        abort_if(!auth()->user()->can('add-category'), 403, 'You did not have permission to access this page!');
+
+        $categories = Category::orderBy('id', 'desc')->pluck('name', 'id');
 
         return view('backend.categories.create', compact('categories'));
     }
 
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request, Category $category)
     {
-        $this->category->store($request);
+        $category->create($request->validated());
+
+        if ($request->status == 1) {
+            clear_cache();
+        }
 
         return redirect()->route('admin.categories.index')->with(['message' => 'Category create successfully', 'alert-type' => 'success',]);
     }
 
     public function edit(Category $category)
     {
-        $categories = $this->category->edit();
+        abort_if(!auth()->user()->can('edit-category'), 403, 'You did not have permission to access this page!');
+
+        $categories = Category::orderBy('id', 'desc')->pluck('name', 'id');
 
         return view('backend.categories.edit', compact('category', 'categories'));
     }
 
     public function update(StoreCategoryRequest $request, Category $category)
     {
-        if ($category) {
+        abort_if(!auth()->user()->can('edit-category'), 403, 'You did not have permission to access this page!');
 
-            $this->category->update($request, $category);
+        $category->update($request->validated());
 
-            return redirect()->route('admin.categories.index')->with(['message' => 'Product updated successfully', 'alert-type' => 'success']);
-        }
-        return redirect()->back()->with(['message' => 'Something was wrong', 'alert-type' => 'danger']);
+        clear_cache();
+
+        return redirect()->route('admin.categories.index')->with(['message' => 'Product updated successfully', 'alert-type' => 'success']);
     }
 
     public function destroy(Category $category)
     {
-        $this->category->delete($category);
+        abort_if(!auth()->user()->can('delete-category'), 403, 'You did not have permission to access this page!');
+
+        foreach ($category->products as $product) {
+            if ($product->media->count() > 0) {
+                foreach ($product->media as $media) {
+                    if (File::exists('storage/' . $media->file_name))
+                        unlink('storage/' . $media->file_name);
+                }
+            }
+        }
+
+        $category->delete();
+
+        clear_cache();
 
         return redirect()->route('admin.categories.index')->with(['message' => 'Category deleted successfully', 'alert-type' => 'success',]);
     }

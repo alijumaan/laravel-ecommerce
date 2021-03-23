@@ -16,6 +16,14 @@ class ProductController extends Controller
 {
     use FilterTrait, RemoveImageTrait;
 
+    /** @var ProductService */
+    private $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+
     public function index()
     {
         $query = Product::with(['category', 'reviews', 'media']);
@@ -72,8 +80,8 @@ class ProductController extends Controller
     {
         $product->update($request->validated());
 
-        (new ProductService())->storeProductTags($request, $product);
-        (new ProductService())->storeProductImages($request, $product);
+        $this->productService->storeProductTags($request, $product);
+        $this->productService->storeProductImages($request, $product);
 
         clear_cache();
 
@@ -84,7 +92,7 @@ class ProductController extends Controller
     {
         abort_if(!auth()->user()->can('delete-product'), 403, 'You have not permission to access this page!');
 
-        (new ProductService())->unlinkImageAfterDelete($product);
+        $this->productService->unlinkImageAfterDelete($product);
 
         $product->delete();
 

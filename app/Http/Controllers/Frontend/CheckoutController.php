@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Mail\OrderCompleted;
 use App\Models\Order;
-use App\Models\OrderItem;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller

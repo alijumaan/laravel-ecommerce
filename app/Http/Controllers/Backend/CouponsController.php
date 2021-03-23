@@ -25,12 +25,7 @@ class CouponsController extends Controller
 
     public function store(StoreCouponRequest $request)
     {
-        $data['name']         = $request->name;
-        $data['code']         = $request->code;
-        $data['type']         = $request->type;
-        $data['value']        = $request->value;
-        $data['description']  = $request->description;
-        Coupon::create($data);
+        Coupon::create($request->only('name', 'code', 'type', 'value', 'description'));
 
         return redirect()->route('admin.coupons.index')->with(['message' => 'Coupon create successfully', 'alert-type' => 'success']);
     }
@@ -44,12 +39,7 @@ class CouponsController extends Controller
 
     public function update(StoreCouponRequest $request, Coupon $coupon)
     {
-        $coupon->name         = $request->name;
-        $coupon->code         = $request->code;
-        $coupon->type         = $request->type;
-        $coupon->value        = $request->value;
-        $coupon->description  = $request->description;
-        $coupon->save();
+        $coupon->update($request->only('name', 'code', 'type', 'value', 'description'));
 
         return redirect()->route('admin.coupons.index')->with(['message' => 'Coupon updated successfully', 'alert-type' => 'success',]);
 

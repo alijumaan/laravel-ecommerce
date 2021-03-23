@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderCompleted;
 use App\Models\Order;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -24,7 +26,9 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
 
-        $order->update(['status' => 1]);
+        $order->confirm();
+
+        Mail::to($order->user)->send(new OrderCompleted());
 
         return redirect()->back()->with(['message' => 'Order has been again into confirm', 'alert-type' => 'success']);
     }
@@ -33,7 +37,7 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
 
-        $order->update(['status' => 0]);
+        $order->pending();
 
         return redirect()->back()->with(['message' => 'Order has been pending', 'alert-type' => 'warning']);
 

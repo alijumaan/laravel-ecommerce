@@ -3,7 +3,7 @@
 
 You received new order.
 
-@component('mail::button', ['url' => 'http://cart.test/dashboard'])
+@component('mail::button', ['url' => route('dashboard'),])
 Show order
 @endcomponent
 

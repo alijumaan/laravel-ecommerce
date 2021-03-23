@@ -53,7 +53,7 @@ class PageController extends Controller
 
     public function update(StorePageRequest $request, Page $page)
     {
-        $page->update($request->all());
+        $page->update($request->validated());
 
         return redirect()->back()->with(['message' => 'Page updated successfully', 'alert-type' => 'success',]);
     }
