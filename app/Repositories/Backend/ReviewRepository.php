@@ -4,14 +4,9 @@ namespace App\Repositories\Backend;
 
 class ReviewRepository
 {
-    public function update($request, $review)
+    public function update(array $request, $review)
     {
-        $data['name']         = $request->name;
-        $data['email']        = $request->email;
-        $data['status']       = $request->status;
-        $data['review']      = $request->review;
-
-        $review->update($data);
+        $review->update($request);
 
         clear_cache();
    }

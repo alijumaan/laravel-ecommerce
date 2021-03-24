@@ -39,7 +39,7 @@ class ReviewController extends Controller
 
     public function update(UpdateReviewRequest $request, Review $review)
     {
-        $this->reviewRepository->update($request, $review);
+        $this->reviewRepository->update($request->only(['name', 'email', 'status', 'review']), $review);
 
         return redirect()->route('admin.reviews.index')->with(['message' => 'Review updated successfully', 'alert-type' => 'success']);
     }

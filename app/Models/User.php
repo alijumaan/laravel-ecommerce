@@ -69,9 +69,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Review::class);
     }
 
-    public function status()
+    public function getStatusAttribute()
     {
-        return $this->status == 1 ? 'Active' : 'Inactive';
+        return $this->attributes['status'] == 1 ? 'Active' : 'Inactive';
     }
 
     public function ratings()
