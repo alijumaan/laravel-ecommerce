@@ -67,8 +67,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Coupons:</h6>
                 <a class="collapse-item" href="{{route('admin.coupons.index')}}">Coupons</a>
-                <a class="collapse-item" href="{{route('admin.coupons.create')}}">Create new coupon</a>
-            </div>c
+                @can('add-coupon')<a class="collapse-item" href="{{route('admin.coupons.create')}}">Create new coupon</a>@endcan
+            </div>
         </div>
     </li>
 
@@ -81,7 +81,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Tags:</h6>
                 <a class="collapse-item" href="{{route('admin.tags.index')}}">Tags</a>
-                <a class="collapse-item" href="{{route('admin.tags.create')}}">Create new tags</a>
+                @can('add-tag')<a class="collapse-item" href="{{route('admin.tags.create')}}">Create new tags</a>@endcan
             </div>
         </div>
     </li>
@@ -95,7 +95,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Users:</h6>
                 <a class="collapse-item" href="{{route('admin.users.index')}}">All users</a>
-                <a class="collapse-item" href="{{route('admin.users.create')}}">Create new user</a>
+                @can('add-user')<a class="collapse-item" href="{{route('admin.users.create')}}">Create new user</a>@endcan
             </div>
         </div>
     </li>
