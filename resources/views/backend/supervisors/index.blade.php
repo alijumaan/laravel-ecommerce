@@ -47,7 +47,7 @@
                                     {{ $supervisor->email }}
                                     <p class="text-secondary">{{ $supervisor->mobile }}</p>
                                 </td>
-                                <td>{{ $supervisor->status() }}</td>
+                                <td>{{ $supervisor->status }}</td>
                                 <td>{{ $supervisor->created_at->format('d-m-Y h:i a') }}</td>
                                 <td>
                                     <div class="btn-group btn-group-toggle">

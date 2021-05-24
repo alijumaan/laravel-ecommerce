@@ -17,9 +17,9 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert(['id' => 1, 'role' => 'Admin']);
-        DB::table('roles')->insert(['id' => 2, 'role' => 'Supervisor']);
-        DB::table('roles')->insert(['id' => 3, 'role' => 'User']);
+        DB::table('roles')->insert(['id' => 1, 'role' => 'admin']);
+        DB::table('roles')->insert(['id' => 2, 'role' => 'supervisor']);
+        DB::table('roles')->insert(['id' => 3, 'role' => 'user']);
 
         User::create([
             'name' => 'Admin',
@@ -30,7 +30,7 @@ class RolesTableSeeder extends Seeder
             'status' => 1,
             'email_verified_at' => Carbon::now(),
             'bio' => 'Administrator',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('admin'),
 
         ]);
 
@@ -43,7 +43,7 @@ class RolesTableSeeder extends Seeder
             'status' => 1,
             'email_verified_at' => Carbon::now(),
             'bio' => 'Supervisor',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('supervisor'),
         ]);
 
         User::create([
@@ -55,7 +55,7 @@ class RolesTableSeeder extends Seeder
             'status' => 1,
             'email_verified_at' => Carbon::now(),
             'bio' => 'User',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('ali'),
         ]);
 
     }

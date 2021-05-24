@@ -28,7 +28,7 @@
                     <th>Mobile</th>
                     <td>{{ $supervisor->mobile }}</td>
                     <th>Status</th>
-                    <td>{{ $supervisor->status() }}</td>
+                    <td>{{ $supervisor->status }}</td>
                 </tr>
                 <tr>
                     <th>Created date</th>

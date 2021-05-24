@@ -20,7 +20,7 @@ class Admin
         if (!auth()->check() || !$request->user()->isAdmin()){
             return redirect()->route('admin.login.form');
         }
-        return $next($request);
 
+        return $next($request);
     }
 }

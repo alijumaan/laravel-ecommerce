@@ -22,10 +22,10 @@ after install the source code open Terminal to use these command line:
 - sudo chmod -R 777 storage/app/public/images/
 
 ## Try
-<a href='https://cartwhite.tk'>https://cartwhite.tk</a>
+<a href='https://cartwhite.tk' target="_blank">https://cartwhite.tk</a>
 
 ## My site
-<a href='https://alijumaan.com'>https://alijumaan.com</a>
+<a href='https://alijumaan.com' target="_blank">https://alijumaan.com</a>
 
 * enjoy...
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateReviewRequest;
 use App\Models\Review;
-use App\Repositories\Backend\ReviewRepository;
 use App\Traits\FilterTrait;
 
 class ReviewController extends Controller
@@ -15,10 +14,9 @@ class ReviewController extends Controller
     public $review;
     public $reviewRepository;
 
-    public function __construct(Review $review, ReviewRepository $reviewRepository)
+    public function __construct(Review $review)
     {
         $this->review = $review;
-        $this->reviewRepository = $reviewRepository;
     }
 
     public function index()
@@ -39,14 +37,20 @@ class ReviewController extends Controller
 
     public function update(UpdateReviewRequest $request, Review $review)
     {
-        $this->reviewRepository->update($request->only(['name', 'email', 'status', 'review']), $review);
+        $review->update($request->only(['name', 'email', 'status', 'review']));
+
+        clear_cache();
 
         return redirect()->route('admin.reviews.index')->with(['message' => 'Review updated successfully', 'alert-type' => 'success']);
     }
 
     public function destroy(Review $review)
     {
-        $this->reviewRepository->delete($review);
+        abort_if(!auth()->user()->can('delete-review'), 403, 'You did not have permission to access this page!');
+
+        $review->delete();
+
+        clear_cache();
 
         return redirect()->route('admin.reviews.index')->with(['message' => 'Review deleted successfully', 'alert-type' => 'success']);
     }

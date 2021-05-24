@@ -5,21 +5,16 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
-use App\Repositories\Backend\UserRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public $user;
-
-    public function __construct(UserRepository $user)
-    {
-        $this->user = $user;
-    }
-
     public function index()
     {
-        $users = $this->user->index();
+        $users = User::Paginate(5);
 
         return view('backend.users.index', compact('users'));
     }
@@ -33,7 +28,10 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $this->user->store($request);
+        $data = $this->createNewData($request);
+        $data['email_verified_at'] = Carbon::now();
+        $data['password'] = bcrypt($request->password);
+        User::create($data);
 
         return redirect()->route('admin.users.index')->with(['message' => 'User create successfully', 'alert-type' => 'success']);
     }
@@ -52,20 +50,68 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $this->user->update($request, $user);
+        $validator = Validator::make($request->all(), [
+            'name'          => 'required',
+            'username'      => 'required|max:20|unique:users,username,'.$user->id,
+            'email'         => 'required|email|unique:users,email,'.$user->id,
+            'mobile'        => 'nullable|numeric|unique:users,mobile,'.$user->id,
+            'status'        => 'required',
+            'password'      => 'nullable|min:8',
+        ]);
+
+        if ($validator->fails()) { return redirect()->back()->withErrors($validator)->withInput(); }
+
+        $data = $this->createNewData($request);
+
+        if (trim($request->password) != '')
+            $data['password']  = bcrypt($request->password);
+
+        if ($request->has('avatar')) {
+            if ($user->avatar != 'images/avatar.png') {
+                if (File::exists('storage/' . $user->avatar))
+                    unlink('storage/' . $user->avatar);
+            }
+            $data['avatar'] = $this->uploadAvatar($request->avatar);
+        }
+
+        $user->update($data);
 
         return redirect()->route('admin.users.index')->with(['message' => 'User updated successfully', 'alert-type' => 'success']);
     }
 
     public function destroy(User $user)
     {
-        $this->user->delete($user);
+        abort_if(!auth()->user()->can('delete-user'), 403, 'You did not have permission to access this page!');
+
+        if ($user->avatar != '') {
+            if (File::exists('storage/' . $user->avatar)) {
+                unlink('storage/' . $user->avatar);
+            }
+        }
+
+        $user->delete();
 
         return redirect()->route('admin.users.index')->with(['message' => 'User deleted successfully', 'alert-type' => 'success',]);
     }
 
     public function removeImage(Request $request, User $user)
     {
-        $this->user->removeImage($request, $user);
+        abort_if(!auth()->user()->can('delete-user'), 403, 'You did not have permission to access this page!');
+//        $this->removeAvatar($request, $user);
+
+        $user->removeImage($request, $user);
+    }
+
+    protected function createNewData($request)
+    {
+        $data['name']                   = $request->name;
+        $data['username']               = $request->username;
+        $data['email']                  = $request->email;
+        $data['mobile']                 = $request->mobile;
+        $data['role_id']                = $request->role_id;
+        $data['status']                 = $request->status;
+        $data['bio']                    = $request->bio;
+        $data['receive_email']          = $request->receive_email;
+        return $data;
     }
 }
