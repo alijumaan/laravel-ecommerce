@@ -16,7 +16,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.5",
         "intervention/imagecache": "^2.4",
-        "laravel/framework": "^8.12",
+        "laravel/framework": "^8.40.0",
         "laravel/legacy-factories": "^1.0",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.5",
