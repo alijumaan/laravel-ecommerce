@@ -10,7 +10,7 @@ after install the source code open Terminal to use these command line:
 - php artisan migrate --seed
 - npm install
 - npm run dev
-- User your mail info to avoid this Error "Connection could not be established with host mailhog :stream_socket_client()" 
+- Use your mail info to avoid this Error "Connection could not be established with host mailhog :stream_socket_client()" 
 - php artisan serve
 - mkdir storage/app/public/images
 - mkdir storage/app/public/images/products
