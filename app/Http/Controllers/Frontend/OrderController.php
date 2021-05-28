@@ -3,18 +3,14 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Frontend\OrderRepository;
+use App\Services\OrderService;
 
 class OrderController extends Controller
 {
 
-    public $orderRepository;
-
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct()
     {
         $this->middleware('auth');
-
-        return $this->orderRepository = $orderRepository;
     }
 
     public function chargeRequest()
@@ -23,12 +19,12 @@ class OrderController extends Controller
 
         $total = \Cart::session(auth()->id())->getTotal();
 
-        return redirect($this->orderRepository->getChargeRequest($total, $user->name, $user->email, $user->phone));
+        return redirect((new OrderService())->getChargeRequest($total, $user->name, $user->email, $user->phone));
     }
 
     public function chargeUpdate()
     {
-        return $this->orderRepository->validateRequest(request()->tap_id);
+        return (new OrderService())->validateRequest(request()->tap_id);
     }
 
 }

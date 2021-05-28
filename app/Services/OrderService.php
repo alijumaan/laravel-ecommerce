@@ -1,22 +1,19 @@
 <?php
 
-namespace App\Repositories\Frontend;
+namespace App\Services;
 
 use App\Mail\OrderCompleted;
 use App\Models\Order;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Mail;
 
-class OrderRepository
+class OrderService
 {
-
     public function getChargeRequest($amount, $name, $email, $number)
     {
         $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'https://api.tap.company/v2/charges',
-            // You can set any number of default request options.
-            'timeout'  => 30.0,
+            'base_uri' => 'https://api.tap.company/v2/charges', // Base URI is used with relative requests
+            'timeout'  => 30.0, // You can set any number of default request options.
         ]);
 
         $headers = [
@@ -27,16 +24,16 @@ class OrderRepository
         $response = $client->request('POST', 'charges', [
             'headers' => $headers,
             'form_params' => [
-            'amount' => $amount,
-            'currency' => 'SAR',
-            'customer' =>
-                 [
-                    'first_name' => $name,
-                    'email' => $email,
-                    'phone' => ['country_code' => '966', 'number' => $number]
-                 ],
-            'source' => ['id' => 'src_sa.mada'],
-            'redirect' => ['url' => 'http://127.0.0.1:8000/orders/charge-update']
+                'amount' => $amount,
+                'currency' => 'SAR',
+                'customer' =>
+                    [
+                        'first_name' => $name,
+                        'email' => $email,
+                        'phone' => ['country_code' => '966', 'number' => $number]
+                    ],
+                'source' => ['id' => 'src_sa.mada'],
+                'redirect' => ['url' => config('app.url') . '/orders/charge-update']
             ]
         ]);
 
@@ -48,10 +45,8 @@ class OrderRepository
     public function validateRequest($id)
     {
         $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'https://api.tap.company/v2/charges/',
-            // You can set any number of default request options.
-            'timeout'  => 30.0,
+            'base_uri' => 'https://api.tap.company/v2/charges/', // Base URI is used with relative requests
+            'timeout'  => 30.0, // You can set any number of default request options.
         ]);
 
         $headers = [
@@ -93,21 +88,4 @@ class OrderRepository
         $status = $response['status'];
         return view('frontend.orders.paymentResult', compact('status'));
     }
-
-
-//    public function delivered($order)
-//    {
-//        if ($order->store->user->id != auth()->user()->id)
-//            return __('messages.this_store_not_for_you');
-//
-////        if ($order->status == 'paid' || $order->status == 'pending')
-//        if (!in_array($order->status,['paid', 'pending']))
-//            return __('messages.you_cant_change_order_status');
-//
-//        $order->status = 'delivered';
-//        $order->save();
-//        return back();
-//    }
-
 }
-

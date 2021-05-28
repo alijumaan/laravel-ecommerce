@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Favorite;
 use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
@@ -21,8 +20,8 @@ class FavoriteController extends Controller
         $request->user()->favProduct()->attach($request->id);
     }
 
-    public function destroy(Favorite $favorite)
+    public function destroy($id)
     {
-        auth()->user()->favProduct()->detach($favorite);
+        auth()->user()->favProduct()->detach($id);
     }
 }
