@@ -4,25 +4,17 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Repositories\Frontend\FavoriteRepository;
-use App\Repositories\Frontend\ProductRepository;
+use App\Models\Rating;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\FilterTrait;
 
 class ProductController extends Controller
 {
     use FilterTrait;
-
-    protected $product;
-    protected $favorite;
-
-    public function __construct(ProductRepository $product, FavoriteRepository $favorite)
-    {
-        $this->product = $product;
-        $this->favorite = $favorite;
-    }
 
     public function index()
     {
@@ -33,8 +25,13 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = $this->product->show($id);
-        $favorite = $this->favorite->show($product->id);
+        $product = Product::with(['media', 'approved_reviews' => function($query) {
+            $query->orderBy('id', 'desc');
+        }])->whereHas('category', function ($query) {
+            $query->whereStatus(1);
+        })->whereSlug($id)->active()->first();
+
+        $favorite = $this->show_favorite($product->id);
 
         $productFind = 0;
         if (Auth::check())
@@ -53,7 +50,25 @@ class ProductController extends Controller
 
         if ($validation->fails()) {return redirect()->back()->withErrors($validation)->withInput();}
 
-        $this->product->storeReview($request, $slug);
+        $product = Product::whereSlug($slug)->first();
+
+        $userId = auth()->check() ?  auth()->id() : null;
+        $userName = auth()->user()->name;
+        $userEmail = auth()->user()->email;
+
+        $data['name']             = $userName;
+        $data['email']            = $userEmail;
+        $data['ip_address']       = $request->ip();
+        $data['status']           = 1;
+        $data['review']          = $request->review;
+        $data['product_id']       = $product->id;
+        $data['user_id']          = $userId;
+
+        $review = $product->reviews()->create($data);
+
+        if ($review) {
+            Cache::forget('recent_reviews');
+        }
 
         return redirect()->back()->with(['message' => 'Review added successfully', 'alert-type' => 'success']);
 
@@ -61,16 +76,46 @@ class ProductController extends Controller
 
     public function tag($slug)
     {
-        $products = $this->product->tag($slug);
+        $tag = Tag::whereSlug($slug)->orWhere('id', $slug)->first()->id;
 
-        if ($products)
+        if ($tag) {
+            $products = Product::with(['media', 'tags'])
+                ->whereHas('tags', function ($query) use ($slug) {
+                    $query->where('slug', $slug);
+                })
+                ->active()
+                ->orderBy('id', 'desc')
+                ->paginate(5);
+
             return view('frontend.product.index', compact( 'products'));
+        }
 
         return redirect()->back();
     }
 
     public function rate(Request $request, Product $product)
     {
-        $this->product->rate($request, $product);
+        if (auth()->user()->rated($product)) {
+            $rating = auth()->user()->ratings()->where('product_id', $product->id)->first();
+            $rating->value = $request->value;
+            $rating->save();
+        } else {
+            $rating = new Rating;
+            $rating->user_id = auth()->id();
+            $rating->product_id = $product->id;
+            $rating->value = $request->value;
+            $rating->save();
+        }
+        return back();
+    }
+
+    public function show_favorite($id)
+    {
+        if (auth()->check())
+        {
+            $favorite = Auth::user()->favProduct()->whereProduct_id($id)->first();
+
+            return $favorite ? true : false;
+        }
     }
 }

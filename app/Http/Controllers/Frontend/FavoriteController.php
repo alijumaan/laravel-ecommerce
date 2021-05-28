@@ -3,32 +3,26 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Frontend\FavoriteRepository;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
-    protected $favorite;
-
-    public function __construct(FavoriteRepository $favorite)
-    {
-        $this->favorite = $favorite;
-    }
 
     public function index()
     {
-        $userFav = $this->favorite->all();
+        $userFav = auth()->user()->favProduct()->get();
 
         return view('frontend.users.wishlist', compact('userFav'));
     }
 
     public function store(Request $request)
     {
-        $this->favorite->store($request);
+        $request->user()->favProduct()->attach($request->id);
     }
 
-    public function destroy($id)
+    public function destroy(Favorite $favorite)
     {
-        $this->favorite->delete($id);
+        auth()->user()->favProduct()->detach($favorite);
     }
 }

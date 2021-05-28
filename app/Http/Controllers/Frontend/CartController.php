@@ -5,14 +5,13 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
-use App\Repositories\Frontend\CartRepository;
+use Darryldecode\Cart\CartCondition;
+use Darryldecode\Cart\Exceptions\InvalidConditionException;
 
 class CartController extends Controller
 {
-    public $cartRepository;
-    public function __construct(CartRepository $cartRepository)
+    public function __construct()
     {
-        $this->cartRepository = $cartRepository;
         $this->middleware('auth');
     }
 
@@ -22,9 +21,36 @@ class CartController extends Controller
         return view('frontend.cart.index', compact('cartItems'));
     }
 
-    public function add(Product $product)
+    public function aadToCart(Product $product)
     {
-        $this->cartRepository->aadToCart($product);
+        try {
+            $condition = new CartCondition(array(
+                'name' => 'VAT 5%',
+                'type' => 'tax',
+                'target' => 'total', // this condition will be applied to cart's subtotal when getSubTotal() is called.
+//                'value' => '0%',
+                'value' => '5%',
+                'attributes' => array( // attributes field is optional
+                    'description' => 'Value added tax',
+                )
+            ));
+
+            \Cart::condition($condition);
+
+            \Cart::session(auth()->id())->condition($condition);
+
+
+        } catch (InvalidConditionException $e) {
+        }
+
+        \Cart::session(auth()->id())->add(array(
+            'id' => $product['id'],
+            'name' => $product['name'],
+            'price' => $product['price'],
+            'quantity' => 1,
+            'attributes' => array(),
+            'associatedModel' => $product
+        ));
 
         return back()->with('msg', 'Items has been add to cart');
     }

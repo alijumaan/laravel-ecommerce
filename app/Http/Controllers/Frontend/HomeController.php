@@ -3,26 +3,20 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
-use App\Repositories\Frontend\HomeRepository;
 use App\Traits\FilterTrait;
 
 class HomeController extends Controller
 {
     use FilterTrait;
 
-    public $homeRepository;
-    public $product;
-
-    public function __construct(HomeRepository $homeRepository, Product $product)
-    {
-        $this->homeRepository = $homeRepository;
-        $this->product = $product;
-    }
-
     public function index()
     {
-        $products = $this->homeRepository->index();
+        $products = Product::active()->with('media')
+            ->whereHas('category', function ($query){
+                $query->whereStatus(1);
+            })->orderBy('id', 'desc')->paginate(8);
 
         return view('frontend.index', compact('products'))->with(['message' => 'searching...', 'alert-type' => 'success']);
 
@@ -30,7 +24,7 @@ class HomeController extends Controller
 
     public function search()
     {
-        $query = $this->product::where('in_stock', '>=', 1)->with(['category', 'media', 'tags'])->whereHas('category', function ($query) {
+        $query = Product::where('in_stock', '>=', 1)->with(['category', 'media', 'tags'])->whereHas('category', function ($query) {
             $query->whereStatus(1);
         });
 
@@ -41,17 +35,33 @@ class HomeController extends Controller
 
     public function category($slug)
     {
-        $products = $this->homeRepository->category($slug);
+        $category = Category::whereSlug($slug)
+            ->orWhere('id', $slug)
+            ->whereStatus(1)->first()->id;
 
-        if ($products)
+        $products = Product::with('tags', 'media')
+            ->whereCategoryId($category)
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+
+        if ($products){
             return view('frontend.product.index', compact('products'));
+        }
 
         return redirect()->route('home');
     }
 
     public function archive($date)
     {
-        $products = $this->homeRepository->archive($date);
+        $exploded_date = explode('-', $date);
+        $month = $exploded_date[0];
+        $year = $exploded_date[1];
+
+        $products = Product::with('tags', 'media')->active()
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->orderBy('id', 'desc')
+            ->paginate(5);
 
         return view('frontend.product.index', compact('products'));
     }

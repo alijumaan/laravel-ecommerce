@@ -59,7 +59,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 /***** CART *****/
 Route::get('/cart/apply-coupon', [CartController::class, 'applyCoupon'])->name('cart.coupon');
-Route::get('/add-to-cart/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/add-to-cart/{product}', [CartController::class, 'aadToCart'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/destroy/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
 
