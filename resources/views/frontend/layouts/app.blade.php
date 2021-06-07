@@ -4,17 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{  config('app.name') }}</title>
-
     <meta name="description" content="">
-
-    <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-
-    <!-- all css here -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
@@ -26,8 +20,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">--}}
-
     <style>
         .score {
             display: block;
@@ -75,7 +67,7 @@
 
         .rating-star:after {
             position: relative;
-            font-family: "Font Awesome 5 Free";
+            font-family: "Font Awesome 5 Free", serif;
             content: '\f005';
             color: lightgrey;
         }
@@ -96,8 +88,6 @@
             content: '\f005';
             color: #FFCA00;
         }
-
-
     </style>
 
     @livewireStyles
@@ -111,17 +101,11 @@
 <div class="text-center">
     @include('messages.flash')
 </div>
-
 @yield('content')
-
 @include('frontend.layouts.footer')
-
-<!-- all js here -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('frontend/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 <script src="{{ asset('frontend/js/vendor/jquery-1.12.0.min.js') }}"></script>
-{{--<script src="{{ asset('frontend/js/popper.js') }}"></script>--}}
-{{--<script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>--}}
 <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ asset('frontend/js/isotope.pkgd.min.js') }}"></script>
 <script src="{{ asset('frontend/js/imagesloaded.pkgd.min.js') }}"></script>
@@ -131,12 +115,10 @@
 <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('frontend/js/plugins.js') }}"></script>
 <script src="{{ asset('frontend/js/main.js') }}"></script>
-
 <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ asset('frontend/js/alert-message.js') }}"></script>
 <script src="{{ url('https://kit.fontawesome.com/8003f9e0e2.js') }}" crossorigin="anonymous"></script>
 @livewireScripts
-
 @yield('script')
 </body>
 </html>

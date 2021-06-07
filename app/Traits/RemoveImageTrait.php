@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Models\ProductMedia;
+use App\Models\MediaProduct;
 use Illuminate\Support\Facades\File;
 
 trait RemoveImageTrait
@@ -27,7 +27,7 @@ trait RemoveImageTrait
 
     public function removeProductImage($request)
     {
-        $media = ProductMedia::whereId($request->mediaId)->first();
+        $media = MediaProduct::whereId($request->mediaId)->first();
 
         if ($media) {
             if (File::exists('storage/' . $media->file_name)) {

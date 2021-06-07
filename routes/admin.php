@@ -23,50 +23,51 @@ if (App::environment('production')) {
 
 Route::group(['middleware' => 'admin'], function () {
 
-    /** DASHBOARD */
+    // DASHBOARD
     Route::view('/', 'backend.index')->name('admin.index');
 
-    /** PRODUCTS */
+    // PRODUCTS
     Route::post('/products/remove-image/{mediaId}', [ProductController::class, 'removeImage'])->name('products.media.destroy');
     Route::resource('products', ProductController::class)->names('admin.products');
 
-    /** REVIEWS */
+    // REVIEWS
     Route::resource('reviews', ReviewController::class)->names('admin.reviews');
 
-    /** CATEGORIES */
+    // CATEGORIES
     Route::resource('categories', CategoryController::class)->names('admin.categories');
 
-    /** USERS */
+    // USERS
     Route::post('/users/remove-image', [UserController::class, 'removeImage'])->name('admin.users.remove-image');
     Route::resource('users', UserController::class)->names('admin.users');
 
-    /** SUPERVISORS */
-    Route::post('/supervisors/remove-image', [SupervisorController::class, 'removeImage'])->name('admin.supervisors.remove-image');
-    Route::resource('supervisors', SupervisorController::class)->names('admin.supervisors');
-
-    /** CONTACTS */
+    // CONTACTS
     Route::resource('contacts', ContactController::class)->names('admin.contacts');
 
-    /** TAGS */
+    // TAGS
     Route::resource('tags', TagController::class)->names('admin.tags');
 
-    /** SETTINGS */
+    // SETTINGS
     Route::resource('settings', SettingController::class)->names('admin.settings')->only('index', 'update');
 
-    /** ORDERS */
+    // ORDERS
     Route::get('confirm/{id}', [OrderController::class, 'confirm'])->name('order.confirm');
     Route::get('pending/{id}', [OrderController::class, 'pending'])->name('order.pending');
     Route::resource('orders', OrderController::class)->names('admin.orders')->only('index', 'show');
 
-    /** COUPONS */
+    // COUPONS
     Route::resource('coupons', CouponsController::class)->names('admin.coupons');
 
-    /***** PERMISSION *****/
-    /* Change Role By Ajax JavaScript */
-    Route::post('permissions/byRole', [PermissionController::class, 'getByRole'])->name('permission_byRole');
-    Route::resource('permissions', PermissionController::class);
+    Route::group(['middleware' => 'superAdmin'], function () {
+        /* Change Role By Ajax JavaScript */
+        Route::post('permissions/byRole', [PermissionController::class, 'getByRole'])->name('permission_byRole');
+        Route::resource('permissions', PermissionController::class);
 
-    /** Pages */
+        // SUPERVISORS
+        Route::post('/supervisors/remove-image', [SupervisorController::class, 'removeImage'])->name('admin.supervisors.remove-image');
+        Route::resource('supervisors', SupervisorController::class)->names('admin.supervisors');
+    });
+
+    // Pages
     Route::resource('pages', PageController::class);
 });
 
@@ -74,7 +75,6 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('admin.login.form');
     Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
-
 });
 
 

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use App\Models\ProductMedia;
+use App\Models\MediaProduct;
 use Illuminate\Database\Seeder;
 
 class ProductMediaTableSeeder extends Seeder
@@ -21,7 +21,7 @@ class ProductMediaTableSeeder extends Seeder
 
         foreach ($products as $product) {
             for ($i = 1; $i <= 4; $i++) {
-                ProductMedia::create([
+                MediaProduct::create([
                     'product_id'   => $product->id,
                 ]);
             }

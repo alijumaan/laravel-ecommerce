@@ -16,11 +16,6 @@ class SupervisorController extends Controller
 
     public $supervisor;
 
-    public function __construct()
-    {
-        $this->middleware('superAdmin');
-    }
-
     public function index()
     {
         $supervisors = User::whereHas('role', function ($query) {

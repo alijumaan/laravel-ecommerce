@@ -14,11 +14,6 @@ class UserController extends Controller
 {
     use ImageUploadTrait;
 
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
-
     public function index()
     {
         $orders = auth()->user()->orders()->with(['items', 'user'])->orderBy('id', 'desc')->paginate(1);
