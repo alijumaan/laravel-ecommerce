@@ -75,6 +75,8 @@
                         <div class="product-fruit-img">
                             @if($product->media->count() > 0)
                                 <img src="{{ asset('storage/' . $product->media->first()->file_name ) }}">
+                            @else
+                                <img src="{{ asset('storage/app/public/images/default.jpeg' ) }}">
                             @endif
                             <div class="product-furit-action">
                                 <a class="furit-animate-left" title="Add To Cart" href="{{route('cart.add', $product->id)}}">
