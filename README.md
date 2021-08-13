@@ -27,5 +27,5 @@ after install the source code open Terminal to use these command line:
 ## My site
 <a href='https://alijumaan.com' target="_blank">https://alijumaan.com</a>
 
-* enjoy...
+* Thank You
 
