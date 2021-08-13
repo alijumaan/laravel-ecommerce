@@ -28,7 +28,7 @@
                 <td><span class="amount">${{ auth()->user()->orderSubTotal() }}</span></td>
             </tr>
             <tr class="cart-subtotal">
-                <th>Task(5%)</th>
+                <th>Tax(5%)</th>
                 <td><span class="amount">${{ auth()->user()->tax() }}</span></td>
             </tr>
             <tr class="order-total">
