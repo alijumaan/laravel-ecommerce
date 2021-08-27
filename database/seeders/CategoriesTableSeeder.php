@@ -14,9 +14,29 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        Category::create(['name' => 'Phones']);
-        Category::create(['name' => 'Computers']);
-        Category::create(['name' => 'Headphones']);
-        Category::create(['name' => 'Televisions']);
+        $clothes = Category::create(['name' => 'Clothes', 'status' => true]);
+        Category::create(['name' => 'Women\' Clothes', 'status' => true, 'parent_id' => $clothes->id]);
+        Category::create(['name' => 'Men\' Clothes', 'status' => true, 'parent_id' => $clothes->id]);
+        Category::create(['name' => 'Boy\' Clothes', 'status' => true, 'parent_id' => $clothes->id]);
+        Category::create(['name' => 'Girls\' Clothes', 'status' => true, 'parent_id' => $clothes->id]);
+
+
+        $shoes = Category::create(['name' => 'Shoes', 'status' => true]);
+        Category::create(['name' => 'Women\' Shoes', 'status' => true, 'parent_id' => $shoes->id]);
+        Category::create(['name' => 'Men\' Shoes', 'status' => true, 'parent_id' => $shoes->id]);
+        Category::create(['name' => 'Boy\' Shoes', 'status' => true, 'parent_id' => $shoes->id]);
+        Category::create(['name' => 'Girls\' Shoes', 'status' => true, 'parent_id' => $shoes->id]);
+
+        $watches = Category::create(['name' => 'Watches', 'status' => true]);
+        Category::create(['name' => 'Women\' Watches', 'status' => true, 'parent_id' => $watches->id]);
+        Category::create(['name' => 'Men\' Watches', 'status' => true, 'parent_id' => $watches->id]);
+        Category::create(['name' => 'Boy\' Watches', 'status' => true, 'parent_id' => $watches->id]);
+        Category::create(['name' => 'Girls\' Watches', 'status' => true, 'parent_id' => $watches->id]);
+
+        $electronics = Category::create(['name' => 'Electronics', 'status' => true]);
+        Category::create(['name' => 'USB Flash drives', 'status' => true, 'parent_id' => $electronics->id]);
+        Category::create(['name' => 'Headphone', 'status' => true, 'parent_id' => $electronics->id]);
+        Category::create(['name' => 'Portable speakers', 'status' => true, 'parent_id' => $electronics->id]);
+        Category::create(['name' => 'Keyboards', 'status' => true, 'parent_id' => $electronics->id]);
     }
 }

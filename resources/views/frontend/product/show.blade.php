@@ -7,8 +7,8 @@
                 <div class="col-md-12 col-lg-7 col-12">
                     <div class="product-details-img-content">
                         <div class="product-details-tab mr-70">
-                            <div class="product-details-large tab-content">
-                                @if($product->media->count() > 0)
+                            @if($product->media->first()->file_name)
+                                <div class="product-details-large tab-content">
                                     @foreach ($product->media as $media)
                                         <div class="tab-pane {{ $loop->index == 0 ? 'active' : '' }} show fade"
                                              id="pro-details{{ $loop->index }}" role="tabpanel">
@@ -20,34 +20,27 @@
                                                              alt="{{ $product->name }}">
                                                     </a>
                                                 @else
-
-                                                    <img src="{{asset('frontend/images/products/default.jpg') }}"
-                                                         alt="">
-
-                                                    <img src="{{asset('frontend/images/default.jpg') }}" alt="">
-
+                                                    <img src="{{ asset('frontend/img/default/no-img.png' ) }}" alt="{{ $product->name }}">
                                                 @endif
 
                                             </div>
                                         </div>
 
                                     @endforeach
-                                @else
-                                    <img src="{{ asset('frontend/images/default.jpg') }}" alt="{{ $product->name }}">
-                                @endif
-                            </div>
-
-                            <div class="product-details-small nav mt-12" role=tablist>
-                                @foreach ($product->media as $media)
-                                    <a class="{{ $loop->index == 0 ? 'active' : '' }} mr-12"
-                                       href="#pro-details{{ $loop->index }}" data-toggle="tab" role="tab"
-                                       aria-selected="true">
-                                        <img style="width: 90px;" src="{{ asset('storage/' . $media->file_name ) }}"
-                                             alt="{{ $product->name }}">
-                                    </a>
-                                @endforeach
-                            </div>
-
+                                </div>
+                                    <div class="product-details-small nav mt-12" role=tablist>
+                                        @foreach ($product->media as $media)
+                                            <a class="{{ $loop->index == 0 ? 'active' : '' }} mr-12"
+                                               href="#pro-details{{ $loop->index }}" data-toggle="tab" role="tab"
+                                               aria-selected="true">
+                                                <img style="width: 90px;" src="{{ asset('storage/' . $media->file_name ) }}"
+                                                     alt="{{ $product->name }}">
+                                            </a>
+                                        @endforeach
+                                    </div>
+                            @else
+                                <img src="{{ asset('frontend/img/default/no-img.png' ) }}" alt="{{ $product->name }}">
+                            @endif
                         </div>
                     </div>
                 </div>

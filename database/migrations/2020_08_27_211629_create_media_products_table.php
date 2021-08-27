@@ -15,8 +15,8 @@ class CreateMediaProductsTable extends Migration
     {
         Schema::create('media_products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->string('file_name')->default('images/default.png');
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->string('file_name')->nullable();
             $table->string('file_type')->nullable();
             $table->string('file_size')->nullable();
             $table->timestamps();

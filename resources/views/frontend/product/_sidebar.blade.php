@@ -108,8 +108,10 @@
                     <li>
                         <div class="post-wrapper d-flex">
                                 <a href="{{ route('frontend.products.show', $recent_product->slug) }}">
-                                    @if($recent_product->media->count() > 0)
+                                    @if($recent_product->media->first()->file_name)
                                         <img class="avatar pb-3" src="{{ asset('storage/' . $recent_product->media->first()->file_name ) }}">
+                                    @else
+                                        <img class="avatar pb-3 mx-2" src="{{ asset('frontend/img/default/no-img.png' ) }}" alt="">
                                     @endif
                                 </a>
                             <div class="">

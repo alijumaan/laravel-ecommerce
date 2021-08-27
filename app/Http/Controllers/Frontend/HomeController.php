@@ -17,8 +17,10 @@ class HomeController extends Controller
             ->whereHas('category', function ($query){
                 $query->whereStatus(1);
             })->orderBy('id', 'desc')->paginate(8);
+        $categories = Category::whereStatus(1)->whereParentId(null)->limit(4)->get();
 
-        return view('frontend.index', compact('products'))->with(['message' => 'searching...', 'alert-type' => 'success']);
+        return view('frontend.index', compact('products', 'categories'))
+            ->with(['message' => 'searching...', 'alert-type' => 'success']);
 
     }
 

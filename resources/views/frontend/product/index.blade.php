@@ -68,8 +68,10 @@
                                                 <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
                                                     <div class="product-img list-img-width">
                                                         <a href="{{route('frontend.products.show', $product->slug)}}">
-                                                            @if($product->media->count() > 0)
+                                                            @if($product->media->first()->file_name)
                                                                 <img src="{{ asset('storage/' . $product->media->first()->file_name ) }}">
+                                                            @else
+                                                                <img src="{{ asset('frontend/img/default/no-img.png' ) }}" alt="{{ $product->name }}">
                                                             @endif
                                                         </a>
                                                     </div>
@@ -115,8 +117,10 @@
                                                 <div class="product-wrapper mb-30">
                                                     <div class="product-img">
                                                         <a href="{{route('frontend.products.show', $product->slug)}}">
-                                                            @if($product->media->count() > 0)
+                                                            @if($product->media->first()->file_name)
                                                                 <img src="{{ asset('storage/' . $product->media->first()->file_name ) }}">
+                                                            @else
+                                                                <img src="{{ asset('frontend/img/default/no-img.png' ) }}" alt="{{ $product->name }}">
                                                             @endif
                                                         </a>
 {{--                                                        <span class="bg-danger">hot</span>--}}

@@ -52,6 +52,8 @@
                                         <img src="{{asset('storage/'. $media->file_name) }}" class="img-fluid" alt="">
                                     </div>
                                 @endforeach
+                            @else
+                                <img src="{{ asset('frontend/img/default/no-img.png' ) }}" alt="">
                             @endif
                         </div>
                     </th>

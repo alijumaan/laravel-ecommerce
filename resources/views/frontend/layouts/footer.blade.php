@@ -1,3 +1,40 @@
+<!-- services area start -->
+<div class="fruits-services ptb-200">
+    <div class="fruits-services-wrapper">
+        <div class="single-fruits-services">
+            <div class="fruits-services-img">
+                <img src="{{asset('frontend/img/logo/logo.png')}}" alt="">
+            </div>
+            <div class="fruits-services-content">
+                <h4>Free Shipping</h4>
+                <p>Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is simply
+                    industry.</p>
+            </div>
+        </div>
+        <div class="single-fruits-services">
+            <div class="fruits-services-img">
+                <img src="{{asset('frontend/img/logo/logo.png')}}" alt="">
+            </div>
+            <div class="fruits-services-content">
+                <h4>Money Guarentee.</h4>
+                <p>Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is simply
+                    industry.</p>
+            </div>
+        </div>
+        <div class="single-fruits-services">
+            <div class="fruits-services-img">
+                <img src="{{asset('frontend/img/logo/logo.png')}}" alt="">
+            </div>
+            <div class="fruits-services-content">
+                <h4>Online Support</h4>
+                <p>Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is simply
+                    industry.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- services area end -->
+
 <footer class="footer-area fruits-footer">
     <div class="food-footer-bottom pt-80 pb-70 black-bg-5">
         <div class="container">

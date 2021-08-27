@@ -22,12 +22,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 8, 2);
             $table->unsignedBigInteger('in_stock');
             $table->unsignedTinyInteger('review_able')->default(1);
-            $table->unsignedInteger('category_id')->nullable();
-
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories')
-                ->onDelete('set null');
+            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

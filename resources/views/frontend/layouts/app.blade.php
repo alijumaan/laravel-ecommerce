@@ -20,76 +20,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    <style>
-        .score {
-            display: block;
-            font-size: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .score-wrap {
-            display: inline-block;
-            position: relative;
-            height: 19px;
-        }
-
-        .score .stars-active {
-            color: #FFCA00;
-            position: relative;
-            z-index: 10;
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .score .stars-inactive {
-            color: lightgrey;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .rating {
-            overflow: hidden;
-            display: inline-block;
-            position: relative;
-            font-size: 20px;
-        }
-
-        .rating-star {
-            padding: 0 5px;
-            margin: 0;
-            cursor: pointer;
-            display: block;
-            float: right;
-        }
-
-        .rating-star:after {
-            position: relative;
-            font-family: "Font Awesome 5 Free", serif;
-            content: '\f005';
-            color: lightgrey;
-        }
-
-        .rating-star.checked ~ .rating-star:after,
-        .rating-star.checked:after {
-            content: '\f005';
-            color: #FFCA00;
-        }
-
-        .rating:hover .rating-star:after {
-            content: '\f005';
-            color: lightgrey;
-        }
-
-        .rating-star:hover ~ .rating-star:after,
-        .rating .rating-star:hover:after {
-            content: '\f005';
-            color: #FFCA00;
-        }
-    </style>
-
     @livewireStyles
     @yield('style')
 </head>
@@ -101,7 +31,10 @@
 <div class="text-center">
     @include('messages.flash')
 </div>
-@yield('content')
+
+
+    @yield('content')
+
 @include('frontend.layouts.footer')
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('frontend/js/vendor/modernizr-2.8.3.min.js') }}"></script>
