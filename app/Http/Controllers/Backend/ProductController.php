@@ -3,109 +3,139 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\Backend\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
-use App\Traits\RemoveImageTrait;
-use Illuminate\Http\Request;
-use App\Traits\FilterTrait;
 use App\Services\ProductService;
+use App\Traits\ImageUploadTrait;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
-    use FilterTrait, RemoveImageTrait;
-
-    /** @var ProductService */
-    private $productService;
-
-    public function __construct(ProductService $productService)
-    {
-        $this->productService = $productService;
-    }
+    use ImageUploadTrait;
 
     public function index()
     {
-        $query = Product::with(['category', 'reviews', 'media']);
+        $this->authorize('access_product');
 
-        $products = $this->filter($query);
+        $products = Product::with('category', 'tags', 'firstMedia')
+            ->when(\request()->keyword != null, function ($query) {
+                $query->search(\request()->keyword);
+            })
+            ->when(\request()->status != null, function ($query) {
+                $query->whereStatus(\request()->status);
+            })
+            ->orderBy(\request()->sortBy ?? 'id', \request()->orderBy ?? 'desc')
+            ->paginate(\request()->limitBy ?? 10);
 
         return view('backend.products.index', compact('products'));
     }
 
-    public function show(Product $product)
-    {
-        return view('backend.products.show', compact('product'));
-    }
-
     public function create()
     {
-        abort_if(!auth()->user()->can(['add-product', 'add-tag']), 403, 'You have not permission to access this page!');
+        $this->authorize('create_product');
 
-        $categories = Category::orderBy('name')->pluck('name', 'id');
-
-        $tags = Tag::orderBy('name')->pluck('name', 'id');
+        $categories = Category::active()->get(['id', 'name']);
+        $tags = Tag::active()->get(['id', 'name']);
 
         return view('backend.products.create', compact('categories', 'tags'));
     }
 
-    public function store(StoreProductRequest $request)
+    public function store(ProductRequest $request)
     {
+        $this->authorize('create_product');
 
-        $product = Product::create($request->validated());
-        $product->tags()->sync($request->tags);
+        if ($request->validated()){
+            $product = Product::create($request->except('tags', 'images', '_token'));
+            $product->tags()->attach($request->tags);
 
-        (new ProductService())->storeProductImages($request, $product);
+            (new ProductService())->storeImages($request, $product, 1);
 
-        if ($request->status == 1) {
-            clear_cache();
+            return redirect()->route('admin.products.index')->with([
+                'message' => 'Create product successfully',
+                'alert-type' => 'success'
+            ]);
         }
 
-        return redirect()->route('admin.products.index')->with(['message' => 'Product create successfully', 'alert-type' => 'success',]);
+        return back()->with([
+            'message' => 'Something was wrong, please try again late',
+            'alert-type' => 'error'
+        ]);
+    }
+
+    public function show(Product $product)
+    {
+        $this->authorize('show_product');
+
+        return view('backend.products.show', compact('product'));
     }
 
     public function edit(Product $product)
     {
-        abort_if(!auth()->user()->can('edit-product'), 403, 'You have not permission to access this page!');
+        $this->authorize('edit_product');
 
-        $categories = Category::orderBy('name')->pluck('name', 'id');
+        $categories = Category::whereStatus(true)->get(['id', 'name']);
+        $tags = Tag::whereStatus(1)->get(['id', 'name']);
 
-        $tags = Tag::orderBy('name')->pluck('name', 'id');
-
-        return view('backend.products.edit', compact('categories', 'product', 'tags'));
-
+        return view('backend.products.edit', compact('product', 'categories', 'tags'));
     }
 
-    public function update(StoreProductRequest $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $product->update($request->validated());
+        $this->authorize('edit_product');
 
-        $this->productService->storeProductTags($request, $product);
-        $this->productService->storeProductImages($request, $product);
+        if ($request->validated()) {
+            $product->update($request->except('tags', 'images', '_token'));
+            $product->tags()->sync($request->tags);
 
-        clear_cache();
+            if ($request->images) {
+                (new ProductService())->unlinkAndDeleteImage($product);
+            }
 
-        return redirect()->route('admin.products.index')->with(['message' => 'Product updated successfully', 'alert-type' => 'success']);
+            $i = $product->media()->count() + 1;
+            (new ProductService())->storeImages($request, $product, $i);
+
+            return redirect()->route('admin.products.index')->with([
+                'message' => 'Updated product successfully',
+                'alert-type' => 'success'
+            ]);
+        }
+
+        return back()->with([
+            'message' => 'Something was wrong, please try again late',
+            'alert-type' => 'error'
+        ]);
     }
 
     public function destroy(Product $product)
     {
-        abort_if(!auth()->user()->can('delete-product'), 403, 'You have not permission to access this page!');
+        $this->authorize('delete_product');
 
-        $this->productService->unlinkImageAfterDelete($product);
+        (new ProductService())->unlinkAndDeleteImage($product);
 
         $product->delete();
 
-        clear_cache();
-
-        return redirect()->route('admin.products.index')->with(['message' => 'Product deleted successfully', 'alert-type' => 'success']);
+        return redirect()->route('admin.products.index')->with([
+            'message' => 'Deleted product successfully',
+            'alert-type' => 'success'
+        ]);
     }
 
     public function removeImage(Request $request)
     {
-        abort_if(!auth()->user()->can('delete-product'), 403, 'You have not permission to access this page!');
+        $this->authorize('delete_product');
 
-        return ($this->removeProductImage($request));
+        $product = Product::findOrFail($request->product_id);
+        $image = $product->media()->whereId($request->image_id)->first();
+
+        if (File::exists('storage/images/products/'. $image->file_name)) {
+            unlink('storage/images/products/'. $image->file_name);
+        }
+
+        $image->delete();
+
+        return true;
     }
-
 }

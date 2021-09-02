@@ -1,169 +1,55 @@
-@extends('backend.layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-
-    <div class="card shadow-sm mb-2">
-        <div class="card-header d-flex py-3">
-            <h4 class="m-0 font-weight-bold text-success">User ( {{ $supervisor->name }} )</h4>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex">
+            @if($supervisor->user_image)
+                <img src="{{ asset('storage/assets/images/users/' . $supervisor->user_image) }}" alt="" style="width: 70px;">
+            @else
+                <img src="{{ asset('default_images/avatar.png') }}" alt="" style="width: 70px;">
+            @endif
+            {{ $supervisor->full_name }}
             <div class="ml-auto">
-                <a href="{{ route('admin.users.index') }}" class="btn btn-outline-success">
-                        <span class="icon text-success-50">
-                            <i class="fa fa-home"></i>
-                        </span>
-                    <span class="text">Users</span>
+                <a href="{{ route('admin.supervisors.index') }}" class="btn btn-primary">
+                    <span class="text">Back to tags</span>
                 </a>
             </div>
         </div>
-
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table class="table table-hover">
                 <tbody>
                 <tr>
-                    <th>Name</th>
-                    <td>{{ $supervisor->name }} ({{ $supervisor->username }})</td>
-                    <th>Email</th>
-                    <td>{{ $supervisor->email }}</td>
+                    <th>First Name</th>
+                    <td>{{ $supervisor->first_name }}</td>
+                    <th>Last Name</th>
+                    <td>{{ $supervisor->last_name }}</td>
                 </tr>
                 <tr>
-                    <th>Mobile</th>
-                    <td>{{ $supervisor->mobile }}</td>
+                    <th>Email</th>
+                    <td>{{ $supervisor->email }}</td>
+                    <th>Username</th>
+                    <td>{{ $supervisor->username }}</td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>{{ $supervisor->phone }}</td>
                     <th>Status</th>
                     <td>{{ $supervisor->status }}</td>
                 </tr>
                 <tr>
-                    <th>Created date</th>
-                    <td>{{ $supervisor->created_at->format('d-m-Y h:i a') }}</td>
-                    <th>Orders Count</th>
-                    <td>{{ $supervisor->orders_count }}</td>
+                    <td>Email Verified At</td>
+                    <td>{{ $supervisor->email_verified_at ? $supervisor->email_verified_at->format('Y-m-d') : "Undefined" }}</td>
+                    <td>Created At</td>
+                    <td>{{ $supervisor->created_at ? $supervisor->created_at->format('Y-m-d') : "Undefined" }}</td>
                 </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="card shadow-sm mb-2">
-        <div class="card-header d-flex py-3">
-            <h4 class="m-0 font-weight-bold text-success">Orders</h4>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Order number</th>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                        <th>Product Price</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                @forelse($supervisor->orders as $order)
-                    <tr>
-                        <td>{{$order->order_number}}</td>
-                        <td>
-                            @forelse($order->items as $product)
-                                <p>{{ $product->name }}</p>
-                            @empty
-                            @endforelse
-                        </td>
-                        <td>
-                            @foreach($order->OrderItems as $item)
-                                <p>x{{ $item->quantity }}</p>
-                            @endforeach
-                        </td>
-                        <td>
-                            @forelse($order->OrderItems as $item)
-                                <p>${{ $item->price }}</p>
-                            @empty
-                            @endforelse
-                        </td>
-                        <td>
-                            @if($order->status)
-                                <span class="badge badge-success">Confirmed</span>
-                            @else
-                                <span class="badge badge-warning">Pending</span>
-                            @endif
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <th colspan="5" class="text-center">No orders found.</th>
-                    </tr>
-                @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="card shadow-sm mb-2">
-        <div class="card-header d-flex py-3">
-            <h4 class="m-0 font-weight-bold text-success">Reviews</h4>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-content table-hover">
-                <thead>
                 <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>review</th>
-                    <th>Status</th>
-                    <th>Create at</th>
-                    <th>Action</th>
+                    <td>Permissions</td>
+                    <td colspan="3" class="text-success">
+                        <h5>{{ str_replace("_", " ", $supervisor->getPermissionNames()->join(', ')) }}</h5>
+                    </td>
                 </tr>
-                </thead>
-                <tbody>
-                @forelse($supervisor->reviews as $review)
-                    <tr>
-                        <td><img src="{{ get_gravatar($review->email, 50) }}" alt="" class="img-circle"></td>
-                        <td>{{ $review->name }}</td>
-                        <td>{!! $review->review !!}</td>
-                        <td>{{ $review->status() }}</td>
-                        <td>{{ $review->created_at->format('d-m-Y') }}</td>
-                        <td>
-                            <div class="btn-group btn-group-toggle">
-                                <a href="{{ route('admin.reviews.edit', $review->id) }}" title="Edit" class="btn-primary btn btn-sm"><i class="fa fa-edit"></i></a>
-                                <a href="javascript:void(0);" onclick="if (confirm('Are You sure want to Delete?'))
-                                    { document.getElementById('review-delete-{{ $review->id }}').submit(); } else { return false; }"
-                                   title="Delete" class="btn-danger btn btn-sm"><i class="fa fa-trash"></i>
-                                </a>
-                                <form action="{{ route('admin.reviews.destroy', $review->id) }}" method="post" id="review-delete-{{ $review->id }}">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <th colspan="9" class="text-center">No reviews found.</th>
-                    </tr>
-                @endforelse
                 </tbody>
             </table>
         </div>
     </div>
-
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

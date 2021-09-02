@@ -3,66 +3,77 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTagRequest;
+use App\Http\Requests\Backend\TagRequest;
 use App\Models\Tag;
-use App\Traits\FilterTrait;
 
 class TagController extends Controller
 {
-    use FilterTrait;
-
-    public $tag;
-
-    public function __construct(Tag $tag)
-    {
-        $this->tag = $tag;
-    }
-
     public function index()
     {
-        $query = $this->tag::withCount('products');
-        $tags = $this->filter($query);
-
+        $this->authorize('access_tag');
+        $tags = Tag::with('products')
+            ->when(\request()->keyword != null, function ($query) {
+                $query->search(\request()->keyword);
+            })
+            ->when(\request()->status != null, function ($query) {
+                $query->whereStatus(\request()->status);
+            })
+            ->orderBy(\request()->sortBy ?? 'id', \request()->orderBy ?? 'desc')
+            ->paginate(\request()->limitBy ?? 10);
         return view('backend.tags.index', compact('tags'));
     }
 
     public function create()
     {
-        abort_if(!auth()->user()->can('add-tag'), 403, 'You did not have permission to access this page!');
+        $this->authorize('create_tag');
         return view('backend.tags.create');
     }
 
-    public function store(StoreTagRequest $request, Tag $tag)
+    public function store(TagRequest $request)
     {
-        $tag->name = $request->name;
-        $tag->save();
-        clear_cache();
+        $this->authorize('create_tag');
 
-        return redirect()->route('admin.tags.index')->with(['message' => 'Tag create successfully', 'alert-type' => 'success']);
+        Tag::create($request->validated());
+
+        return redirect()->route('admin.tags.index')->with([
+            'message' => 'Created successfully',
+            'alert-type' => 'success'
+        ]);
+    }
+
+    public function show(Tag $tag)
+    {
+        $this->authorize('show_tag');
+        return view('backend.tags.show', compact('tag'));
     }
 
     public function edit(Tag $tag)
     {
-        abort_if(!auth()->user()->can('edit-tag'), 403, 'You did not have permission to access this page!');
-
+        $this->authorize('edit_tag');
         return view('backend.tags.edit', compact('tag'));
     }
 
-    public function update(StoreTagRequest $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag)
     {
-        $tag->name = $request->name;
-        $tag->save();
-        clear_cache();
+        $this->authorize('edit_tag');
 
-        return redirect()->route('admin.tags.index')->with(['message' => 'Tag updated successfully', 'alert-type' => 'success']);
+        $tag->update($request->validated());
+
+        return redirect()->route('admin.tags.index')->with([
+            'message' => 'Updated successfully',
+            'alert-type' => 'success'
+        ]);
     }
 
     public function destroy(Tag $tag)
     {
-        abort_if(!auth()->user()->can('delete-tag'), 403, 'You did not have permission to access this page!');
-        $tag->delete();
-        clear_cache();
+        $this->authorize('delete_tag');
 
-        return redirect()->route('admin.tags.index')->with(['message' => 'Tag deleted successfully', 'alert-type' => 'success']);
+        $tag->delete();
+
+        return redirect()->route('admin.tags.index')->with([
+            'message' => 'Deleted successfully',
+            'alert-type' => 'success'
+        ]);
     }
 }

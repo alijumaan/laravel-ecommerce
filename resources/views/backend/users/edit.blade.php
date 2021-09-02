@@ -1,147 +1,113 @@
-@extends('backend.layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-
-    <div class="card">
-        <div class="card-header d-flex">
-            <h4 class="m-0 font-weight-bold text-success">Edit user {{ $user->name }}</h4>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex">
+            <h6 class="m-0 font-weight-bold text-primary">
+                Edit user: ({{ $user->full_name }})
+            </h6>
             <div class="ml-auto">
-                <a href="{{ route('admin.users.index') }}" class="btn btn-outline-success">
-                        <span class="icon text-primary-50">
-                            <i class="fa fa-home"></i>
-                        </span>
-                    <span class="text">Users</span>
+                <a href="{{ route('admin.users.index') }}" class="btn btn-primary">
+                    <span class="icon text-white-50">
+                        <i class="fa fa-home"></i>
+                    </span>
+                    <span class="text">Back to users</span>
                 </a>
             </div>
         </div>
-
         <div class="card-body">
-            {!! Form::model($user, ['route' => ['admin.users.update', $user->id],'method' => 'patch', 'files' => true]) !!}
+            <form action="{{ route('admin.users.update', $user) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input class="form-control" id="first_name" type="text" name="first_name" value="{{ old('first_name', $user->first_name) }}">
+                            @error('first_name')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input class="form-control" id="last_name" type="text" name="last_name" value="{{ old('last_name', $user->last_name) }}">
+                            @error('last_name')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
 
-            <div class="row">
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('name', 'Name') !!}
-                        {!! Form::text('name', old('name', $user->name), ['class' => 'form-control']) !!}
-                        @error('name')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input class="form-control" id="username" type="text" name="username" value="{{ old('username', $user->username) }}">
+                            @error('username')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input class="form-control" id="email" type="email" name="email" value="{{ old('email', $user->email) }}">
+                            @error('email')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('username', 'Username') !!}
-                        {!! Form::text('username', old('username', $user->username), ['class' => 'form-control']) !!}
-                        @error('username')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('email', 'Email') !!}
-                        {!! Form::email('email', old('email', $user->email), ['class' => 'form-control']) !!}
-                        @error('email')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('mobile', 'Mobile') !!}
-                        {!! Form::text('mobile', old('mobile', $user->mobile), ['class' => 'form-control']) !!}
-                        @error('mobile')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('password', 'Password') !!}
-                        {!! Form::password('password', ['class' => 'form-control', 'type' => 'password']) !!}
-                        @error('username')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input class="form-control" id="phone" type="text" name="phone" value="{{ old('phone', $user->phone) }}">
+                            @error('phone')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="1" {{ old('status', $user->status) == "Active" ? 'selected' : null }}>Active</option>
+                                <option value="0" {{ old('status', $user->status) == "Inactive" ? 'selected' : null }}>Inactive</option>
+                            </select>
+                            @error('status')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('status', 'Status') !!}
-                        {!! Form::select('status', ['' => '---', '1' => 'Active', '0' => 'Inactive'] , old('status', $user->status), ['class' => 'form-control']) !!}
-                        @error('status')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('role_id', 'Role') !!}
-                        {!! Form::select('role_id', ['' => '---', '1' => 'Admin', '2' => 'Supervisor', '3' => 'User'] , old('role_id', $user->role_id), ['class' => 'form-control']) !!}
-                        @error('role_id')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('receive_email', 'Receive Email') !!}
-                        {!! Form::select('receive_email', ['' => '---', '1' => 'Yes', '0' => 'No'] , old('receive_email', $user->receive_email), ['class' => 'form-control']) !!}
-                        @error('receive_email')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        {!! Form::label('bio', 'Bio') !!}
-                        {!! Form::textarea('bio', old('bio', $user->bio), ['class' => 'form-control']) !!}
-                        @error('bio')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-6">
+                        <label for="receive-email">Receive Email</label>
+                        <select name="receive_email" id="receive-email" class="form-control">
+                            <option value="">---</option>
+                            <option value="1" {{ old('receive_email', $user->receive_email) == 1 ? 'selected' : null }}>Yes</option>
+                            <option value="0" {{ old('receive_email', $user->receive_email) == 0 ? 'selected' : null }}>No</option>
+                        </select>
+                        @error('receive_email')<span class="text-danger">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="password" class="text-danger">Change password</label>
+                            <input class="form-control" id="password" type="password" name="password" value="{{ old('password') }}">
+                            @error('password')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                @if($user->avatar != '')
-                    <div class="col-12 d-flex">
-                        <img id="avatar_img" src="{{ asset('storage/' . $user->avatar) }}" class="img-fluid" width="150px" alt="{{ $user->name }}">
-                    </div>
-                @endif
-                <div class="col-12">
-                    <div class="form-group">
-                        {!! Form::file('avatar', ['class' => 'd-none', 'id' => 'avatar_file']) !!}
-                        @error('avatar')<span class="text-danger">{{ $message }}</span>@enderror
+                <div class="row">
+                    <div class="col-12">
+                        @if($user->user_image)
+                            <img src="{{ asset('storage/images/users/' . $user->user_image) }}" alt="{{ $user->full_name }}" width="60" height="60">
+                        @else
+                            <img src="{{ asset('img/avatar.png') }}" alt="{{ $user->full_name }}" width="60" height="60">
+                        @endif
+                        <br>
+                        <input type="file" name="user_image">
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group pt-4">
-                {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
-            </div>
-
-            {!! Form::close() !!}
+                <div class="form-group pt-4">
+                    <button class="btn btn-primary" type="submit" name="submit">Update</button>
+                </div>
+            </form>
         </div>
-
     </div>
-
-@endsection
-@section('script')
-    <script>
-        $(function () {
-
-            $(document).ready(function(){
-
-                $('#avatar_img').click(function() {
-                    $("input[id='avatar_file']").click();
-                });
-
-                $("#avatar_file").change(function(){
-                    let reader = new FileReader();
-                    reader.onload = function()
-                    {
-                        $("#avatar_img").addClass("avatar_preview").attr("src", reader.result);
-                    }
-                    reader.readAsDataURL(event.target.files[0]);
-                });
-            });
-
-            //   Script for remove Image
-            {{--$('.removeImage').click(function (){--}}
-            {{--    $.post('{{ route('admin.users.remove-image') }}', { user_id: '{{ $user->id }}', _token: '{{ csrf_token() }}' }, function (data) {--}}
-            {{--        if (data == 'true') {--}}
-            {{--            window.location.href = window.location;--}}
-            {{--        }--}}
-            {{--    })--}}
-            {{--});--}}
-        });
-    </script>
 @endsection

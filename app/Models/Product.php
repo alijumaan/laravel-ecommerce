@@ -5,13 +5,16 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Product extends Model
 {
-    use HasFactory;
-
-    use Sluggable, SearchableTrait;
+    use HasFactory, Sluggable, SearchableTrait;
 
     protected $guarded = [];
 
@@ -28,63 +31,89 @@ class Product extends Model
 
         'columns' => [
             'products.name'        => 10,
-            'products.slug'        => 10,
-            'products.description' => 10,
-            'products.details'     => 10,
+            'products.slug'        => 10
         ],
     ];
 
-    public function scopeActive($query)
+    public function getStatusAttribute(): string
     {
-        return $query->where('in_stock', '>=', 1);
+        return $this->attributes['status'] == 0 ? 'Inactive' : 'Active';
     }
 
-    public function category()
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(true);
+    }
+
+    public function scopeHasQuantity($query)
+    {
+        return $query->where('quantity', '>', 0);
+    }
+
+    public function scopeActiveCategory($query)
+    {
+        return $query->whereHas('category', function ($query) {
+            $query->whereStatus(1);
+        });
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->whereFeatured(true);
+    }
+
+    public function getFeaturedAttribute(): string
+    {
+        return $this->attributes['featured'] == 0 ? 'No' : 'Yes';
+    }
+
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id');
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function reviews()
+    public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
     }
 
-    public function orders()
+    public function orders(): BelongsToMany
     {
-        return $this->belongsToMany(Order::class, 'order_items', 'product_id', 'order_id');
+        return $this->belongsToMany(Order::class)->wherePivot('quantity');
     }
 
-    public function orderItems()
+    public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
     }
 
-    public function approved_reviews()
+    public function approvedReviews()
     {
         return $this->hasMany(Review::class)->whereStatus(1);
     }
 
-    public function media()
+    public function media(): MorphMany
     {
-        return $this->hasMany(MediaProduct::class);
+        return $this->morphMany(Media::class, 'mediable');
     }
 
-    public function inStock()
+    public function firstMedia(): MorphOne
     {
-        return $this->in_stock >= 1 ? 'In stock' : 'Out of stock';
+        return $this->morphOne(Media::class, 'mediable')
+            ->orderBy('file_sort', 'asc');
     }
 
-    public function ratings()
+    public function ratings(): HasMany
     {
         return $this->hasMany(Rating::class);
     }
@@ -93,6 +122,4 @@ class Product extends Model
     {
         return $this->ratings->isNotEmpty() ? $this->ratings()->sum('value') / $this->ratings()->count() : 0;
     }
-
-
 }

@@ -1,79 +1,79 @@
-@extends('backend.layouts.app')
+@extends('layouts.admin')
 
 @section('content')
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex">
+            <h6 class="m-0 font-weight-bold text-primary">
+                Product Reviews
+            </h6>
+            <div class="ml-auto"></div>
+        </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card shadow-sm mb-4">
-            <div class="card-header d-flex py-3">
-                <h4 class="m-0 font-weight-bold text-success">Reviews</h4>
-            </div>
-            <div class="col-11 mr-auto">
-                @include('backend.reviews.filter.filter')
-            </div>
-            <div class="table-responsive">
-                <table class="table table-content table-hover">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>User</th>
-                            <th width="40%">Review</th>
-                            <th>Status</th>
-                            <th>Create at</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($reviews as $review)
-                            <tr>
-                                <td><img src="{{ get_gravatar($review->email, 50) }}" alt="" class="img-circle"></td>
-                                <td>
-{{--                                    <a href="{!! $review->url != '' ? $review->url : 'javascript:void(0);' !!}" target="{!! $review->url != '' ? '_blank' : '' !!}">--}}
-                                    <a href="{{ route('admin.users.show', $review->user->id) }}">
-                                        {{ $review->name }}</a>
-                                    {{ $review->user_id != '' ? '(Member)' : '' }}
-                                </td>
-                                <td>
-                                    {!! $review->review !!}
-                                    <div class="text-muted">
-                                        <a href="{{ route('admin.products.show', $review->product_id) }}">{{ $review->product->name }}</a>
-                                    </div>
-                                </td>
-                                <td>{{ $review->status() }}</td>
-                                <td>{{ $review->created_at->format('d-m-Y') }}</td>
-                                <td>
-                                    <div class="btn-group btn-group-toggle">
-                                        <a href="{{ route('admin.reviews.edit', $review->id) }}" title="Edit" class="btn-primary btn btn-sm"><i class="fa fa-edit"></i></a>
-                                        <a href="javascript:void(0);" onclick="if (confirm('Are You sure want to Delete?'))
-                                            { document.getElementById('review-delete-{{ $review->id }}').submit(); } else { return false; }"
-                                           title="Delete" class="btn-danger btn btn-sm"><i class="fa fa-trash"></i>
-                                        </a>
-                                        <form action="{{ route('admin.reviews.destroy', $review->id) }}" method="post" id="review-delete-{{ $review->id }}">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" class="text-center">No reviews found.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                    <tfoot>
+        @include('partials.backend.filter', ['model' => route('admin.reviews.index')])
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Rating</th>
+                    <th>Product</th>
+                    <th>Status</th>
+                    <th>Created at</th>
+                    <th class="text-center" style="width: 30px;">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                @forelse($reviews as $review)
                     <tr>
-                        <th colspan="6">
-                            <div class="float-right">
-                            {!! $reviews->appends(request()->input())->links() !!}
+                        <td>
+                            <a href="{{ route('admin.reviews.show', $review->id) }}">
+                                {{ $review->user_id ? $review->user->full_name : $review->name }}
+                            </a><br>
+                            <small>{{ $review->email }}</small><br>
+                        </td>
+                        <td>{{ $review->title }}</td>
+                        <td><span class="badge badge-success">{{ $review->rating }}</span></td>
+                        <td>{{ $review->product->name }}</td>
+                        <td>{{ $review->status }}</td>
+                        <td>{{ $review->created_at ? $review->created_at->format('Y-m-d') : '' }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ route('admin.reviews.edit', $review) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="javascript:void(0);"
+                                   onclick="if (confirm('Are you sure to delete this record?'))
+                                       {document.getElementById('delete-review-{{ $review->id }}').submit();} else {return false;}"
+                                   class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
                             </div>
-                        </th>
+                            <form action="{{ route('admin.reviews.destroy', $review) }}"
+                                  method="POST"
+                                  id="delete-review-{{ $review->id }}" class="d-none">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        </td>
                     </tr>
-                    </tfoot>
-                </table>
-            </div>
+                @empty
+                    <tr>
+                        <td class="text-center" colspan="7">No reviews found.</td>
+                    </tr>
+                @endforelse
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="7">
+                        <div class="float-right">
+                            {!!$reviews->appends(request()->all())->links() !!}
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
-</div>
-
 @endsection

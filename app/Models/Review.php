@@ -2,35 +2,40 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Review extends Model
 {
-    use SearchableTrait;
+    use HasFactory, SearchableTrait;
 
     protected $guarded = [];
 
     protected $searchable = [
-
         'columns' => [
-            'reviews.name'       => 10,
-            'reviews.review'    => 10,
+            'reviews.title' => 10,
+            'reviews.content' => 10,
+            'users.first_name' => 10,
+            'users.email' => 10,
         ],
+        'joins' => [
+            'users' => ['users.id', 'reviews.user_id'],
+        ]
     ];
+    public function getStatusAttribute(): string
+    {
+        return $this->attributes['status'] == 0 ? 'Inactive' : 'Active';
+    }
 
-    public function product()
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function status()
-    {
-        return $this->status == 1 ? 'Active' : 'Inactive';
     }
 }

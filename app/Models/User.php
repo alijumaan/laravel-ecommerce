@@ -4,54 +4,56 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, searchableTrait;
+    use HasFactory, Notifiable, searchableTrait, HasRoles;
 
-    use HasFactory;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $guarded = [];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['full_name'];
+
     protected $searchable = [
         'columns' => [
-            'users.name'        => 10,
-            'users.username'    => 10,
-            'users.email'       => 10,
-            'users.mobile'      => 10,
-            'users.bio'         => 10,
+            'users.name' => 10,
+            'users.username' => 10,
+            'users.email' => 10,
+            'users.phone' => 10,
         ],
     ];
+
+    public function getFullNameAttribute(): string
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    public function isAdminOrSupervisor()
+    {
+        return auth()->user()->hasRole('admin') || auth()->user()->hasRole('supervisor');
+    }
 
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function ordersPaid(): HasMany
+    {
+        return $this->hasMany(Order::class)
+            ->whereIn('order_status', [Order::PAID]);
     }
 
     public function products()
@@ -67,6 +69,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(UserAddress::class);
     }
 
     public function getStatusAttribute()
@@ -89,76 +96,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->rated($product) ? $this->ratings->where('product_id', $product->id)->first() : NULL;
     }
 
-    public function productsInCart()
-    {
-        return \Cart::session(auth()->id())->getContent();
-    }
-
-    public function orderTotal()
-    {
-        return \Cart::session(auth()->id())->getTotal();
-    }
-
-    public function orderSubTotal()
-    {
-        return \Cart::session(auth()->id())->getSubTotal();
-    }
-
-    public function totalQuantity()
-    {
-        return \Cart::session(auth()->id())->getTotalQuantity();
-    }
-
-    public function tax()
-    {
-        return $this->orderTotal() - $this->orderSubTotal();
-    }
-
     public function ratedPurches()
     {
         return $this->belongsToMany(Product::class)->withPivot(['is_paid'])->wherePivot('id_paid', true);
 
     }
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    public function isSuperAdmin()
-    {
-        return $this->role->id == 1;
-    }
-
-    public function isAdmin()
-    {
-//        return null !== $this->role()->where('role', $role)->first();
-        return $this->role->id <= 2;
-    }
-
-    public function roleId()
-    {
-        switch ($this->role_id) {
-            case 1:
-                return 'Admin';
-
-            case 2:
-                return 'Supervisor';
-
-            case 3:
-                return 'User';
-        }
-    }
-
-    public function hasAllow($permission)
-    {
-        $role = $this->role()->first();
-        return $role->permissions()->whereName($permission)->first() ? true : false;
-    }
-
     public function favProduct()
     {
         return $this->belongsToMany(Product::class, 'favorites')->withTimestamps();
     }
-
 }

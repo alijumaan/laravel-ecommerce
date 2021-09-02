@@ -1,0 +1,111 @@
+.avatar{
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+}
+.avatar-round{
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 30%;
+}
+.score {
+    display: block;
+    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+}
+.score-wrap {
+    display: inline-block;
+    position: relative;
+    height: 19px;
+}
+.score .stars-active {
+    color: #FFCA00;
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.score .stars-inactive {
+    color: lightgrey;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.rating {
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+}
+.rating-star {
+    padding: 0 5px;
+    margin: 0;
+    cursor: pointer;
+    display: block;
+    float: right;
+}
+.rating-star:after {
+    position: relative;
+    font-family: "Font Awesome 5 Free", serif;
+    content: '\f005';
+    color: lightgrey;
+}
+.rating-star.checked ~ .rating-star:after,
+.rating-star.checked:after {
+    content: '\f005';
+    color: #FFCA00;
+}
+.rating:hover .rating-star:after {
+    content: '\f005';
+    color: lightgrey;
+}
+.rating-star:hover ~ .rating-star:after,
+.rating .rating-star:hover:after {
+    content: '\f005';
+    color: #FFCA00;
+}
+.cartBox{
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 5px;
+    border: 0 medium none;
+}
+.cartPlusMinus{
+    border: 1px solid #dcdcdc;
+    overflow: hidden;
+    padding: 9px 0 0 15px ;
+    width: 90px;
+    height: 49px;
+}
+.cartQty{
+    background: transparent none repeat scroll 0 0;
+    border: medium none;
+    font-size: 17px;
+    margin: 15px;
+    padding: 0;
+    text-align: center;
+}
+.notification {
+    color: white;
+    text-decoration: none;
+    padding: 3px 10px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
+.notification .badge {
+    position: absolute;
+    top: -1px;
+    right: 0;
+    padding: 2px 4px;
+    border-radius: 50%;
+    background: #85bd02;
+    color: white;
+}

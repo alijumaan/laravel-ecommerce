@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Models\MediaProduct;
+use App\Models\Media;
 use Illuminate\Support\Facades\File;
 
 trait RemoveImageTrait
@@ -10,14 +10,14 @@ trait RemoveImageTrait
     public function removeAvatar($request, $user)
     {
         if ($user) {
-            if ($request->avatar != '') {
-                if ($user->avatar != 'images/avatar.png') {
-                    if (File::exists('storage/' . $user->avatar))
-                        unlink('storage/' . $user->avatar);
+            if ($request->user_image != '') {
+                if ($user->user_image != 'images/avatar.png') {
+                    if (File::exists('storage/' . $user->user_image))
+                        unlink('storage/' . $user->user_image);
                 }
             }
 
-            $user->avatar = null;
+            $user->user_image = null;
             $user->save();
 
             return 'true';
@@ -27,7 +27,7 @@ trait RemoveImageTrait
 
     public function removeProductImage($request)
     {
-        $media = MediaProduct::whereId($request->mediaId)->first();
+        $media = Media::whereId($request->mediaId)->first();
 
         if ($media) {
             if (File::exists('storage/' . $media->file_name)) {

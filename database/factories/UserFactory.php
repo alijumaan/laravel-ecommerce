@@ -23,11 +23,31 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'username' => $this->faker->unique()->userName,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
-            'password' => bcrypt('password'),
+            'phone' => $this->faker->unique()->phoneNumber,
+            'password' => bcrypt('123123123'),
+            'status' => 1,
             'remember_token' => Str::random(10),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole('user');
+        });
+    }
+
+    public function unverified(): \Illuminate\Database\Eloquent\Factories\Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email_verified_at' => now(),
+            ];
+        });
     }
 }

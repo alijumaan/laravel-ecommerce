@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+@extends('layouts.app')
 @section('content')
     <div class="breadcrumb-area pt-5 pb-5" style="background-color: #09c6a2">
         <div class="container">

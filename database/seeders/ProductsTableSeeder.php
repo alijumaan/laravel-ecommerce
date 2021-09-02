@@ -16,23 +16,29 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-
         $faker = Factory::create();
 
-        $categories = Category::all();
+        $categories = Category::whereNotNull('parent_id')->pluck('id');
 
-        foreach ($categories as $category)  {
-            for ($i = 1; $i <= 5; $i++) {
-                $product = Product::create([
-                    'name'      => $category->name . ' ' . $i,
-                    'description'   => $faker->paragraph(),
-                    'details'   => $faker->paragraph(),
-                    'price'   => $faker->randomFloat(2, 100, 5000),
-                    'in_stock'   => $faker->numberBetween(50, 2000),
-                    'category_id'   => $category->id,
-                ]);
+        for($i = 1; $i <= 50; $i ++) {
+            $products[] = [
+                'name'          => $faker->sentence(2, true),
+                'slug'          => $faker->unique()->slug(2, true),
+                'description'   => $faker->paragraph,
+                'details'       => $faker->paragraph,
+                'price'         => $faker->numberBetween(5, 200),
+                'quantity'      => $faker->numberBetween(10, 100),
+                'category_id'   => $categories->random(),
+                'featured'      => rand(0, 1),
+                'status'        => true,
+                'created_at'    => now(),
+                'updated_at'    => now()
+            ];
+        }
 
-            }
+        $chunks = array_chunk($products, 50);
+        foreach ($chunks as $chunk) {
+            Product::insert($chunk);
         }
     }
 }

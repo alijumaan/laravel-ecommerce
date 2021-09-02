@@ -1,19 +1,9 @@
 <?php
-
-use App\Http\Controllers\Frontend\Auth\ForgotPasswordController;
-use App\Http\Controllers\Frontend\Auth\LoginController;
-use App\Http\Controllers\Frontend\Auth\RegisterController;
-use App\Http\Controllers\Frontend\Auth\ResetPasswordController;
-use App\Http\Controllers\Frontend\Auth\VerificationController;
-use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\Frontend\CheckoutController;
-use App\Http\Controllers\Frontend\ContactController;
-use App\Http\Controllers\Frontend\FavoriteController;
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\OrderController;
-use App\Http\Controllers\Frontend\ProductController;
-use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Frontend;
+use App\Http\Controllers\Backend;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 
@@ -21,71 +11,134 @@ if (App::environment('production')) {
     URL::forceScheme('https');
 }
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Auth::routes(['verify' => true]);
+
+Route::get('/', [Frontend\HomeController::class, 'index'])->name('home');
+Route::get('/cart', [Frontend\HomeController::class, 'cart'])->name('cart.index');
+Route::get('/shop/{slug?}', [Frontend\HomeController::class, 'shop'])->name('shop.index');
+Route::get('/shop/tag/{slug}', [Frontend\HomeController::class, 'shopTag'])->name('shop.tag');
+Route::get('/wishlist', [Frontend\HomeController::class, 'wishlist'])->name('wishlist.index');
+Route::get('/product/{slug}', [Frontend\HomeController::class, 'product'])->name('product.show');
+Route::post('/product/review', [Frontend\HomeController::class, 'storeReview'])->name('review.store');
+//Route::post('product/{slug}/rate', [Frontend\HomeController::class, 'rate'])->name('products.rate');
+Route::get('/search', [Frontend\HomeController::class, 'search'])->name('search');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'verified'], function () {
-        Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
-        Route::get('/edit-info', [UserController::class, 'edit_info'])->name('frontend.users.edit');
-        Route::post('/edit-info', [UserController::class, 'update_info'])->name('users.update_info');
-        Route::post('/edit-password', [UserController::class, 'update_password'])->name('users.update_password');
-
-        // favorite
-        Route::post('/products/{id}/favorite', [FavoriteController::class, 'store']);
-        Route::post('/products/{id}/unFavorite', [FavoriteController::class, 'destroy']);
-        Route::get('/user/favorite', [FavoriteController::class, 'index'])->name('userFav');
-        Route::get('/user/reviews', [UserController::class, 'show_reviews'])->name('users.reviews');
+        Route::get('/user/dashboard', [Frontend\UserController::class, 'dashboard'])->name('user.dashboard');
+        Route::get('/user/profile', [Frontend\UserController::class, 'profile'])->name('user.profile');
+        Route::patch('/user/profile', [Frontend\UserController::class, 'updateProfile'])->name('user.update_profile');
+        Route::get('/user/profile/remove-image', [Frontend\UserController::class, 'removeImage'])->name('user.remove_image');
+        Route::get('/user/addresses', [Frontend\UserController::class, 'addresses'])->name('user.addresses');
+        Route::get('/user/orders', [Frontend\UserController::class, 'orders'])->name('user.orders');
     });
 
-    // cart
-    Route::get('/cart/apply-coupon', [CartController::class, 'applyCoupon'])->name('cart.coupon');
-    Route::get('/add-to-cart/{product}', [CartController::class, 'aadToCart'])->name('cart.add');
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::get('/destroy/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
-
-    // checkout
-    Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-    Route::post('/cart/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::group(['middleware' => 'checkCart'], function () {
+        Route::get('/checkout', [Frontend\PaymentController::class, 'checkout'])->name('checkout.index');
+        Route::post('/checkout/payment', [Frontend\PaymentController::class, 'checkoutPayment'])->name('checkout.payment');
+        Route::get('/checkout/{orderId}/cancelled', [Frontend\PaymentController::class, 'cancelled'])->name('checkout.cancelled');
+        Route::get('/checkout/{orderId}/completed', [Frontend\PaymentController::class, 'completed'])->name('checkout.completed');
+        Route::get('/checkout/webhook/{order?}/{env?}', [Frontend\PaymentController::class, 'webhook'])->name('checkout.webhook.ipn');
+    });
 
     // tap gateway ****/
-    Route::get('/cart/charge-request', [OrderController::class, 'chargeRequest'])->name('checkout.charge_request');
-    Route::get('/cart/charge-update', [OrderController::class, 'chargeUpdate'])->name('checkout.charge_update');
+//    Route::get('/cart/charge-request', [OrderController::class, 'chargeRequest'])->name('checkout.charge_request');
+//    Route::get('/cart/charge-update', [OrderController::class, 'chargeUpdate'])->name('checkout.charge_update');
 });
 
-// category sidebar - archive sidebar
-Route::get('/category/{category_slug}', [HomeController::class, 'category'])->name('category.product');
-Route::get('/archive/{date}', [HomeController::class, 'archive'])->name('archive.product');
-
-// search
-Route::get('/search', [HomeController::class, 'search'])->name('search');
-
-// tags
-Route::get('/tag/{tag_slug}', [ProductController::class, 'tag'])->name('tag.products');
-
-// products
-Route::post('products/{product}', [ProductController::class, 'storeReview'])->name('products.add_review');
-Route::post('products/{product}/rate', [ProductController::class, 'rate'])->name('products.rate');
-Route::resource('products', ProductController::class)->names('frontend.products');
-
 // contacts
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-// authentication route
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('frontend.login.form');
-Route::post('/login', [LoginController::class, 'login'])->name('frontend.login');
+Route::get('/contact', [Frontend\ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [Frontend\ContactController::class, 'store'])->name('contact.store');
 
 // login by social media [ Facebook - Twitter - Google ]
-Route::get('login/{provider}', [LoginController::class, 'redirectToProvider'])->name('frontend.social_login');
-Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('frontend.social_login_callback');
+Route::get('login/{provider}', [LoginController::class, 'redirectToProvider'])->name('social_login');
+Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('social_login_callback');
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('frontend.logout');
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('frontend.register.form');
-Route::post('/register', [RegisterController::class, 'register'])->name('frontend.register');
-Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
-Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
+// admin
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get('/login', [Backend\BackendController::class, 'login'])->name('login');
+        Route::get('/forgot-password', [Backend\BackendController::class, 'forgot_password'])->name('forgot_password');
+    });
+
+    Route::group(['middleware' => ['roles']], function () {
+        Route::get('/', [Backend\BackendController::class, 'index'])->name('index');
+        Route::get('/account-settings', [Backend\BackendController::class, 'account_setting'])->name('account_setting');
+        Route::patch('/account-settings', [Backend\BackendController::class, 'update_account_setting'])->name('account_setting.update');
+        Route::get('/categories/{category}/remove-image', [Backend\CategoryController::class, 'removeImage'])->name('categories.remove_image');
+        Route::resource('categories', Backend\CategoryController::class);
+        Route::post('/products/remove-image', [Backend\ProductController::class, 'removeImage'])->name('products.remove_image');
+        Route::resource('products', Backend\ProductController::class);
+        Route::resource('tags', Backend\TagController::class);
+        Route::resource('coupons', Backend\CouponController::class);
+        Route::resource('reviews', Backend\ReviewController::class);
+        Route::get('/supervisors/{supervisor}/remove-image', [Backend\SupervisorController::class, 'removeImage'])->name('supervisors.remove_image');
+        Route::resource('supervisors', Backend\SupervisorController::class);
+        Route::resource('countries', Backend\CountryController::class);
+        Route::get('/states/get-states', [Backend\StateController::class, 'get_states'])->name('states.get_states');
+        Route::resource('states', Backend\StateController::class);
+        Route::get('/cities/get-cities', [Backend\CityController::class, 'get_cities'])->name('cities.get_cities');
+        Route::resource('cities', Backend\CityController::class);
+        Route::get('users/get-users', [Backend\UserController::class, 'get_users'])->name('users.get_users');
+        Route::resource('users', Backend\UserController::class);
+        Route::resource('user_addresses', Backend\UserAddressController::class);
+        Route::resource('shipping_companies', Backend\ShippingCompanyController::class);
+        Route::resource('payment_methods', Backend\PaymentMethodController::class);
+        Route::resource('orders', Backend\OrderController::class)->except('create', 'edit');
+    });
+});
+
+//Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+//    Route::get('/', [Backend_old\DashboardController::class, 'index'])->name('index');
+//
+//    Route::group(['middleware' => 'guest'], function () {
+//        Route::get('/login', [Backend_old\DashboardController::class, 'login'])->name('login');
+//        Route::get('/forgot-password', [Backend_old\DashboardController::class, 'forgot_password'])->name('forgot_password');
+//    });
+//
+//    // PRODUCTS
+//    Route::post('/products/remove-image/{mediaId}', [Backend_old\ProductController::class, 'removeImage'])->name('products.media.destroy');
+//    Route::resource('products', Backend_old\ProductController::class)->names('products');
+//
+//    Route::resource('payment-methods', Backend_old\PaymentMethodController::class)->names('payment_methods');
+//    Route::resource('user-addresses', Backend_old\UserAddressController::class)->names('user_addresses');
+//    Route::resource('shipping-companies', Backend_old\ShippingCompanyController::class)->names('shipping_companies');
+//    Route::resource('reviews', Backend_old\ReviewController::class)->names('reviews');
+//
+//    // CATEGORIES
+//    Route::resource('categories', Backend_old\CategoryController::class)->names('categories');
+//
+//    // USERS
+//    Route::post('/users/remove-image', [Backend_old\UserController::class, 'removeImage'])->name('users.remove-image');
+//    Route::resource('users', Backend_old\UserController::class)->names('users');
+//
+//    // CONTACTS
+//    Route::resource('contacts', Backend_old\ContactController::class)->names('contacts');
+//
+//    // TAGS
+//    Route::resource('tags', Backend_old\TagController::class)->names('tags');
+//
+//    // SETTINGS
+//    Route::resource('settings', Backend_old\SettingController::class)->names('settings')->only('index', 'update');
+//
+//    // ORDERS
+//    Route::get('confirm/{id}', [Backend_old\OrderController::class, 'confirm'])->name('order.confirm');
+//    Route::get('pending/{id}', [Backend_old\OrderController::class, 'pending'])->name('order.pending');
+//    Route::resource('orders', Backend_old\OrderController::class)->names('orders')->only('index', 'show');
+//
+//    // COUPONS
+//    Route::resource('coupons', Backend_old\CouponsController::class)->names('coupons');
+//
+//    Route::group(['middleware' => 'superAdmin'], function () {
+//        /* Change Role By Ajax JavaScript */
+//        Route::post('permissions/byRole', [Backend_old\PermissionController::class, 'getByRole'])->name('permission_byRole');
+//        Route::resource('permissions', Backend_old\PermissionController::class);
+//
+//        // SUPERVISORS
+//        Route::post('/supervisors/remove-image', [Backend_old\SupervisorController::class, 'removeImage'])->name('supervisors.remove-image');
+//        Route::resource('supervisors', Backend_old\SupervisorController::class)->names('supervisors');
+//    });
+//
+//    // Pages
+//    Route::resource('pages', Backend_old\PageController::class);
+//});

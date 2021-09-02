@@ -1,155 +1,50 @@
-@extends('backend.layouts.app')
+@extends('layouts.admin')
 
 @section('content')
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex">
+            @if($user->user_image)
+                <img src="{{ asset('storage/assets/images/users/' . $user->user_image) }}" alt="" style="width: 70px;">
+            @else
+                <img src="{{ asset('default_images/avatar.png') }}" alt="" style="width: 70px;">
+            @endif
 
-    <div class="card shadow-sm mb-2">
-        <div class="card-header d-flex py-3">
-            <h4 class="m-0 font-weight-bold text-success">User ( {{ $user->name }} )</h4>
+            {{ $user->full_name }}
             <div class="ml-auto">
-                <a href="{{ route('admin.users.index') }}" class="btn btn-outline-success">
-                        <span class="icon text-success-50">
-                            <i class="fa fa-home"></i>
-                        </span>
-                    <span class="text">Users</span>
+                <a href="{{ route('admin.users.index') }}" class="btn btn-primary">
+                    <span class="text">Back to users</span>
                 </a>
             </div>
         </div>
-
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <tbody>
-                <tr>
-                    <th>Name</th>
-                    <td>{{ $user->name }} ({{ $user->username }})</td>
-                    <th>Email</th>
-                    <td>{{ $user->email }}</td>
-                </tr>
-                <tr>
-                    <th>Mobile</th>
-                    <td>{{ $user->mobile }}</td>
-                    <th>Status</th>
-                    <td>{{ $user->status() }}</td>
-                </tr>
-                <tr>
-                    <th>Created date</th>
-                    <td>{{ $user->created_at->format('d-m-Y h:i a') }}</td>
-                    <th>Orders Count</th>
-                    <td>{{ $user->orders_count }}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="card shadow-sm mb-2">
-        <div class="card-header d-flex py-3">
-            <h4 class="m-0 font-weight-bold text-success">Orders</h4>
-        </div>
         <div class="table-responsive">
             <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Order number</th>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                        <th>Product Price</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
                 <tbody>
-                @forelse($user->orders as $order)
-                    <tr>
-                        <td>{{$order->order_number}}</td>
-                        <td>
-                            @forelse($order->items as $product)
-                                <p>{{ $product->name }}</p>
-                            @empty
-                                <p>not found.</p>
-                            @endforelse
-                        </td>
-                        <td>
-                            @forelse($order->OrderItems as $item)
-                                <p>x{{ $item->quantity }}</p>
-                            @empty
-                                <p>not found.</p>
-                            @endforelse
-                        </td>
-                        <td>
-                            @forelse($order->OrderItems as $item)
-                                <p>${{ $item->price }}</p>
-                            @empty
-                                <p>not found.</p>
-                            @endforelse
-                        </td>
-                        <td>
-                            @if($order->status)
-                                <span class="badge badge-success">Confirmed</span>
-                            @else
-                                <span class="badge badge-warning">Pending</span>
-                            @endif
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <th colspan="5">No orders found.</th>
-                    </tr>
-                @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="card shadow-sm mb-2">
-        <div class="card-header d-flex py-3">
-            <h4 class="m-0 font-weight-bold text-success">Reviews</h4>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-content table-hover">
-                <thead>
                 <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>comment</th>
-                    <th>Status</th>
-                    <th>Create at</th>
-                    <th>Action</th>
+                    <th>ID</th>
+                    <td>{{ $user->id }}</td>
+                    <th>First Name</th>
+                    <td>{{ $user->first_name }}</td>
+                    <th>Last Name</th>
+                    <td>{{ $user->last_name }}</td>
                 </tr>
-                </thead>
-                <tbody>
-                @forelse($user->reviews as $review)
-                    <tr>
-                        <td><img src="{{ get_gravatar($review->email, 50) }}" alt="" class="img-circle"></td>
-                        <td>{{ $review->name }}</td>
-                        <td>{!! $review->comment !!}</td>
-                        <td>{{ $review->status() }}</td>
-                        <td>{{ $review->created_at->format('d-m-Y') }}</td>
-                        <td>
-                            <div class="btn-group btn-group-toggle">
-                                <a href="{{ route('admin.reviews.edit', $review->id) }}" title="Edit" class="btn-primary btn btn-sm"><i class="fa fa-edit"></i></a>
-                                <a href="javascript:void(0);" onclick="if (confirm('Are You sure want to Delete?'))
-                                    { document.getElementById('comment-delete-{{ $review->id }}').submit(); } else { return false; }"
-                                   title="Delete" class="btn-danger btn btn-sm"><i class="fa fa-trash"></i>
-                                </a>
-                                <form action="{{ route('admin.reviews.destroy', $review->id) }}" method="post" id="comment-delete-{{ $review->id }}">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <th colspan="9" class="text-center">No comments found.</th>
-                    </tr>
-                @endforelse
+                <tr>
+                    <th>Email</th>
+                    <td>{{ $user->email }}</td>
+                    <th>Username</th>
+                    <td>{{ $user->username }}</td>
+                    <td>Phone</td>
+                    <td>{{ $user->phone }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{{ $user->status }}</td>
+                    <td>Email Verified At</td>
+                    <td>{{ $user->email_verified_at ? $user->email_verified_at->format('Y-m-d') : "Undefined" }}</td>
+                    <td>Created At</td>
+                    <td>{{ $user->created_at ? $user->created_at->format('Y-m-d') : "Undefined" }}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
     </div>
-
 @endsection
-
-
-
-

@@ -2,38 +2,44 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 trait ImageUploadTrait
 {
-    protected $image_path  = "app/public/images/products";
-    protected $img_height = 600;
-    protected $img_width = 600;
+    protected $path  = "app/public/images/";
 
-    protected $avatar_path = "app/public/images/covers";
-    protected $avatar_height = 240;
-    protected $avatar_width = 240;
-
-    public function uploadAvatar($img)
+    public function uploadImage($name, $img, $folderName, $image_width = NULL, $image_height = NULL): string
     {
-        $img_name = $this->imageName($img);
+        $image_name = $this->imageName($name, $img);
 
-        Image::make($img)->resize($this->avatar_width, $this->avatar_height)->save(storage_path($this->avatar_path.'/'.$img_name));
+        Image::make($img->getRealPath())->resize($image_width, $image_height, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save(storage_path($this->path.$folderName.'/'.$image_name), 100);
 
-        return "images/covers/" . $img_name;
+        return $image_name;
     }
 
-    public function uploadImage($img)
+    public function uploadImages($name, $img, $i, $folderName, $image_width = NULL, $image_height = NULL): string
     {
-        $img_name = $this->imageName($img);
+        $image_name = $this->randomImageName($name, $img, $i);
 
-        Image::make($img)->resize($this->img_width, $this->img_height)->save(storage_path($this->image_path.'/'.$img_name));
+        Image::make($img->getRealPath())
+            ->resize($image_width, $image_height, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(storage_path($this->path.$folderName.'/'.$image_name), 100);
 
-        return "images/products/" . $img_name;
+        return $image_name;
     }
 
-    public function imageName($image)
+
+    protected function imageName($imageName, $image): string
     {
-        return time().'-'.$image->getClientOriginalName();
+        return Str::slug($imageName) . "." . $image->getClientOriginalExtension();
+    }
+
+    protected function randomImageName($imageName, $image, $i): string
+    {
+        return Str::slug($imageName) . time() . '-' . $i . '.' . $image->getClientOriginalExtension();
     }
 }

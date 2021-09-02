@@ -19,8 +19,10 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->longText('details');
-            $table->decimal('price', 8, 2);
-            $table->unsignedBigInteger('in_stock');
+            $table->double('price');
+            $table->integer('quantity')->default(0);
+            $table->boolean('featured')->default(0);
+            $table->boolean('status')->default(false);
             $table->unsignedTinyInteger('review_able')->default(1);
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();

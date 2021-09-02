@@ -10,13 +10,19 @@ class ProductService
 {
     use ImageUploadTrait;
 
-    public function storeProductImages($request, $product)
+    public function storeImages($request, $product, $i)
     {
         if ($request->images && count($request->images) > 0) {
-            $i = 1;
-            foreach ($request->images as $file) {
+            foreach ($request->images as $image) {
+                $file_size = $image->getSize();
+                $file_type = $image->getMimeType();
+
                 $product->media()->create([
-                    'file_name' => $this->uploadImage($file)
+                    'file_name' => $this->uploadImages($product->name, $image, $i, 'products', 500, NULL),
+                    'file_size' => $file_size,
+                    'file_type' => $file_type,
+                    'file_status' => true,
+                    'file_sort' => $i
                 ]);
 
                 $i++;
@@ -24,26 +30,27 @@ class ProductService
         }
     }
 
-    public function storeProductTags($request, $product)
-    {
-        if (isset($request->tags) && count($request->tags) > 0) {
-            $new_tags = array();
-            foreach ($request->tags as $tag) {
-                $tag = Tag::firstOrCreate(['id' => $tag], ['name' => $tag]);
-                $new_tags[] = $tag->id;
-            }
-            $product->tags()->sync($new_tags);
-        }
-    }
-
-    public function unlinkImageAfterDelete($product)
+    public function unlinkAndDeleteImage($product)
     {
         if ($product->media->count() > 0) {
             foreach ($product->media as $media) {
-                if (File::exists('storage/' . $media->file_name)) {
-                    unlink('storage/' . $media->file_name);
+                if (File::exists('storage/images/products/' . $media->file_name)) {
+                    unlink('storage/images/products/' . $media->file_name);
                 }
+                $media->delete();
             }
         }
     }
+
+//    public function storeProductTags($request, $product)
+//    {
+//        if (isset($request->tags) && count($request->tags) > 0) {
+//            $new_tags = array();
+//            foreach ($request->tags as $tag) {
+//                $tag = Tag::firstOrCreate(['id' => $tag], ['name' => $tag]);
+//                $new_tags[] = $tag->id;
+//            }
+//            $product->tags()->sync($new_tags);
+//        }
+//    }
 }

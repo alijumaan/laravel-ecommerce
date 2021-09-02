@@ -30,7 +30,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    //  Social Media On Test
+//    Social Media On Test
 //    'facebook' => [
 //        'client_id' => '1036141446846834',
 //        'client_secret' => '82d4f87675e4bbf9d5229e369bcced17',
@@ -39,22 +39,27 @@ return [
 
     // Social Media On Server
     'facebook' => [
-        'client_id' => '1079454672514017',
-        'client_secret' => 'a029aac3df6dd281a461ebdcfba2afd2',
-        'redirect' => 'https://cartwhite.tk/login/facebook/callback',
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT'),
     ],
 
     'twitter' => [
-        'client_id' => '',
-        'client_secret' => '',
-        'redirect' => 'https://cartwhite.tk/login/twitter/callback',
+        'client_id' => env('TWITTER_CLIENT_ID'),
+        'client_secret' => env('TWITTER_CLIENT_SECRET'),
+        'redirect' => env('TWITTER_REDIRECT'),
     ],
 
     'google' => [
-        'client_id' => '',
-        'client_secret' => '',
-        'redirect' => 'https://cartwhite.tk/login/google/callback',
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT'),
     ],
 
-
+    'paypal' => [
+        'username' => env('PAYPAL_USERNAME'),
+        'password' => env('PAYPAL_PASSWORD'),
+        'signature' => env('PAYPAL_SIGNATURE'),
+        'sandbox' => env('PAYPAL_SANDBOX'),
+    ]
 ];

@@ -1,118 +1,191 @@
-@extends('backend.layouts.app')
-
-@section('style')
+@extends('layouts.admin')
+@section('styles')
     <link rel="stylesheet" href="{{ asset('backend/vendor/select2/css/select2.min.css') }}">
 @endsection
-
 @section('content')
-    <div class="card">
-        <div class="card-header d-flex">
-            <h4 class="m-0 font-weight-bold text-success">Edit user {{ $supervisor->name }}</h4>
+    <div class="card shadow mb-4">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <div class="card-header py-3 d-flex">
+            <h6 class="m-0 font-weight-bold text-primary">
+                Edit user: ({{ $supervisor->full_name }})
+            </h6>
             <div class="ml-auto">
-                <a href="{{ route('admin.supervisors.index') }}" class="btn btn-outline-success">
-                        <span class="icon text-primary-50">
-                            <i class="fa fa-home"></i>
-                        </span>
-                    <span class="text">Supervisors</span>
+                <a href="{{ route('admin.supervisors.index') }}" class="btn btn-primary">
+                    <span class="icon text-white-50">
+                    </span>
+                    <span class="text">Back to supervisors</span>
                 </a>
             </div>
         </div>
-
         <div class="card-body">
-            {!! Form::model($supervisor, ['route' => ['admin.supervisors.update', $supervisor->id],'method' => 'patch', 'files' => true]) !!}
+            <form action="{{ route('admin.supervisors.update', $supervisor) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input class="form-control" id="first_name" type="text" name="first_name" value="{{ old('first_name', $supervisor->first_name) }}">
+                            @error('first_name')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input class="form-control" id="last_name" type="text" name="last_name" value="{{ old('last_name', $supervisor->last_name) }}">
+                            @error('last_name')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
 
-            <div class="row">
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('name', 'Name') !!}
-                        {!! Form::text('name', old('name', $supervisor->name), ['class' => 'form-control']) !!}
-                        @error('name')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input class="form-control" id="username" type="text" name="username" value="{{ old('username', $supervisor->username) }}">
+                            @error('username')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input class="form-control" id="email" type="email" name="email" value="{{ old('email', $supervisor->email) }}">
+                            @error('email')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('username', 'Username') !!}
-                        {!! Form::text('username', old('username', $supervisor->username), ['class' => 'form-control']) !!}
-                        @error('username')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('email', 'Email') !!}
-                        {!! Form::email('email', old('email', $supervisor->email), ['class' => 'form-control']) !!}
-                        @error('email')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('mobile', 'Mobile') !!}
-                        {!! Form::text('mobile', old('mobile', $supervisor->mobile), ['class' => 'form-control']) !!}
-                        @error('mobile')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('password', 'Password') !!}
-                        {!! Form::password('password', ['class' => 'form-control', 'type' => 'password']) !!}
-                        @error('username')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input class="form-control" id="phone" type="text" name="phone" value="{{ old('phone', $supervisor->phone) }}">
+                            @error('phone')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="1" {{ old('status', $supervisor->status) == "Active" ? 'selected' : null }}>Active</option>
+                                <option value="0" {{ old('status', $supervisor->status) == "Inactive" ? 'selected' : null }}>Inactive</option>
+                            </select>
+                            @error('status')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('permissions', 'Permissions') !!}
-                        @include('backend.partial.permissions')
-                        @error('permissions')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-6">
+                        <label for="receive-email">Receive Email</label>
+                        <select name="receive_email" id="receive-email" class="form-control">
+                            <option value="">---</option>
+                            <option value="1" {{ old('receive_email', $supervisor->receive_email) == 1 ? 'selected' : null }}>Yes</option>
+                            <option value="0" {{ old('receive_email', $supervisor->receive_email) == 0 ? 'selected' : null }}>No</option>
+                        </select>
+                        @error('receive_email')<span class="text-danger">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="password" class="text-danger">Change password</label>
+                            <input class="form-control" id="password" type="password" name="password" value="{{ old('password') }}">
+                            @error('password')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('status', 'Status') !!}
-                        {!! Form::select('status', ['' => '---', '1' => 'Active', '0' => 'Inactive'] , old('status', $supervisor->status), ['class' => 'form-control']) !!}
-                        @error('status')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="permissions">Permissions</label>
+                            <select name="permissions[]" id="permissions" class="form-control select2" multiple="multiple">
+                                @forelse($permissions as $permission)
+                                    <option
+                                        value="{{ $permission->id }}"
+                                        {{ in_array($permission->name, $supervisorPermissions) ? 'selected' : null }}>
+                                        {{ $permission->name }}
+                                    </option>
+                                @empty
+                                @endforelse
+                            </select>
+                            @error('permissions')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('receive_email', 'Receive Email') !!}
-                        {!! Form::select('receive_email', ['' => '---', '1' => 'Yes', '0' => 'No'] , old('receive_email', $supervisor->receive_email), ['class' => 'form-control']) !!}
-                        @error('receive_email')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-12">
+                        @if($supervisor->user_image)
+                            <img class="mb-2" src="{{ asset('storage/images/users/' . $supervisor->user_image) }}" alt="{{ $supervisor->full_name }}" width="60" height="60">
+                            <a  class="btn btn-sm btn-danger mb-2"
+                                href="{{ route('admin.supervisors.remove_image', $supervisor->id) }}">Remove</a>
+                        @else
+                            <img src="{{ asset('img/avatar.png') }}" alt="{{ $supervisor->full_name }}" width="60" height="60">
+                        @endif
+                        <br>
+                        <input type="file" name="user_image">
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        {!! Form::label('bio', 'Bio') !!}
-                        {!! Form::textarea('bio', old('bio', $supervisor->bio), ['class' => 'form-control']) !!}
-                        @error('bio')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
+                <div class="form-group pt-4">
+                    <button class="btn btn-primary" type="submit" name="submit">Update</button>
                 </div>
-            </div>
-
-            <div class="form-group pt-4">
-                {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
-            </div>
-
-            {!! Form::close() !!}
+            </form>
         </div>
-
     </div>
 
+    @include('backend.users.edit_password', ['user' => $supervisor])
 @endsection
-
-@section('script')
+@section('scripts')
     <script src="{{ asset('backend/vendor/select2/js/select2.full.min.js') }}"></script>
     <script>
         $(function () {
-            $('.select-multiple-tags').select2({
+            // select2
+            function matchStart(params, data) {
+                // If there are no search terms, return all of the data
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+
+                // Skip if there is no 'children' property
+                if (typeof data.children === 'undefined') {
+                    return null;
+                }
+
+                // `data.children` contains the actual options that we are matching against
+                var filteredChildren = [];
+                $.each(data.children, function (idx, child) {
+                    if (child.text.toUpperCase().indexOf(params.term.toUpperCase()) == 0) {
+                        filteredChildren.push(child);
+                    }
+                });
+
+                // If we matched any of the timezone group's children, then set the matched children on the group
+                // and return the group object
+                if (filteredChildren.length) {
+                    var modifiedData = $.extend({}, data, true);
+                    modifiedData.children = filteredChildren;
+
+                    // You can return modified objects from here
+                    // This includes matching the `children` how you want in nested data sets
+                    return modifiedData;
+                }
+
+                // Return `null` if the term should not be displayed
+                return null;
+            }
+
+            $(".select2").select2({
+                tags: true,
+                closeOnSelect: false,
                 minimumResultsForSearch: Infinity,
-                tags: false,
-                closeOnSelect: false
+                matcher: matchStart
             });
-        });
+        })
     </script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+@extends('layouts.app')
 
 @section('content')
 
@@ -22,7 +22,7 @@
 
                         <div class="contact-title">
                             <h4>Contact Information</h4>
-                            @include('messages.flash')
+                            @include('partials.frontend.flash')
                         </div>
 
                         {!! Form::open(['route' => 'contact.store', 'method' => 'post']) !!}
@@ -37,12 +37,6 @@
                                 <div class="contact-input-style mb-30">
                                     {!! Form::email('email', old('email'), ['placeholder' => 'Email']) !!}
                                     @error('email')<span class="text-danger">{{ $message }}</span>@enderror
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="contact-input-style mb-30">
-                                    {!! Form::text('mobile', old('mobile'), ['placeholder' => 'Mobile optional']) !!}
-                                    @error('mobile')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
                             <div class="col-md-12">

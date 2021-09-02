@@ -1,137 +1,181 @@
-@extends('backend.layouts.app')
-
-@section('style')
-    <!-- Select2- -->
+@extends('layouts.admin')
+@section('styles')
     <link rel="stylesheet" href="{{ asset('backend/vendor/select2/css/select2.min.css') }}">
-    <!-- Fileinput -->
-    <link href="{{ asset('backend/vendor/bootstrap-fileinput/css/fileinput.min.css') }}" media="all" rel="stylesheet" type="text/css" />
 @endsection
-
 @section('content')
-
-    <div class="card">
-        <div class="card-header d-flex">
-            <h4 class="m-0 font-weight-bold text-success">Add supervisor</h4>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex">
+            <h6 class="m-0 font-weight-bold text-primary">
+                Create supervisor
+            </h6>
             <div class="ml-auto">
-                <a href="{{ route('admin.supervisors.index') }}" class="btn btn-outline-success">
-                        <span class="icon text-primary-50">
-                            <i class="fa fa-home"></i>
-                        </span>
-                    <span class="text">Supervisors</span>
+                <a href="{{ route('admin.supervisors.index') }}" class="btn btn-primary">
+                    <span class="icon text-white-50">
+                        <i class="fa fa-home"></i>
+                    </span>
+                    <span class="text">Back to supervisors</span>
                 </a>
             </div>
         </div>
-
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.supervisors.store','method' => 'post', 'files' => true]) !!}
-
-            <div class="row">
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('name', 'Name') !!}
-                        {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
-                        @error('name')<span class="text-danger">{!!  $message  !!}</span>@enderror
+            <form method="POST" action="{{ route('admin.supervisors.store') }}" enctype="multipart/form-data">
+                @csrf
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="first_name" class="text-small text-uppercase">{{ __('First Name') }}</label>
+                            <input id="first_name" type="text" class="form-control form-control-lg" name="first_name"
+                                   value="{{ old('first_name') }}" placeholder="First Name">
+                            @error('first_name')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="last_name" class="text-small text-uppercase">{{ __('Last Name') }}</label>
+                            <input id="last_name" type="text" class="form-control form-control-lg" name="last_name"
+                                   value="{{ old('last_name') }}" placeholder="Last Name">
+                            @error('last_name')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('username', 'Username') !!}
-                        {!! Form::text('username', old('username'), ['class' => 'form-control']) !!}
-                        @error('username')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="username" class="text-small text-uppercase">{{ __('Username') }}</label>
+                            <input id="username" type="text" class="form-control form-control-lg" name="username"
+                                   value="{{ old('username') }}" placeholder="Username">
+                            @error('username')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="email" class="text-small text-uppercase">{{ __('E-Mail Address') }}</label>
+                            <input id="email" type="email" class="form-control form-control-lg" name="email"
+                                   placeholder="Enter your Email">
+                            @error('email')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('email', 'Email') !!}
-                        {!! Form::email('email', old('email'), ['class' => 'form-control']) !!}
-                        @error('email')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="phone" class="text-small text-uppercase">{{ __('Phone') }}</label>
+                            <input id="phone" type="text" class="form-control form-control-lg" name="phone"
+                                   placeholder="Enter your Phone Number">
+                            @error('phone')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="">---</option>
+                                <option value="1" {{ old('status') == "1" ? 'selected' : null }}>Active</option>
+                                <option value="0" {{ old('status') == "0" ? 'selected' : null }}>Inactive</option>
+                            </select>
+                            @error('status')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('mobile', 'Mobile') !!}
-                        {!! Form::text('mobile', old('mobile'), ['class' => 'form-control']) !!}
-                        @error('mobile')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="password" class="text-small text-uppercase">{{ __('New Password') }}</label>
+                            <input id="password" type="password" class="form-control form-control-lg"
+                                   name="password"
+                                   placeholder="Enter your password">
+                            @error('password')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="password-confirm"
+                                   class="text-small text-uppercase">{{ __('Confirm Password') }}</label>
+                            <input id="password-confirm" type="password" class="form-control form-control-lg"
+                                   name="password_confirmation" placeholder="Confirm Password">
+                            @error('password-confirm')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('password', 'Password') !!}
-                        {!! Form::password('password', ['class' => 'form-control', 'type' => 'password']) !!}
-                        @error('password')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="permissions">Permissions</label>
+                            <select name="permissions[]" id="permissions" class="form-control select2" multiple="multiple">
+                                @forelse($permissions as $permission)
+                                    <option value="{{ $permission->id }}"
+                                    {{ in_array($permission->id, old('permissions', [])) ? 'selected' : null }}>{{ $permission->name }}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                            @error('permissions')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        {!! Form::label('status', 'Status') !!}
-                        {!! Form::select('status', ['' => '---', '1' => 'Active', '0' => 'Inactive'] , old('status'), ['class' => 'form-control']) !!}
-                        @error('status')<span class="text-danger">{!!  $message  !!}</span>@enderror
+                <div class="row">
+                    <div class="col-12">
+                        <label for="user_image">Supervisor image</label>
+                        <br>
+                        <div class="form-group">
+                            <input type="file" name="user_image">
+                        </div>
+                        @error('user_image')<span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        {!! Form::label('receive_email', 'Receive Email') !!}
-                        {!! Form::select('receive_email', ['' => '---', '1' => 'Yes', '0' => 'No'] , old('receive_email'), ['class' => 'form-control']) !!}
-                        @error('receive_email')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Create') }}
+                    </button>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        {!! Form::label('bio', 'Bio') !!}
-                        {!! Form::textarea('bio', old('bio'), ['class' => 'form-control']) !!}
-                        @error('bio')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        {!! Form::label('permissions', 'Permissions') !!}
-                        @include('backend.partial.permissions')
-                        @error('permissions')<span class="text-danger">{!!  $message  !!}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group pt-4">
-                {!! Form::submit('Add supervisor', ['class' => 'btn btn-success']) !!}
-            </div>
-
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
-
 @endsection
-@section('script')
+@section('scripts')
     <script src="{{ asset('backend/vendor/select2/js/select2.full.min.js') }}"></script>
-
-    <script src="{{ asset('backend/vendor/bootstrap-fileinput/js/plugins/piexif.min.js') }}"></script>
-    <script src="{{ asset('backend/vendor/bootstrap-fileinput/js/plugins/sortable.min.js') }}"></script>
-    <script src="{{ asset('backend/vendor/bootstrap-fileinput/js/plugins/purify.min.js') }}"></script>
-    <script src="{{ asset('backend/vendor/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
-    <script src="{{ asset('backend/vendor/bootstrap-fileinput/themes/fas/theme.min.js') }}"></script>
     <script>
         $(function () {
-            $('.select-multiple-tags').select2({
-                minimumResultsForSearch: Infinity,
+            // select2
+            function matchStart(params, data) {
+                // If there are no search terms, return all of the data
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+
+                // Skip if there is no 'children' property
+                if (typeof data.children === 'undefined') {
+                    return null;
+                }
+
+                // `data.children` contains the actual options that we are matching against
+                var filteredChildren = [];
+                $.each(data.children, function (idx, child) {
+                    if (child.text.toUpperCase().indexOf(params.term.toUpperCase()) == 0) {
+                        filteredChildren.push(child);
+                    }
+                });
+
+                // If we matched any of the timezone group's children, then set the matched children on the group
+                // and return the group object
+                if (filteredChildren.length) {
+                    var modifiedData = $.extend({}, data, true);
+                    modifiedData.children = filteredChildren;
+
+                    // You can return modified objects from here
+                    // This includes matching the `children` how you want in nested data sets
+                    return modifiedData;
+                }
+
+                // Return `null` if the term should not be displayed
+                return null;
+            }
+
+            $(".select2").select2({
                 tags: true,
-                closeOnSelect: false
+                closeOnSelect: false,
+                minimumResultsForSearch: Infinity,
+                matcher: matchStart
             });
-            $('#user_image').fileinput({
-                theme: "fas",
-                maxFileCount: 1,
-                allowedFileTypes: ['image'],
-                showCancel: true,
-                showRemove: false,
-                showUpload: false,
-                overwriteInitial: false,
-            })
-        });
+        })
     </script>
 @endsection

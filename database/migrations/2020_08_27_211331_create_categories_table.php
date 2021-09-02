@@ -19,9 +19,9 @@ class CreateCategoriesTable extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('cover')->nullable();
+            $table->boolean('status')->default(true);
             $table->unsignedBigInteger('parent_id')->unsigned()->nullable();
             $table->foreign('parent_id')->references('id')->on('categories')->cascadeOnUpdate()->nullOnDelete();
-            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

@@ -3,80 +3,138 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\Backend\CategoryRequest;
 use App\Models\Category;
-use App\Traits\FilterTrait;
+use App\Traits\ImageUploadTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
-    use FilterTrait;
+    use ImageUploadTrait;
 
     public function index()
     {
-        $query = Category::withCount('products');
-        $categories = $this->filter($query);
+        $this->authorize('access_category');
+
+        $categories = Category::with('parent')
+            ->withCount('products')
+            ->when(\request()->keyword != null, function ($query) {
+                $query->search(\request()->keyword);
+            })
+            ->when(\request()->status != null, function ($query) {
+                $query->whereStatus(\request()->status);
+            })
+            ->orderBy(\request()->sortBy ?? 'id', \request()->orderBy ?? 'asc')
+            ->paginate(\request()->limitBy ?? 10);
 
         return view('backend.categories.index', compact('categories'));
     }
 
     public function create()
     {
-        abort_if(!auth()->user()->can('add-category'), 403, 'You did not have permission to access this page!');
+        $this->authorize('create_category');
 
-        $categories = Category::orderBy('id', 'desc')->pluck('name', 'id');
+        $mainCategories = Category::whereNull('parent_id')->get(['id', 'name']);
 
-        return view('backend.categories.create', compact('categories'));
+        return view('backend.categories.create', compact('mainCategories'));
     }
 
-    public function store(StoreCategoryRequest $request, Category $category)
+    public function store(CategoryRequest $request)
     {
-        $category->create($request->validated());
+        $this->authorize('create_category');
 
-        if ($request->status == 1) {
-            clear_cache();
+        $image = NULL;
+        if ($request->hasFile('cover')) {
+            $image = $this->uploadImage($request->name, $request->cover, 'categories', 500, NULL);
         }
 
-        return redirect()->route('admin.categories.index')->with(['message' => 'Category create successfully', 'alert-type' => 'success',]);
+        Category::create([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+            'status' => $request->status,
+            'cover' => $image
+        ]);
+
+        return redirect()->route('admin.categories.index')->with([
+            'message' => 'Created successfully',
+            'alert-type' => 'success'
+        ]);
+    }
+
+    public function show(Category $category)
+    {
+        $this->authorize('show_category');
+
+        return view('backend.categories.show', compact('category'));
     }
 
     public function edit(Category $category)
     {
-        abort_if(!auth()->user()->can('edit-category'), 403, 'You did not have permission to access this page!');
+        $this->authorize('edit_category');
+        $mainCategories = Category::whereNull('parent_id')->get(['id', 'name']);
 
-        $categories = Category::orderBy('id', 'desc')->pluck('name', 'id');
-
-        return view('backend.categories.edit', compact('category', 'categories'));
+        return view('backend.categories.edit', compact('category', 'mainCategories'));
     }
 
-    public function update(StoreCategoryRequest $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        abort_if(!auth()->user()->can('edit-category'), 403, 'You did not have permission to access this page!');
+        $this->authorize('edit_category');
 
-        $category->update($request->validated());
+        $image = $category->cover;
+        if ($request->has('cover')) {
+            if ($category->cover != null && File::exists('storage/assets/images/categories/'. $category->cover)) {
+                unlink('storage/assets/images/categories/'. $category->cover);
+            }
+            $image = $this->uploadImage($request->name, $request->cover, 'categories', 500, NULL);
+        }
 
-        clear_cache();
+        $category->update([
+            'name' => $request->name,
+            'slug' => null,
+            'parent_id' => $request->parent_id,
+            'status' => $request->status,
+            'cover' => $image
+        ]);
 
-        return redirect()->route('admin.categories.index')->with(['message' => 'Product updated successfully', 'alert-type' => 'success']);
+        return redirect()->route('admin.categories.index')->with([
+            'message' => 'Updated successfully',
+            'alert-type' => 'success'
+        ]);
     }
 
     public function destroy(Category $category)
     {
-        abort_if(!auth()->user()->can('delete-category'), 403, 'You did not have permission to access this page!');
+        $this->authorize('delete_category');
 
-        foreach ($category->products as $product) {
-            if ($product->media->count() > 0) {
-                foreach ($product->media as $media) {
-                    if (File::exists('storage/' . $media->file_name))
-                        unlink('storage/' . $media->file_name);
-                }
+        if ($category->cover) {
+            if (File::exists('storage/assets/images/categories/'. $category->cover)) {
+                unlink('storage/assets/images/categories/'. $category->cover);
             }
         }
 
         $category->delete();
 
-        clear_cache();
+        return redirect()->route('admin.categories.index')->with([
+            'message' => 'Deleted successfully',
+            'alert-type' => 'success'
+        ]);
 
-        return redirect()->route('admin.categories.index')->with(['message' => 'Category deleted successfully', 'alert-type' => 'success',]);
+    }
+
+    public function removeImage(Category $category)
+    {
+        $this->authorize('delete_category');
+
+        if (File::exists('storage/images/categories/'. $category->cover)) {
+            unlink('storage/images/categories/'. $category->cover);
+            $category->cover = null;
+            $category->save();
+        }
+
+        return back()->with([
+            'message' => 'Image deleted successfully',
+            'alert-type' => 'success'
+        ]);
     }
 }

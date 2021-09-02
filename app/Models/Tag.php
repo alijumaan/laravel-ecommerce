@@ -31,6 +31,16 @@ class Tag extends Model
         ],
     ];
 
+    public function getStatusAttribute(): string
+    {
+        return $this->attributes['status'] == 0 ? 'Inactive' : 'Active';
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(true);
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_tags');

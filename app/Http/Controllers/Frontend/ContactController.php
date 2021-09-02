@@ -19,7 +19,6 @@ class ContactController extends Controller
         $userId = auth()->check() ? auth()->id() : null;
         $data['name'] = $request['name'];
         $data['email'] = $request['email'];
-        $data['mobile'] = $request['mobile'];
         $data['title'] = $request['title'];
         $data['message'] = $request['message'];
         $data['user_id'] = $userId;

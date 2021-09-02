@@ -1,76 +1,93 @@
-@extends('backend.layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="card shadow-sm mb-4">
-            <div class="card-header d-flex py-3">
-                <h4 class="m-0 font-weight-bold text-success">Coupons</h4>
-                <div class="ml-auto">
-                    <a href="{{ route('admin.coupons.create') }}" class="btn btn-outline-success">
-                        <span class="icon text-success-50">
-                            <i class="fa fa-plus"></i>
-                        </span>
-                        <span class="text">Add new coupon</span>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex">
+            <h6 class="m-0 font-weight-bold text-primary">
+                Coupons
+            </h6>
+            <div class="ml-auto">
+                @can('create_coupon')
+                    <a href="{{ route('admin.coupons.create') }}" class="btn btn-primary">
+                    <span class="icon text-white-50">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                        <span class="text">New coupon</span>
                     </a>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-content table-hover">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Code</th>
-                            <th>Type</th>
-                            <th>Value</th>
-                            <th>Description</th>
-                            <th>Create at</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($coupons as $coupon)
-                            <tr>
-                                <td>{{ $coupon->name }}</td>
-                                <td>{{ $coupon->code }}</td>
-                                <td>{{ $coupon->type }}</td>
-                                <td>{{ $coupon->value }}</td>
-                                <td>{{ $coupon->description }}</td>
-                                <td>{{ $coupon->created_at->format('d-m-Y') }}</td>
-                                <td>
-                                    <div class="btn-group btn-group-toggle">
-                                        <a href="{{ route('admin.coupons.edit', $coupon->id) }}" title="Edit" class="btn-primary btn btn-sm"><i class="fa fa-edit"></i></a>
-                                        <a href="javascript:void(0);" onclick="if (confirm('Are You sure want to Delete?'))
-                                            { document.getElementById('coupon-delete-{{ $coupon->id }}').submit(); } else { return false; }"
-                                           title="Delete" class="btn-danger btn btn-sm"><i class="fa fa-trash"></i>
-                                        </a>
-                                        <form action="{{ route('admin.coupons.destroy', $coupon->id) }}" method="post" id="coupon-delete-{{ $coupon->id }}">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="9" class="text-center">No coupons found.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th colspan="9">
-                            <div class="float-right">
-                            {!! $coupons->appends(request()->input())->links() !!}
-                            </div>
-                        </th>
-                    </tr>
-                    </tfoot>
-                </table>
+                @endcan
             </div>
         </div>
-    </div>
-</div>
 
+        @include('partials.backend.filter', ['model' => route('admin.coupons.index')])
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Value</th>
+                    <th>Use times</th>
+                    <th>Validity date</th>
+                    <th>Greater than</th>
+                    <th>Status</th>
+                    <th>Created at</th>
+                    <th class="text-center" style="width: 30px;">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                @forelse($coupons as $coupon)
+                    <tr>
+                        <td><a href="{{ route('admin.coupons.show', $coupon->id) }}">
+                                {{ $coupon->code }}
+                            </a></td>
+                        <td>{{ $coupon->type == 'fixed' ? '$' : '%' }}{{ $coupon->value }}</td>
+                        <td>{{ $coupon->used_times . '/' . $coupon->use_times }}</td>
+                        <td>Start:  {{ $coupon->start_date != '' ? $coupon->start_date->format('Y-m-d') : '-' }}
+                            <br>
+                            Expire:
+                            <span class="text-danger">
+                                {{ $coupon->expire_date != '' ? $coupon->expire_date->format('Y-m-d') : '-' }}
+                            </span>
+                        </td>
+                        <td>{{ $coupon->greater_than ?? '-' }}</td>
+                        <td>{{ $coupon->status }}</td>
+                        <td>{{ $coupon->created_at ?? $coupon->created_at->format('Y-m-d h:i a') }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ route('admin.coupons.edit', $coupon) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="javascript:void(0);"
+                                   onclick="if (confirm('Are you sure to delete this record?'))
+                                       {document.getElementById('delete-coupon-{{ $coupon->id }}').submit();} else {return false;}"
+                                   class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+                            <form action="{{ route('admin.coupons.destroy', $coupon) }}"
+                                  method="POST"
+                                  id="delete-coupon-{{ $coupon->id }}" class="d-none">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td class="text-center" colspan="8">No coupons found.</td>
+                    </tr>
+                @endforelse
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="8">
+                        <div class="float-right">
+                            {!! $coupons->appends(request()->all())->links() !!}
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 @endsection

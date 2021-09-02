@@ -3,115 +3,150 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\Backend\UpdatePasswordRequest;
+use App\Http\Requests\Backend\UserRequest;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Validator;
+use App\Services\UserImageService;
+use App\Traits\ImageUploadTrait;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
+    use ImageUploadTrait;
+
+    protected $userImageService;
+
+    public function __construct(UserImageService $userImageService)
+    {
+        $this->userImageService = $userImageService;
+    }
+
     public function index()
     {
-        $users = User::Paginate(5);
+        $this->authorize('access_user');
+
+        $users = User::role(['user'])
+            ->when(\request()->keyword != null, function ($query) {
+                $query->search(\request()->keyword);
+            })
+            ->when(\request()->status != null, function ($query) {
+                $query->whereStatus(\request()->status);
+            })
+            ->orderBy(\request()->sortBy ?? 'id', \request()->orderBy ?? 'desc')
+            ->paginate(\request()->limitBy ?? 10);
 
         return view('backend.users.index', compact('users'));
     }
 
     public function create()
     {
-        abort_if(!auth()->user()->can('add-user'), 403, 'You did not have permission to access this page!');
+        $this->authorize('create_user');
 
         return view('backend.users.create');
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(UserRequest $request)
     {
-        $data = $this->createNewData($request);
-        $data['email_verified_at'] = Carbon::now();
-        $data['password'] = bcrypt($request->password);
-        User::create($data);
+        $this->authorize('create_user');
 
-        return redirect()->route('admin.users.index')->with(['message' => 'User create successfully', 'alert-type' => 'success']);
+        if ($request->hasFile('user_image')) {
+            $userImage = $this->userImageService->storeImages($request->username, $request->user_image);
+        }
+
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'email_verified_at' => now(),
+            'phone' => $request->phone,
+            'password' => bcrypt($request->password),
+            'status' => $request->status,
+            'receive_email' => true,
+           'user_image' => $userImage ?? NULL
+        ]);
+
+        $user->markEmailAsVerified();
+        $user->assignRole('user');
+
+        return redirect()->route('admin.users.index')->with([
+            'message' => 'Created successfully',
+            'alert-type' => 'success'
+        ]);
     }
 
     public function show(User $user)
     {
+        $this->authorize('user_show');
+
         return view('backend.users.show', compact('user'));
     }
 
     public function edit(User $user)
     {
-        abort_if(!auth()->user()->can('edit-user'), 403, 'You did not have permission to access this page!');
+        $this->authorize('edit_user');
 
         return view('backend.users.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $validator = Validator::make($request->all(), [
-            'name'          => 'required',
-            'username'      => 'required|max:20|unique:users,username,'.$user->id,
-            'email'         => 'required|email|unique:users,email,'.$user->id,
-            'mobile'        => 'nullable|numeric|unique:users,mobile,'.$user->id,
-            'status'        => 'required',
-            'password'      => 'nullable|min:8',
-        ]);
+        $this->authorize('edit_user');
 
-        if ($validator->fails()) { return redirect()->back()->withErrors($validator)->withInput(); }
-
-        $data = $this->createNewData($request);
-
-        if (trim($request->password) != '')
-            $data['password']  = bcrypt($request->password);
-
-        if ($request->has('avatar')) {
-            if ($user->avatar != 'images/avatar.png') {
-                if (File::exists('storage/' . $user->avatar))
-                    unlink('storage/' . $user->avatar);
+        if ($request->hasFile('user_image')) {
+            if ($user->user_image) {
+                $this->userImageService->unlinkFile($user->user_image);
             }
-            $data['avatar'] = $this->uploadAvatar($request->avatar);
+            $userImage = $this->userImageService->storeImages($request->username,  $request->user_image);
         }
 
-        $user->update($data);
+        if ($request->password){
+            $password = bcrypt($request->password);
+        }
 
-        return redirect()->route('admin.users.index')->with(['message' => 'User updated successfully', 'alert-type' => 'success']);
+        $user->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'status' => $request->status,
+            'receive_email' => $request->receive_email,
+            'user_image' => $userImage ?? $user->user_image,
+            'password' => $password ?? $user->password
+        ]);
+
+        return redirect()->route('admin.users.index')->with([
+            'message' => 'Updated successfully',
+            'alert-type' => 'success'
+        ]);
     }
 
     public function destroy(User $user)
     {
-        abort_if(!auth()->user()->can('delete-user'), 403, 'You did not have permission to access this page!');
+        $this->authorize('delete_user');
 
-        if ($user->avatar != '') {
-            if (File::exists('storage/' . $user->avatar)) {
-                unlink('storage/' . $user->avatar);
-            }
+        if ($user->user_image) {
+            $this->userImageService->unlinkFile($user->user_image);
         }
 
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with(['message' => 'User deleted successfully', 'alert-type' => 'success',]);
+        return redirect()->route('admin.users.index')->with([
+            'message' => 'Deleted successfully',
+            'alert-type' => 'success'
+        ]);
     }
 
-    public function removeImage(Request $request, User $user)
+    public function get_users()
     {
-        abort_if(!auth()->user()->can('delete-user'), 403, 'You did not have permission to access this page!');
-//        $this->removeAvatar($request, $user);
+        $users = User::role(['user'])
+            ->when(\request()->input('query') != '', function ($query) {
+                $query->search(\request()->input('query'));
+            })
+            ->get(['id', 'first_name', 'last_name', 'email'])->toArray();
 
-        $user->removeImage($request, $user);
-    }
-
-    protected function createNewData($request)
-    {
-        $data['name']                   = $request->name;
-        $data['username']               = $request->username;
-        $data['email']                  = $request->email;
-        $data['mobile']                 = $request->mobile;
-        $data['role_id']                = $request->role_id;
-        $data['status']                 = $request->status;
-        $data['bio']                    = $request->bio;
-        $data['receive_email']          = $request->receive_email;
-        return $data;
+        return response()->json($users);
     }
 }
