@@ -36,14 +36,17 @@
                             </a>
                             <a class="category-item" href="{{ route('shop.index', $categories[2]->slug) }}">
                                 @if($categories[2]->cover)
-                                <img class="img-fluid" src="http://laravel-shop.test/frontend/assets/categories/cat-img-3.jpg" alt="{{ $categories[2]->name }}">
+                                <img class="img-fluid"
+                                     src="{{ asset('storage/images/categories/' . $categories[2]->cover) }}"
+                                     alt="{{ $categories[2]->name }}">
                                 @else
                                     <img class="img-fluid" src="{{ asset('frontend/assets/categories/cat-img-3.jpg') }}" alt="{{ $categories[2]->name }}">
                                 @endif
                                 <strong class="category-item-title">{{ $categories[2]->name }}</strong>
                             </a>
                         </div>
-                        <div class="col-md-4"><a class="category-item" href="{{ route('shop.index', $categories[3]->slug) }}">
+                        <div class="col-md-4">
+                            <a class="category-item" href="{{ route('shop.index', $categories[3]->slug) }}">
                                 @if($categories[3]->cover)
                                 <img class="img-fluid"
                                      src="{{ asset('storage/images/categories/' . $categories[3]->cover) }}"
