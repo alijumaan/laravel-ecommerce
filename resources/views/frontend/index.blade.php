@@ -2,81 +2,67 @@
 @section('content')
     @include('partials.frontend.sliders')
     <div class="container">
-        <!-- banner area start -->
-        <div class="banner-area pt-0 pb-100 fix">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4">
-                        <div class="card-body">
-                            <div class="furits-banner-wrapper mb-30 wow fadeInLeft">
-                                <img src="{{ asset('frontend/img/banner/49.jpg') }}" alt="">
-                                <div class="furits-banner-content">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="card-body">
-                            <div class="furits-banner-wrapper mb-30 wow fadeInUp">
-                                <img src="{{ asset('frontend/img/banner/50.jpg') }}" alt="">
-                                <div class="furits-banner-content">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="card-body">
-                            <div class="furits-banner-wrapper mb-30 wow fadeInUp">
-                                <img src="{{ asset('frontend/img/banner/51.png') }}" alt="">
-                                <div class="furits-banner-content">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- banner area end -->
-        <!-- product area start -->
+        <!-- categories area start -->
         <div class="product-style-area gray-bg-4 pb-105">
             <div class="container">
                 <div class="section-title-furits bg-shape text-center mb-80">
                     <img src="{{ asset('frontend/img/icon-img/49.png') }}" alt="">
                     <h2>BROWSE OUR CATEGORIES</h2>
                 </div>
-                <div class="row">
-                    @forelse($categories as $category)
-                        <div class="col-6">
-                            <div class="">
-                                <a href="{{ route('shop.index', $category->slug) }}">
-                                    <div class="product-fruit-img">
-                                        @if($category->cover)
-                                            <img src="{{ asset('storage/images/categories/' . $category->cover) }}"
-                                                 alt="{{ $category->name }}" style="max-height: 400px;">
-                                        @else
-                                            <img src="{{ asset('img/no-img.png' ) }}" alt="">
-                                        @endif
-                                    </div>
-                                </a>
-                                <div class="product-fruit-content text-center">
-                                    <h4>
-                                        <a href="{{ route('shop.index', $category->slug) }}">
-                                            {{ $category->name }}
-                                        </a>
-                                    </h4>
-                                    <span>{{ $category->price }}</span>
-                                </div>
-                            </div>
+                <section class="pt-5">
+                    <div class="row">
+                        <div class="col-md-4 mb-4 mb-md-0">
+                            <a class="category-item" href="{{ route('shop.index', $categories[0]->slug) }}">
+                                @if($categories[0]->cover)
+                                    <img class="img-fluid"
+                                         src="{{ asset('storage/images/categories/' . $categories[0]->cover) }}"
+                                         alt="{{ $categories[0]->name }}">
+                                @else
+                                    <img class="img-fluid" src="{{ asset('frontend/assets/categories/cat-img-1.jpg') }}" alt="">
+                                @endif
+                                <strong class="category-item-title">{{ $categories[0]->name }}</strong>
+                            </a>
                         </div>
-                    @empty
-                        <p>No categories found.</p>
-                    @endforelse
-                </div>
+                        <div class="col-md-4 mb-4 mb-md-0">
+                            <a class="category-item mb-4" href="{{ route('shop.index', $categories[1]->slug) }}">
+                                @if($categories[1]->cover)
+                                <img class="img-fluid"
+                                     src="{{ asset('storage/images/categories/' . $categories[1]->cover) }}"
+                                     alt="{{ $categories[1]->name }}">
+                                @else
+                                    <img class="img-fluid" src="{{ asset('frontend/assets/categories/cat-img-2.jpg') }}" alt="{{ $categories[1]->name }}">
+                                @endif
+                                <strong class="category-item-title">{{ $categories[1]->name }}</strong>
+                            </a>
+                            <a class="category-item" href="{{ route('shop.index', $categories[2]->slug) }}">
+                                @if($categories[2]->cover)
+                                <img class="img-fluid" src="http://laravel-shop.test/frontend/assets/categories/cat-img-3.jpg" alt="{{ $categories[2]->name }}">
+                                @else
+                                    <img class="img-fluid" src="{{ asset('frontend/assets/categories/cat-img-3.jpg') }}" alt="{{ $categories[2]->name }}">
+                                @endif
+                                <strong class="category-item-title">{{ $categories[2]->name }}</strong>
+                            </a>
+                        </div>
+                        <div class="col-md-4"><a class="category-item" href="{{ route('shop.index', $categories[3]->slug) }}">
+                                @if($categories[3]->cover)
+                                <img class="img-fluid"
+                                     src="{{ asset('storage/images/categories/' . $categories[3]->cover) }}"
+                                     alt="">
+                                @else
+                                    <img class="img-fluid" src="{{ asset('frontend/assets/categories/cat-img-4.jpg') }}"
+                                         alt="{{ $categories[3]->name }}">
+                                @endif
+                                <strong class="category-item-title">{{ $categories[3]->name }}</strong>
+                            </a>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-        <!-- product area end -->
+        <!-- categories area end -->
     </div>
-        <!-- banner area start -->
+
+    <!-- banner area start -->
     <div class="fruits-choose-area pb-65 bg-img" style="background-image: url('{{ asset('frontend/img/banner/53.png') }}')">
         <div class="container">
             <div class="row">

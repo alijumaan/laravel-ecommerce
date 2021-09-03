@@ -23,89 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/Api/ApiController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/CategoryController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/ContactController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/CouponsController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/DashboardController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/OrderController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/PageController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/PaymentMethodController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/PermissionController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/ProductController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/ReviewController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/SettingController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/ShippingCompanyController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/SupervisorController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/TagController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/UserAddressController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend_old/UserController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Backend_old/LastProductReviews.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Backend_old/Statistics.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/auth/login.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/auth/passwords/confirm.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/auth/passwords/email.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/auth/passwords/reset.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/auth/register.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/auth/verify.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/categories/_fields.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/categories/create.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/categories/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/categories/filter/filter.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/categories/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/contacts/filter/filter.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/contacts/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/contacts/show.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/coupons/_fields.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/coupons/create.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/coupons/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/coupons/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/login.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/orders/details.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/orders/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/pages/create.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/pages/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/pages/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/pages/show.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/partial/categories.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/partial/create_product_form.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/partial/edit_product_form.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/partial/pages.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/partial/permissions.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/partial/products.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/partial/tags.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/payment_methods/create.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/payment_methods/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/payment_methods/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/payment_methods/show.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/permissions/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/products/create.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/products/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/products/filter/filter.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/products/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/products/show.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/reviews/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/reviews/filter/filter.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/reviews/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/settings/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/supervisors/create.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/supervisors/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/supervisors/filter/filter.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/supervisors/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/supervisors/show.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/tags/_fields.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/tags/create.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/tags/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/tags/filter/filter.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/tags/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/users/create.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/users/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/users/filter/filter.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/users/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend_old/users/show.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -846,7 +765,8 @@
       <workItem from="1630561768837" duration="15126000" />
       <workItem from="1630587571000" duration="5603000" />
       <workItem from="1630602195929" duration="3025000" />
-      <workItem from="1630618303018" duration="481000" />
+      <workItem from="1630618303018" duration="2009000" />
+      <workItem from="1630649872613" duration="2120000" />
     </task>
     <servers />
   </component>
