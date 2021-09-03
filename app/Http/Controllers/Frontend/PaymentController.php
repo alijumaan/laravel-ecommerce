@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\Models\OrderTransaction;
 use App\Models\Product;
 use App\Models\User;
-use App\Notifications\Frontend\User\OrderCreatedNotification;
+use App\Notifications\Backend\User\OrderCreatedNotification;
 use App\Notifications\Frontend\User\OrderThanksNotification;
 use App\Services\OmnipayService;
 use App\Services\OrderService;

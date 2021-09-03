@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Frontend\User;
 use App\Models\Order;
 use App\Models\OrderTransaction;
 use App\Models\User;
-use App\Notifications\Frontend\User\ReturnRequestOrderNotification;
+use App\Notifications\Backend\User\ReturnRequestOrderNotification;
 use Livewire\Component;
 
 class OrdersComponent extends Component

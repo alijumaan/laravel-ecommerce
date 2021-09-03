@@ -63,15 +63,7 @@
                                 <li><a href="{{route('register')}}">Reg</a></li>
                             @else
                                 <li>
-                                    <a class="notification" href="#" id="alertsDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-user-alt text-dark"></i>
-                                        <span class="badge">3</span>
-                                    </a>
-                                    <div class=" dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                                        <h6 class="dropdown-header"></h6>
-                                        <div class="dropdown-item text-center">No notifications found!</div>
-                                    </div>
+                                    <livewire:frontend.notification-component />
                                 </li>
 
                                 <li>

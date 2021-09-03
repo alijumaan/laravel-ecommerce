@@ -109,3 +109,25 @@
     background: #85bd02;
     color: white;
 }
+.navbar-nav .nav-item .nav-link .badge-counter {
+    position: absolute;
+    transform: scale(0.7);
+    transform-origin: top right;
+    left: 0.50rem;
+    margin-top: -0.50rem;
+    border-radius: 100%;
+    margin-right: -5px;
+}
+.withoutAfter::after {
+    display: none !important;
+}
+.navbar .dropdown-menu::before {
+    content: '';
+    display: block;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-bottom: 0.5rem solid #dcb14a;
+    position: absolute;
+    top: -0.5rem;
+    left: 10.60rem !important;
+}

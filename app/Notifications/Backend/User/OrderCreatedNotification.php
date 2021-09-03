@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\Frontend\User;
+namespace App\Notifications\Backend\User;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

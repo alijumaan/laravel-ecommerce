@@ -7,8 +7,8 @@
     "require": {
         "php": "^7.3|^8.0",
         "beyondcode/laravel-websockets": "^1.12",
-        "cviebrock/eloquent-sluggable": "^8.0",
         "carlos-meneses/laravel-mpdf": "^2.1",
+        "cviebrock/eloquent-sluggable": "^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0",
@@ -28,9 +28,8 @@
         "nicolaslopezj/searchable": "^1.13",
         "omnipay/paypal": "^3.0",
         "predis/predis": "^1.1",
-        "pusher/pusher-php-server": "~4.0",
+        "pusher/pusher-php-server": "^5.0",
         "realrashid/sweet-alert": "^4.0",
-        "spatie/valuestore": "^1.2",
         "spatie/laravel-permission": "^4.2"
     },
     "require-dev": {
@@ -41,7 +40,6 @@
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
-
     },
     "config": {
         "optimize-autoloader": true,

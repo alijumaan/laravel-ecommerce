@@ -4,11 +4,11 @@
             @if($cartItem->model->firstMedia)
                 <img src=""
                      alt="{{ $cartItem->model->name }}" width="70"/>
-                <img src="{{ asset('storage/assets/images/products/' . $cartItem->firstMedia->file_name) }}"
+                <img src="{{ asset('storage/images/products/' . $cartItem->firstMedia->file_name) }}"
                      style="width: 50px;"
                      alt="">
             @else
-                <img src="{{ asset('frontend/images/default_small.png') }}"
+                <img src="{{ asset('img/no-img.png') }}"
                      alt="{{ $cartItem->model->name }}" width="70"/>
             @endif
 

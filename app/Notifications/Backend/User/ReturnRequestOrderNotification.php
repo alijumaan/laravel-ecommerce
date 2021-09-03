@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Notifications\Backend;
+namespace App\Notifications\Backend\User;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 
-class OrderNotification extends Notification implements ShouldQueue
+class ReturnRequestOrderNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -34,6 +34,12 @@ class OrderNotification extends Notification implements ShouldQueue
         return ['database', 'broadcast'];
     }
 
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
     public function toDatabase($notifiable): array
     {
         return $this->data();
@@ -49,11 +55,12 @@ class OrderNotification extends Notification implements ShouldQueue
     protected function data(): array
     {
         return [
+            'user_id' => $this->order->user_id,
+            'user_name' => $this->order->user->full_name,
             'order_id' => $this->order->id,
-            'order_ref' => $this->order->ref_id,
-            'last_transaction' => $this->order->status($this->order->transactions()->latest()->first()->transaction_status),
-            'order_url' => route('user.orders'),
-            'created_date' => $this->order->transactions()->latest()->first()->created_at->format('M d, Y'),
+            'amount' => $this->order->total,
+            'order_url' => route('admin.orders.show', $this->order->id),
+            'created_date' => $this->order->created_at->format('M d, Y'),
         ];
     }
 }

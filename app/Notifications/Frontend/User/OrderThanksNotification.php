@@ -60,7 +60,7 @@ class OrderThanksNotification extends Notification implements ShouldQueue
         return [
             'user_name' => $this->order->user->full_name,
             'order_ref' => $this->order->ref_id,
-            'order_url' => route('frontend.user.orders'),
+            'order_url' => route('user.orders'),
             'created_date' => $this->order->created_at->format('M d, Y'),
         ];
     }
