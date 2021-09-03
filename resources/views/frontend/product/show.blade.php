@@ -61,16 +61,14 @@
                                         @endif
                                     </div>
                                 </span>
-                                <span> Ratting (S)</span>
+                                <span>{{ $product->reviews_count }} Ratting (S)</span>
                             </div>
                         </div>
                         <div class="details-price">
                             <span>${{ $product->price }}</span>
                         </div>
                         <p>{{ $product->description }}</p>
-
                         <livewire:frontend.add-product-to-cart-or-wishlist :product="$product"/>
-
                         <div class="product-details-cati-tag mt-35">
                             <ul>
                                 <li class="categories-title">Categories :</li>

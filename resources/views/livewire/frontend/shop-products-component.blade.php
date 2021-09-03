@@ -106,21 +106,27 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="product-content">
+                                    <div class="product-content text-center">
                                         <h4>
                                             <a href="{{route('product.show', $product->slug)}}">
                                                 {{ $product->name }}
                                             </a>
                                         </h4>
                                         <span>${{ $product->price }}</span>
+                                        <div>
+                                            @if($product->tags->count() > 0)
+                                                @foreach($product->tags as $tag)
+                                                    <label for="" class="small">
+                                                        <a href="{{ route('shop.tag', $tag->slug) }}">
+                                                            {{ $tag->name }}
+                                                            <span>{{ $loop->last ? '' : ',' }}</span>
+                                                        </a>
+                                                    </label>
+                                                @endforeach
+                                            @endif
+                                        </div>
                                     </div>
-                                    @if($product->tags->count() > 0)
-                                        @foreach($product->tags as $tag)
-                                            <label for="" class="badge bg-success">
-                                                <a href="{{ route('shop.tag', $tag->slug) }}">{{ $tag->name }}</a>
-                                            </label>
-                                        @endforeach
-                                    @endif
+
                                 </div>
                             </div>
                         @empty

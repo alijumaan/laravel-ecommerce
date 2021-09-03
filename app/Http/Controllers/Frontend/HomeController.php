@@ -36,6 +36,7 @@ class HomeController extends Controller
     {
         $product = Product::with('media', 'category', 'tags', 'reviews')
             ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
             ->whereSlug($slug)
             ->active()
             ->hasQuantity()

@@ -23,32 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Livewire/Frontend/NotificationComponent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/websockets.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/0000_00_00_000000_create_websockets_statistics_entries_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/livewire/frontend/notification-component.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/PaymentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Frontend/User/OrdersComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Frontend/User/OrdersComponent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/Backend/OrderNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/Frontend/User/OrderStatusNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/Frontend/User/OrderCreatedNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/Backend/User/OrderCreatedNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/Frontend/User/OrderThanksNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/Frontend/User/OrderThanksNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/Frontend/User/ReturnRequestOrderNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/Backend/User/ReturnRequestOrderNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/broadcasting.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/broadcasting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/custom.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/custom.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/backend/notification-component.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/backend/notification-component.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/frontend/cart-item-component.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/frontend/cart-item-component.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/frontend/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/frontend/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/admin.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/channels.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/channels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/frontend/css/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/css/responsive.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/shop/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/shop/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/frontend/shop-products-component.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/frontend/shop-products-component.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -789,7 +769,8 @@
       <workItem from="1630587571000" duration="5603000" />
       <workItem from="1630602195929" duration="3025000" />
       <workItem from="1630618303018" duration="2009000" />
-      <workItem from="1630649872613" duration="8626000" />
+      <workItem from="1630649872613" duration="8825000" />
+      <workItem from="1630663430251" duration="1149000" />
     </task>
     <servers />
   </component>
