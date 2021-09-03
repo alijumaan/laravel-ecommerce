@@ -87,6 +87,12 @@
                 <a class="nav-link text-dark" href="{{ route('admin.supervisors.index') }}">Supervisors</a>
             </li>
         @endcan
+        @can('access_setting')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.settings.index') }}">
+                    <span>Settings</span></a>
+            </li>
+        @endcan
 
         <div class="topbar-divider d-none d-sm-block"></div>
 

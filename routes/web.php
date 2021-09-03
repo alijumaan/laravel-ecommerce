@@ -85,60 +85,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('shipping_companies', Backend\ShippingCompanyController::class);
         Route::resource('payment_methods', Backend\PaymentMethodController::class);
         Route::resource('orders', Backend\OrderController::class)->except('create', 'edit');
+        Route::resource('settings', Backend\SettingController::class)->names('settings')->only('index', 'update');
     });
 });
-
-//Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-//    Route::get('/', [Backend_old\DashboardController::class, 'index'])->name('index');
-//
-//    Route::group(['middleware' => 'guest'], function () {
-//        Route::get('/login', [Backend_old\DashboardController::class, 'login'])->name('login');
-//        Route::get('/forgot-password', [Backend_old\DashboardController::class, 'forgot_password'])->name('forgot_password');
-//    });
-//
-//    // PRODUCTS
-//    Route::post('/products/remove-image/{mediaId}', [Backend_old\ProductController::class, 'removeImage'])->name('products.media.destroy');
-//    Route::resource('products', Backend_old\ProductController::class)->names('products');
-//
-//    Route::resource('payment-methods', Backend_old\PaymentMethodController::class)->names('payment_methods');
-//    Route::resource('user-addresses', Backend_old\UserAddressController::class)->names('user_addresses');
-//    Route::resource('shipping-companies', Backend_old\ShippingCompanyController::class)->names('shipping_companies');
-//    Route::resource('reviews', Backend_old\ReviewController::class)->names('reviews');
-//
-//    // CATEGORIES
-//    Route::resource('categories', Backend_old\CategoryController::class)->names('categories');
-//
-//    // USERS
-//    Route::post('/users/remove-image', [Backend_old\UserController::class, 'removeImage'])->name('users.remove-image');
-//    Route::resource('users', Backend_old\UserController::class)->names('users');
-//
-//    // CONTACTS
-//    Route::resource('contacts', Backend_old\ContactController::class)->names('contacts');
-//
-//    // TAGS
-//    Route::resource('tags', Backend_old\TagController::class)->names('tags');
-//
-//    // SETTINGS
-//    Route::resource('settings', Backend_old\SettingController::class)->names('settings')->only('index', 'update');
-//
-//    // ORDERS
-//    Route::get('confirm/{id}', [Backend_old\OrderController::class, 'confirm'])->name('order.confirm');
-//    Route::get('pending/{id}', [Backend_old\OrderController::class, 'pending'])->name('order.pending');
-//    Route::resource('orders', Backend_old\OrderController::class)->names('orders')->only('index', 'show');
-//
-//    // COUPONS
-//    Route::resource('coupons', Backend_old\CouponsController::class)->names('coupons');
-//
-//    Route::group(['middleware' => 'superAdmin'], function () {
-//        /* Change Role By Ajax JavaScript */
-//        Route::post('permissions/byRole', [Backend_old\PermissionController::class, 'getByRole'])->name('permission_byRole');
-//        Route::resource('permissions', Backend_old\PermissionController::class);
-//
-//        // SUPERVISORS
-//        Route::post('/supervisors/remove-image', [Backend_old\SupervisorController::class, 'removeImage'])->name('supervisors.remove-image');
-//        Route::resource('supervisors', Backend_old\SupervisorController::class)->names('supervisors');
-//    });
-//
-//    // Pages
-//    Route::resource('pages', Backend_old\PageController::class);
-//});
