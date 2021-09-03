@@ -11,7 +11,7 @@
                         <div class="product-fruit-wrapper mb-60">
                             <div class="product-fruit-img">
                                 @if($product->firstMedia)
-                                    <img src="{{ asset('storage/' . $product->firstMedia->file_name ) }}"
+                                    <img src="{{ asset('storage/images/products/' . $product->firstMedia->file_name ) }}"
                                          alt="{{ $product->name }}">
                                 @else
                                     <img src="{{ asset('img/cartwhite.png' ) }}" alt="">
