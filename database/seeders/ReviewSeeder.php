@@ -24,7 +24,6 @@ class ReviewSeeder extends Seeder
             for ($i = 1; $i < rand(1, 3); $i++) {
                 $product->reviews()->create([
                     'user_id' => User::all()->random()->id,
-                    'title' => $faker->sentence,
                     'content' => $faker->paragraph,
                     'status' => rand(0,1),
                     'rating' => rand(1,5),

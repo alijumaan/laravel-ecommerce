@@ -19,8 +19,6 @@ Route::get('/shop/{slug?}', [Frontend\HomeController::class, 'shop'])->name('sho
 Route::get('/shop/tag/{slug}', [Frontend\HomeController::class, 'shopTag'])->name('shop.tag');
 Route::get('/wishlist', [Frontend\HomeController::class, 'wishlist'])->name('wishlist.index');
 Route::get('/product/{slug}', [Frontend\HomeController::class, 'product'])->name('product.show');
-Route::post('/product/review', [Frontend\HomeController::class, 'storeReview'])->name('review.store');
-//Route::post('product/{slug}/rate', [Frontend\HomeController::class, 'rate'])->name('products.rate');
 Route::get('/search', [Frontend\HomeController::class, 'search'])->name('search');
 
 Route::group(['middleware' => 'auth'], function () {

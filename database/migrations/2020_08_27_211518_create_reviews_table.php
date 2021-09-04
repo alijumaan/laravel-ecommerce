@@ -17,10 +17,10 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->string('title');
             $table->text('content');
             $table->boolean('status')->default(false);
-            $table->unsignedTinyInteger('rating')->default(1);
+            $table->unsignedTinyInteger('rating');
+            $table->string('ip_address')->nullable();
             $table->timestamps();
         });
     }

@@ -75,35 +75,35 @@ class HomeController extends Controller
         return view('frontend.shop.index', compact('products', 'slug'));
     }
 
-    public function storeReview(Request $request, $slug)
-    {
-        $validation = Validator::make($request->all(), ['review' => 'required',]);
-
-        if ($validation->fails()) {return redirect()->back()->withErrors($validation)->withInput();}
-
-        $product = Product::whereSlug($slug)->first();
-
-        $userId = auth()->check() ?  auth()->id() : null;
-        $userName = auth()->user()->name;
-        $userEmail = auth()->user()->email;
-
-        $data['name']             = $userName;
-        $data['email']            = $userEmail;
-        $data['ip_address']       = $request->ip();
-        $data['status']           = 1;
-        $data['review']          = $request->review;
-        $data['product_id']       = $product->id;
-        $data['user_id']          = $userId;
-
-        $review = $product->reviews()->create($data);
-
-        if ($review) {
-            Cache::forget('recent_reviews');
-        }
-
-        return redirect()->back()->with(['message' => 'Review added successfully', 'alert-type' => 'success']);
-
-    }
+//    public function storeReview(Request $request, $slug)
+//    {
+//        $validation = Validator::make($request->all(), ['review' => 'required',]);
+//
+//        if ($validation->fails()) {return redirect()->back()->withErrors($validation)->withInput();}
+//
+//        $product = Product::whereSlug($slug)->first();
+//
+//        $userId = auth()->check() ?  auth()->id() : null;
+//        $userName = auth()->user()->name;
+//        $userEmail = auth()->user()->email;
+//
+//        $data['name']             = $userName;
+//        $data['email']            = $userEmail;
+//        $data['ip_address']       = $request->ip();
+//        $data['status']           = 1;
+//        $data['review']          = $request->review;
+//        $data['product_id']       = $product->id;
+//        $data['user_id']          = $userId;
+//
+//        $review = $product->reviews()->create($data);
+//
+//        if ($review) {
+//            Cache::forget('recent_reviews');
+//        }
+//
+//        return redirect()->back()->with(['message' => 'Review added successfully', 'alert-type' => 'success']);
+//
+//    }
 
 //    public function rate(Request $request, Product $product)
 //    {

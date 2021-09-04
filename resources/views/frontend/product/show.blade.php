@@ -149,7 +149,6 @@
                                                                             @endfor
                                                                         @endif
                                                                     </div><div>
-                                                                    <strong style="width: 100%; font-size: 14px;">{{ $review->title }}</strong>
                                                                     <p style="width: 100%; font-size: 14px;">{{ $review->content }}</p></div>
                                                                 </div>
                                                             </div>
@@ -159,6 +158,20 @@
                                                     @endforelse
                                                 </ul>
                                             </div>
+{{--                                            @if() --}}
+{{--                                                --}}
+{{--                                            @else--}}
+{{--                                                <div class="alert alert-danger" role="alert">--}}
+{{--                                                    <small>Must buy this product before write a review.</small>--}}
+{{--                                                </div>--}}
+{{--                                            @endif--}}
+                                            @auth
+                                                <livewire:frontend.save-product-review-component :product="$product" />
+                                            @else
+                                                <a href="{{ route('login') }}" class="btn btn-dark">
+                                                    Login to write a review!
+                                                </a>
+                                            @endauth
                                         </div>
                                     </div>
                                 </div>

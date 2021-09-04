@@ -10,7 +10,6 @@ use Livewire\Component;
 
 class AddressesComponent extends Component
 {
-    public $confirming;
     public $showForm = false;
     public $editMode = false;
     public $address_id = '';
@@ -117,16 +116,6 @@ class AddressesComponent extends Component
         $this->resetForm();
         $this->showForm = false;
         $this->alert('success', 'Address updated successfully');
-    }
-
-    public function confirmDelete($id)
-    {
-        $this->confirming = $id;
-    }
-
-    public function kill($id)
-    {
-        Country::destroy($id);
     }
 
     public function deleteAddress  ($id)

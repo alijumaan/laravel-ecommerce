@@ -15,7 +15,6 @@ class Review extends Model
 
     protected $searchable = [
         'columns' => [
-            'reviews.title' => 10,
             'reviews.content' => 10,
             'users.first_name' => 10,
             'users.email' => 10,
