@@ -121,58 +121,13 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-9 col-12">
-                                        <div class="blog-details content">
-                                            <div class="comments_area pb-5">
-                                                <ul class="comment__list">
-                                                    @forelse($product->reviews as $review)
-                                                        <li>
-                                                            <div class="wn__comment">
-                                                                <div class="">
-                                                                    @if($review->user && $review->user->user_image)
-                                                                        <img class="rounded-circle"
-                                                                             src="{{ asset('storage/images/users/' . $review->user->user_image) }}"
-                                                                             alt="" width="50">
-                                                                    @else
-                                                                        <img src="{{ get_gravatar($review->email, 50) }}"
-                                                                            alt="{{ $review->name }}">
-                                                                    @endif
-                                                                </div>
-                                                                <div class="content">
-                                                                    {{ $review->name }}
-                                                                    <div class="comnt__author d-block d-sm-flex">
-                                                                        <small>{{ $review->created_at ? $review->created_at->format('d M, Y') : '' }}</small>
-                                                                    </div>
-                                                                    <div>
-                                                                        @if($review->rating)
-                                                                            @for($i = 0; $i < 5; $i++)
-                                                                                <i class="{{ round($review->rating) <= $i ? 'far' : 'fas' }} fa-star"></i>
-                                                                            @endfor
-                                                                        @endif
-                                                                    </div><div>
-                                                                    <p style="width: 100%; font-size: 14px;">{{ $review->content }}</p></div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    @empty
-                                                        <a class="m-2">Be the first to write your review!</a>
-                                                    @endforelse
-                                                </ul>
-                                            </div>
-{{--                                            @if() --}}
-{{--                                                --}}
-{{--                                            @else--}}
-{{--                                                <div class="alert alert-danger" role="alert">--}}
-{{--                                                    <small>Must buy this product before write a review.</small>--}}
-{{--                                                </div>--}}
-{{--                                            @endif--}}
-                                            @auth
-                                                <livewire:frontend.save-product-review-component :product="$product" />
-                                            @else
-                                                <a href="{{ route('login') }}" class="btn btn-dark">
-                                                    Login to write a review!
-                                                </a>
-                                            @endauth
-                                        </div>
+                                        @auth
+                                            <livewire:frontend.product-review-component :product="$product" />
+                                        @else
+                                            <a href="{{ route('login') }}" class="btn btn-dark">
+                                                Login to write a review!
+                                            </a>
+                                        @endauth
                                     </div>
                                 </div>
                             </div>

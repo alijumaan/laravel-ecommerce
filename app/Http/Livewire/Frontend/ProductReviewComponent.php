@@ -7,16 +7,26 @@ use App\Models\Review;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
-class SaveProductReviewComponent extends Component
+class ProductReviewComponent extends Component
 {
     public $showForm = true;
+    public $canRate = false;
     public $product;
     public $content;
     public $rating;
+    public $checkProduct;
     public $currentRatingId;
+
 
     public function mount()
     {
+        $this->checkProduct = Order::whereHas('products', function ($query) {
+            $query->where('product_id', $this->product->id);
+        })->where('user_id', auth()->id())->where('order_status', Order::FINISHED)->first();
+        if ($this->checkProduct) {
+            $this->canRate = true;
+        }
+
         if(auth()->user()){
             $rating = Review::where('user_id', auth()->id())->where('product_id', $this->product->id)->first();
 
@@ -38,11 +48,7 @@ class SaveProductReviewComponent extends Component
 
     public function rate()
     {
-        $canRating = Order::whereHas('products', function ($query) {
-            $query->where('product_id', $this->product->id);
-        })->where('user_id', auth()->id())->where('order_status', Order::FINISHED)->first();
-
-        if (!$canRating){
+        if (!$this->checkProduct){
             $this->alert('error', 'You must buy this item first');
             return false;
         }
@@ -95,6 +101,6 @@ class SaveProductReviewComponent extends Component
 
     public function render()
     {
-        return view('livewire.frontend.save-product-review-component');
+        return view('livewire.frontend.product-review-component');
     }
 }
