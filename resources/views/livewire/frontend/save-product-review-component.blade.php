@@ -1,6 +1,6 @@
 <div class="comment_respond">
-    @if($hideForm != true)
-        <h3 class="reply_title">Leave a Reply<small></small></h3>
+    @if($showForm)
+        <h3 class="reply_title">{{ $currentRatingId ? 'Your Rating' : 'Leave a Reply' }}</h3>
         <form wire:submit.prevent="rate()" class="review__form score">
             <div class="score-wrap">
                 <label for="star1">
@@ -40,16 +40,18 @@
                 @error('content')<span class="text-danger">{{ $message }}</span>@enderror
             </div>
             <div class="submite__btn">
-                @if($currentId)
+                @if($currentRatingId)
                     @auth
-                        <button type="submit" wire:click.prevent="delete({{ $currentId }})" class="btn btn-danger">
+                        <button type="submit" wire:click.prevent="delete({{ $currentRatingId }})" class="btn btn-danger">
                             Delete
                         </button>
+                        <button type="submit" class="btn btn-dark rounded shadow-lg">Update</button>
                     @endauth
                 @else
-                    <button class="btn btn-dark rounded shadow-lg">Rate</button>
+                    <button type="submit" class="btn btn-dark rounded shadow-lg">Rate</button>
                 @endif
             </div>
+
         </form>
     @endif
 </div>
