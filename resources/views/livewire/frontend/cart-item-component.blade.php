@@ -21,8 +21,8 @@
         <span class="amount" style="font-size: 16px;">${{ $cartItem->model->price }}</span>
     </td>
     <td class="product-quantity" style="font-size: 16px;">
-        <div class="border d-flex align-items-center justify-content-between px-2">
-            <span class="text-uppercase text-gray headings-font-family">Quantity</span>
+        <div class="d-flex align-items-center justify-content-between">
+            <span class="text-uppercase text-gray headings-font-family"></span>
             <a wire:click.prevent="decreaseQuantity('{{ $cartItem->rowId }}')"
                 style="cursor: pointer;">
                 <i class="fas fa-caret-left"></i>

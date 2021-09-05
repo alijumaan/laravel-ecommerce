@@ -21,17 +21,65 @@
                 </div>
                 <div class="shop-filter-tab">
                     <div class="shop-tab nav" role=tablist>
-                        <a class="active" href="#grid-sidebar14" data-toggle="tab" role="tab" aria-selected="true">
+                        <a class="active" href="#grid-sidebar1" data-toggle="tab" role="tab" aria-selected="true">
                             <i class="fas fa-border-all"></i>
                         </a>
-                        <a href="#grid-sidebar13" data-toggle="tab" role="tab" aria-selected="false">
+                        <a href="#grid-sidebar2" data-toggle="tab" role="tab" aria-selected="false">
                             <i class="fas fa-bars"></i>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="shop-product-content tab-content">
-                <div id="grid-sidebar13" class="tab-pane fade">
+                <div id="grid-sidebar1" class="tab-pane fade active show">
+                    <div class="row">
+                        @forelse($products as $product)
+                            <div class="col-lg-4 col-xl-3 col-md-6">
+                                <div class="product-fruit-wrapper mb-60">
+                                    <div class="product-fruit-img">
+                                        @if($product->firstMedia)
+                                            <img src="{{ asset('storage/images/products/' . $product->firstMedia->file_name ) }}"
+                                                 alt="{{ $product->name }}">
+                                        @else
+                                            <img src="{{ asset('img/cartwhite.png' ) }}" alt="">
+                                        @endif
+                                        <div class="product-furit-action">
+                                            <a wire:click.prevent="addToCart('{{ $product->id }}')"
+                                               class="furit-animate-left" title="Add To Cart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                            <a wire:click.prevent="addToWishList('{{ $product->id }}')"
+                                               class="furit-animate-right" title="Wishlist">
+                                                <i class="fas fa-heart"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="product-fruit-content text-center">
+                                        <h4>
+                                            <a href="{{route('product.show', $product->slug)}}">{{ $product->name }}</a>
+                                        </h4>
+                                        <span>${{ $product->price }}</span>
+                                        <div>
+                                            @if($product->tags->count() > 0)
+                                                @foreach($product->tags as $tag)
+                                                    <label for="" class="small">
+                                                        <a href="{{ route('shop.tag', $tag->slug) }}">
+                                                            {{ $tag->name }}
+                                                            <span>{{ $loop->last ? '' : ',' }}</span>
+                                                        </a>
+                                                    </label>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <p>No products found.</p>
+                        @endforelse
+                    </div>
+                </div>
+                <div id="grid-sidebar2" class="tab-pane fade">
                     <div class="row">
                         @forelse($products as $product)
                             <div class="col-lg-12">
@@ -53,8 +101,10 @@
                                             <span>${{ $product->price }}</span>
                                             @if($product->tags->count() > 0)
                                                 @foreach($product->tags as $tag)
-                                                    <label for="" class="badge bg-success">
-                                                        <a href="{{ route('shop.tag', $tag->slug) }}">{{ $tag->name }}</a>
+                                                    <label>
+                                                        <a href="{{ route('shop.tag', $tag->slug) }}">
+                                                            {{ $tag->name }}<span>{{ $loop->last ? '' : ',' }}</span>
+                                                        </a>
                                                     </label>
                                                 @endforeach
                                             @endif
@@ -81,60 +131,6 @@
                         @endforelse
                     </div>
                 </div>
-
-                <div id="grid-sidebar14" class="tab-pane fade active show">
-                    <div class="row">
-                        @forelse($products as $product)
-                            <div class="col-lg-6 col-md-6" style="max-width: 30%;">
-                                <div class="product-wrapper mb-30">
-                                    <div class="product-img">
-                                        @if($product->firstMedia)
-                                            <img src="{{ asset('storage/images/products/' . $product->firstMedia->file_name ) }}" style="width: 100%;">
-                                        @else
-                                            <img src="{{ asset('img/cartwhite.png' ) }}" alt="{{ $product->name }}" style="width: 100%;">
-                                        @endif
-{{--                                         <span class="bg-danger">hot</span>--}}
-                                        <div class="product-action">
-                                            <a wire:click.prevent="addToCart('{{ $product->id }}')"
-                                               class="animate-top"
-                                               title="Add To Cart" style="cursor: pointer;">
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </a>
-                                            <a wire:click.prevent="addToWishList('{{ $product->id }}')"
-                                               class="animate-right" title="Quick View" style="cursor: pointer;">
-                                                <i class="fas fa-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content text-center">
-                                        <h4>
-                                            <a href="{{route('product.show', $product->slug)}}">
-                                                {{ $product->name }}
-                                            </a>
-                                        </h4>
-                                        <span>${{ $product->price }}</span>
-                                        <div>
-                                            @if($product->tags->count() > 0)
-                                                @foreach($product->tags as $tag)
-                                                    <label for="" class="small">
-                                                        <a href="{{ route('shop.tag', $tag->slug) }}">
-                                                            {{ $tag->name }}
-                                                            <span>{{ $loop->last ? '' : ',' }}</span>
-                                                        </a>
-                                                    </label>
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        @empty
-                            <h3>No Products found.</h3>
-                        @endforelse
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
