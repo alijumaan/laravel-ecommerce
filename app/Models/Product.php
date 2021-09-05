@@ -92,11 +92,6 @@ class Product extends Model
         return $this->belongsToMany(Order::class)->wherePivot('quantity');
     }
 
-    public function orderItems(): HasMany
-    {
-        return $this->hasMany(OrderItem::class);
-    }
-
     public function approvedReviews()
     {
         return $this->hasMany(Review::class)->whereStatus(1);
