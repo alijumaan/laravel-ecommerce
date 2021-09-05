@@ -23,14 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Livewire/Frontend/SaveProductReviewComponent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/livewire/frontend/save-product-review-component.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_27_211518_create_reviews_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_08_27_211518_create_reviews_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,7 +249,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Laravel-Shop" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -777,7 +770,8 @@
       <workItem from="1630664930416" duration="382000" />
       <workItem from="1630675773569" duration="2130000" />
       <workItem from="1630746776765" duration="5985000" />
-      <workItem from="1630780386922" duration="2847000" />
+      <workItem from="1630780386922" duration="10486000" />
+      <workItem from="1630831183797" duration="498000" />
     </task>
     <servers />
   </component>
@@ -806,6 +800,24 @@
           <url>file://$PROJECT_DIR$/resources/views/backend_old/users/create.blade.php</url>
           <line>76</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Livewire/Frontend/SaveProductReviewComponent.php</url>
+          <line>73</line>
+          <properties>
+            <option name="className" value="\App\Http\Livewire\Frontend\SaveProductReviewComponent" />
+            <option name="methodName" value="rate" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Livewire/Frontend/SaveProductReviewComponent.php</url>
+          <line>60</line>
+          <properties>
+            <option name="className" value="\App\Http\Livewire\Frontend\SaveProductReviewComponent" />
+            <option name="methodName" value="delete" />
+          </properties>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

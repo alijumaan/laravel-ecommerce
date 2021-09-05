@@ -122,7 +122,7 @@
                                 <div class="row">
                                     <div class="col-lg-9 col-12">
                                         <div class="blog-details content">
-                                            <div class="comments_area">
+                                            <div class="comments_area pb-5">
                                                 <ul class="comment__list">
                                                     @forelse($product->reviews as $review)
                                                         <li>
