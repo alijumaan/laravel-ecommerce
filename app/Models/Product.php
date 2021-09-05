@@ -82,14 +82,14 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(Review::class);
-    }
-
     public function orders(): BelongsToMany
     {
         return $this->belongsToMany(Order::class)->wherePivot('quantity');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
     }
 
     public function approvedReviews()

@@ -23,6 +23,12 @@ class Review extends Model
             'users' => ['users.id', 'reviews.user_id'],
         ]
     ];
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(true);
+    }
+
     public function getStatusAttribute(): string
     {
         return $this->attributes['status'] == 0 ? 'Inactive' : 'Active';

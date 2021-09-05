@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Frontend;
 
 use App\Models\Order;
 use App\Models\Review;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
@@ -17,18 +18,18 @@ class ProductReviewComponent extends Component
     public $checkProduct;
     public $currentRatingId;
 
-
     public function mount()
     {
         $this->checkProduct = Order::whereHas('products', function ($query) {
             $query->where('product_id', $this->product->id);
         })->where('user_id', auth()->id())->where('order_status', Order::FINISHED)->first();
+
         if ($this->checkProduct) {
             $this->canRate = true;
         }
 
         if(auth()->user()){
-            $rating = Review::where('user_id', auth()->id())->where('product_id', $this->product->id)->first();
+            $rating = Review::active()->where('user_id', auth()->id())->where('product_id', $this->product->id)->first();
 
             if (!empty($rating)) {
                 $this->rating  = $rating->rating;
@@ -46,14 +47,14 @@ class ProductReviewComponent extends Component
         ];
     }
 
-    public function rate()
+    public function rate(Request $request)
     {
         if (!$this->checkProduct){
             $this->alert('error', 'You must buy this item first');
             return false;
         }
 
-        $rating = Review::where('user_id', auth()->id())->where('product_id', $this->product->id)->first();
+        $rating = Review::active()->where('user_id', auth()->id())->where('product_id', $this->product->id)->first();
 
         $this->validate();
 
@@ -62,6 +63,7 @@ class ProductReviewComponent extends Component
             $rating->product_id = $this->product->id;
             $rating->rating = $this->rating;
             $rating->content = $this->content;
+            $rating->ip_address = $request->ip();
             $rating->status = 1;
             $rating->update();
             Cache::forget('recent_reviews');
@@ -73,6 +75,7 @@ class ProductReviewComponent extends Component
             $rating->product_id = $this->product->id;
             $rating->rating = $this->rating;
             $rating->content = $this->content;
+            $rating->ip_address = $request->ip();
             $rating->status = 1;
             $rating->save();
             Cache::forget('recent_reviews');

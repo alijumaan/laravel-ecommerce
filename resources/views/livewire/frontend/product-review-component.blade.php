@@ -1,7 +1,7 @@
 <div class="blog-details content">
     <div class="comments_area pb-5">
         <ul class="comment__list">
-            @forelse($product->reviews as $review)
+            @forelse($product->approvedReviews as $review)
                 <li>
                     <div class="wn__comment">
                         <div class="">
