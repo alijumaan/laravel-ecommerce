@@ -48,10 +48,10 @@
                             <div class="quick-view-number">
                                 <span class="score">
                                     <div class="score-wrap">
-                                        @if($product->reviews_avg_rating)
+                                        @if($product->approved_reviews_avg_rating)
                                             @for($i = 0; $i < 5; $i++)
                                                 <span class="stars-active">
-                                                    <i class="{{ round($product->reviews_avg_rating) <= $i ? 'far' : 'fas' }} fa-star"></i>
+                                                    <i class="{{ round($product->approved_reviews_avg_rating) <= $i ? 'far' : 'fas' }} fa-star"></i>
                                                 </span>
                                             @endfor
                                         @else
@@ -61,7 +61,7 @@
                                         @endif
                                     </div>
                                 </span>
-                                <span>{{ $product->reviews_count }} Ratting (S)</span>
+                                <span>{{ $product->approved_reviews_count }} Ratting (S)</span>
                             </div>
                         </div>
                         <div class="details-price">
@@ -106,7 +106,7 @@
             <div class="product-description-review text-center">
                 <div class="description-review-title nav" role=tablist>
                     <a class="active" href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
-                        Reviews ({{ $product->reviews_count }})
+                        Reviews ({{ $product->approved_reviews_count }})
                     </a>
                     <a href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
                         Description
