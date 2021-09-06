@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="ml-auto">
-                                @if($currentRatingId)
+                                @if($currentRatingId === $review->id)
                                     @auth
                                         <span x-on:click="showForm = !showForm"
                                             class="text-primary" style="cursor: pointer">

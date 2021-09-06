@@ -31,7 +31,7 @@ class ProductReviewComponent extends Component
         }
 
         if(auth()->user()){
-            $rating = Review::where('user_id', auth()->id())->where('product_id', $this->product->id)->first();
+            $rating = Review::active()->where('user_id', auth()->id())->where('product_id', $this->product->id)->first();
 
             if (!empty($rating)) {
                 $this->rating  = $rating->rating;
