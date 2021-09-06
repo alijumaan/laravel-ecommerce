@@ -106,7 +106,7 @@
             <div class="product-description-review text-center">
                 <div class="description-review-title nav" role=tablist>
                     <a class="active" href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
-                        Reviews ({{ $product->reviews->count() }})
+                        Reviews ({{ $product->reviews_count }})
                     </a>
                     <a href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
                         Description

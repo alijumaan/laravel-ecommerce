@@ -17,6 +17,9 @@ class ProductReviewComponent extends Component
     public $checkProduct;
     public $currentRatingId;
 
+    protected $listeners = [
+        'updateRating' => 'mount',
+    ];
 
     public function mount()
     {
@@ -66,6 +69,7 @@ class ProductReviewComponent extends Component
             $rating->update();
             Cache::forget('recent_reviews');
             $this->alert('success', 'Your review updated successfully');
+            $this->showForm = false;
 
         } else {
             $rating = new Review();
@@ -80,7 +84,7 @@ class ProductReviewComponent extends Component
             $this->showForm = false;
         }
 
-        return redirect()->route('product.show', $this->product->slug);
+        $this->emit('updateRating');
     }
 
     public function delete($id)
@@ -88,15 +92,16 @@ class ProductReviewComponent extends Component
         $rating = Review::where('id', $id)->first();
         if ($rating && ($rating->user_id == auth()->id())) {
             $rating->delete();
-            Cache::forget('recent_reviews');
-            $this->alert('success', 'Your review deleted successfully');
         }
         if ($this->currentRatingId) {
             $this->currentRatingId = '';
             $this->rating  = '';
             $this->content = '';
         }
-        return redirect()->route('product.show', $this->product->slug);
+        $this->emit('updateRating');
+        $this->showForm = true;
+        Cache::forget('recent_reviews');
+        $this->alert('success', 'Your review deleted successfully');
     }
 
     public function render()

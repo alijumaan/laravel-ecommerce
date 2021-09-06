@@ -24,9 +24,10 @@
   <component name="ChangeListManager">
     <list default="true" id="24755cfc-25d3-4ded-ab7d-a382fb67390f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Frontend/SaveProductReviewComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Frontend/SaveProductReviewComponent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Frontend/ProductReviewComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Frontend/ProductReviewComponent.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/frontend/save-product-review-component.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/frontend/save-product-review-component.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/frontend/product-review-component.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/frontend/product-review-component.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/frontend/shop/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/frontend/shop/sidebar.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,6 +246,7 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
@@ -775,7 +777,8 @@
       <workItem from="1630746776765" duration="5985000" />
       <workItem from="1630780386922" duration="10486000" />
       <workItem from="1630831183797" duration="9070000" />
-      <workItem from="1630861627615" duration="3580000" />
+      <workItem from="1630861627615" duration="4378000" />
+      <workItem from="1630914873679" duration="6488000" />
     </task>
     <servers />
   </component>
