@@ -23,7 +23,7 @@
     <livewire:styles/>
     @yield('style')
 </head>
-<body>
+<body style="background: #ffffff">
     @include('partials.frontend.header')
 
     @include('partials.frontend.flash')

@@ -46,7 +46,7 @@ class ViewServiceProvider extends ServiceProvider
 
         if (!request()->is('admin/*')) {
 
-            Paginator::defaultView('vendor.pagination.cart-white');
+//            Paginator::defaultView('vendor.pagination.cart-white');
 
             view()->composer('*', function ($view) {
                 if (!Cache::has('recent_reviews')) {

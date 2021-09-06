@@ -121,13 +121,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-9 col-12">
-                                        @auth
-                                            <livewire:frontend.product-review-component :product="$product" />
-                                        @else
-                                            <a href="{{ route('login') }}" class="btn btn-dark">
-                                                Login to write a review!
-                                            </a>
-                                        @endauth
+                                        <livewire:frontend.product-review-component :product="$product" />
                                     </div>
                                 </div>
                             </div>

@@ -57,12 +57,12 @@
                         </div>
                         <div class="ml-3 p-0">
                             @if(isset($recent_review->product->slug))
-                                <h6>
-                                    <span class="text-success">{{ $recent_review->name }}</span>
+                                <p>
+                                    <span class="">{{ $recent_review->user->full_name }}</span>
                                     <small> review on :
                                         {{ $recent_review->product->name }}
                                     </small>
-                                </h6>
+                                </p>
                                 <p>{!! \Illuminate\Support\Str::limit($recent_review->review, 30, '...') !!}</p>
                             @else
 

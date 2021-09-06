@@ -26,10 +26,17 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Frontend/ProductReviewComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Frontend/ProductReviewComponent.php" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Review.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/livewire/frontend/product-review-component.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/frontend/product-review-component.blade.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/app/Models/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Review.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/product/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/frontend/product-review-component.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/frontend/product-review-component.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/frontend/shop-products-tag-component.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/frontend/shop-products-tag-component.blade.php" afterDir="false" />
+>>>>>>> 0022fe00f5f11191fac00d92a67f537c8c9013ee
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,6 +255,7 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
@@ -255,7 +263,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Laravel-Shop" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -778,8 +786,15 @@
       <workItem from="1630746776765" duration="5985000" />
       <workItem from="1630780386922" duration="10486000" />
       <workItem from="1630831183797" duration="9070000" />
+<<<<<<< HEAD
       <workItem from="1630861627615" duration="3580000" />
       <workItem from="1630868332503" duration="5796000" />
+=======
+      <workItem from="1630861627615" duration="4378000" />
+      <workItem from="1630914873679" duration="7562000" />
+      <workItem from="1630934027875" duration="3303000" />
+      <workItem from="1630945567689" duration="6285000" />
+>>>>>>> 0022fe00f5f11191fac00d92a67f537c8c9013ee
     </task>
     <servers />
   </component>

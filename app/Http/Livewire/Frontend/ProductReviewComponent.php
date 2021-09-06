@@ -18,6 +18,11 @@ class ProductReviewComponent extends Component
     public $checkProduct;
     public $currentRatingId;
 
+
+    protected $listeners = [
+        'updateRating' => 'mount',
+    ];
+
     public function mount()
     {
         $this->checkProduct = Order::whereHas('products', function ($query) {
@@ -54,22 +59,11 @@ class ProductReviewComponent extends Component
             return false;
         }
 
-        $rating = Review::active()->where('user_id', auth()->id())->where('product_id', $this->product->id)->first();
+        $rating = Review::where('user_id', auth()->id())->where('product_id', $this->product->id)->first();
 
         $this->validate();
 
-        if (!empty($rating)) {
-            $rating->user_id = auth()->id();
-            $rating->product_id = $this->product->id;
-            $rating->rating = $this->rating;
-            $rating->content = $this->content;
-            $rating->ip_address = $request->ip();
-            $rating->status = 1;
-            $rating->update();
-            Cache::forget('recent_reviews');
-            $this->alert('success', 'Your review updated successfully');
-
-        } else {
+        if (empty($rating)) {
             $rating = new Review();
             $rating->user_id = auth()->id();
             $rating->product_id = $this->product->id;
@@ -80,26 +74,41 @@ class ProductReviewComponent extends Component
             $rating->save();
             Cache::forget('recent_reviews');
             $this->alert('success', 'Your review added successfully');
-            $this->showForm = false;
+        } else {
+            if ($rating->status == "Inactive"){
+                $this->alert('error', 'already rating this item');
+                return false;
+            }
+            $rating->user_id = auth()->id();
+            $rating->product_id = $this->product->id;
+            $rating->rating = $this->rating;
+            $rating->content = $this->content;
+            $rating->ip_address = $request->ip();
+            $rating->status = 1;
+            $rating->update();
+            Cache::forget('recent_reviews');
+            $this->alert('success', 'Your review updated successfully');
         }
 
-        return redirect()->route('product.show', $this->product->slug);
+        $this->showForm = false;
+        $this->emit('updateRating');
     }
 
     public function delete($id)
     {
-        $rating = Review::where('id', $id)->first();
+        $rating = Review::active()->where('id', $id)->first();
         if ($rating && ($rating->user_id == auth()->id())) {
             $rating->delete();
-            Cache::forget('recent_reviews');
-            $this->alert('success', 'Your review deleted successfully');
         }
         if ($this->currentRatingId) {
             $this->currentRatingId = '';
             $this->rating  = '';
             $this->content = '';
         }
-        return redirect()->route('product.show', $this->product->slug);
+        $this->emit('updateRating');
+        $this->showForm = true;
+        Cache::forget('recent_reviews');
+        $this->alert('success', 'Your review deleted successfully');
     }
 
     public function render()
