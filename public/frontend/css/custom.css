@@ -131,3 +131,17 @@
     top: -0.5rem;
     left: 10.60rem !important;
 }
+.category-item-title{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px rgb(0 0 0 / 7%);
+    font-size: 0.8rem;
+}
