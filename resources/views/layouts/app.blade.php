@@ -76,7 +76,7 @@
                 },
                 templates: {
                     empty: [
-                        '<div><div>لا يوجد نتائج بحث مطابقة</div></div>'
+                        '<div class="list-group-item">There are no matching search results</div>'
                     ],
                     header: [
                         '<div class="list-group search-results-dropdown">'

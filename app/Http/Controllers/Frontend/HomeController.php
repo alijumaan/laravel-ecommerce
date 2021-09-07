@@ -5,13 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
-use App\Traits\FilterTrait;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    use FilterTrait;
-
     public function index()
     {
         $categories = Category::whereStatus(1)->whereParentId(null)->limit(4)->get();
