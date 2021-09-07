@@ -1,4 +1,3 @@
-
 <div>
     <a class="notification" href="#" id="alertsDropdown" role="button"
        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

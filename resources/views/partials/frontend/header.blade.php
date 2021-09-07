@@ -1,4 +1,3 @@
-
 <header class="ptb-50">
     <div class="header-bottom wrapper-padding-2 res-header-sm sticker header-sticky-3 furits-header">
         <div class="container-fluid">
@@ -160,12 +159,12 @@
             <div class="furniture-login">
             </div>
             <div class="furniture-search">
-                {!! Form::open(['route' => 'search', 'method' => 'get']) !!}
+                <form action="{{ route('search') }}" method="GET">
                 <div class="form-input">
-                    {!! Form::text('keyword', old('keyword', request()->keyword), ['placeholder' => 'I am Searching for . . .']) !!}
-                    {!! Form::button('<i class="fas fa-search"></i>', ['type' => 'submit']) !!}
+                    <input type="text" value="{{ old('keyword', request()->keyword) }}" placeholder="Searching for . . .">
+                    <button><i class="fas fa-search"></i></button>
                 </div>
-                {!! Form::close() !!}
+                </form>
             </div>
             <div class="furniture-wishlist">
                 <livewire:frontend.header.wishlist-component />

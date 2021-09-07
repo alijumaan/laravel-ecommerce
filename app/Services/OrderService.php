@@ -2,14 +2,12 @@
 
 namespace App\Services;
 
-use App\Mail\OrderCompleted;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderTransaction;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class OrderService
