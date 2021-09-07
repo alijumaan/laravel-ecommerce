@@ -108,7 +108,7 @@
                                value="{{ old('shippingCompanyId', $shippingCompanyId) }}" class="form-control">
                         <input type="hidden" name="paymentMethodId" value="{{ old('paymentMethodId', $paymentMethodId) }}"
                                class="form-control">
-                        <button type="submit" name="submit" class="btn btn-sm btn-dark btn-block uppercase">
+                        <button type="submit" name="submit" class="btn btn-sm btn-primary btn-block uppercase">
                             PayPay Place order
                         </button>
                     </form>
