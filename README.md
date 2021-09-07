@@ -20,6 +20,7 @@ after install the source code open Terminal to use these command line:
 ## Permission folder ( Linux | Mac)
 - sudo chmod -R 777 settings.json
 - sudo chmod -R 777 storage/app/public/images/
+- sudo chmod -R 777 bootstrap/cache
 
 ## Try
 <a href='https://cartwhite.tk' target="_blank">https://cartwhite.tk</a>

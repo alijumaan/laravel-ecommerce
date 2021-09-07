@@ -109,10 +109,24 @@
                         <input type="hidden" name="paymentMethodId" value="{{ old('paymentMethodId', $paymentMethodId) }}"
                                class="form-control">
                         <button type="submit" name="submit" class="btn btn-sm btn-dark btn-block uppercase">
-                            Place order
+                            PayPay Place order
                         </button>
                     </form>
                 @endif
+                    @if(\Str::lower($paymentMethodCode) == 'mada')
+                        <form action="{{ route('checkout.charge_request') }}">
+                            @csrf
+                            <input type="hidden" name="userAddressId" value="{{ old('userAddressId', $userAddressId) }}"
+                                   class="form-control">
+                            <input type="hidden" name="shippingCompanyId"
+                                   value="{{ old('shippingCompanyId', $shippingCompanyId) }}" class="form-control">
+                            <input type="hidden" name="paymentMethodId" value="{{ old('paymentMethodId', $paymentMethodId) }}"
+                                   class="form-control">
+                            <button type="submit" name="submit" class="btn btn-sm btn-dark btn-block uppercase">
+                                Mada Place order
+                            </button>
+                        </form>
+                    @endif
             @endif
         </div>
         <div class="col-lg-6 col-md-12 col-12">

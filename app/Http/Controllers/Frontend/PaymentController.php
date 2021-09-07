@@ -123,4 +123,18 @@ class PaymentController extends Controller
     {
         // feature..
     }
+
+    public function chargeRequest()
+    {
+        $user = auth()->user();
+
+        $total = getNumbersOfCart()->get('total');
+
+        return redirect((new OrderService())->getChargeRequest($total, $user->full_name, $user->email, $user->phone));
+    }
+
+    public function chargeUpdate(Request $request)
+    {
+        return (new OrderService())->validateRequest($request->except(['_token', 'submit']), request()->tap_id);
+    }
 }
