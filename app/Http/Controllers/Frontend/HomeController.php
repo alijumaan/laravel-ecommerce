@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Traits\FilterTrait;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -62,12 +63,14 @@ class HomeController extends Controller
         return view('frontend.wishlist.index');
     }
 
-    public function search($slug = null)
+    public function search(Request $request)
     {
-        $query = Product::with('category')->hasQuantity()->activeCategory();
+        $data = Product::where('name', 'LIKE', '%'.$request->searchName. '%')
+            ->hasQuantity()
+            ->activeCategory()
+            ->take(5)
+            ->get();
 
-        $products = $this->filter($query);
-
-        return view('frontend.shop.index', compact('products', 'slug'));
+        return response()->json($data);
     }
 }

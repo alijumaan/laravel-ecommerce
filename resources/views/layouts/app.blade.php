@@ -51,6 +51,43 @@
     <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('frontend/js/alert-message.js') }}"></script>
     <script src="{{ url('https://kit.fontawesome.com/8003f9e0e2.js') }}" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let bloodhound = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '{{url("search")}}?searchName=%QUERY%', //'/user/find?q=%QUERY%',
+                    wildcard: '%QUERY%'
+                },
+            });
+
+            $('#search').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            }, {
+                name: 'products',
+                source: bloodhound,
+                limit: 10,
+                display: function(data) {
+                    return data.name  //Input value to be set when you select a suggestion.
+                },
+                templates: {
+                    empty: [
+                        '<div><div>لا يوجد نتائج بحث مطابقة</div></div>'
+                    ],
+                    header: [
+                        '<div class="list-group search-results-dropdown">'
+                    ],
+                    suggestion: function(data) {
+                        return '<div style="font-weight:normal; width:100%" class="list-group-item"><a href="{{url('product')}}/'+data.slug+'">' + data.name + '</a></div></div>'
+                    }
+                }
+            });
+        });
+    </script>
     @yield('script')
 </body>
 </html>

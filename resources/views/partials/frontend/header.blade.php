@@ -159,11 +159,10 @@
             <div class="furniture-login">
             </div>
             <div class="furniture-search">
-                <form action="{{ route('search') }}" method="GET">
-                <div class="form-input">
-                    <input type="text" value="{{ old('keyword', request()->keyword) }}" placeholder="Searching for . . .">
-                    <button><i class="fas fa-search"></i></button>
-                </div>
+                <form>
+                    <div class="form-input">
+                        <input id="search" type="text" value="{{ old('keyword', request()->keyword) }}" placeholder="Searching for . . .">
+                    </div>
                 </form>
             </div>
             <div class="furniture-wishlist">
