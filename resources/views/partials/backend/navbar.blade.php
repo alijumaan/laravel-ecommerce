@@ -82,6 +82,11 @@
         --}}
 
         <!-- Supervisor link -->
+        @can('access_link')
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="{{ route('admin.links.index') }}">Links</a>
+            </li>
+        @endcan
         @can('access_supervisor')
             <li class="nav-item">
                 <a class="nav-link text-dark" href="{{ route('admin.supervisors.index') }}">Supervisors</a>
