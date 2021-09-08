@@ -131,5 +131,14 @@ class LinkSeeder extends Seeder
             'status' => 1,
         ]);
 
+        Link::whereStatus(true)->create([
+            'title' => 'Contacts',
+            'as' => 'Contact',
+            'to' => 'admin.contacts.index',
+            'icon' => 'far fa-comment',
+            'permission_title' => 'access_contact',
+            'status' => 1,
+        ]);
+
     }
 }

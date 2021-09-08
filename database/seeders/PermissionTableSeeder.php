@@ -81,6 +81,10 @@ class PermissionTableSeeder extends Seeder
             'show_order',
             'edit_order',
             'delete_order',
+            'access_contact',
+            'show_contact',
+            'edit_contact',
+            'delete_contact',
         ];
 
         foreach ($permissions as $permission) {
