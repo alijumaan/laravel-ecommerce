@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
@@ -21,14 +22,14 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/login', [BackendController::class, 'login'])->name('login');
-    Route::get('/forgot-password', [BackendController::class, 'forgot_password'])->name('forgot_password');
+    Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
+    Route::get('/forgot-password', [AdminAuthController::class, 'forgotPassword'])->name('forgot_password');
 });
 
 Route::group(['middleware' => ['roles']], function () {
     Route::get('/', [BackendController::class, 'index'])->name('index');
-    Route::get('/account-settings', [BackendController::class, 'account_setting'])->name('account_setting');
-    Route::patch('/account-settings', [BackendController::class, 'update_account_setting'])->name('account_setting.update');
+    Route::get('/account-settings', [AdminAuthController::class, 'accountSetting'])->name('account_setting');
+    Route::patch('/account-settings', [AdminAuthController::class, 'updateAccount'])->name('account_setting.update');
     Route::get('/categories/{category}/remove-image', [CategoryController::class, 'removeImage'])->name('categories.remove_image');
     Route::resource('categories', CategoryController::class);
     Route::post('/products/remove-image', [ProductController::class, 'removeImage'])->name('products.remove_image');
@@ -45,9 +46,9 @@ Route::group(['middleware' => ['roles']], function () {
     Route::resource('cities', CityController::class);
     Route::get('users/get-users', [UserController::class, 'get_users'])->name('users.get_users');
     Route::resource('users', UserController::class);
-    Route::resource('user_addresses', UserAddressController::class);
-    Route::resource('shipping_companies', ShippingCompanyController::class);
-    Route::resource('payment_methods', PaymentMethodController::class);
+    Route::resource('user-addresses', UserAddressController::class);
+    Route::resource('shipping-companies', ShippingCompanyController::class);
+    Route::resource('payment-methods', PaymentMethodController::class);
     Route::resource('orders', OrderController::class)->except('create', 'edit');
     Route::resource('settings', SettingController::class)->names('settings')->only('index', 'update');
 });
