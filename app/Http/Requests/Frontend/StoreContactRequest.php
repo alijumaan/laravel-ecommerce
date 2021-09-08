@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePageRequest extends FormRequest
+class StoreContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class StorePageRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'slug' => 'required|max:255',
-            'content' => 'required|max:255'
+            'name'     => ['required', 'string'],
+            'email'    => ['required', 'email', 'string'],
+            'title'    => ['required', 'min:5'],
+            'message'  => ['required', 'min:10'],
         ];
     }
 }

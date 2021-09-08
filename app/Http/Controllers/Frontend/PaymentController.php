@@ -19,12 +19,7 @@ use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class PaymentController extends Controller
 {
-    public function checkout()
-    {
-        return view('frontend.checkout.index');
-    }
-
-    public function checkoutPayment(Request $request)
+    public function store(Request $request)
     {
         $order = (new OrderService())->createOrder($request->except(['_token', 'submit']));
 
@@ -45,7 +40,7 @@ class PaymentController extends Controller
         return redirect()->route('home');
     }
 
-    public function cancelled($orderId): RedirectResponse
+    public function paymentCancelled($orderId): RedirectResponse
     {
         $order = Order::find($orderId);
         $order->update([
@@ -62,7 +57,7 @@ class PaymentController extends Controller
         return redirect()->route('home');
     }
 
-    public function completed($orderId): RedirectResponse
+    public function paymentCompleted($orderId): RedirectResponse
     {
         $order = Order::with('products', 'user', 'paymentMethod')->find($orderId);
 
@@ -119,7 +114,7 @@ class PaymentController extends Controller
         return redirect()->route('home');
     }
 
-    public function webhook($order, $env)
+    public function paymentWebhook($order, $env)
     {
         // feature..
     }

@@ -1,27 +1,32 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Frontend\ShopController;
+use App\Http\Controllers\Frontend\ShopTagController;
 use App\Http\Controllers\Frontend\UserController;
-use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Frontend\WishlistController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\URL;
-
-if (App::environment('production')) {
-    URL::forceScheme('https');
-}
 
 Auth::routes(['verify' => true]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/cart', [HomeController::class, 'cart'])->name('cart.index');
-Route::get('/shop/{slug?}', [HomeController::class, 'shop'])->name('shop.index');
-Route::get('/shop/tag/{slug}', [HomeController::class, 'shopTag'])->name('shop.tag');
-Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist.index');
-Route::get('/product/{slug}', [HomeController::class, 'product'])->name('product.show');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/shop/{slug?}', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/shop/tag/{slug}', [ShopTagController::class, 'index'])->name('shop.tag');
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+// login by social media [ Facebook - Twitter - Google ]
+Route::get('login/{provider}', [LoginController::class, 'redirectToProvider'])->name('social_login');
+Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('social_login_callback');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'verified'], function () {
@@ -34,21 +39,13 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'checkCart'], function () {
-        Route::get('/checkout', [PaymentController::class, 'checkout'])->name('checkout.index');
-        Route::post('/checkout/payment', [PaymentController::class, 'checkoutPayment'])->name('checkout.payment');
-        Route::get('/checkout/{orderId}/cancelled', [PaymentController::class, 'cancelled'])->name('checkout.cancelled');
-        Route::get('/checkout/{orderId}/completed', [PaymentController::class, 'completed'])->name('checkout.completed');
-        Route::get('/checkout/webhook/{order?}/{env?}', [PaymentController::class, 'webhook'])->name('checkout.webhook.ipn');
-        // tap gateway
-        Route::get('/checkout/charge-request', [PaymentController::class, 'chargeRequest'])->name('checkout.charge_request');
-        Route::get('/checkout/charge-update', [PaymentController::class, 'chargeUpdate'])->name('checkout.charge_update');
+        Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+        Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
+        Route::get('/payment/{orderId}/cancelled', [PaymentController::class, 'paymentCancelled'])->name('payment.cancelled');
+        Route::get('/payment/{orderId}/completed', [PaymentController::class, 'paymentCompleted'])->name('payment.completed');
+        Route::get('/payment/webhook/{order?}/{env?}', [PaymentController::class, 'paymentWebhook'])->name('payment.webhook.ipn');
+        // Tap gateway
+        Route::get('/payment/charge-request', [PaymentController::class, 'chargeRequest'])->name('checkout.charge_request');
+        Route::get('/payment/charge-update', [PaymentController::class, 'chargeUpdate'])->name('checkout.charge_update');
     });
 });
-
-// contacts
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-// login by social media [ Facebook - Twitter - Google ]
-Route::get('login/{provider}', [LoginController::class, 'redirectToProvider'])->name('social_login');
-Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('social_login_callback');

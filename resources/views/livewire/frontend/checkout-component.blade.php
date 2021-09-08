@@ -100,7 +100,7 @@
 
             @if($userAddressId && $shippingCompanyId && $paymentMethodId)
                 @if(\Str::lower($paymentMethodCode) == 'ppex')
-                    <form action="{{ route('checkout.payment') }}" method="POST">
+                    <form action="{{ route('payment.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="userAddressId" value="{{ old('userAddressId', $userAddressId) }}"
                                class="form-control">

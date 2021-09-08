@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreContactRequest;
+use App\Http\Requests\Frontend\StoreContactRequest;
 use App\Models\Contact;
 
 class ContactController extends Controller
@@ -16,14 +16,11 @@ class ContactController extends Controller
 
     public function store(StoreContactRequest $request)
     {
-        $userId = auth()->check() ? auth()->id() : null;
-        $data['name'] = $request['name'];
-        $data['email'] = $request['email'];
-        $data['title'] = $request['title'];
-        $data['message'] = $request['message'];
-        $data['user_id'] = $userId;
-        Contact::create($data);
+        Contact::create($request->validated() + [
+            'user_id' => auth()->check() ? auth()->id() : null
+        ]);
 
-        return redirect()->route('home')->with(['message' => 'Thank you for contact us ', 'alert-type' => 'success']);
+        return redirect()->route('home')
+            ->with(['message' => 'Thank you for contact us ', 'alert-type' => 'success']);
     }
 }

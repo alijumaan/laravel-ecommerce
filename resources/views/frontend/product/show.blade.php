@@ -6,7 +6,7 @@
                 <div class="col-md-12 col-lg-7 col-12">
                     <div class="product-details-img-content">
                         <div class="product-details-tab mr-70">
-                            @if($product->media->count())
+                            @if($product->media_count)
                                 <div class="product-details-large tab-content">
                                     @foreach ($product->media as $media)
                                         <div class="tab-pane {{ $loop->index == 0 ? 'active' : '' }} show fade"
