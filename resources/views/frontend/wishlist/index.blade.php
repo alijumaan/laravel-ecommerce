@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Wishlist')
 @section('content')
     <div class="breadcrumb-area pt-70 pb-70" style="background-image: url('{{ asset('frontend/img/bg/16.jpg') }}')">
         <div class="container">

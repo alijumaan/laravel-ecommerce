@@ -75,7 +75,7 @@ class LoginController extends Controller
         /* Repopulate Session With Cart */
         if (!config('cart.destroy_on_logout')) {
             $cart->each(function ($rows, $identifier) use ($request) {
-               $request->session()->put('cart.' . $identifier, $rows);
+                $request->session()->put('cart.' . $identifier, $rows);
             });
         }
 
@@ -91,31 +91,31 @@ class LoginController extends Controller
         Cache::forget('shop_tags_menu');
     }
 
-    // Facebook Function to Login
+    // Facebook Function to Log in
     public function redirectToProvider($provider)
     {
         return Socialite::driver($provider)->redirect();
     }
 
-    // Facebook Function to Login
+    // Facebook Function to Log in
     public function handleProviderCallback($provider)
     {
         $socialUser = Socialite::driver($provider)->user();
 
 //        dd($provider, $socialUser);
-
-        $token     = $socialUser->token;
-        $id        = $socialUser->getId();
-        $nickName  = $socialUser->getNickname();
-        $name      = $socialUser->getName();
-        $email     = $socialUser->getEmail() == '' ? trim(Str::lower(Str::replaceArray(' ', ['_'], $name))). '@'. $provider. '.com' : $socialUser->getEmail();
-        $avatar    = $socialUser->getAvatar();
+        $token = $socialUser->token;
+        $id = $socialUser->getId();
+        $nickName = $socialUser->getNickname();
+        $name = $socialUser->getName();
+        $email = $socialUser->getEmail() == '' ? trim(Str::lower(Str::replaceArray(' ', ['_'], $name))) . '@' . $provider . '.com' : $socialUser->getEmail();
+        $user_image = $socialUser->getAvatar();
 
         $user = User::firstOrCreate([
             'email' => $email
         ],
             [
-                'name' => $name,
+                'first_name' => $name,
+                'last_name' => $name,
                 'username' => $nickName != '' ? $nickName : trim(Str::lower(Str::replaceArray(' ', ['_'], $name))),
                 'email' => $email,
                 'email_verified_at' => Carbon::now(),
@@ -126,17 +126,7 @@ class LoginController extends Controller
                 'password' => Hash::make($email),
             ]);
 
-//        if ($user->avatar == '') {
-//            $filename = '' . $user->username . '.jpg';
-//            $path = public_path('/storage/' . $filename);
-//            Image::make($avatar)->save($path, 100);
-//            $user->update(['avatar' => $filename]);
-//        }
-
-
-//        if (!$user->hasRole('user')){
-//            $user->attachRole(Role::whereName('user')->first()->id);
-//        }
+        $user->assignRole('user');
 
         Auth::login($user, true);
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Contact us')
 @section('content')
 
     <div class="breadcrumb-area pt-5 pb-5 mb-5" style="background-color: #09c6a2;">

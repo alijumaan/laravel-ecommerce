@@ -4,7 +4,8 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\Payment\PaypalController;
+use App\Http\Controllers\Frontend\Payment\TapController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\ShopTagController;
@@ -40,12 +41,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'checkCart'], function () {
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-        Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
-        Route::get('/payment/{orderId}/cancelled', [PaymentController::class, 'paymentCancelled'])->name('payment.cancelled');
-        Route::get('/payment/{orderId}/completed', [PaymentController::class, 'paymentCompleted'])->name('payment.completed');
-        Route::get('/payment/webhook/{order?}/{env?}', [PaymentController::class, 'paymentWebhook'])->name('payment.webhook.ipn');
+        // PayPal gateway
+        Route::post('/payment', [PaypalController::class, 'store'])->name('payment.store');
+        Route::get('/payment/{orderId}/cancelled', [PaypalController::class, 'cancelled'])->name('payment.cancelled');
+        Route::get('/payment/{orderId}/completed', [PaypalController::class, 'completed'])->name('payment.completed');
+        Route::get('/payment/webhook/{order?}/{env?}', [PaypalController::class, 'webhook'])->name('payment.webhook.ipn');
         // Tap gateway
-        Route::get('/payment/charge-request', [PaymentController::class, 'chargeRequest'])->name('checkout.charge_request');
-        Route::get('/payment/charge-update', [PaymentController::class, 'chargeUpdate'])->name('checkout.charge_update');
+        Route::get('/payment/charge-request', [TapController::class, 'chargeRequest'])->name('checkout.charge_request');
+        Route::get('/payment/charge-update', [TapController::class, 'chargeUpdate'])->name('checkout.charge_update');
     });
 });

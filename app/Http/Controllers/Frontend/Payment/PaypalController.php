@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
@@ -17,7 +17,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
-class PaymentController extends Controller
+class PaypalController extends Controller
 {
     public function store(Request $request)
     {
@@ -40,9 +40,10 @@ class PaymentController extends Controller
         return redirect()->route('home');
     }
 
-    public function paymentCancelled($orderId): RedirectResponse
+    public function cancelled($orderId): RedirectResponse
     {
         $order = Order::find($orderId);
+
         $order->update([
             'order_status' => Order::CANCELED
         ]);
@@ -57,7 +58,7 @@ class PaymentController extends Controller
         return redirect()->route('home');
     }
 
-    public function paymentCompleted($orderId): RedirectResponse
+    public function completed($orderId): RedirectResponse
     {
         $order = Order::with('products', 'user', 'paymentMethod')->find($orderId);
 
@@ -114,22 +115,8 @@ class PaymentController extends Controller
         return redirect()->route('home');
     }
 
-    public function paymentWebhook($order, $env)
+    public function webhook($order, $env)
     {
         // feature..
-    }
-
-    public function chargeRequest()
-    {
-        $user = auth()->user();
-
-        $total = getNumbersOfCart()->get('total');
-
-        return redirect((new OrderService())->getChargeRequest($total, $user->full_name, $user->email, $user->phone));
-    }
-
-    public function chargeUpdate(Request $request)
-    {
-        return (new OrderService())->validateRequest($request->except(['_token', 'submit']), request()->tap_id);
     }
 }
