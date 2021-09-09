@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class AdminAuthController extends Controller
 {
     use ImageUploadTrait;
+
     public function login()
     {
         return view('backend.login');

@@ -53,6 +53,8 @@ class ProductController extends Controller
 
             (new ProductService())->storeImages($request, $product, 1);
 
+            clear_cache();
+
             return redirect()->route('admin.products.index')->with([
                 'message' => 'Create product successfully',
                 'alert-type' => 'success'
@@ -97,6 +99,7 @@ class ProductController extends Controller
             $i = $product->media()->count() + 1;
             (new ProductService())->storeImages($request, $product, $i);
 
+            clear_cache();
             return redirect()->route('admin.products.index')->with([
                 'message' => 'Updated product successfully',
                 'alert-type' => 'success'
@@ -117,6 +120,7 @@ class ProductController extends Controller
 
         $product->delete();
 
+        clear_cache();
         return redirect()->route('admin.products.index')->with([
             'message' => 'Deleted product successfully',
             'alert-type' => 'success'
@@ -135,7 +139,7 @@ class ProductController extends Controller
         }
 
         $image->delete();
-
+        clear_cache();
         return true;
     }
 }

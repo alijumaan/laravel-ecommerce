@@ -6,14 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\LinkRequest;
 use App\Models\Link;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Route;
 
 class LinkController extends Controller
 {
     public function index()
     {
         $this->authorize('access_link');
+
         $links = Link::latest()->paginate(5);
+
         return view('backend.links.index', compact('links'));
     }
 
@@ -39,6 +40,7 @@ class LinkController extends Controller
     public function edit(Link $link)
     {
         $this->authorize('edit_link');
+
         return view('backend.links.edit', compact('link'));
     }
 

@@ -10,6 +10,7 @@ class ContactController extends Controller
     public function index()
     {
         $this->authorize('access_contact');
+
         $contacts = Contact::query()
             ->when(\request()->keyword != null, function ($query) {
                 $query->search(\request()->keyword);
@@ -19,12 +20,14 @@ class ContactController extends Controller
             })
             ->orderBy(\request()->sortBy ?? 'id', \request()->orderBy ?? 'desc')
             ->paginate(\request()->limitBy ?? 10);
+
         return view('backend.contacts.index', compact('contacts'));
     }
 
     public function show(Contact $contact)
     {
         $this->authorize('show_contact');
+
         return view('backend.contacts.show', compact('contact'));
     }
 

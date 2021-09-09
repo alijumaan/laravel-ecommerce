@@ -15,6 +15,7 @@ class OrderController extends Controller
     public function index()
     {
         $this->authorize('access_order');
+
         $orders = Order::with('user', 'paymentMethod')
             ->when(\request()->keyword != null, function ($query) {
                 $query->search(\request()->keyword);

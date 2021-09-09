@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CategoryRequest;
 use App\Models\Category;
 use App\Traits\ImageUploadTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
@@ -56,6 +55,8 @@ class CategoryController extends Controller
             'cover' => $image
         ]);
 
+        clear_cache();
+
         return redirect()->route('admin.categories.index')->with([
             'message' => 'Created successfully',
             'alert-type' => 'success'
@@ -72,6 +73,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $this->authorize('edit_category');
+
         $mainCategories = Category::whereNull('parent_id')->get(['id', 'name']);
 
         return view('backend.categories.edit', compact('category', 'mainCategories'));
@@ -97,6 +99,7 @@ class CategoryController extends Controller
             'cover' => $image
         ]);
 
+        clear_cache();
         return redirect()->route('admin.categories.index')->with([
             'message' => 'Updated successfully',
             'alert-type' => 'success'
@@ -115,6 +118,7 @@ class CategoryController extends Controller
 
         $category->delete();
 
+        clear_cache();
         return redirect()->route('admin.categories.index')->with([
             'message' => 'Deleted successfully',
             'alert-type' => 'success'
@@ -132,6 +136,7 @@ class CategoryController extends Controller
             $category->save();
         }
 
+        clear_cache();
         return back()->with([
             'message' => 'Image deleted successfully',
             'alert-type' => 'success'

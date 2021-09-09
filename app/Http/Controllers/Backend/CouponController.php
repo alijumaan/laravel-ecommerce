@@ -21,6 +21,7 @@ class CouponController extends Controller
             })
             ->orderBy(\request()->sortBy ?? 'id', \request()->orderBy ?? 'desc')
             ->paginate(\request()->limitBy ?? 10);
+
         return view('backend.coupons.index', compact('coupons'));
     }
 

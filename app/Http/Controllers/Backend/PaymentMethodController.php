@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\PaymentMethodRequest;
 use App\Models\PaymentMethod;
-use Illuminate\Http\Request;
 
 class PaymentMethodController extends Controller
 {
     public function index()
     {
         $this->authorize('access_payment_method');
+
         $paymentMethods = PaymentMethod::query()
             ->when(\request()->keyword != null, function ($query) {
                 $query->search(\request()->keyword);

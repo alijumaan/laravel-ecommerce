@@ -2,31 +2,30 @@
 
 ## installation :
 after install the source code open Terminal to use these command line:
-- composer install
+- composer install ( may need to use "composer update")
 - cp .env.example .env 
-- create new database
+- create new database (RECOMMENDED: DB = "laravel_ecommerce")
 - php artisan key:generate
 - php artisan storage:link
 - php artisan migrate --seed
 - npm install
 - npm run dev
-- Use your mail info to avoid this Error "Connection could not be established with host mailhog :stream_socket_client()" 
-- php artisan serve
+- Use your mail configuration in .env to avoid "Connection could not be established with host mailhog :stream_socket_client()" 
+- php artisan serve or your_domain.test
 - mkdir storage/app/public/images
+- mkdir storage/app/public/images/categories
 - mkdir storage/app/public/images/products
-- mkdir storage/app/public/images/covers
-- add your default image (should be the name is 'default.png' or custom the default name from ProductMedia migration table)
+- mkdir storage/app/public/images/users
+- if you want to use pusher and redis check the Documentation (Optional)
 
 ## Permission folder ( Linux | Mac)
 - sudo chmod -R 777 settings.json
-- sudo chmod -R 777 storage/app/public/images/
+- sudo chmod -R 777 storage
 - sudo chmod -R 777 bootstrap/cache
 
 ## Try
 <a href='https://cartwhite.tk' target="_blank">https://cartwhite.tk</a>
 
-## My site
+## Contact me
 <a href='https://alijumaan.com' target="_blank">https://alijumaan.com</a>
-
-* Thank You
 

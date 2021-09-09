@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\UpdatePasswordRequest;
 use App\Http\Requests\Backend\UserRequest;
 use App\Models\User;
 use App\Services\UserImageService;
 use App\Traits\ImageUploadTrait;
-use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller

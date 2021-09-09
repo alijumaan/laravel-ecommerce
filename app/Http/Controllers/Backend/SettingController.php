@@ -11,6 +11,8 @@ class SettingController extends Controller
 {
     public function index()
     {
+        $this->authorize('access_setting');
+
         $section = (isset(\request()->section) && \request()->section != '') ? \request()->section : 'general';
         $setting_sections = Setting::select('section')->distinct()->pluck('section');
         $settings = Setting::whereSection($section)->get();
@@ -18,9 +20,10 @@ class SettingController extends Controller
         return view('backend.settings.index', compact('section', 'setting_sections', 'settings'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        abort_if(!auth()->user()->can('edit-setting'), 403, 'You did not have permission to access this page!');
+        $this->authorize('edit_setting');
+
         for ($i = 0; $i < count($request->id); $i++) {
             $input['value'] = isset($request->value[$i]) ? $request->value[$i] : null;
             Setting::whereId($request->id[$i])->first()->update($input);
