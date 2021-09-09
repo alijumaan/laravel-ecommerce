@@ -5,11 +5,9 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Link;
 use App\Models\Review;
-use App\Models\Product;
 use App\Models\Tag;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
@@ -38,15 +36,22 @@ class ViewServiceProvider extends ServiceProvider
                 }
                 $admin_side_menu = Cache::get('admin_side_menu');
 
+                $routes_name = [];
+                foreach (Route::getRoutes()->getRoutes() as $route) {
+                    $action = $route->getAction();
+                    if (array_key_exists('as', $action)) {
+                        $routes_name[] = $action['as'];
+                    }
+                }
+
                 $view->with([
-                    'admin_side_menu' => $admin_side_menu
+                    'admin_side_menu' => $admin_side_menu,
+                    'routes_name' => $routes_name
                 ]);
             });
         }
 
         if (!request()->is('admin/*')) {
-
-//            Paginator::defaultView('vendor.pagination.cart-white');
 
             view()->composer('*', function ($view) {
                 if (!Cache::has('recent_reviews')) {
@@ -74,7 +79,6 @@ class ViewServiceProvider extends ServiceProvider
                     });
                 }
                 $shop_tags_menu = Cache::get('shop_tags_menu');
-
 
                 $view->with([
                     'recent_reviews' => $recent_reviews,

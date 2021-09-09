@@ -18,7 +18,7 @@ class CreateLinksTable extends Migration
             $table->string('title')->unique();
             $table->string('as')->unique();
             $table->string('to')->unique();
-            $table->string('icon')->unique();
+            $table->string('icon');
             $table->string('permission_title')->unique();
             $table->boolean('status')->default(true);
             $table->timestamps();

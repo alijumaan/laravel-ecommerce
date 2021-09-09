@@ -21,11 +21,9 @@ function get_gravatar($email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts 
 
 function clear_cache()
 {
+    Cache::forget('shop_categories_menu');
+    Cache::forget('shop_tags_menu');
     Cache::forget('recent_reviews');
-    Cache::forget('recent_products');
-    Cache::forget('global_categories');
-    Cache::forget('global_archives');
-    Cache::forget('global_tags');
 }
 
 function getSettingsOf($key)

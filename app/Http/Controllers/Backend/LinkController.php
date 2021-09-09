@@ -5,14 +5,21 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\LinkRequest;
 use App\Models\Link;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 class LinkController extends Controller
 {
     public function index()
     {
         $this->authorize('access_link');
-        $links = Link::paginate(10);
+        $links = Link::latest()->paginate(5);
         return view('backend.links.index', compact('links'));
+    }
+
+    public function create()
+    {
+        return view('backend.links.create');
     }
 
     public function store(LinkRequest $request)
@@ -20,6 +27,8 @@ class LinkController extends Controller
         $this->authorize('create_link');
 
         Link::create($request->validated());
+
+        Cache::forget('admin_side_menu');
 
         return redirect()->route('admin.links.index')->with([
             'message' => 'Created successfully',
@@ -39,6 +48,8 @@ class LinkController extends Controller
 
         $link->update($request->validated());
 
+        Cache::forget('admin_side_menu');
+
         return redirect()->route('admin.links.index')->with([
             'message' => 'Updated successfully',
             'alert-type' => 'success'
@@ -50,6 +61,8 @@ class LinkController extends Controller
         $this->authorize('delete_link');
 
         $link->delete();
+
+        Cache::forget('admin_side_menu');
 
         return redirect()->route('admin.links.index')->with([
             'message' => 'Deleted successfully',

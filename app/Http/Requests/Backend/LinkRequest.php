@@ -23,13 +23,31 @@ class LinkRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => ['required', 'string'],
-            'as' => ['required', 'string'],
-            'to' => ['required', 'string'],
-            'icon' => ['required', 'string'],
-            'permission_title' => ['required', 'string'],
-            'status' => ['required'],
-        ];
+        switch ($this->method()) {
+            case 'POST':
+            {
+                return [
+                    'title' => ['required', 'string', 'max:255', 'unique:links'],
+                    'as' => ['required', 'string', 'max:255', 'unique:links'],
+                    'to' => ['required', 'string', 'max:255', 'unique:links'],
+                    'icon' => ['required', 'max:255', 'string'],
+                    'permission_title' => ['required', 'string', 'max:255', 'unique:links'],
+                    'status' => ['required'],
+                ];
+            }
+            case 'PUT':
+            case 'PATCH':
+            {
+                return [
+                    'title' => ['required', 'string', 'max:255', 'unique:links,title,'.$this->route()->link->id],
+                    'as' => ['required', 'string', 'max:255', 'unique:links,as,'.$this->route()->link->id],
+                    'to' => ['required', 'string', 'max:255', 'unique:links,to,'.$this->route()->link->id],
+                    'icon' => ['required', 'max:255', 'string'],
+                    'permission_title' => ['required', 'string', 'max:255', 'unique:links,permission_title,'.$this->route()->link->id],
+                    'status' => ['required'],
+                ];
+            }
+            default: break;
+        }
     }
 }
