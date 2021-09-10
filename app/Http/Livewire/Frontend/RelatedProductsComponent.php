@@ -23,11 +23,11 @@ class RelatedProductsComponent extends Component
         });
 
         if ($duplicated->isNotEmpty()) {
-            $this->alert('error', 'Product already exist!');
+            $this->alert('warning', 'Product already exist!');
         } else {
             Cart::instance('default')->add($product->id, $product->name, 1, $product->price)
                 ->associate(Product::class);
-            $this->emit('updateCart');
+            $this->emit('update_cart');
             $this->alert('success', 'added successfully.');
         }
     }
@@ -40,11 +40,11 @@ class RelatedProductsComponent extends Component
         });
 
         if ($duplicated->isNotEmpty()) {
-            $this->alert('error', 'Product already exist!');
+            $this->alert('warning', 'Product already exist!');
         } else {
             Cart::instance('wishlist')->add($product->id, $product->name, 1, $product->price)
                 ->associate(Product::class);
-            $this->emit('updateCart');
+            $this->emit('update_cart');
             $this->alert('success', 'added successfully.');
         }
     }

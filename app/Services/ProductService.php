@@ -41,16 +41,4 @@ class ProductService
             }
         }
     }
-
-//    public function storeProductTags($request, $product)
-//    {
-//        if (isset($request->tags) && count($request->tags) > 0) {
-//            $new_tags = array();
-//            foreach ($request->tags as $tag) {
-//                $tag = Tag::firstOrCreate(['id' => $tag], ['name' => $tag]);
-//                $new_tags[] = $tag->id;
-//            }
-//            $product->tags()->sync($new_tags);
-//        }
-//    }
 }

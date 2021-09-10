@@ -15,7 +15,7 @@ class TapService
     {
         $client = new Client([
             'base_uri' => 'https://api.tap.company/v2/charges', // Base URI is used with relative requests
-            'timeout'  => 30.0, // You can set any number of default request options.
+            'timeout' => 30.0, // You can set any number of default request options.
         ]);
 
         $headers = [
@@ -28,8 +28,7 @@ class TapService
             'form_params' => [
                 'amount' => $amount,
                 'currency' => 'SAR',
-                'customer' =>
-                    [
+                'customer' => [
                         'first_name' => $name,
                         'email' => $email,
                         'phone' => ['country_code' => '966', 'number' => $number]
@@ -48,7 +47,7 @@ class TapService
     {
         $client = new Client([
             'base_uri' => 'https://api.tap.company/v2/charges/', // Base URI is used with relative requests
-            'timeout'  => 30.0, // You can set any number of default request options.
+            'timeout' => 30.0, // You can set any number of default request options.
         ]);
 
         $headers = [

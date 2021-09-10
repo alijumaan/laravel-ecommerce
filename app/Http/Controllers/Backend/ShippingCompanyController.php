@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ShippinCompanyRequest;
 use App\Models\Country;
 use App\Models\ShippingCompany;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ShippingCompanyController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_shipping_company');
 
@@ -27,7 +29,7 @@ class ShippingCompanyController extends Controller
         return view('backend.shipping_companies.index', compact('shippingCompanies'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_shipping_company');
 
@@ -36,11 +38,11 @@ class ShippingCompanyController extends Controller
         return view('backend.shipping_companies.create', compact('countries'));
     }
 
-    public function store(ShippinCompanyRequest $request)
+    public function store(ShippinCompanyRequest $request): RedirectResponse
     {
         $this->authorize('create_shipping_company');
 
-        if ($request->validated()){
+        if ($request->validated()) {
             $shippingCompany = ShippingCompany::create($request->except('countries', '_token'));
             $shippingCompany->countries()->attach($request->countries);
 
@@ -48,22 +50,23 @@ class ShippingCompanyController extends Controller
                 'message' => 'Created successfully',
                 'alert-type' => 'success'
             ]);
-        } else {
-            return redirect()->back()->with([
-                'message' => 'Something was wrong, please try again late',
-                'alert-type' => 'danger'
-            ]);
         }
+
+        return redirect()->back()->with([
+            'message' => 'Something was wrong, please try again late',
+            'alert-type' => 'danger'
+        ]);
+
     }
 
-    public function show(ShippingCompany $shippingCompany)
+    public function show(ShippingCompany $shippingCompany): View
     {
         $this->authorize('show_shipping_company');
 
         return view('backend.shipping_companies.show', compact('shippingCompany'));
     }
 
-    public function edit(ShippingCompany $shippingCompany)
+    public function edit(ShippingCompany $shippingCompany): View
     {
         $this->authorize('edit_shipping_company');
 
@@ -73,11 +76,11 @@ class ShippingCompanyController extends Controller
         return view('backend.shipping_companies.edit', compact('shippingCompany', 'countries'));
     }
 
-    public function update(ShippinCompanyRequest $request, ShippingCompany $shippingCompany)
+    public function update(ShippinCompanyRequest $request, ShippingCompany $shippingCompany): RedirectResponse
     {
         $this->authorize('edit_shipping_company');
 
-        if ($request->validated()){
+        if ($request->validated()) {
             $shippingCompany->update($request->except('countries', '_token', '_method'));
             $shippingCompany->countries()->sync($request->countries);
 
@@ -85,15 +88,15 @@ class ShippingCompanyController extends Controller
                 'message' => 'Updated successfully',
                 'alert-type' => 'success'
             ]);
-        } else {
-            return redirect()->back()->with([
-                'message' => 'Something was wrong, please try again late',
-                'alert-type' => 'danger'
-            ]);
         }
+
+        return redirect()->back()->with([
+            'message' => 'Something was wrong, please try again late',
+            'alert-type' => 'danger'
+        ]);
     }
 
-    public function destroy(ShippingCompany $shippingCompany)
+    public function destroy(ShippingCompany $shippingCompany): RedirectResponse
     {
         $this->authorize('delete_shipping_company');
 

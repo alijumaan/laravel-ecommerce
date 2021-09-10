@@ -7,6 +7,9 @@ use App\Http\Requests\Backend\UserRequest;
 use App\Models\User;
 use App\Services\UserImageService;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 
 
 class UserController extends Controller
@@ -20,7 +23,7 @@ class UserController extends Controller
         $this->userImageService = $userImageService;
     }
 
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_user');
 
@@ -37,14 +40,14 @@ class UserController extends Controller
         return view('backend.users.index', compact('users'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_user');
 
         return view('backend.users.create');
     }
 
-    public function store(UserRequest $request)
+    public function store(UserRequest $request): RedirectResponse
     {
         $this->authorize('create_user');
 
@@ -74,21 +77,21 @@ class UserController extends Controller
         ]);
     }
 
-    public function show(User $user)
+    public function show(User $user): View
     {
         $this->authorize('user_show');
 
         return view('backend.users.show', compact('user'));
     }
 
-    public function edit(User $user)
+    public function edit(User $user): View
     {
         $this->authorize('edit_user');
 
         return view('backend.users.edit', compact('user'));
     }
 
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, User $user): RedirectResponse
     {
         $this->authorize('edit_user');
 
@@ -96,7 +99,7 @@ class UserController extends Controller
             if ($user->user_image) {
                 $this->userImageService->unlinkFile($user->user_image);
             }
-            $userImage = $this->userImageService->storeImages($request->username,  $request->user_image);
+            $userImage = $this->userImageService->storeImages($request->username, $request->user_image);
         }
 
         if ($request->password){
@@ -121,7 +124,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
         $this->authorize('delete_user');
 
@@ -137,7 +140,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function get_users()
+    public function get_users(): JsonResponse
     {
         $users = User::role(['user'])
             ->when(\request()->input('query') != '', function ($query) {

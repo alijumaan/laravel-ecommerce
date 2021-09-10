@@ -7,6 +7,8 @@ use App\Http\Requests\Backend\SupervisorRequest;
 use App\Models\User;
 use App\Services\UserImageService;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
 use Spatie\Permission\Models\Permission;
 
@@ -21,7 +23,7 @@ class SupervisorController extends Controller
         $this->userImageService = $userImageService;
     }
 
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_supervisor');
 
@@ -38,7 +40,7 @@ class SupervisorController extends Controller
         return view('backend.supervisors.index', compact('supervisors'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_supervisor');
 
@@ -47,7 +49,7 @@ class SupervisorController extends Controller
         return view('backend.supervisors.create', compact('permissions'));
     }
 
-    public function store(SupervisorRequest $request)
+    public function store(SupervisorRequest $request): RedirectResponse
     {
         $this->authorize('create_supervisor');
 
@@ -84,14 +86,14 @@ class SupervisorController extends Controller
         ]);
     }
 
-    public function show(User $supervisor)
+    public function show(User $supervisor): View
     {
         $this->authorize('show_supervisor');
 
         return view('backend.supervisors.show', compact('supervisor'));
     }
 
-    public function edit(User $supervisor)
+    public function edit(User $supervisor): View
     {
         $this->authorize('edit_supervisor');
 
@@ -101,7 +103,7 @@ class SupervisorController extends Controller
         return view('backend.supervisors.edit', compact('supervisor', 'permissions', 'supervisorPermissions'));
     }
 
-    public function update(SupervisorRequest $request, User $supervisor)
+    public function update(SupervisorRequest $request, User $supervisor): RedirectResponse
     {
         $this->authorize('edit_supervisor');
 
@@ -143,7 +145,7 @@ class SupervisorController extends Controller
         ]);
     }
 
-    public function destroy(User $supervisor)
+    public function destroy(User $supervisor): RedirectResponse
     {
         $this->authorize('delete_supervisor');
 
@@ -159,7 +161,7 @@ class SupervisorController extends Controller
         ]);
     }
 
-    public function removeImage(User $supervisor)
+    public function removeImage(User $supervisor): RedirectResponse
     {
         $this->authorize('delete_user');
 

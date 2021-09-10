@@ -8,11 +8,13 @@ use App\Models\OrderTransaction;
 use App\Models\User;
 use App\Notifications\Frontend\User\OrderStatusNotification;
 use App\Services\OmnipayService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_order');
 
@@ -29,7 +31,7 @@ class OrderController extends Controller
         return view('backend.orders.index', compact('orders'));
     }
 
-    public function show(Order $order)
+    public function show(Order $order): View
     {
         $this->authorize('show_order');
 
@@ -55,7 +57,7 @@ class OrderController extends Controller
         return view('backend.orders.show', compact('order', 'orderStatusArray'));
     }
 
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Order $order): RedirectResponse
     {
         $this->authorize('edit_order');
 
@@ -108,7 +110,7 @@ class OrderController extends Controller
         }
     }
 
-    public function destroy(Order $order)
+    public function destroy(Order $order): RedirectResponse
     {
         $this->authorize('delete_order');
 

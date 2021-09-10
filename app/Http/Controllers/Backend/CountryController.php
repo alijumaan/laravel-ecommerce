@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CountryRequest;
 use App\Models\Country;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CountryController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_country');
 
@@ -25,14 +27,14 @@ class CountryController extends Controller
         return view('backend.countries.index', compact('countries'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_country');
 
         return view('backend.countries.create');
     }
 
-    public function store(CountryRequest $request)
+    public function store(CountryRequest $request): RedirectResponse
     {
         $this->authorize('create_country');
 
@@ -44,21 +46,21 @@ class CountryController extends Controller
         ]);
     }
 
-    public function show(Country $country)
+    public function show(Country $country): View
     {
         $this->authorize('show_country');
 
         return view('backend.countries.show', compact('country'));
     }
 
-    public function edit(Country $country)
+    public function edit(Country $country): View
     {
         $this->authorize('edit_country');
 
         return view('backend.countries.edit', compact('country'));
     }
 
-    public function update(CountryRequest $request, Country $country)
+    public function update(CountryRequest $request, Country $country): RedirectResponse
     {
         $this->authorize('edit_country');
 
@@ -70,7 +72,7 @@ class CountryController extends Controller
         ]);
     }
 
-    public function destroy(Country $country)
+    public function destroy(Country $country): RedirectResponse
     {
         $this->authorize('delete_country');
 

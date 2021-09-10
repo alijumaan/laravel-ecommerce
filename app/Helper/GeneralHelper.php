@@ -5,28 +5,30 @@ use Spatie\Valuestore\Valuestore;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Collection;
 
-function get_gravatar($email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array())
+function get_gravatar($email, int $s = 80, string $d = 'mp', string $r = 'g', bool $img = false, array $atts = array()): string
 {
     $url = 'https://www.gravatar.com/avatar/';
     $url .= md5(strtolower(trim($email)));
-    $url .= "?s=$s&d=$d&r=$r";
+    $url .= "?s=${s}&d=${d}&r=${r}";
+
     if ($img) {
         $url = '<img src="' . $url . '"';
         foreach ($atts as $key => $val)
             $url .= ' ' . $key . '="' . $val . '"';
         $url .= ' />';
     }
+
     return $url;
 }
 
-function clear_cache()
+function clear_cache(): void
 {
     Cache::forget('shop_categories_menu');
     Cache::forget('shop_tags_menu');
     Cache::forget('recent_reviews');
 }
 
-function getSettingsOf($key)
+function getSettingsOf(string $key)
 {
     $settings = Valuestore::make(config_path('settings.json'));
     return $settings->get($key);
@@ -35,7 +37,6 @@ function getSettingsOf($key)
 function getNumbersOfCart(): Collection
 {
     $subtotal = Cart::instance('default')->subtotal();
-
     $discount = session()->has('coupon') ? session()->get('coupon')['discount'] : 0.00;
     $discountCode = session()->has('coupon') ? session()->get('coupon')['code'] : null;
 

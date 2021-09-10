@@ -7,6 +7,8 @@ use Livewire\Component;
 
 class WishlistItemComponent extends Component
 {
+    public $item;
+
     public function moveToCart($rowId)
     {
         $this->emit('move_to_cart', $rowId);
@@ -22,7 +24,7 @@ class WishlistItemComponent extends Component
     public function render()
     {
         return view('livewire.frontend.wishlist-item-component', [
-            'wishlistItems' => Cart::instance('wishlist')->content()
+            'wishlistItem' => Cart::instance('wishlist')->content()->get($this->item)
         ]);
     }
 }

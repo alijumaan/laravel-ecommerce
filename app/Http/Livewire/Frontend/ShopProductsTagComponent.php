@@ -24,7 +24,7 @@ class ShopProductsTagComponent extends Component
         });
 
         if ($duplicated->isNotEmpty()) {
-            $this->alert('error', 'Product already exist!');
+            $this->alert('warning', 'Product already exist!');
         } else {
             Cart::instance('default')->add($product->id, $product->name, 1, $product->price)
                 ->associate(Product::class);
@@ -41,7 +41,7 @@ class ShopProductsTagComponent extends Component
         });
 
         if ($duplicated->isNotEmpty()) {
-            $this->alert('error', 'Product already exist!');
+            $this->alert('warning', 'Product already exist!');
         } else {
             Cart::instance('wishlist')->add($product->id, $product->name, 1, $product->price)
                 ->associate(Product::class);

@@ -6,33 +6,35 @@ use App\Http\Controllers\Controller;
 use App\Services\UserImageService;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class AdminAuthController extends Controller
 {
     use ImageUploadTrait;
 
-    public function login()
+    public function login(): View
     {
         return view('backend.login');
     }
 
-    public function forgotPassword()
+    public function forgotPassword(): View
     {
         return view('backend.forgot-password');
     }
 
-    public function accountSetting()
+    public function accountSetting(): View
     {
         return view('backend.account_setting');
     }
 
-    public function updateAccount(Request $request)
+    public function updateAccount(Request $request): RedirectResponse
     {
         if ($request->hasFile('user_image')) {
             if (auth()->user()->user_image) {
-                (new UserImageService)->unlinkFile(auth()->user()->user_image);
+                (new UserImageService())->unlinkFile(auth()->user()->user_image);
             }
-            $adminImage = (new UserImageService)->storeImages($request);
+            $adminImage = (new UserImageService())->storeImages($request);
         }
 
         if ($request->password){

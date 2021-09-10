@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Contact us')
 @section('content')
-
     <div class="breadcrumb-area pt-5 pb-5 mb-5" style="background-color: #09c6a2;">
         <div class="container">
             <div class="breadcrumb-content text-center">
@@ -25,35 +24,38 @@
                             @include('partials.frontend.flash')
                         </div>
 
-                        {!! Form::open(['route' => 'contact.store', 'method' => 'post']) !!}
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="contact-input-style mb-30">
-                                    {!! Form::text('name', old('name'), ['placeholder' => 'Name']) !!}
-                                    @error('name')<span class="text-danger">{{ $message }}</span>@enderror
+                        <form action="{{ route('contact.store') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-input-style mb-30">
+                                        <input type="text" name="name" value="{{ old('name') }}" placeholder="Name">
+                                        @error('name')<span class="text-danger">{{ $message }}</span>@enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="contact-input-style mb-30">
+                                        <input type="email" name="email" value="{{ old('email') }}" placeholder="Email">
+                                        @error('email')<span class="text-danger">{{ $message }}</span>@enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="contact-input-style mb-30">
+                                        <input type="text" name="title" value="{{ old('title') }}" placeholder="Title">
+                                        @error('title')<span class="text-danger">{{ $message }}</span>@enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="contact-textarea-style mb-30">
+                                        <textarea name="message" placeholder="Your message">{{ old('message') }}</textarea>
+                                        @error('message')<span class="text-danger">{{ $message }}</span>@enderror
+                                    </div>
+                                    <button class="submit contact-btn btn-hover">
+                                        <i class="far fa-envelope"></i> Send
+                                    </button>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="contact-input-style mb-30">
-                                    {!! Form::email('email', old('email'), ['placeholder' => 'Email']) !!}
-                                    @error('email')<span class="text-danger">{{ $message }}</span>@enderror
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="contact-input-style mb-30">
-                                    {!! Form::text('title', old('title'), ['placeholder' => 'Subject']) !!}
-                                    @error('title')<span class="text-danger">{{ $message }}</span>@enderror
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="contact-textarea-style mb-30">
-                                    {!! Form::textarea('message',old('message'), ['placeholder' => 'Message']) !!}
-                                    @error('message')<span class="text-danger">{{ $message }}</span>@enderror
-                                </div>
-                                {!! Form::button('<i class="far fa-envelope"></i> Send', ['type' => 'submit', 'class' => 'submit contact-btn btn-hover']) !!}
-                            </div>
-                        </div>
-                        {!! Form::close() !!}
+                        </form>
 
                         <p class="form-messege"></p>
                     </div>
@@ -95,5 +97,4 @@
             </div>
         </div>
     </div>
-
 @endsection

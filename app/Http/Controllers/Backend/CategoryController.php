@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CategoryRequest;
 use App\Models\Category;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
     use ImageUploadTrait;
 
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_category');
 
@@ -30,7 +32,7 @@ class CategoryController extends Controller
         return view('backend.categories.index', compact('categories'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_category');
 
@@ -39,7 +41,7 @@ class CategoryController extends Controller
         return view('backend.categories.create', compact('mainCategories'));
     }
 
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $request): RedirectResponse
     {
         $this->authorize('create_category');
 
@@ -63,14 +65,14 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show(Category $category)
+    public function show(Category $category): View
     {
         $this->authorize('show_category');
 
         return view('backend.categories.show', compact('category'));
     }
 
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
         $this->authorize('edit_category');
 
@@ -79,7 +81,7 @@ class CategoryController extends Controller
         return view('backend.categories.edit', compact('category', 'mainCategories'));
     }
 
-    public function update(CategoryRequest $request, Category $category)
+    public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
         $this->authorize('edit_category');
 
@@ -106,7 +108,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function destroy(Category $category)
+    public function destroy(Category $category): RedirectResponse
     {
         $this->authorize('delete_category');
 
@@ -126,7 +128,7 @@ class CategoryController extends Controller
 
     }
 
-    public function removeImage(Category $category)
+    public function removeImage(Category $category): RedirectResponse
     {
         $this->authorize('delete_category');
 

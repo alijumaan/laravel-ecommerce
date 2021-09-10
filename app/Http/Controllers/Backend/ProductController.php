@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\Tag;
 use App\Services\ProductService;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -16,7 +18,7 @@ class ProductController extends Controller
 {
     use ImageUploadTrait;
 
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_product');
 
@@ -33,7 +35,7 @@ class ProductController extends Controller
         return view('backend.products.index', compact('products'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_product');
 
@@ -43,7 +45,7 @@ class ProductController extends Controller
         return view('backend.products.create', compact('categories', 'tags'));
     }
 
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request): RedirectResponse
     {
         $this->authorize('create_product');
 
@@ -67,14 +69,14 @@ class ProductController extends Controller
         ]);
     }
 
-    public function show(Product $product)
+    public function show(Product $product): View
     {
         $this->authorize('show_product');
 
         return view('backend.products.show', compact('product'));
     }
 
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         $this->authorize('edit_product');
 
@@ -84,7 +86,7 @@ class ProductController extends Controller
         return view('backend.products.edit', compact('product', 'categories', 'tags'));
     }
 
-    public function update(ProductRequest $request, Product $product)
+    public function update(ProductRequest $request, Product $product): RedirectResponse
     {
         $this->authorize('edit_product');
 
@@ -112,7 +114,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
         $this->authorize('delete_product');
 
@@ -127,7 +129,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function removeImage(Request $request)
+    public function removeImage(Request $request): bool
     {
         $this->authorize('delete_product');
 

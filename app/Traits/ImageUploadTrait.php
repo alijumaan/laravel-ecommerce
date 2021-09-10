@@ -7,7 +7,7 @@ use Intervention\Image\Facades\Image;
 
 trait ImageUploadTrait
 {
-    protected $path  = "app/public/images/";
+    protected $path  = 'app/public/images/';
 
     public function uploadImage($name, $img, $folderName, $image_width = NULL, $image_height = NULL): string
     {
@@ -32,10 +32,9 @@ trait ImageUploadTrait
         return $image_name;
     }
 
-
     protected function imageName($imageName, $image): string
     {
-        return Str::slug($imageName) . "." . $image->getClientOriginalExtension();
+        return Str::slug($imageName) . '.' . $image->getClientOriginalExtension();
     }
 
     protected function randomImageName($imageName, $image, $i): string

@@ -15,7 +15,9 @@ class UserImageService
             $fileName,
             $image,
             'users',
-            300, NULL);
+            300,
+            NULL
+        );
     }
 
     public function unlinkFile($userImage)

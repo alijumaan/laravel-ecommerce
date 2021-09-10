@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StateRequest;
 use App\Models\Country;
 use App\Models\State;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class StateController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_state');
 
@@ -27,7 +30,7 @@ class StateController extends Controller
         return view('backend.states.index', compact('states'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_state');
 
@@ -36,7 +39,7 @@ class StateController extends Controller
         return view('backend.states.create', compact('countries'));
     }
 
-    public function store(StateRequest $request)
+    public function store(StateRequest $request): RedirectResponse
     {
         $this->authorize('create_state');
 
@@ -48,14 +51,14 @@ class StateController extends Controller
         ]);
     }
 
-    public function show(State $state)
+    public function show(State $state): View
     {
         $this->authorize('show_state');
 
         return view('backend.states.show', compact('state'));
     }
 
-    public function edit(State $state)
+    public function edit(State $state): View
     {
         $this->authorize('edit_state');
 
@@ -64,7 +67,7 @@ class StateController extends Controller
         return view('backend.states.edit', compact('state', 'countries'));
     }
 
-    public function update(StateRequest $request, State $state)
+    public function update(StateRequest $request, State $state): RedirectResponse
     {
         $this->authorize('edit_state');
 
@@ -76,7 +79,7 @@ class StateController extends Controller
         ]);
     }
 
-    public function destroy(State $state)
+    public function destroy(State $state): RedirectResponse
     {
         $this->authorize('delete_state');
 
@@ -88,7 +91,7 @@ class StateController extends Controller
         ]);
     }
 
-    public function get_states(Request $request)
+    public function get_states(Request $request): JsonResponse
     {
         $states = State::whereCountryId($request->country_id)
             ->whereStatus(true)

@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\LinkRequest;
 use App\Models\Link;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
 
 class LinkController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_link');
 
@@ -18,12 +20,12 @@ class LinkController extends Controller
         return view('backend.links.index', compact('links'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('backend.links.create');
     }
 
-    public function store(LinkRequest $request)
+    public function store(LinkRequest $request): RedirectResponse
     {
         $this->authorize('create_link');
 
@@ -37,14 +39,14 @@ class LinkController extends Controller
         ]);
     }
 
-    public function edit(Link $link)
+    public function edit(Link $link): View
     {
         $this->authorize('edit_link');
 
         return view('backend.links.edit', compact('link'));
     }
 
-    public function update(LinkRequest $request, Link $link)
+    public function update(LinkRequest $request, Link $link): RedirectResponse
     {
         $this->authorize('edit_link');
 
@@ -58,7 +60,7 @@ class LinkController extends Controller
         ]);
     }
 
-    public function destroy(Link $link)
+    public function destroy(Link $link): RedirectResponse
     {
         $this->authorize('delete_link');
 

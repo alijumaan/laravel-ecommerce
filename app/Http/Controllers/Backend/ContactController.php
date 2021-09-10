@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ContactController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_contact');
 
@@ -24,14 +26,14 @@ class ContactController extends Controller
         return view('backend.contacts.index', compact('contacts'));
     }
 
-    public function show(Contact $contact)
+    public function show(Contact $contact): View
     {
         $this->authorize('show_contact');
 
         return view('backend.contacts.show', compact('contact'));
     }
 
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact): RedirectResponse
     {
         $this->authorize('delete_contact');
 

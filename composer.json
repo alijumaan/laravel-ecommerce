@@ -21,7 +21,6 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-        "laravelcollective/html": "^6.1",
         "league/omnipay": "^3.2",
         "livewire/livewire": "^2.5",
         "mindscms/laravelshoppingcart": "^1.2",
@@ -40,6 +39,7 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.0",
+        "nunomaduro/phpinsights": "^2.0",
         "phpunit/phpunit": "^9.3.3"
     },
     "config": {

@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\TagRequest;
 use App\Models\Tag;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class TagController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_tag');
         $tags = Tag::with('products')
@@ -23,13 +25,13 @@ class TagController extends Controller
         return view('backend.tags.index', compact('tags'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_tag');
         return view('backend.tags.create');
     }
 
-    public function store(TagRequest $request)
+    public function store(TagRequest $request): RedirectResponse
     {
         $this->authorize('create_tag');
 
@@ -41,19 +43,19 @@ class TagController extends Controller
         ]);
     }
 
-    public function show(Tag $tag)
+    public function show(Tag $tag): View
     {
         $this->authorize('show_tag');
         return view('backend.tags.show', compact('tag'));
     }
 
-    public function edit(Tag $tag)
+    public function edit(Tag $tag): View
     {
         $this->authorize('edit_tag');
         return view('backend.tags.edit', compact('tag'));
     }
 
-    public function update(TagRequest $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag): RedirectResponse
     {
         $this->authorize('edit_tag');
 
@@ -65,7 +67,7 @@ class TagController extends Controller
         ]);
     }
 
-    public function destroy(Tag $tag)
+    public function destroy(Tag $tag): RedirectResponse
     {
         $this->authorize('delete_tag');
 

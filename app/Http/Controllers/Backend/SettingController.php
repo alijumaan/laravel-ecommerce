@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
 
 class SettingController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_setting');
 
@@ -20,12 +22,12 @@ class SettingController extends Controller
         return view('backend.settings.index', compact('section', 'setting_sections', 'settings'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         $this->authorize('edit_setting');
 
         for ($i = 0; $i < count($request->id); $i++) {
-            $input['value'] = isset($request->value[$i]) ? $request->value[$i] : null;
+            $input['value'] = $request->value[$i] ?? null;
             Setting::whereId($request->id[$i])->first()->update($input);
         }
 

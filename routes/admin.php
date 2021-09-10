@@ -2,6 +2,7 @@
 use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\LinkController;
@@ -11,7 +12,6 @@ use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Backend\SupervisorController;
 use App\Http\Controllers\Backend\CountryController;
 use App\Http\Controllers\Backend\StateController;
-use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\UserAddressController;
 use App\Http\Controllers\Backend\ShippingCompanyController;

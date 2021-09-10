@@ -30,8 +30,8 @@ class Product extends Model
     protected $searchable = [
 
         'columns' => [
-            'products.name'        => 10,
-            'products.slug'        => 10
+            'products.name' => 10,
+            'products.slug' => 10
         ],
     ];
 

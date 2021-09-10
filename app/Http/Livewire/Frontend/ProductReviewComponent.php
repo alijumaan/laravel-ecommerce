@@ -20,7 +20,7 @@ class ProductReviewComponent extends Component
 
 
     protected $listeners = [
-        'updateRating' => 'mount',
+        'update_rating' => 'mount',
     ];
 
     public function mount()
@@ -75,7 +75,7 @@ class ProductReviewComponent extends Component
             Cache::forget('recent_reviews');
             $this->alert('success', 'Your review added successfully');
         } else {
-            if ($rating->status == "Inactive"){
+            if ($rating->status == 'Inactive'){
                 $this->alert('error', 'already rating this item');
                 return false;
             }
@@ -91,7 +91,7 @@ class ProductReviewComponent extends Component
         }
 
         $this->showForm = false;
-        $this->emit('updateRating');
+        $this->emit('update_rating');
     }
 
     public function delete($id)
@@ -105,7 +105,7 @@ class ProductReviewComponent extends Component
             $this->rating  = '';
             $this->content = '';
         }
-        $this->emit('updateRating');
+        $this->emit('update_rating');
         $this->showForm = true;
         Cache::forget('recent_reviews');
         $this->alert('success', 'Your review deleted successfully');

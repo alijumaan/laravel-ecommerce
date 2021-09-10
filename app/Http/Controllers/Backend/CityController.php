@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CityRequest;
 use App\Models\City;
 use App\Models\State;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CityController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_city');
 
@@ -27,7 +30,7 @@ class CityController extends Controller
         return view('backend.cities.index', compact('cities'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_city');
 
@@ -36,7 +39,7 @@ class CityController extends Controller
         return view('backend.cities.create', compact('states'));
     }
 
-    public function store(CityRequest $request)
+    public function store(CityRequest $request): RedirectResponse
     {
         $this->authorize('create_city');
 
@@ -48,14 +51,14 @@ class CityController extends Controller
         ]);
     }
 
-    public function show(City $city)
+    public function show(City $city): View
     {
         $this->authorize('show_city');
 
         return view('backend.cities.show', compact('city'));
     }
 
-    public function edit(City $city)
+    public function edit(City $city): View
     {
         $this->authorize('edit_city');
 
@@ -64,7 +67,7 @@ class CityController extends Controller
         return view('backend.cities.edit', compact('city', 'states'));
     }
 
-    public function update(CityRequest $request, City $city)
+    public function update(CityRequest $request, City $city): RedirectResponse
     {
         $this->authorize('edit_city');
 
@@ -76,7 +79,7 @@ class CityController extends Controller
         ]);
     }
 
-    public function destroy(City $city)
+    public function destroy(City $city): RedirectResponse
     {
         $this->authorize('delete_city');
 
@@ -88,7 +91,7 @@ class CityController extends Controller
         ]);
     }
 
-    public function get_cities(Request $request)
+    public function get_cities(Request $request): JsonResponse
     {
         $cities = City::whereStateId($request->state_id)
             ->whereStatus(true)

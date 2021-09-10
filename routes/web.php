@@ -29,8 +29,8 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::get('login/{provider}', [LoginController::class, 'redirectToProvider'])->name('social_login');
 Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('social_login_callback');
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::group(['middleware' => 'verified'], function () {
+Route::group(['middleware' => 'auth'], function (): void {
+    Route::group(['middleware' => 'verified'], function (): void {
         Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
         Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
         Route::patch('/user/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/user/orders', [UserController::class, 'orders'])->name('user.orders');
     });
 
-    Route::group(['middleware' => 'checkCart'], function () {
+    Route::group(['middleware' => 'checkCart'], function (): void {
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
         // PayPal gateway
         Route::post('/payment', [PaypalController::class, 'store'])->name('payment.store');

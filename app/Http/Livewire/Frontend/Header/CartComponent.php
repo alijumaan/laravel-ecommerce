@@ -28,9 +28,9 @@ class CartComponent extends Component
     {
         Cart::instance('default')->remove($rowId);
         $this->emit('update_cart');
-//        if (Cart::instance('default')->count() == 0) {
-//            return redirect()->route('cart.index');
-//        }
+        if (Cart::instance('default')->count() == 0) {
+            return redirect()->route('cart.index');
+        }
     }
 
     public function render()

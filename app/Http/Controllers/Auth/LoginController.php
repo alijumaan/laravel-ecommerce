@@ -110,9 +110,10 @@ class LoginController extends Controller
         $email = $socialUser->getEmail() == '' ? trim(Str::lower(Str::replaceArray(' ', ['_'], $name))) . '@' . $provider . '.com' : $socialUser->getEmail();
         $user_image = $socialUser->getAvatar();
 
-        $user = User::firstOrCreate([
-            'email' => $email
-        ],
+        $user = User::firstOrCreate(
+            [
+                'email' => $email
+            ],
             [
                 'first_name' => $name,
                 'last_name' => $name,
@@ -124,7 +125,8 @@ class LoginController extends Controller
                 'receive_email' => 1,
                 'remember_token' => $token,
                 'password' => Hash::make($email),
-            ]);
+            ]
+        );
 
         $user->assignRole('user');
 

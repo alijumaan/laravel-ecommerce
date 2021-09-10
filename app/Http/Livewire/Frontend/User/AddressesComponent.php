@@ -30,7 +30,6 @@ class AddressesComponent extends Component
     public $zip_code = '';
     public $po_box = '';
 
-
     public function rules()
     {
         return [
@@ -118,7 +117,7 @@ class AddressesComponent extends Component
         $this->alert('success', 'Address updated successfully');
     }
 
-    public function deleteAddress  ($id)
+    public function deleteAddress($id)
     {
         $address = auth()->user()->addresses()->where('id', $id)->first();
         if ($address->default_address) {
@@ -137,19 +136,19 @@ class AddressesComponent extends Component
     public function formData(): array
     {
         return [
-            "address_title" => $this->address_title,
-            "default_address" => $this->default_address,
-            "first_name" => $this->first_name,
-            "last_name" => $this->last_name,
-            "email" => $this->email,
-            "phone" => $this->phone,
-            "address" => $this->address,
-            "address2" => $this->address2,
-            "country_id" => $this->country_id,
-            "state_id" => $this->state_id,
-            "city_id" => $this->city_id,
-            "zip_code" => $this->zip_code,
-            "po_box" => $this->po_box,
+            'address_title' => $this->address_title,
+            'default_address' => $this->default_address,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'address' => $this->address,
+            'address2' => $this->address2,
+            'country_id' => $this->country_id,
+            'state_id' => $this->state_id,
+            'city_id' => $this->city_id,
+            'zip_code' => $this->zip_code,
+            'po_box' => $this->po_box,
         ];
     }
 

@@ -12,15 +12,15 @@ class OrderTransaction extends Model
 
     protected $guarded = [];
 
-    const NEW_ORDER = 0;
-    const PAID = 1;
-    const UNDER_PROCESS = 2;
-    const FINISHED = 3;
-    const REJECTED = 4;
-    const CANCELED = 5;
-    const REFUNDED_REQUEST = 6;
-    const RETURNED = 7;
-    const REFUNDED = 8;
+    public const NEW_ORDER = 0;
+    public const PAID = 1;
+    public const UNDER_PROCESS = 2;
+    public const FINISHED = 3;
+    public const REJECTED = 4;
+    public const CANCELED = 5;
+    public const REFUNDED_REQUEST = 6;
+    public const RETURNED = 7;
+    public const REFUNDED = 8;
 
 
     public function order(): BelongsTo

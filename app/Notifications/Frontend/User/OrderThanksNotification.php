@@ -33,7 +33,7 @@ class OrderThanksNotification extends Notification implements ShouldQueue
 
     public function toMail($notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->greeting('Dear, ' . $notifiable->full_name)
             ->line('Thank you for purchase the order.')
             ->line('Thank you for using our application!')

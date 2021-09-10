@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ReviewRequest;
 use App\Models\Review;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ReviewController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_review');
 
@@ -24,21 +26,21 @@ class ReviewController extends Controller
         return view('backend.reviews.index', compact('reviews'));
     }
 
-    public function show(Review $review)
+    public function show(Review $review): View
     {
         $this->authorize('show_review');
 
         return view('backend.reviews.show', compact('review'));
     }
 
-    public function edit(Review $review)
+    public function edit(Review $review): View
     {
         $this->authorize('edit_review');
 
         return view('backend.reviews.edit', compact('review'));
     }
 
-    public function update(ReviewRequest $request, Review $review)
+    public function update(ReviewRequest $request, Review $review): RedirectResponse
     {
         $this->authorize('edit_review');
 
@@ -50,7 +52,7 @@ class ReviewController extends Controller
         ]);
     }
 
-    public function destroy(Review $review)
+    public function destroy(Review $review): RedirectResponse
     {
         $this->authorize('delete_review');
 

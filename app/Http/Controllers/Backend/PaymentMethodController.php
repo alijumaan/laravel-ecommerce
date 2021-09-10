@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\PaymentMethodRequest;
 use App\Models\PaymentMethod;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class PaymentMethodController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_payment_method');
 
@@ -25,14 +27,14 @@ class PaymentMethodController extends Controller
         return view('backend.payment_methods.index', compact('paymentMethods'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_payment_method');
 
         return view('backend.payment_methods.create');
     }
 
-    public function store(PaymentMethodRequest $request)
+    public function store(PaymentMethodRequest $request): RedirectResponse
     {
         $this->authorize('create_payment_method');
 
@@ -44,21 +46,21 @@ class PaymentMethodController extends Controller
         ]);
     }
 
-    public function show(PaymentMethod $paymentMethod)
+    public function show(PaymentMethod $paymentMethod): View
     {
         $this->authorize('show_payment_method');
 
         return view('backend.payment_methods.show', compact('paymentMethod'));
     }
 
-    public function edit(PaymentMethod $paymentMethod)
+    public function edit(PaymentMethod $paymentMethod): View
     {
         $this->authorize('edit_payment_method');
 
         return view('backend.payment_methods.edit', compact('paymentMethod'));
     }
 
-    public function update(PaymentMethodRequest $request, PaymentMethod $paymentMethod)
+    public function update(PaymentMethodRequest $request, PaymentMethod $paymentMethod): RedirectResponse
     {
         $this->authorize('edit_payment_method');
 
@@ -70,7 +72,7 @@ class PaymentMethodController extends Controller
         ]);
     }
 
-    public function destroy(PaymentMethod $paymentMethod)
+    public function destroy(PaymentMethod $paymentMethod): RedirectResponse
     {
         $this->authorize('delete_payment_method');
 

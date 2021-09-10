@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\File;
 
 trait RemoveImageTrait
 {
-    public function removeAvatar($request, $user)
+    public function removeAvatar($request, $user): string
     {
         if ($user) {
             if ($request->user_image != '') {
                 if ($user->user_image != 'images/avatar.png') {
-                    if (File::exists('storage/' . $user->user_image))
+                    if (File::exists('storage/' . $user->user_image)){
                         unlink('storage/' . $user->user_image);
+                    }
                 }
             }
 
@@ -22,10 +23,11 @@ trait RemoveImageTrait
 
             return 'true';
         }
+
         return 'false';
     }
 
-    public function removeProductImage($request)
+    public function removeProductImage($request): bool
     {
         $media = Media::whereId($request->mediaId)->first();
 

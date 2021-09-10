@@ -31,9 +31,9 @@ class UserController extends Controller
 
         if ($request->hasFile('user_image')) {
             if ($user->user_image) {
-                (new UserImageService)->unlinkFile($user->user_image);
+                (new UserImageService())->unlinkFile($user->user_image);
             }
-            $userImage = (new UserImageService)->storeImages($user->username, $request->user_image);
+            $userImage = (new UserImageService())->storeImages($user->username, $request->user_image);
         }
 
         $user->update([
@@ -53,7 +53,7 @@ class UserController extends Controller
     public function removeImage()
     {
         if (auth()->user()->user_image) {
-            (new UserImageService)->unlinkFile(auth()->user()->user_image);
+            (new UserImageService())->unlinkFile(auth()->user()->user_image);
             auth()->user()->update(['user_image' => NULL]);
 
             toast('Image removed successfully', 'success');

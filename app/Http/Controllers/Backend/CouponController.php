@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CouponRequest;
 use App\Models\Coupon;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CouponController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('access_coupon');
 
@@ -25,14 +27,14 @@ class CouponController extends Controller
         return view('backend.coupons.index', compact('coupons'));
     }
 
-    public function create()
+    public function create(): View
     {
         $this->authorize('create_coupon');
 
         return view('backend.coupons.create');
     }
 
-    public function store(CouponRequest $request)
+    public function store(CouponRequest $request): RedirectResponse
     {
         $this->authorize('create_coupon');
 
@@ -44,21 +46,21 @@ class CouponController extends Controller
         ]);
     }
 
-    public function show(Coupon $coupon)
+    public function show(Coupon $coupon): View
     {
         $this->authorize('show_coupon');
 
         return view('backend.coupons.show', compact('coupon'));
     }
 
-    public function edit(Coupon $coupon)
+    public function edit(Coupon $coupon): View
     {
         $this->authorize('edit_coupon');
 
         return view('backend.coupons.edit', compact('coupon'));
     }
 
-    public function update(CouponRequest $request, Coupon $coupon)
+    public function update(CouponRequest $request, Coupon $coupon): RedirectResponse
     {
         $this->authorize('edit_coupon');
 
@@ -70,7 +72,7 @@ class CouponController extends Controller
         ]);
     }
 
-    public function destroy(Coupon $coupon)
+    public function destroy(Coupon $coupon): RedirectResponse
     {
         $this->authorize('delete_coupon');
 

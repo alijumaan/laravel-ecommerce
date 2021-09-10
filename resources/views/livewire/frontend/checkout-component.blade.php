@@ -27,6 +27,7 @@
                                 wire:click="getShippingCompanies()"
                                 {{ intval($userAddressId) == $address->id ? 'checked' : '' }}
                                 value="{{ $address->id }}">
+
                             <label for="address-{{ $address->id }}" class="custom-control-label text-small">
                                 <b>{{ $address->address_title }}</b>
                                 <small>

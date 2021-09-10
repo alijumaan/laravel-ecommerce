@@ -39,7 +39,7 @@ class AddProductToCartOrWishlist extends Component
         });
 
         if ($duplicated->isNotEmpty()) {
-            $this->alert('error', 'Product already exist!');
+            $this->alert('warning', 'Product already exist!');
         } else {
             Cart::instance('default')->add($this->product->id, $this->product->name, $this->quantity, $this->product->price)
                 ->associate(Product::class);
@@ -56,7 +56,7 @@ class AddProductToCartOrWishlist extends Component
         });
 
         if ($duplicated->isNotEmpty()) {
-            $this->alert('error', 'Product already exist!');
+            $this->alert('warning', 'Product already exist!');
         } else {
             Cart::instance('wishlist')->add($this->product->id, $this->product->name, $this->quantity, $this->product->price)
                 ->associate(Product::class);

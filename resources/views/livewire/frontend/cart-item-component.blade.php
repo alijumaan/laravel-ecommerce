@@ -1,12 +1,9 @@
 <tr x-data="{ show: true }" x-show="show">
     <td class="product-thumbnail">
-        <a href="#">
+        <a href="{{ route('product.show', $cartItem->model->slug) }}">
             @if($cartItem->model->firstMedia)
-                <img src=""
+                <img src="{{ asset('storage/images/products/' . $cartItem->model->firstMedia->file_name) }}"
                      alt="{{ $cartItem->model->name }}" width="70"/>
-                <img src="{{ asset('storage/images/products/' . $cartItem->firstMedia->file_name) }}"
-                     style="width: 50px;"
-                     alt="">
             @else
                 <img src="{{ asset('img/no-img.png') }}"
                      alt="{{ $cartItem->model->name }}" width="70"/>
