@@ -15,10 +15,10 @@ class WorldSeeder extends Seeder
     {
         $sqlFIle = public_path('ecommerce_world.sql');
         $db = [
-            'host' => '127.0.0.1',
-            'database' => 'laravel_ecommerce',
-            'username' => 'root',
-            'password' => 'password'
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'database' => env('DB_DATABASE', 'laravel_ecommerce'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'password'),
         ];
 
         exec("mysql --user={$db['username']} --password={$db['password']} --host={$db['host']} --database={$db['database']} < $sqlFIle");
