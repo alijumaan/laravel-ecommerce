@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\SupervisorRequest;
 use App\Models\User;
-use App\Services\UserImageService;
+use App\Services\ImageService;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -16,11 +16,11 @@ class SupervisorController extends Controller
 {
     use ImageUploadTrait;
 
-    protected $userImageService;
+    protected $imageService;
 
-    public function __construct(UserImageService $userImageService)
+    public function __construct(ImageService $imageService)
     {
-        $this->userImageService = $userImageService;
+        $this->imageService = $imageService;
     }
 
     public function index(): View
@@ -54,7 +54,7 @@ class SupervisorController extends Controller
         $this->authorize('create_supervisor');
 
         if ($request->hasFile('user_image')) {
-            $supervisorImage = $this->userImageService->storeImages($request->username, $request->user_image);
+            $supervisorImage = $this->imageService->storeUserImages($request->username, $request->user_image);
         }
 
         $supervisor = User::create([
@@ -109,9 +109,9 @@ class SupervisorController extends Controller
 
         if ($request->hasFile('user_image')) {
             if ($supervisor->user_image) {
-                $this->userImageService->unlinkFile($supervisor->user_image);
+                $this->imageService->unlinkImage($supervisor->user_image, 'users');
             }
-            $supervisorImage = $this->userImageService->storeImages($request->username, $request->user_image);
+            $supervisorImage = $this->imageService->storeUserImages($request->username, $request->user_image);
         }
 
         if ($request->password){
@@ -150,7 +150,7 @@ class SupervisorController extends Controller
         $this->authorize('delete_supervisor');
 
         if ($supervisor->user_image) {
-            $this->userImageService->unlinkFile($supervisor->user_image);
+            $this->imageService->unlinkImage($supervisor->user_image, 'users');
         }
 
         $supervisor->delete();

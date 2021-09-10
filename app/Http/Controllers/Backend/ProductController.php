@@ -7,12 +7,11 @@ use App\Http\Requests\Backend\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
-use App\Services\ProductService;
+use App\Services\ImageService;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -53,7 +52,9 @@ class ProductController extends Controller
             $product = Product::create($request->except('tags', 'images', '_token'));
             $product->tags()->attach($request->tags);
 
-            (new ProductService())->storeImages($request, $product, 1);
+            if ($request->images && count($request->images) > 0) {
+                (new ImageService())->storeProductImages($request->images, $product);
+            }
 
             clear_cache();
 
@@ -94,12 +95,18 @@ class ProductController extends Controller
             $product->update($request->except('tags', 'images', '_token'));
             $product->tags()->sync($request->tags);
 
-            if ($request->images) {
-                (new ProductService())->unlinkAndDeleteImage($product);
+            if ($request->images && $product->media->count() > 0) {
+                foreach ($product->media as $media) {
+                    (new ImageService())->unlinkImage($media->file_name, 'products');
+                    $media->delete();
+                }
             }
 
             $i = $product->media()->count() + 1;
-            (new ProductService())->storeImages($request, $product, $i);
+
+            if ($request->images && count($request->images) > 0) {
+                (new ImageService())->storeProductImages($request->images, $product, $i);
+            }
 
             clear_cache();
             return redirect()->route('admin.products.index')->with([
@@ -118,7 +125,12 @@ class ProductController extends Controller
     {
         $this->authorize('delete_product');
 
-        (new ProductService())->unlinkAndDeleteImage($product);
+        if ($product->media->count() > 0) {
+            foreach ($product->media as $media) {
+                (new ImageService())->unlinkImage($media->file_name, 'products');
+                $media->delete();
+            }
+        }
 
         $product->delete();
 
@@ -136,12 +148,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($request->product_id);
         $image = $product->media()->whereId($request->image_id)->first();
 
-        if (File::exists('storage/images/products/'. $image->file_name)) {
-            unlink('storage/images/products/'. $image->file_name);
-        }
-
+        (new ImageService())->unlinkImage($image->file_name, 'products');
         $image->delete();
         clear_cache();
+
         return true;
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Services\UserImageService;
+use App\Services\ImageService;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
@@ -32,9 +32,9 @@ class AdminAuthController extends Controller
     {
         if ($request->hasFile('user_image')) {
             if (auth()->user()->user_image) {
-                (new UserImageService())->unlinkFile(auth()->user()->user_image);
+                (new ImageService())->unlinkImage(auth()->user()->user_image, 'users');
             }
-            $adminImage = (new UserImageService())->storeImages($request);
+            $adminImage = (new ImageService())->storeUserImages(auth()->user()->username, $request->user_image);
         }
 
         if ($request->password){

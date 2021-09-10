@@ -79,9 +79,9 @@
                 <div class="row">
                     <div class="col-12">
                         @if(auth()->user()->user_image)
-                            <img src="{{ asset('storage/assets/images/users/' . auth()->user()->user_image) }}" alt="{{ auth()->user()->full_name }}" width="60" height="60">
+                            <img src="{{ asset('storage/images/users/' . auth()->user()->user_image) }}" alt="{{ auth()->user()->full_name }}" width="60" height="60">
                         @else
-                            <img src="{{ asset('default_images/avatar.png') }}" alt="{{ auth()->user()->full_name }}" width="60" height="60">
+                            <img src="{{ asset('img/avatar.png') }}" alt="{{ auth()->user()->full_name }}" width="60" height="60">
                         @endif
                         <br>
                         <input type="file" name="user_image">

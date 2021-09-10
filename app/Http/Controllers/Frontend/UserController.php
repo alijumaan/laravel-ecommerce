@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProfileRequest;
-use App\Services\UserImageService;
+use App\Services\ImageService;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\ImageUploadTrait;
 
@@ -31,9 +31,9 @@ class UserController extends Controller
 
         if ($request->hasFile('user_image')) {
             if ($user->user_image) {
-                (new UserImageService())->unlinkFile($user->user_image);
+                (new ImageService())->unlinkImage($user->user_image, 'users');
             }
-            $userImage = (new UserImageService())->storeImages($user->username, $request->user_image);
+            $userImage = (new ImageService())->storeUserImages($user->username, $request->user_image);
         }
 
         $user->update([
@@ -53,7 +53,7 @@ class UserController extends Controller
     public function removeImage()
     {
         if (auth()->user()->user_image) {
-            (new UserImageService())->unlinkFile(auth()->user()->user_image);
+            (new ImageService())->unlinkImage(auth()->user()->user_image, 'users');
             auth()->user()->update(['user_image' => NULL]);
 
             toast('Image removed successfully', 'success');

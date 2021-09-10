@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\UserRequest;
 use App\Models\User;
-use App\Services\UserImageService;
+use App\Services\ImageService;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -16,11 +16,11 @@ class UserController extends Controller
 {
     use ImageUploadTrait;
 
-    protected $userImageService;
+    protected $imageService;
 
-    public function __construct(UserImageService $userImageService)
+    public function __construct(ImageService $imageService)
     {
-        $this->userImageService = $userImageService;
+        $this->imageService = $imageService;
     }
 
     public function index(): View
@@ -52,7 +52,7 @@ class UserController extends Controller
         $this->authorize('create_user');
 
         if ($request->hasFile('user_image')) {
-            $userImage = $this->userImageService->storeImages($request->username, $request->user_image);
+            $userImage = $this->imageService->storeUserImages($request->username, $request->user_image);
         }
 
         $user = User::create([
@@ -97,9 +97,9 @@ class UserController extends Controller
 
         if ($request->hasFile('user_image')) {
             if ($user->user_image) {
-                $this->userImageService->unlinkFile($user->user_image);
+                $this->imageService->unlinkImage($user->user_image, 'users');
             }
-            $userImage = $this->userImageService->storeImages($request->username, $request->user_image);
+            $userImage = $this->imageService->storeUserImages($request->username, $request->user_image);
         }
 
         if ($request->password){
@@ -129,7 +129,7 @@ class UserController extends Controller
         $this->authorize('delete_user');
 
         if ($user->user_image) {
-            $this->userImageService->unlinkFile($user->user_image);
+            $this->imageService->unlinkImage($user->user_image, 'users');
         }
 
         $user->delete();
