@@ -112,15 +112,18 @@
                                         </div>
                                         <div class="product-list-cart-wishlist">
                                             <div class="product-list-cart">
-                                                <a class="btn-hover list-btn-style">add to cart</a>
+                                                <a wire:click="addToCart('{{ $product->id }}')"
+                                                   class="btn-hover list-btn-style" title="Add To Cart" style="cursor: pointer">
+                                                    add to cart
+                                                </a>
                                             </div>
-                                            @auth
-                                                <div class="product-list-look">
-                                                    <a class="btn-hover list-btn-wishlist" href="{{route('product.show', $product->slug)}}">
-                                                        <i class='far fa-heart'></i>
-                                                    </a>
-                                                </div>
-                                            @endauth
+                                            <div class="product-list-look">
+                                                <a wire:click="addToWishList('{{ $product->id }}')"
+                                                   class="btn-hover list-btn-wishlist"
+                                                   title="Wishlist" style="cursor: pointer">
+                                                    <i class='far fa-heart'></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
