@@ -4,12 +4,11 @@
 
     <div class="container">
         <!-- categories area start -->
-        <div class="product-style-area gray-bg-4 pb-105">
-            <div class="section-title-furits bg-shape text-center mb-80">
+        <div class="product-style-area gray-bg-4 pb-80">
+            <div class="section-title-furits bg-shape text-center mb-80 ">
                 <img src="{{ asset('frontend/img/icon-img/49.png') }}" alt="">
                 <h2>BROWSE OUR CATEGORIES</h2>
             </div>
-
             <section>
                 <header class="text-center">
                     <p class="small text-muted small text-uppercase mb-1">Carefully created collections</p>
@@ -71,18 +70,17 @@
                     </div>
                 </div>
             </section>
-
         </div>
         <!-- categories area end -->
     </div>
 
     <!-- banner area start -->
-    <div class="fruits-choose-area pb-65 bg-img" style="background-image: url('{{ asset('frontend/img/banner/53.png') }}')">
+    <div class="fruits-choose-area pb-65 bg-img mt-5" style="background-image: url('{{ asset('frontend/img/banner/53.png') }}')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-xl-8 col-12">
                     <div class="fruits-choose-wrapper-all">
-                        <div class="fruits-choose-title">
+                        <div class="fruits-choose-title mt-5">
                             <h2>WHY CHOOSE US ?</h2>
                         </div>
                         <div class="fruits-choose-wrapper">
