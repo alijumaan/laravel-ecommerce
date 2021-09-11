@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Frontend;
+namespace App\Http\Livewire\Frontend\Wishlist;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
@@ -23,7 +23,7 @@ class WishlistItemComponent extends Component
 
     public function render()
     {
-        return view('livewire.frontend.wishlist-item-component', [
+        return view('livewire.frontend.wishlist.wishlist-item-component', [
             'wishlistItem' => Cart::instance('wishlist')->content()->get($this->item)
         ]);
     }

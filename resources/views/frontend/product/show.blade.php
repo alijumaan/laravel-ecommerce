@@ -69,7 +69,7 @@
                             <span>${{ $product->price }}</span>
                         </div>
                         <p>{{ $product->description }}</p>
-                        <livewire:frontend.add-product-to-cart-or-wishlist :product="$product"/>
+                        <livewire:frontend.product.single-product-cart-component :product="$product"/>
                         <div class="product-details-cati-tag mt-35">
                             <ul>
                                 <li class="categories-title">Categories :</li>
@@ -122,7 +122,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-9 col-12">
-                                        <livewire:frontend.product-review-component :product="$product" />
+                                        <livewire:frontend.product.single-product-review-component :product="$product" />
                                     </div>
                                 </div>
                             </div>
@@ -132,6 +132,6 @@
             </div>
         </div>
     </div>
-    <livewire:frontend.related-products-component :relatedProducts="$relatedProducts" />
+    <livewire:frontend.product.related-products-component :relatedProducts="$relatedProducts" />
 @endsection
 

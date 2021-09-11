@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Frontend;
+namespace App\Http\Livewire\Frontend\Cart;
 
 use App\Models\Coupon;
 use Livewire\Component;
@@ -71,6 +71,6 @@ class CartTotalComponent extends Component
 
     public function render()
     {
-        return view('livewire.frontend.cart-total-component');
+        return view('livewire.frontend.cart.cart-total-component');
     }
 }

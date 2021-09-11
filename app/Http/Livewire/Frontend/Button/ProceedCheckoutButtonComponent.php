@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Frontend;
+namespace App\Http\Livewire\Frontend\Button;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
-class ButtonProceedToCheckoutComponent extends Component
+class ProceedCheckoutButtonComponent extends Component
 {
     public $showButton;
 
@@ -24,6 +24,6 @@ class ButtonProceedToCheckoutComponent extends Component
 
     public function render()
     {
-        return view('livewire.frontend.button-proceed-to-checkout-component');
+        return view('livewire.frontend.button.proceed-checkout-button-component');
     }
 }

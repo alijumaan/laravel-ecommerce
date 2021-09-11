@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Frontend;
+namespace App\Http\Livewire\Frontend\Product;
 
 use App\Models\Order;
 use App\Models\Review;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
-class ProductReviewComponent extends Component
+class SingleProductReviewComponent extends Component
 {
     public $showForm = true;
     public $canRate = false;
@@ -113,6 +113,6 @@ class ProductReviewComponent extends Component
 
     public function render()
     {
-        return view('livewire.frontend.product-review-component');
+        return view('livewire.frontend.product.single-product-review-component');
     }
 }

@@ -8,7 +8,7 @@
                 The purchase was completed successfully
             </div>
             <div class="card-body">
-                <livewire:frontend.checkout-component />
+                <livewire:frontend.checkout.checkout-component />
             </div>
         </div>
     </div>

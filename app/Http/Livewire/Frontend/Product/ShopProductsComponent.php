@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\Frontend;
+namespace App\Http\Livewire\Frontend\Product;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\CartService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -20,34 +21,24 @@ class ShopProductsComponent extends Component
     public function addToCart($productId)
     {
         $product = Product::whereId($productId)->active()->hasQuantity()->activeCategory()->firstOrFail();
-        $duplicated = Cart::instance('default')->search(function ($cartItem, $rowId) use ($product) {
-            return $cartItem->id === $product->id;
-        });
-
-        if ($duplicated->isNotEmpty()) {
-            $this->alert('warning', 'Product already exist!');
-        } else {
-            Cart::instance('default')->add($product->id, $product->name, 1, $product->price)
-                ->associate(Product::class);
+        try {
+            (new CartService())->addToList('default', $product);
             $this->emit('update_cart');
-            $this->alert('success', 'Added to Cart.');
+            $this->alert('success', 'added to Cart.');
+        } catch(\Exception $exception) {
+            $this->alert('warning', $exception->getMessage());
         }
     }
 
     public function addToWishList($id)
     {
         $product = Product::whereId($id)->active()->hasQuantity()->activeCategory()->firstOrFail();
-        $duplicated = Cart::instance('wishlist')->search(function ($cartItem, $rowId) use ($product) {
-            return $cartItem->id === $product->id;
-        });
-
-        if ($duplicated->isNotEmpty()) {
-            $this->alert('warning', 'Product already exist!');
-        } else {
-            Cart::instance('wishlist')->add($product->id, $product->name, 1, $product->price)
-                ->associate(Product::class);
+        try {
+            (new CartService())->addToList('wishlist', $product);
             $this->emit('update_wishlist');
             $this->alert('success', 'added to Wishlist.');
+        } catch(\Exception $exception) {
+            $this->alert('warning', $exception->getMessage());
         }
     }
 
@@ -85,8 +76,10 @@ class ShopProductsComponent extends Component
                 $products = $products->whereHas('category', function ($query) use ($categoriesIds) {
                     $query->whereIn('id', $categoriesIds);
                 });
+
             } else {
-                $products = $products->with('category')->whereHas('category', function ($query) {
+                $products = $products->with('category')
+                    ->whereHas('category', function ($query) {
                     $query->where([
                         'slug' => $this->slug,
                         'status' => true
@@ -100,6 +93,6 @@ class ShopProductsComponent extends Component
             ->orderBy($sortField, $sortType)
             ->paginate($this->paginationLimit);
 
-        return view('livewire.frontend.shop-products-component', compact('products'));
+        return view('livewire.frontend.product.shop-products-component', compact('products'));
     }
 }

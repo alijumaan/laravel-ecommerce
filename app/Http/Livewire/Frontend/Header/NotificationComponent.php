@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Frontend;
+namespace App\Http\Livewire\Frontend\Header;
 
 use Livewire\Component;
 
@@ -32,6 +32,6 @@ class NotificationComponent extends Component
 
     public function render()
     {
-        return view('livewire.frontend.notification-component');
+        return view('livewire.frontend.header.notification-component');
     }
 }

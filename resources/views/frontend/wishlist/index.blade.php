@@ -32,7 +32,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach(Cart::instance('wishlist')->content() as $item)
-                                    <livewire:frontend.wishlist-item-component :item="$item->rowId" :key="$item->rowId"/>
+                                    <livewire:frontend.wishlist.wishlist-item-component :item="$item->rowId" :key="$item->rowId"/>
                                 @endforeach
                                 <livewire:frontend.message.wishlist-not-found-component />
                                 </tbody>

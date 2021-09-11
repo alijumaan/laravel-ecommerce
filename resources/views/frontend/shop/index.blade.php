@@ -8,7 +8,7 @@
                     @include('partials.frontend.shop.sidebar')
                 </div>
                 <div class="col-lg-9">
-                    <livewire:frontend.shop-products-component  :slug="$slug"/>
+                    <livewire:frontend.product.shop-products-component  :slug="$slug"/>
                 </div>
             </div>
         </div>

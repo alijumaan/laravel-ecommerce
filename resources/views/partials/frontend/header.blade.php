@@ -60,7 +60,7 @@
                                 <li><a href="{{route('register')}}">Reg</a></li>
                             @else
                                 <li>
-                                    <livewire:frontend.notification-component />
+                                    <livewire:frontend.header.notification-component />
                                 </li>
 
                                 <li>

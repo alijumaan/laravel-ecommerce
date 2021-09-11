@@ -32,7 +32,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach(Cart::instance('default')->content() as $item)
-                                    <livewire:frontend.cart-item-component :item="$item->rowId" :key="$item->rowId"/>
+                                    <livewire:frontend.cart.cart-item-component :item="$item->rowId" :key="$item->rowId"/>
                                 @endforeach
                                 <livewire:frontend.message.cart-not-found-component />
                                 </tbody>
@@ -44,7 +44,7 @@
 
             <!-- cart total -->
             <div class="row">
-                <livewire:frontend.cart-total-component/>
+                <livewire:frontend.cart.cart-total-component/>
             </div>
             <div class="row">
                 <div class="col-md-4 ">
@@ -56,7 +56,7 @@
                 </div>
                 @if(Cart::instance('default')->count())
                 <div class="col-md-4 ">
-                    <livewire:frontend.button-proceed-to-checkout-component/>
+                    <livewire:frontend.button.proceed-checkout-button-component />
                 </div>
                 @endif
             </div>
