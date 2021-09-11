@@ -31,15 +31,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse(Cart::instance('default')->content() as $item)
+                                @foreach(Cart::instance('default')->content() as $item)
                                     <livewire:frontend.cart-item-component :item="$item->rowId" :key="$item->rowId"/>
-                                @empty
-                                    <tr>
-                                        <td class="pl-0 border-light" colspan="5">
-                                            <p class="text-center">No items found.</p>
-                                        </td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
+                                <livewire:frontend.message.cart-not-found-component />
                                 </tbody>
                             </table>
                         </div>
@@ -61,10 +56,7 @@
                 </div>
                 @if(Cart::instance('default')->count())
                 <div class="col-md-4 ">
-                    <a href="{{ route('checkout.index') }}" class="btn btn-outline-dark">
-                        Proceed to checkout
-                        <i class="fas fa-long-arrow-alt-right ml-2"></i>
-                    </a>
+                    <livewire:frontend.button-proceed-to-checkout-component/>
                 </div>
                 @endif
             </div>

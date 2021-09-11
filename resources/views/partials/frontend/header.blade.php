@@ -1,7 +1,6 @@
 <header class="ptb-50">
     <div class="header-bottom wrapper-padding-2 res-header-sm sticker header-sticky-3 furits-header">
         <div class="container-fluid">
-
             <div class="header-bottom-wrapper ">
                 <div class="logo-2 ptb-35 menu-hover">
                     <a href="{{route('home')}}">
@@ -50,7 +49,6 @@
                             <li>
                                 <a href="{{route('contact.index')}}">Contact</a>
                             </li>
-
                         </ul>
                     </nav>
                 </div>
@@ -79,9 +77,7 @@
                                             </li>
                                         @endauth
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                               onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();" style="color: #578a01;">
+                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: #578a01;">
                                                 {{ __('Logout') }}
                                             </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -167,6 +163,8 @@
             </div>
             <div class="furniture-wishlist">
                 <livewire:frontend.header.wishlist-component />
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
             </div>
         </div>
     </div>

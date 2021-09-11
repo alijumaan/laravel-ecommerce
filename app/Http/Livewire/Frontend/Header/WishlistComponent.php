@@ -24,6 +24,9 @@ class WishlistComponent extends Component
     public function wishlistCount()
     {
         $this->wishlistCount = Cart::instance('wishlist')->count();
+        if (Cart::instance('wishlist')->count() == 0) {
+            $this->emit('update_message_wishlist_not_found');
+        }
     }
 
     public function moveToCart($rowId)
@@ -50,10 +53,6 @@ class WishlistComponent extends Component
     {
         Cart::instance('wishlist')->remove($rowId);
         $this->emit('update_wishlist');
-
-        if (Cart::instance('wishlist')->count() == 0) {
-            return redirect()->route('wishlist.index');
-        }
     }
 
     public function render()

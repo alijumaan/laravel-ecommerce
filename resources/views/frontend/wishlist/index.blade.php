@@ -31,15 +31,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse(Cart::instance('wishlist')->content() as $item)
+                                @foreach(Cart::instance('wishlist')->content() as $item)
                                     <livewire:frontend.wishlist-item-component :item="$item->rowId" :key="$item->rowId"/>
-                                @empty
-                                    <tr>
-                                        <td class="pl-0 border-light" colspan="5">
-                                            <p class="text-center">No items in your wish list.</p>
-                                        </td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
+                                <livewire:frontend.message.wishlist-not-found-component />
                                 </tbody>
                             </table>
                         </div>

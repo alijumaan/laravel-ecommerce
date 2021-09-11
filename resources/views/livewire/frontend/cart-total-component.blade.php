@@ -25,15 +25,12 @@
             <div class="coupon">
                 @if(!session()->has('coupon'))
                     <form wire:submit.prevent="applyDiscount()">
-                        <input wire:model="couponCode"class="input-text"
-                               placeholder="Coupon code" type="text" required>
-                            <input class="button" value="Apply coupon" type="submit">
-
+                        <input type="text" wire:model="couponCode" class="input-text" placeholder="Coupon code" required>
+                        <input class="button" value="Apply coupon" type="submit">
                     </form>
                 @endif
                 @if(session()->has('coupon'))
-                    <input wire:click.prevent="removeCoupon()" class="button"
-                           value="Remove coupon" type="button">
+                    <input type="button" wire:click.prevent="removeCoupon()" class="button" value="Remove coupon">
                 @endif
             </div>
         </div>

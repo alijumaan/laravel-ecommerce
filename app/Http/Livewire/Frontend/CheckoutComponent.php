@@ -32,10 +32,10 @@ class CheckoutComponent extends Component
 
     public function mount()
     {
+        $this->addresses = auth()->user()->addresses;
         $this->userAddressId = session()->has('saved_user_address_id') ? session()->get('saved_user_address_id') : '';
         $this->shippingCompanyId = session()->has('saved_shipping_company_id') ? session()->get('saved_shipping_company_id') : '';
         $this->paymentMethodId = session()->has('saved_payment_method_id') ? session()->get('saved_payment_method_id') : '';
-        $this->addresses = auth()->user()->addresses;
         $this->cartSubTotal = getNumbersOfCart()->get('subtotal');
         $this->cartTax = getNumbersOfCart()->get('productTaxes');
         $this->cartDiscount = getNumbersOfCart()->get('discount');

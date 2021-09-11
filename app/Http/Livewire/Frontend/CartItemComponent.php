@@ -29,10 +29,8 @@ class CartItemComponent extends Component
         }
     }
 
-
     public function increaseQuantity($rowId, $id)
     {
-
         $productQuantity = Product::whereId($id)->pluck('quantity')->first();
 
         if ($productQuantity > $this->itemQuantity && $this->itemQuantity > 0){
