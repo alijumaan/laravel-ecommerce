@@ -157,7 +157,9 @@
             <div class="furniture-search">
                 <form>
                     <div class="form-input">
-                        <input id="search" type="text" value="{{ old('keyword', request()->keyword) }}" placeholder="Searching for . . .">
+                        <input id="search" type="text"
+                               value="{{ old('keyword', request()->keyword) }}"
+                               placeholder="Search for product...">
                     </div>
                 </form>
             </div>

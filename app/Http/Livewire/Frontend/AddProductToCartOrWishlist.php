@@ -45,7 +45,7 @@ class AddProductToCartOrWishlist extends Component
                 ->associate(Product::class);
             $this->quantity = 1;
             $this->emit('update_cart');
-            $this->alert('success', 'added successfully.');
+            $this->alert('success', 'Added to Cart.');
         }
     }
 
@@ -61,7 +61,7 @@ class AddProductToCartOrWishlist extends Component
             Cart::instance('wishlist')->add($this->product->id, $this->product->name, $this->quantity, $this->product->price)
                 ->associate(Product::class);
             $this->emit('update_wishlist');
-            $this->alert('success', 'added successfully.');
+            $this->alert('success', 'added to Wishlist.');
         }
     }
 

@@ -29,9 +29,10 @@
                                             <i class="pe-7s-chat"></i>
                                         </div>
                                         <div class="food-info-content">
-                                            <p><a href="http://alijumaan.com">alila3883@gmail.com</a> <br><a
-                                                    href="https://alijumaan.com/"
-                                                    target="_blank">contact@alijumaan.com</a></p>
+                                            <p>
+                                                <a href="https://alijumaan.com">alila3883@gmail.com</a> <br>
+                                                <a href="https://alijumaan.com" target="_blank">contact@alijumaan.com</a>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -46,14 +47,18 @@
                             <ul>
                                 <li><a href="{{ route('cart.index') }}"><img
                                             src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> Cart</a></li>
-                                <li><a href="{{ route('user.dashboard') }}"><img
-                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> My Account</a>
+                                <li>
+                                    <a href="{{ route('user.dashboard') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
+                                        My Account</a>
                                 </li>
                                 @guest
                                     @if (route('register'))
-                                        <li><a href="{{ route('register') }}"><img
-                                                    src="{{ asset('frontend/img/icon-img/41.png') }}"
-                                                    alt="">Register</a></li>
+                                        <li>
+                                            <a href="{{ route('register') }}">
+                                                <img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
+                                                Register
+                                            </a>
+                                        </li>
                                     @endif
                                 @endguest
                             </ul>
@@ -72,8 +77,10 @@
                                 <li><a href="{{ route('contact.index') }}"><img
                                             src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Privacy Policy</a>
                                 </li>
-                                <li><a href="{{ route('contact.index') }}"><img
-                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">News</a></li>
+                                <li>
+                                    <a href="{{ route('contact.index') }}">
+                                        <img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">News</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -83,7 +90,6 @@
         </div>
     </div>
     <div class="footer-middle black-bg-2 pt-35 pb-40">
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4">
@@ -125,7 +131,6 @@
             </div>
         </div>
     </div>
-
     <div class="food-copyright black-bg-6 ptb-30">
         <div class="container text-center">
             <p class="copyright text-center">

@@ -44,7 +44,7 @@ class WishlistComponent extends Component
             Cart::instance('default')->add($item->id, $item->name, 1, $item->price)
                 ->associate(Product::class);
             $this->removeFromWishlist($rowId);
-            $this->alert('success', 'Product add in your cart.');
+            $this->alert('success', 'Added to Cart.');
         }
         $this->emit('update_cart');
     }

@@ -28,7 +28,7 @@ class RelatedProductsComponent extends Component
             Cart::instance('default')->add($product->id, $product->name, 1, $product->price)
                 ->associate(Product::class);
             $this->emit('update_cart');
-            $this->alert('success', 'added successfully.');
+            $this->alert('success', 'Added to Cart.');
         }
     }
 
@@ -45,7 +45,7 @@ class RelatedProductsComponent extends Component
             Cart::instance('wishlist')->add($product->id, $product->name, 1, $product->price)
                 ->associate(Product::class);
             $this->emit('update_cart');
-            $this->alert('success', 'added successfully.');
+            $this->alert('success', 'Added to Cart.');
         }
     }
 
