@@ -102,18 +102,15 @@ class LoginController extends Controller
     {
         $socialUser = Socialite::driver($provider)->user();
 
-//        dd($provider, $socialUser);
-        $token = $socialUser->token;
         $id = $socialUser->getId();
+        $token = $socialUser->token;
         $nickName = $socialUser->getNickname();
         $name = $socialUser->getName();
         $email = $socialUser->getEmail() == '' ? trim(Str::lower(Str::replaceArray(' ', ['_'], $name))) . '@' . $provider . '.com' : $socialUser->getEmail();
         $user_image = $socialUser->getAvatar();
 
         $user = User::firstOrCreate(
-            [
-                'email' => $email
-            ],
+            ['email' => $email],
             [
                 'first_name' => $name,
                 'last_name' => $name,
@@ -132,10 +129,9 @@ class LoginController extends Controller
 
         Auth::login($user, true);
 
-        return redirect()->route('dashboard')->with([
+        return redirect()->route('user.dashboard')->with([
             'message' => 'Your logged in successfully',
             'alert-type' => 'success',
         ]);
-
     }
 }

@@ -22,12 +22,6 @@ class OrderTransaction extends Model
     public const RETURNED = 7;
     public const REFUNDED = 8;
 
-
-    public function order(): BelongsTo
-    {
-        return $this->belongsTo(Order::class);
-    }
-
     public function status($transactionStatus = null)
     {
         $transaction = $transactionStatus != '' ? $transactionStatus : $this->transaction_status;
@@ -44,5 +38,10 @@ class OrderTransaction extends Model
             case 8: return 'Refunded';
             default: return 0;
         }
+    }
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
     }
 }

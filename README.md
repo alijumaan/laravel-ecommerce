@@ -24,9 +24,9 @@ after install the source code open Terminal to use these command line:
 - sudo chmod -R 777 storage
 - sudo chmod -R 777 bootstrap/cache
 
-## Try
+## Demo
 <a href='https://cartwhite.tk' target="_blank">https://cartwhite.tk</a>
 
-## Contact me
+## Ali Al-Qahtani
 <a href='https://alijumaan.com' target="_blank">https://alijumaan.com</a>
 
