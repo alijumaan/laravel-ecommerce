@@ -141,26 +141,3 @@
         {!! $products->appends(request()->all())->onEachSide(1)->links() !!}
     </div>
 </div>
-@section('script')
-    <script>
-        let productBlocks = document.querySelectorAll('#product-container-area');
-
-        document.getElementById('threeItems').onclick = function () {
-            Array.prototype.forEach.call(productBlocks, function (productBlock) {
-                if (productBlock.classList.contains('col-6')) {
-                    productBlock.classList.remove('col-6');
-                    productBlock.classList.add('col-4');
-                }
-            });
-        }
-
-        document.getElementById('twoItems').onclick = function () {
-            Array.prototype.forEach.call(productBlocks, function (productBlock) {
-                if (productBlock.classList.contains('col-4')) {
-                    productBlock.classList.remove('col-4');
-                    productBlock.classList.add('col-6');
-                }
-            });
-        }
-    </script>
-@endsection

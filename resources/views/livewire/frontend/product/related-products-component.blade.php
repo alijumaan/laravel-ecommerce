@@ -26,10 +26,8 @@
                             </div>
                         </div>
                         <div class="product-fruit-content text-center">
-                            <h4>
-                                <a href="{{route('product.show', $product->slug)}}">{{ $product->name }}</a>
-                            </h4>
-                            <span>${{ $product->price }}</span>
+                            <a class="" href="{{route('product.show', $product->slug)}}">{{ $product->name }}</a><br>
+                            <span class="small">${{ $product->price }}</span>
                         </div>
                     </div>
                 </div>

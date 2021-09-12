@@ -46,7 +46,7 @@
                         <div class="food-widget-content">
                             <ul>
                                 <li><a href="{{ route('cart.index') }}"><img
-                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> Cart</a></li>
+                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt="hhhhhh"> Cart</a></li>
                                 <li>
                                     <a href="{{ route('user.dashboard') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
                                         My Account</a>

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 @include('partials.frontend.sliders')
-
 <div class="container">
     <!-- categories area start -->
     <div class="product-style-area gray-bg-4 pb-80">
@@ -120,7 +119,9 @@
 <!-- banner area end -->
 
 <!-- TRENDING PRODUCTS -->
-<livewire:frontend.product.top-trending-products />
+<div class="container">
+    <livewire:frontend.product.top-trending-products />
+</div>
 
 <!-- services area start -->
 <div class="fruits-services ptb-200">

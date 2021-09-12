@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Frontend;
+namespace App\Http\Livewire\Frontend\Checkout;
 
 use App\Models\Coupon;
 use App\Models\PaymentMethod;
@@ -168,6 +168,6 @@ class CheckoutComponent extends Component
 
     public function render()
     {
-        return view('livewire.frontend.checkout-component');
+        return view('livewire.frontend.checkout.checkout-component');
     }
 }
