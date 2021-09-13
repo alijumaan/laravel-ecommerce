@@ -1,13 +1,23 @@
 @extends('layouts.app')
 @section('content')
+<!-- promotion area start -->
+@if($coupon)
+<div class="p-1 text-white text-center"
+     style="background-image: url('{{ asset('frontend/img/bg/12.jpg') }}')">
+    {{ $coupon->value }}{{ $coupon->type == 'percentage' ? '%' : '' }} off use ({{ $coupon->code }})
+</div>
+@endif
+<!-- promotion area end -->
+
 @include('partials.frontend.sliders')
-<div class="container">
-    <!-- categories area start -->
-    <div class="product-style-area gray-bg-4 pb-80">
-        <div class="section-title-furits bg-shape text-center mb-80 ">
+<!-- categories area start -->
+<div class="container-fluid">
+    <div class="pb-50">
+        <div class="section-title-furits text-center">
             <img src="{{ asset('frontend/img/icon-img/49.png') }}" alt="">
             <h2>BROWSE OUR CATEGORIES</h2>
         </div>
+        <br>
         <section>
             <header class="text-center">
                 <p class="small text-muted small text-uppercase mb-1">Carefully created collections</p>
@@ -70,8 +80,8 @@
             </div>
         </section>
     </div>
-    <!-- categories area end -->
 </div>
+<!-- categories area end -->
 
 <!-- banner area start -->
 <div class="fruits-choose-area pb-65 bg-img mt-5" style="background-image: url('{{ asset('frontend/img/banner/53.png') }}')">

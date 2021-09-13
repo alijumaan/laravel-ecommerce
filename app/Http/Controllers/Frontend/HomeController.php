@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Coupon;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -13,13 +14,15 @@ class HomeController extends Controller
 {
     public function index(): View
     {
+        $coupon = Coupon::whereStatus(true)->whereType('percentage')->first();
+
         $categories = Category::select('slug', 'cover', 'name')
             ->active()
             ->whereParentId(null)
             ->limit(4)
             ->get();
 
-        return view('frontend.index', compact('categories'));
+        return view('frontend.index', compact('categories', 'coupon'));
     }
 
     public function search(Request $request): JsonResponse
