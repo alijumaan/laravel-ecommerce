@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\LinkController;
+use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\TagController;
@@ -55,5 +56,6 @@ Route::group(['middleware' => ['roles']], function () {
     Route::resource('settings', SettingController::class)->only('index', 'update');
     Route::resource('contacts', ContactController::class)->except('create', 'edit', 'update');
     Route::resource('links', LinkController::class)->except('show');
+    Route::resource('pages', PageController::class);
 });
 

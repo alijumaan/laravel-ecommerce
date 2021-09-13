@@ -140,5 +140,14 @@ class LinkSeeder extends Seeder
             'status' => 1,
         ]);
 
+        Link::whereStatus(true)->create([
+            'title' => 'Pages',
+            'as' => 'Page',
+            'to' => 'admin.pages.index',
+            'icon' => 'far fa-file',
+            'permission_title' => 'access_page',
+            'status' => 1,
+        ]);
+
     }
 }

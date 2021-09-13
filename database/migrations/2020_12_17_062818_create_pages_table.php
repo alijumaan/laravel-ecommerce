@@ -17,7 +17,8 @@ class CreatePagesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->index();
-            $table->string('content');
+            $table->longText('content');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

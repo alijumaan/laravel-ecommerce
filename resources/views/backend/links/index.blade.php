@@ -34,7 +34,7 @@
                     <tbody>
                         @forelse($links as $link)
                             <tr>
-                                <td><a href="{{ route('admin.contacts.show', $link->id) }}">{{ $link->title }}</a></td>
+                                <td class="text-danger">{{ $link->title }}</td>
                                 <td>{{ $link->as }}</td>
                                 @if(in_array($link->to, $routes_name))
                                     <td>{{ $link->to }}</td>

@@ -47,6 +47,12 @@
                                 </ul>
                             </li>
                             <li>
+                                <a href="javascript:void(0);">Pages</a>
+                                <ul class="single-dropdown">
+                                    @include('partials.frontend.pages')
+                                </ul>
+                            </li>
+                            <li>
                                 <a href="{{route('contact.index')}}">Contact</a>
                             </li>
                         </ul>

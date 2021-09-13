@@ -70,22 +70,28 @@
                         <h3 class="footer-widget-title-6">Information</h3>
                         <div class="food-widget-content">
                             <ul>
-                                <li><a href="{{ route('contact.index') }}"><img
-                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt=""> About</a></li>
-                                <li><a href="{{ route('contact.index') }}"><img
-                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Contact</a></li>
-                                <li><a href="{{ route('contact.index') }}"><img
-                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">Privacy Policy</a>
+                                <li>
+                                    <a href="{{ route('contact.index') }}">
+                                        <img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
+                                        About
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('contact.index') }}">
-                                        <img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">News</a>
+                                        <img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
+                                        Contact
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('page.show', 'privacy-policy') }}">
+                                        <img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
+                                        Privacy Policy
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
