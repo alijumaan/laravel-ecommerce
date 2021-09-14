@@ -108,6 +108,17 @@
                             @error('status')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="is_public">Visibility</label>
+                            <select name="is_public" id="is_public" class="form-control">
+                                <option value="">---</option>
+                                <option value="1" {{ old('is_public') == "1" ? 'selected' : null }}>Public</option>
+                                <option value="0" {{ old('is_public') == "0" ? 'selected' : null }}>Private</option>
+                            </select>
+                            @error('is_public')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">

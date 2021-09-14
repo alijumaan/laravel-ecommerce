@@ -14,7 +14,7 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $coupon = Coupon::whereStatus(true)->whereType('percentage')->first();
+        $coupon = Coupon::active()->public()->first();
 
         $categories = Category::select('slug', 'cover', 'name')
             ->active()

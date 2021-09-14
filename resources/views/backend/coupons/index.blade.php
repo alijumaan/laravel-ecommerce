@@ -30,6 +30,7 @@
                     <th>Validity date</th>
                     <th>Greater than</th>
                     <th>Status</th>
+                    <th>Coupon visibility</th>
                     <th>Created at</th>
                     <th class="text-center" style="width: 30px;">Action</th>
                 </tr>
@@ -51,6 +52,7 @@
                         </td>
                         <td>{{ $coupon->greater_than ?? '-' }}</td>
                         <td>{{ $coupon->status }}</td>
+                        <td>{{ $coupon->is_public }}</td>
                         <td>{{ $coupon->created_at ?? $coupon->created_at->format('Y-m-d h:i a') }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">

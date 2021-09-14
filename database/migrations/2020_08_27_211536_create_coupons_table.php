@@ -25,6 +25,7 @@ class CreateCouponsTable extends Migration
             $table->dateTime('expire_date')->nullable();
             $table->unsignedDecimal('greater_than')->nullable();
             $table->boolean('status')->default(false);
+            $table->boolean('is_public')->default(false);
             $table->timestamps();
         });
     }

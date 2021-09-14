@@ -27,6 +27,21 @@ class Coupon extends Model
         return $this->attributes['status'] == 0 ? 'Inactive' : 'Active';
     }
 
+    public function getIsPublicAttribute(): string
+    {
+        return $this->attributes['is_public'] == 0 ? 'Private' : 'Public';
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(true);
+    }
+
+    public function scopePublic($query)
+    {
+        return $query->whereIsPublic(true);
+    }
+
     public function discount($total)
     {
         if (!$this->checkDate() || !$this->checkUsedTimes()) {

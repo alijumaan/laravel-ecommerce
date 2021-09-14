@@ -35,7 +35,8 @@ class CouponRequest extends FormRequest
                     'start_date' => ['nullable', 'date_format:Y-m-d'],
                     'expire_date' => ['required_with:start_date', 'date_format:Y-m-d'],
                     'greater_than' => ['nullable', 'numeric'],
-                    'status' => ['required']
+                    'status' => ['required'],
+                    'is_public' => ['required']
                 ];
             }
             case 'PUT':
@@ -50,7 +51,8 @@ class CouponRequest extends FormRequest
                     'start_date' => ['nullable', 'date_format:Y-m-d'],
                     'expire_date' => ['required_with:start_date', 'date_format:Y-m-d'],
                     'greater_than' => ['nullable', 'numeric'],
-                    'status' => ['required']
+                    'status' => ['required'],
+                    'is_public' => ['required']
                 ];
             }
             default: break;
