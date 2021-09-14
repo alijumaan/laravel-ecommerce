@@ -146,6 +146,7 @@
                                         </form>
                                     </li>
                                 @endguest
+                                @include('partials.frontend.pages')
                             </ul>
                         </nav>
                     </div>

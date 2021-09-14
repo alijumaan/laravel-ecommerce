@@ -6699,7 +6699,6 @@ h1.cart-heading {
     background: #fff none repeat scroll 0 0;
     border-color: #e5e5e5;
     border-radius: 0;
-    border-style: solid;
     border-width: 1px 0 0 1px;
     margin: 0 0 50px;
     text-align: center;
@@ -6725,9 +6724,9 @@ h1.cart-heading {
 }
 .table-content table td {
     border-top: medium none;
-    padding: 40px 10px;
+    padding: 20px 0;
     vertical-align: middle;
-    font-size: 13px;
+    font-size: 12px;
 }
 .table-content table td input {
     background: #00b9b033;

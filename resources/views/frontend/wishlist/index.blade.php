@@ -15,19 +15,19 @@
     <!-- wishlist item area -->
     <div class="cart-main-area pt-50 pb-50 wishlist">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                     <h1 class="cart-heading">wishlist</h1>
                     <form action="#">
                         <div class="table-content table-responsive">
                             <table>
                                 <thead>
                                 <tr>
+                                    <th>Image</th>
                                     <th>Product</th>
-                                    <th></th>
-                                    <th>Move To Cart</th>
+                                    <th style="width: 5%">Move To Cart</th>
                                     <th>Price</th>
-                                    <th></th>
+                                    <th style="width: 5%"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
