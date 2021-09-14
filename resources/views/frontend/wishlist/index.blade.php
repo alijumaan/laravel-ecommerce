@@ -16,7 +16,7 @@
     <div class="cart-main-area pt-50 pb-50 wishlist">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                     <h1 class="cart-heading">wishlist</h1>
                     <form action="#">
                         <div class="table-content table-responsive">
@@ -25,9 +25,9 @@
                                 <tr>
                                     <th>Image</th>
                                     <th>Product</th>
-                                    <th style="width: 5%">Move To Cart</th>
+                                    <th  style="width: 5%">Move To Cart</th>
                                     <th>Price</th>
-                                    <th style="width: 5%"></th>
+                                    <th  style="width: 5%"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
