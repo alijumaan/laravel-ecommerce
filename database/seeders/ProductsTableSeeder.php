@@ -20,7 +20,7 @@ class ProductsTableSeeder extends Seeder
 
         $categories = Category::whereNotNull('parent_id')->pluck('id');
 
-        for($i = 1; $i <= 50; $i ++) {
+        for($i = 1; $i <= 20; $i ++) {
             $products[] = [
                 'name'          => $faker->sentence(2, true),
                 'slug'          => $faker->unique()->slug(2, true),
