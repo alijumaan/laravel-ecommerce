@@ -86,7 +86,8 @@
                                 <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
                                     <div class="product-img list-img-width">
                                         @if($product->firstMedia)
-                                            <img src="{{ asset('storage/' . $product->firstMedia->file_name ) }}" style="width: 100%;">
+                                            <img src="{{ asset('storage/images/products/' . $product->firstMedia->file_name ) }}"
+                                                 alt="{{ $product->name }}" width="150">
                                         @else
                                             <img src="{{ asset('img/cartwhite.png' ) }}" alt="{{ $product->name }}" style="width: 100%;">
                                         @endif
