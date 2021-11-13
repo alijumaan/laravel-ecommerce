@@ -144,7 +144,8 @@
                 <script>
                     document.write(new Date().getFullYear())
                 </script>
-                <a href="https://alijumaan.com">Alijumaan.com</a>
+                Created by
+                <a href="https://alialqahtani.sa" target="_blank" class="text-primary">alialqahtani.sa</a>
             </p>
         </div>
     </div>
