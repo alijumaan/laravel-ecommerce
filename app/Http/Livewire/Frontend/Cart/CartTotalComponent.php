@@ -3,10 +3,13 @@
 namespace App\Http\Livewire\Frontend\Cart;
 
 use App\Models\Coupon;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class CartTotalComponent extends Component
 {
+    use LivewireAlert;
+
     public $cartSubTotal;
     public $cartTotal;
     public $cartTax;

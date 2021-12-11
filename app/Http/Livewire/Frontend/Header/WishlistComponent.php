@@ -4,10 +4,13 @@ namespace App\Http\Livewire\Frontend\Header;
 
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class WishlistComponent extends Component
 {
+    use LivewireAlert;
+
     public $wishlistCount;
 
     protected $listeners = [

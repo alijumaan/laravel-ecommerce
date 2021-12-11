@@ -33,9 +33,10 @@
     @include('partials.frontend.footer')
 
     <livewire:scripts/>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <x-livewire-alert::scripts/>
-    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+    <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+    <x-livewire-alert::flash />
+    <x-livewire-alert::scripts />
+
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('frontend/js/vendor/modernizr-2.8.3.min.js') }}"></script>
     <script src="{{ asset('frontend/js/vendor/jquery-1.12.0.min.js') }}"></script>

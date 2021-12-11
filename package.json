@@ -13,11 +13,11 @@
         "alpinejs": "^2.8",
         "axios": "^0.21",
         "bootstrap": "^4.6",
-        "jquery": "^3.6",
-        "laravel-echo": "^1.11.1",
         "cross-env": "^7.0",
         "dns-packet": "^5.2",
         "eslint": "^7.22",
+        "jquery": "^3.6",
+        "laravel-echo": "^1.11.1",
         "laravel-mix": "^6.0",
         "lodash": "^4.17",
         "popper.js": "^1.16",
@@ -26,6 +26,7 @@
         "resolve-url-loader": "^4.0",
         "sass": "^1.32",
         "sass-loader": "^11.0",
+        "sweetalert2": "^11.3.0",
         "vue-template-compiler": "^2.6"
     }
 }

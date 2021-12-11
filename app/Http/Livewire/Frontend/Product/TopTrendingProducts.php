@@ -4,10 +4,13 @@ namespace App\Http\Livewire\Frontend\Product;
 
 use App\Models\Product;
 use App\Services\CartService;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class TopTrendingProducts extends Component
 {
+    use LivewireAlert;
+
     public function addToCart($productId)
     {
         $product = Product::whereId($productId)->active()->hasQuantity()->activeCategory()->firstOrFail();

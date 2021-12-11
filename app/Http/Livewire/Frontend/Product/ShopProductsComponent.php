@@ -6,12 +6,13 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Services\CartService;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ShopProductsComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, LivewireAlert;
 
     protected $paginationTheme = 'bootstrap';
     public $paginationLimit = 12;

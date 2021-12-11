@@ -15,7 +15,7 @@
         "guzzlehttp/psr7": "^1.5",
         "intervention/image": "^2.6",
         "intervention/imagecache": "^2.5",
-        "jantinnerezo/livewire-alert": "^2.1",
+        "jantinnerezo/livewire-alert": "^2.2",
         "laravel/framework": "^8.40",
         "laravel/legacy-factories": "^1.0",
         "laravel/socialite": "^5.0",
@@ -28,9 +28,9 @@
         "omnipay/paypal": "^3.0",
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^5.0",
-        "realrashid/sweet-alert": "^4.0",
-        "spatie/valuestore": "^1.2",
-        "spatie/laravel-permission": "^4.2"
+        "realrashid/sweet-alert": "^4.1",
+        "spatie/laravel-permission": "^4.2",
+        "spatie/valuestore": "^1.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

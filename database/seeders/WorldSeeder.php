@@ -18,7 +18,7 @@ class WorldSeeder extends Seeder
             'host' => env('DB_HOST', '127.0.0.1'),
             'database' => env('DB_DATABASE', 'laravel_ecommerce'),
             'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'password'),
+            'password' => env('DB_PASSWORD', ''),
         ];
 
         exec("mysql --user={$db['username']} --password={$db['password']} --host={$db['host']} --database={$db['database']} < $sqlFIle");

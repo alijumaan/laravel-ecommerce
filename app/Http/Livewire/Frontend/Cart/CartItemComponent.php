@@ -4,10 +4,13 @@ namespace App\Http\Livewire\Frontend\Cart;
 
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class CartItemComponent extends Component
 {
+    use LivewireAlert;
+
     public $item;
     public $itemQuantity = 1;
 

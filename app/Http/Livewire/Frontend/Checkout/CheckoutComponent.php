@@ -6,10 +6,13 @@ use App\Models\Coupon;
 use App\Models\PaymentMethod;
 use App\Models\ShippingCompany;
 use App\Models\UserAddress;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class CheckoutComponent extends Component
 {
+    use LivewireAlert;
+    
     public $cartSubTotal;
     public $cartTax;
     public $cartTotal;
