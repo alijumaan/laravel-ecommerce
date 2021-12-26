@@ -3,10 +3,13 @@
 namespace App\Http\Livewire\Frontend\Product;
 
 use App\Services\CartService;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class SingleProductCartComponent extends Component
 {
+    use LivewireAlert;
+
     public $quantity = 1;
     public $product;
 
