@@ -14,13 +14,13 @@ class TapService
     public function getChargeRequest($amount, $name, $email, $number)
     {
         $client = new Client([
-            'base_uri' => 'https://api.tap.company/v2/charges', // Base URI is used with relative requests
-            'timeout' => 30.0, // You can set any number of default request options.
+            'base_uri' => config('tap.base_uri'),// Base URI is used with relative requests
+            'timeout' => config('tap.timeout'), // You can set any number of default request options.
         ]);
 
         $headers = [
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ'
+            'Accept' => config('tap.accept'),
+            'Authorization' => config('tap.authorization'),
         ];
 
         $response = $client->request('POST', 'charges', [

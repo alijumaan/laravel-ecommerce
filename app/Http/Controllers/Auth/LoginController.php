@@ -63,6 +63,8 @@ class LoginController extends Controller
         if (auth()->user()->isAdminOrSupervisor()) {
             return $this->redirectTo = '/admin';
         }
+
+        return $this->redirectTo = '/';
     }
 
     public function logout(Request $request)
