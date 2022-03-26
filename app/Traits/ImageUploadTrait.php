@@ -7,11 +7,17 @@ use Intervention\Image\Facades\Image;
 
 trait ImageUploadTrait
 {
-    protected $path  = 'app/public/images/';
+    protected string $path  = 'app/public/images/';
 
     public function uploadImage($name, $img, $folderName, $image_width = NULL, $image_height = NULL): string
     {
         $image_name = $this->imageName($name, $img);
+
+        $realPath = $this->path . $folderName;
+
+        if (!file_exists(storage_path($realPath))) {
+            mkdir(storage_path($realPath), 0755, true);
+        }
 
         Image::make($img->getRealPath())->resize($image_width, $image_height, function ($constraint) {
             $constraint->aspectRatio();

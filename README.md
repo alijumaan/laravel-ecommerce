@@ -1,29 +1,66 @@
-# Laravel E-commerce 
+# Laravel E-commerce
 
-## installation :
-after install the source code open Terminal to use these command line:
-- composer install ( may need to use "composer update").
-- cp .env.example .env 
-- create new database.
-- php artisan key:generate.
-- php artisan storage:link.
-- if you need countries, states, cities data (change database in public/ecommerce_world.sql line 22)
-- php artisan migrate --seed
-- npm install.
-- npm run dev.
-- Use your mail configuration in .env 
-- php artisan serve or your_domain.test
-- mkdir storage/app/public/images.
-- mkdir storage/app/public/images/categories.
-- mkdir storage/app/public/images/products.
-- mkdir storage/app/public/images/users.
-- if you want to use pusher and redis check the Documentation.
+<!-- PROJECT LOGO -->
+<p align="center"><a href="https://demoshop.alialqahtani.sa" target="_blank"><img src="http://laravel-ecommerce.test/img/logo.png" width="400" alt="Laravel-Ecommerce"></a></p>
 
-## Permission folder ( Linux | Mac)
-- sudo chmod -R 777 settings.json
-- sudo chmod -R 777 storage
-- sudo chmod -R 777 bootstrap/cache
+<p align="center">
+  <p align="center">
+    <a href="https://github.com/alijumaan/dlolah/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/alijumaan/dlolah/issues">Request Feature</a>
+  </p>
 
-## Demo
-<a href='http://demoshop.alialqahtani.sa' target="_blank">Try</a>
+### Installation
 
+1. Clone the repo
+   ```sh
+   git clone https://github.com/alijumaan/laravel-ecommerce.git
+   ```
+2. Install Composer packages
+   ```sh
+   composer install
+   ```
+3. Copy the environment file & edit it accordingly
+   ```sh
+   cp .env.example .env
+   ```
+
+4. Generate application key
+   ```sh
+   php artisan key:generate
+   ```
+
+5. Create Database then migrate and seed
+   ```sh
+   php artisan migrate --seed
+
+
+6. Linking Storage folder to public
+   ```sh
+   php artisan storage:link
+   ```
+
+
+7. Compile all your assets including a source map
+   ```sh
+   npm install && npm run dev
+   ```
+
+8. Serve the application
+   ```sh
+   php artisan serve
+   ```
+   
+9. Configuration email
+   ```sh
+   add mail configuration in .env
+   ```
+
+## Permission folder
+sudo chmod -R 777 settings.json
+
+## Notes
+if you need countries, states, cities data (change database in public/ecommerce_world.sql line 22)
+
+## Contact
+* [Ali AlQahtani](https://alialqahtani.sa/#contacts)

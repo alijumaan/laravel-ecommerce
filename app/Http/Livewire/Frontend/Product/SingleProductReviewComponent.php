@@ -29,7 +29,7 @@ class SingleProductReviewComponent extends Component
             $query->where('product_id', $this->product->id);
         })->where('user_id', auth()->id())->where('order_status', Order::FINISHED)->first();
 
-        if ($this->checkProduct) {
+        if ($this->checkProdutct) {
             $this->canRate = true;
         }
 
