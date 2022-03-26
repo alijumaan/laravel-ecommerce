@@ -5,9 +5,9 @@
 
 <p align="center">
   <p align="center">
-    <a href="https://github.com/alijumaan/dlolah/issues">Report Bug</a>
+    <a href="https://github.com/alijumaan/laravel-ecommerce/issues">Report Bug</a>
     ·
-    <a href="https://github.com/alijumaan/dlolah/issues">Request Feature</a>
+    <a href="https://github.com/alijumaan/laravel-ecommerce/issues">Request Feature</a>
   </p>
 
 ### Installation
