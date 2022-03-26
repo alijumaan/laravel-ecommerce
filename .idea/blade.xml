@@ -12,6 +12,7 @@
       <data directive="@cannot" injection="true" prefix="&lt;?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)-&gt;denies(" suffix=")): ?&gt;" />
       <data directive="@case" injection="true" prefix="&lt;?php case (" suffix="): ?&gt;" />
       <data directive="@choice" injection="true" prefix="&lt;?php echo app('translator')-&gt;choice(" suffix="); ?&gt;" />
+      <data directive="@class" injection="true" prefix="class=&quot;&lt;?php echo \Illuminate\Support\Arr::toCssClasses(" suffix=")?&gt;&quot;" />
       <data directive="@component" injection="true" prefix="&lt;?php $__env-&gt;startComponent(" suffix="); ?&gt;" />
       <data directive="@componentfirst" injection="true" prefix="&lt;?php $__env-&gt;startComponentFirst(" suffix="); ?&gt;" />
       <data directive="@continue" injection="true" prefix="&lt;?php if(" suffix=") continue; ?&gt;" />
@@ -65,6 +66,7 @@
       <data directive="@endunlessrole" />
       <data directive="@endverbatim" />
       <data directive="@endwhile" />
+      <data directive="@entangle" injection="true" prefix="&lt;?php \print_r(" suffix="); ?&gt;" />
       <data directive="@env" injection="true" prefix="&lt;?php if(app()-&gt;environment(" suffix=")): ?&gt;" />
       <data directive="@error" injection="true" prefix="&lt;?php $__errorArgs = [" suffix="];&#10;$__bag = $errors-&gt;getBag($__errorArgs[1] ?? 'default');&#10;if ($__bag-&gt;has($__errorArgs[0])) :&#10;if (isset($message)) { $__messageOriginal = $message; }&#10;$message = $__bag-&gt;first($__errorArgs[0]); ?&gt;" />
       <data directive="@extends" injection="true" prefix="&lt;?php echo $__env-&gt;make(" suffix=", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))-&gt;render(); ?&gt;" />
@@ -83,9 +85,10 @@
       <data directive="@includeUnless" injection="true" prefix="&lt;?php echo $__env-&gt;renderWhen(! " suffix=", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path'])); ?&gt;" />
       <data directive="@includeWhen" injection="true" prefix="&lt;?php echo $__env-&gt;renderWhen(" suffix=", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path'])); ?&gt;" />
       <data directive="@isset" injection="true" prefix="&lt;?php if(isset(" suffix=")): ?&gt;" />
+      <data directive="@js" injection="true" prefix="&lt;?php json_encode(" suffix="); ?&gt;" />
       <data directive="@json" injection="true" prefix="&lt;?php echo json_encode(" suffix=") ?&gt;" />
       <data directive="@lang" injection="true" prefix="&lt;?php echo app('translator')-&gt;get(" suffix="); ?&gt;" />
-      <data directive="@livewire" injection="true" prefix="&lt;?php echo \Livewire\Livewire::mount(" suffix=")-&gt;dom; ?&gt;" />
+      <data directive="@livewire" injection="true" prefix="&lt;?php \Livewire\Livewire::mount(" suffix="); ?&gt;" />
       <data directive="@livewireScripts" />
       <data directive="@livewireStyles" />
       <data directive="@method" injection="true" prefix="&lt;?php echo method_field(" suffix="); ?&gt;" />
@@ -106,6 +109,7 @@
       <data directive="@stop" />
       <data directive="@superAdmin" injection="true" prefix="&lt;?php _bladeDirective(" suffix="); ?&gt;" />
       <data directive="@switch" injection="true" prefix="&lt;?php switch(" suffix="): ?&gt;" />
+      <data directive="@this" />
       <data directive="@unless" injection="true" prefix="&lt;?php if (! (" suffix=")): ?&gt;" />
       <data directive="@unlessadmin" injection="true" prefix="&lt;?php _bladeDirective(" suffix="); ?&gt;" />
       <data directive="@unlessrole" injection="true" prefix="&lt;?php if(auth()-&gt;check() &amp;&amp; !auth()-&gt;user()-&gt;hasRole(" suffix=")); ?&gt;" />

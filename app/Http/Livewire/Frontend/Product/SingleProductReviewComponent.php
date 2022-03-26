@@ -27,7 +27,8 @@ class SingleProductReviewComponent extends Component
     {
         $this->checkProduct = Order::whereHas('products', function ($query) {
             $query->where('product_id', $this->product->id);
-        })->where('user_id', auth()->id())->where('order_status', Order::FINISHED)->first();
+        })->where('user_id', auth()->id())
+            ->where('order_status', Order::FINISHED)->first();
 
         if ($this->checkProdutct) {
             $this->canRate = true;

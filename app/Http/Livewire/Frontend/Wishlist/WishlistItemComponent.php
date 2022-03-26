@@ -9,7 +9,7 @@ use Livewire\Component;
 class WishlistItemComponent extends Component
 {
     use LivewireAlert;
-    public $item;
+    public string $item;
 
     public function moveToCart($rowId)
     {
