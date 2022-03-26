@@ -1,7 +1,7 @@
 # Laravel E-commerce
 
 <!-- PROJECT LOGO -->
-<p align="center"><a href="https://demoshop.alialqahtani.sa" target="_blank"><img src="http://laravel-ecommerce.test/img/logo.png" width="400" alt="Laravel-Ecommerce"></a></p>
+<p align="center"><a href="https://demoshop.alialqahtani.sa" target="_blank"><img src="https://demoshop.alialqahtani.sa/img/logo.png" width="400" alt="Laravel-Ecommerce"></a></p>
 
 <p align="center">
   <p align="center">
