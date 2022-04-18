@@ -21,7 +21,7 @@
             <div class="col-lg-4 form-group">
                 <label class="text-small text-uppercase">&nbsp;</label>
                 <div class="form-check">
-                    <input class="form-check-input" id="default_address" wire:model="default_address" type="checkbox">
+                    <input class="form-check-input" style="margin-left: -2.8rem;" id="default_address" wire:model="default_address" type="checkbox">
                     <label class="form-check-label" for="default_address">Default address?</label>
                 </div>
             </div>
