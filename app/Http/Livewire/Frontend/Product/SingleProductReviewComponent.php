@@ -6,10 +6,13 @@ use App\Models\Order;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class SingleProductReviewComponent extends Component
 {
+    use LivewireAlert;
+
     public $showForm = true;
     public $canRate = false;
     public $product;

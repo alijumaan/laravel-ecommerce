@@ -4,12 +4,13 @@ namespace App\Http\Livewire\Frontend\Product;
 
 use App\Models\Product;
 use App\Services\CartService;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ShopProductsTagComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, LivewireAlert;
 
     protected $paginationTheme = 'bootstrap';
     public $paginationLimit = 12;

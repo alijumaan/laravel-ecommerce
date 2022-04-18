@@ -36,17 +36,17 @@ class CartTotalComponent extends Component
             $coupon = Coupon::whereCode($this->couponCode)->whereStatus(true)->first();
             if (!$coupon) {
                 $this->couponCode = '';
-                return $this->alert('error', 'Coupon is invalid');
+                $this->alert('error', 'Coupon is invalid');
             }
 
             if ($coupon->greater_than > getNumbersOfCart()->get('subtotal')) {
                 $this->couponCode = '';
-                return $this->alert('warning', 'Subtotal must greater than $'. $coupon->greater_than);
+                $this->alert('warning', 'Subtotal must greater than $'. $coupon->greater_than);
             }
 
             $couponValue = $coupon->discount($this->cartSubTotal);
             if ($couponValue < 0) {
-                return $this->alert('error', 'product coupon is invalid');
+                $this->alert('error', 'product coupon is invalid');
             }
 
             session()->put('coupon', [
@@ -57,11 +57,11 @@ class CartTotalComponent extends Component
 
             $this->couponCode = session()->get('coupon')['code'];
             $this->emit('update_cart');
-            return $this->alert('success', 'Coupon is applied successfully');
+            $this->alert('success', 'Coupon is applied successfully');
         }
 
         $this->couponCode = '';
-        return $this->alert('error', 'No products available in your cart');
+        $this->alert('error', 'No products available in your cart');
     }
 
     public function removeCoupon()

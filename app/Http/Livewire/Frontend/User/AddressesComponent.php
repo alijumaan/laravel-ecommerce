@@ -6,10 +6,13 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\UserAddress;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class AddressesComponent extends Component
 {
+    use LivewireAlert;
+
     public $showForm = false;
     public $editMode = false;
     public $address_id = '';

@@ -41,7 +41,7 @@
                 @empty
                     <div class="col-6 form-group">
                         <p class="text-danger">No addresses found</p>
-                        <a class="btn btn-dark" href="#">Add Your Address</a>
+                        <a class="btn btn-dark" href="{{ route('user.addresses') }}">Add Your Address</a>
                     </div>
                 @endforelse
             </div>
