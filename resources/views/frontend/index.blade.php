@@ -12,7 +12,7 @@
 
 @include('partials.frontend.sliders')
 <!-- categories area start -->
-<div class="container-fluid">
+<div class="container">
     <div class="pb-50">
         <div class="section-title-furits text-center">
             <img src="{{ asset('frontend/img/icon-img/49.png') }}" alt="">
