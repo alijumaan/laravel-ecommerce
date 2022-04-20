@@ -93,21 +93,21 @@ class LoginController extends Controller
         Cache::forget('shop_tags_menu');
     }
 
-    // Facebook Function to Log in
+    // Oauth Login [ Facebook - Twitter - Google ]
     public function redirectToProvider($provider)
     {
         return Socialite::driver($provider)->redirect();
     }
 
-    // Facebook Function to Log in
+    // callback [ Facebook - Twitter - Google ]
     public function handleProviderCallback($provider)
     {
         $socialUser = Socialite::driver($provider)->user();
 
         $id = $socialUser->getId();
         $token = $socialUser->token;
-        $nickName = $socialUser->getNickname();
         $name = $socialUser->getName();
+        $nickName = $socialUser->getNickname() == '' ? trim(Str::lower(Str::replaceArray(' ', ['_'], $name))) : $socialUser->getNickname();
         $email = $socialUser->getEmail() == '' ? trim(Str::lower(Str::replaceArray(' ', ['_'], $name))) . '@' . $provider . '.com' : $socialUser->getEmail();
         $user_image = $socialUser->getAvatar();
 
@@ -116,7 +116,7 @@ class LoginController extends Controller
             [
                 'first_name' => $name,
                 'last_name' => $name,
-                'username' => $nickName != '' ? $nickName : trim(Str::lower(Str::replaceArray(' ', ['_'], $name))),
+                'username' => $nickName,
                 'email' => $email,
                 'email_verified_at' => Carbon::now(),
                 'phone' => null,

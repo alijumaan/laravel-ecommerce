@@ -18,32 +18,36 @@
                         <div class="login-form-container">
                             <div class="form-group">
 
-                                {!! Form::open(['route' => 'password.update', 'method' => 'post']) !!}
+                                <form action="{{ route('password.update') }}" method="POST">
+                                    @csrf
+
                                     <input type="hidden" name="token" value="{{ $token }}">
-                                <div class="mb-2">
-                                    {!! Form::label('email', 'Email *') !!}
-                                    {!! Form::email('email', old('email'), ['placeholder' => 'Your email']) !!}
-                                    @error('email')<span class="text-danger">{{ $message }}</span>@enderror
-                                </div>
 
-                                <div class="mb-2">
-                                    {!! Form::label('password', 'Password *') !!}
-                                    {!! Form::password('password', ['placeholder' => 'Password']) !!}
-                                    @error('password')<span class="text-danger">{{ $message }}</span>@enderror
-                                </div>
-
-                                <div class="mb-2">
-                                    {!! Form::label('password_confirmation', 'Confirm password *') !!}
-                                    {!! Form::password('password_confirmation', ['placeholder' => 'confirm password']) !!}
-                                    @error('password_confirmation')<span class="text-danger">{{ $message }}</span>@enderror
-                                </div>
-
-                                <div class="button-box">
-                                    <div class="login-toggle-btn">
-                                        {!! Form::button('Reset Password', ['type' => 'submit', 'class' => 'default-btn floatright']) !!}
+                                    <div class="mb-2">
+                                        <label for="email">Email*</label>
+                                        <input type="email" id="email" name="email" placeholder="Your email" value="{{ old('email') }}">
+                                        @error('email')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
-                                </div>
-                                {!! Form::close() !!}
+
+                                    <div class="mb-2">
+                                        <label for="password">Password*</label>
+                                        <input type="password" id="password" name="password" placeholder="Password">
+                                        @error('password')<span class="text-danger">{{ $message }}</span>@enderror
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <label for="confirm-password">Confirm password*</label>
+                                        <input type="password" id="confirm-password" name="password_confirmation" placeholder="Confirm password">
+                                        @error('password_confirmation')<span class="text-danger">{{ $message }}</span>@enderror
+                                    </div>
+
+                                    <div class="button-box">
+                                        <div class="login-toggle-btn">
+                                            <button class="default-btn floatright" type="submit">Reset password</button>
+                                        </div>
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -51,7 +55,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 
