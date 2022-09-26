@@ -16,6 +16,7 @@ class ProductTagTableSeeder extends Seeder
     public function run()
     {
         $products = Product::all();
+
         foreach ($products as $product) {
             $tags = Tag::inRandomOrder()->take(2)->pluck('id')->toArray();
             $product->tags()->sync($tags);

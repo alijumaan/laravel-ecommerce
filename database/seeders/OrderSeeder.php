@@ -18,7 +18,6 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Factory::create();
 
         $aliUser = User::find(3);
         $products = Product::active()->hasQuantity()->activeCategory()->inRandomOrder()->take(3)->get();
@@ -64,7 +63,7 @@ class OrderSeeder extends Seeder
         /*
          * Create fake order for each user
          */
-        User::where('id', '>', 3)->each(function ($user) use ($faker) {
+        User::where('id', '>', 3)->each(function ($user) {
             foreach(range(3, 6) as $index) {
                 $products = Product::active()->hasQuantity()->activeCategory()->inRandomOrder()->take(3)->get();
                 $subTotalValue = $products->sum('price');
@@ -87,8 +86,8 @@ class OrderSeeder extends Seeder
                     'total' => $totalValue,
                     'currency' => 'USD',
                     'order_status' => $order_status,
-                    'created_at' => $faker->dateTimeBetween('-7 months', 'now'),
-                    'updated_at' => $faker->dateTimeBetween('-7 months', 'now'),
+                    'created_at' => fake()->dateTimeBetween('-7 months', 'now'),
+                    'updated_at' => fake()->dateTimeBetween('-7 months', 'now'),
                 ]);
 
                 // Create Order Products

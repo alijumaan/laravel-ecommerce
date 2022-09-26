@@ -28,12 +28,13 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
 
-// login by social media [ Facebook - Twitter - Google ]
+// Login by social media [ Facebook - Twitter - Google ]
 Route::get('login/{provider}', [LoginController::class, 'redirectToProvider'])->name('social_login');
 Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('social_login_callback');
 
-Route::group(['middleware' => 'auth'], function (): void {
-    Route::group(['middleware' => 'verified'], function (): void {
+Route::middleware(['middleware' => 'auth'])->group(function() {
+
+    Route::middleware(['middleware' => 'verified'])->group(function() {
         Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
         Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
         Route::patch('/user/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
@@ -42,15 +43,18 @@ Route::group(['middleware' => 'auth'], function (): void {
         Route::get('/user/orders', [UserController::class, 'orders'])->name('user.orders');
     });
 
-    Route::group(['middleware' => 'checkCart'], function (): void {
+    Route::middleware(['middleware' => 'checkCart'])->group(function() {
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
         // PayPal gateway
         Route::post('/payment', [PaypalController::class, 'store'])->name('payment.store');
         Route::get('/payment/{orderId}/cancelled', [PaypalController::class, 'cancelled'])->name('payment.cancelled');
         Route::get('/payment/{orderId}/completed', [PaypalController::class, 'completed'])->name('payment.completed');
         Route::get('/payment/webhook/{order?}/{env?}', [PaypalController::class, 'webhook'])->name('payment.webhook.ipn');
+
         // Tap gateway
         Route::get('/payment/charge-request', [TapController::class, 'chargeRequest'])->name('checkout.charge_request');
         Route::get('/payment/charge-update', [TapController::class, 'chargeUpdate'])->name('checkout.charge_update');
     });
+
 });
