@@ -30,7 +30,8 @@ class OrderService
             'order_status' => 0,
         ]);
 
-        foreach (Cart::content() as $item) {
+        $content = Cart::content();
+        foreach ($content as $item) {
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $item->model->id,
