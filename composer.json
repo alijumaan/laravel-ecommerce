@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.0|8.1",
         "beyondcode/laravel-websockets": "^1.12",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "cviebrock/eloquent-sluggable": "^9.0",

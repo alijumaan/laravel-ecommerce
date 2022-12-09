@@ -2,11 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Admin;
-use App\Http\Middleware\CheckCart;
-use App\Http\Middleware\CheckRole;
-use App\Http\Middleware\Roles;
-use App\Http\Middleware\SuperAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,8 +63,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-
-        'roles' => Roles::class,
-        'checkCart' => CheckCart::class
+        'roles' => \App\Http\Middleware\Roles::class,
+        'checkCart' => \App\Http\Middleware\CheckCart::class
     ];
 }
