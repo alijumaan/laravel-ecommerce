@@ -9,7 +9,7 @@ function get_gravatar($email, int $s = 80, string $d = 'mp', string $r = 'g', bo
 {
     $url = 'https://www.gravatar.com/avatar/';
     $url .= md5(strtolower(trim($email)));
-    $url .= "?s=${s}&d=${d}&r=${r}";
+    $url .= "?s=$s&d=$d&r=$r";
 
     if ($img) {
         $url = '<img src="' . $url . '"';
