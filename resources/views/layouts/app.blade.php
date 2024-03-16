@@ -7,8 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }} | @yield('title', 'Ali Shop')</title>
     <meta name="description" content="">
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
